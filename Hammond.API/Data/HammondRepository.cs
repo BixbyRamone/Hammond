@@ -52,9 +52,9 @@ namespace Hammond.API.Data
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
-        public Task<bool> SaveAll()
+        public async Task<bool> SaveAll()
         {
-            throw new System.NotImplementedException();
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

@@ -39,5 +39,30 @@ namespace Hammond.API.Controllers
             return Ok(usersToReturn);
         }
 
+        [HttpGet("{id}",  Name = "GetUser")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            var user = await _repo.GetUser(id);
+
+            var userToReturn = _mapper.Map<UserForDetailedDto>(user);
+
+            return Ok(userToReturn);
+        }
+
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto) {
+        //     if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //         return Unauthorized();
+                
+        //     var userFromRepo = await _repo.GetUser(id);
+
+        //     _mapper.Map(userForUpdateDto, userFromRepo);
+
+        //     if (await _repo.SaveAll())
+        //         return NoContent();
+
+        //     throw new Exception($"Updating user {id} failed on save");
+        // }
+
     }
 }

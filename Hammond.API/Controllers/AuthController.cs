@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.Configuration;
 using Hammond.API.Data;
 using Hammond.API.Dtos;
 using Hammond.API.Models;
@@ -13,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Hammond.API.Controllers
@@ -57,7 +57,7 @@ namespace Hammond.API.Controllers
                         new { controller = "Users", id = userToCreate.Id }, userToReturn);
             }
 
-            return null;
+            return BadRequest(result.Errors);
         }
 
         [HttpPost("login")]
@@ -103,6 +103,7 @@ namespace Hammond.API.Controllers
             //key is for signing token to make sure it is valid used for signing credentials
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             //key encripted with hashing algorithm
+            
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
