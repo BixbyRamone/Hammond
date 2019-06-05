@@ -20,7 +20,7 @@ namespace Hammond.API.Dtos
 
         [Required]
         public string LastName { get; set; }
-        
+        public string StudentLevel { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime LastActive { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }

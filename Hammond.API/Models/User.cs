@@ -11,6 +11,7 @@ namespace Hammond.API.Models
         public string StudentLevel { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime LastActive { get; set; }
+        public ICollection<ActScore> ActScores { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }

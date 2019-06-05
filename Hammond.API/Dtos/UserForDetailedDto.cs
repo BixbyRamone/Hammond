@@ -8,6 +8,7 @@ namespace Hammond.API.Dtos
     {
          public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string StudentLevel { get; set; }
         public DateTime LastActive { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
     }
