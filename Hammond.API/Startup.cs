@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Hammond.API.Data;
+using Hammond.API.Helpers;
 using Hammond.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -64,9 +65,11 @@ namespace Hammond.API
                 });
 
             services.AddCors();
+            Mapper.Reset();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IHammondRepository, HammondRepository>();
             services.AddAutoMapper();
+            services.AddScoped<LogUserActivity>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
