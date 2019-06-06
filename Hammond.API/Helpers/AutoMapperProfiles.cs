@@ -11,6 +11,8 @@ namespace Hammond.API.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<User, UserForDetailedDto>();
             CreateMap<User, UserForListDto>();
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
+            CreateMap<Message, MessageToReturnDto>();
         }
     }
 }
