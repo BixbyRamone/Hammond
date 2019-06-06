@@ -81,6 +81,7 @@ namespace Hammond.API.Controllers
             messageForCreationDto.SenderId = userId;
 
             var recipient = await _repo.GetUser(messageForCreationDto.RecipientId);
+            
 
             if (recipient == null)
                 return BadRequest("Could not find user");

@@ -52,7 +52,7 @@ namespace Hammond.API.Data
                 if (result.Succeeded)
                 {
                     var admin = _userManager.FindByNameAsync("Admin").Result;
-                    _userManager.AddToRolesAsync(admin, new [] {"Admin", "Moderator"}).Wait();
+                    _userManager.AddToRolesAsync(admin, new [] {"Admin"}).Wait();
                 }
 
 
