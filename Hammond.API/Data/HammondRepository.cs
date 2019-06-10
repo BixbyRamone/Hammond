@@ -25,6 +25,16 @@ namespace Hammond.API.Data
             _context.Remove(entity);
         }
 
+        public Task<Assignment> GetAssignment(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IEnumerable<Assignment>> GetAssignments()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<Message> GetMessage(int id)
         {
             return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
