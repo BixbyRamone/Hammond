@@ -36,6 +36,16 @@ namespace Hammond.API.Data
                     .IsRequired();
             });
 
+            builder.Entity<UserAssignment>(userAssignment =>
+            {
+                userAssignment.HasKey(ua => new {ua.User.Id, ua.Assignment.Id});
+
+                userAssignment.HasOne(ua => ua.Assignment)
+                    .WithMany(a => a.UserAssignment)
+                    
+            })
+
+           
             builder.Entity<Message>()
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
