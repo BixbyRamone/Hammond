@@ -4,14 +4,16 @@ using Hammond.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hammond.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190611193918_UserAssignmentUpdated")]
+    partial class UserAssignmentUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,6 +47,8 @@ namespace Hammond.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Assigned");
+
+                    b.Property<bool>("Completed");
 
                     b.Property<string>("Contnet");
 
@@ -211,8 +215,6 @@ namespace Hammond.API.Migrations
                     b.Property<int>("UserId");
 
                     b.Property<int>("AssignmentId");
-
-                    b.Property<bool>("Completed");
 
                     b.HasKey("UserId", "AssignmentId");
 

@@ -25,14 +25,21 @@ namespace Hammond.API.Data
             _context.Remove(entity);
         }
 
-        public Task<Assignment> GetAssignment(int id)
+        public async Task<Assignment> GetAssignment(int id)
         {
-            throw new System.NotImplementedException();
+            var assignment = await _context.Assignments.FirstOrDefaultAsync(a => a.Id == id);
+
+            return assignment;
         }
 
-        public Task<IEnumerable<Assignment>> GetAssignments()
+        public async Task<PagedList<Assignment>> GetAssignments(AssignmentParams assignmentParams)
         {
-            throw new System.NotImplementedException();
+            var assignments = _context.Assignments.AsQueryable();
+
+
+            assignments = assignments.OrderByDescending(a => a.DateAssigned);
+            return await PagedList<Assignment>.CreateAsync(assignments, assignmentParams.PageNumber,
+                assignmentParams.PageSize);
         }
 
         public async Task<Message> GetMessage(int id)
@@ -78,6 +85,28 @@ namespace Hammond.API.Data
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
+        }
+
+        public async Task<Assignment> GetUserAssignment(int id)
+        {
+            var assignment = await _context.Assignments
+                            .Include(x => x.UserAssignments)
+                            .FirstOrDefaultAsync(a => a.Id == id);
+
+            return assignment;
+        }
+
+        public async Task<PagedList<Assignment>> GetUserAssignments(AssignmentParams assignmentParams)
+        {
+            var assignments = _context.Assignments
+                                .Include(x => x.UserAssignments)
+                                .AsQueryable();
+
+            // assignments = assignments.Where(x => x.Id == )
+
+            return await PagedList<Assignment>.CreateAsync(assignments, assignmentParams.PageNumber,
+                assignmentParams.PageSize);
+            throw new System.NotImplementedException();
         }
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)

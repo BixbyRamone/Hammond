@@ -15,6 +15,7 @@ namespace Hammond.API.Models
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<UserAssignment> UserAssignments { get; set; }
         
     }
 }

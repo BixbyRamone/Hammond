@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
+using Hammond.API.Models;
 
-namespace Hammond.API.Models
+namespace Hammond.API.Dtos
 {
-    public class Assignment
+    public class AssignmentForListDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -13,7 +13,7 @@ namespace Hammond.API.Models
         public DateTime DateAssigned { get; set; }
         public DateTime DateDue { get; set; }
         public bool Assigned { get; set; }
+        public bool Completed { get; set; }
         public User CreatedBy { get; set; }
-        public ICollection<UserAssignment> UserAssignments { get; set; }
     }
 }

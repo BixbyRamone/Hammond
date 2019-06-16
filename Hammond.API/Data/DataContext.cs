@@ -15,6 +15,7 @@ namespace Hammond.API.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Value> Values { get; set; }
+        public DbSet<UserAssignment> UserAssignments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,16 +37,19 @@ namespace Hammond.API.Data
                     .IsRequired();
             });
 
-            builder.Entity<UserAssignment>(userAssignment =>
+            builder.Entity<UserAssignment>(userAssignment => 
             {
-                userAssignment.HasKey(ua => new {ua.User.Id, ua.Assignment.Id});
+                userAssignment.HasKey(ua => new {ua.UserId, ua.AssignmentId});
+
+                userAssignment.HasOne(ua => ua.User)
+                .WithMany(u => u.UserAssignments)
+                .HasForeignKey(ua => ua.UserId);
 
                 userAssignment.HasOne(ua => ua.Assignment)
-                    .WithMany(a => a.UserAssignment)
-                    
-            })
-
-           
+                .WithMany(a => a.UserAssignments)
+                .HasForeignKey(ua => ua.AssignmentId);
+            });
+                       
             builder.Entity<Message>()
                 .HasOne(u => u.Sender)
                 .WithMany(m => m.MessagesSent)
