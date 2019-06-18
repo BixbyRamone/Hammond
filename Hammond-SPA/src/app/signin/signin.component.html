@@ -1,22 +1,12 @@
-<!-- <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
-  <input type="text" class="form-control mr-sm-2" name="username"
-  placeholder="Username" required ([(ngModel)]="model.username")>
-  <input type="password" class="form-control mr-sm-2" name="password"
-  placeholder="Password" required ([(ngModel)]="model.username")>
-  <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-</form> -->
+<div *ngIf="!loggedIn()" class="container">
+  <form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+    <input type="text" class="form-control mr-sm-2" name="username"
+    placeholder="Username" required [(ngModel)]="model.username">
+    <input type="password" class="form-control mr-sm-2" name="password"
+    placeholder="Password" required [(ngModel)]="model.password">
+    <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+  </form>
+</div>
 
-<form class="form-signin" (ngSubmit)="login()">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <input type="text" class="form-control mr-sm-2" name="username"
-  placeholder="Username" required ([(ngModel)]="model.username")>
-  <input type="password" class="form-control mr-sm-2" name="password"
-  placeholder="Password" required ([(ngModel)]="model.username")>
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">© 2019</p>
-</form>
+
+

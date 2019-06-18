@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  model: any;
+  model: any = {};
 
   constructor(
     public authService: AuthService,
@@ -19,14 +19,22 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
+  alertifyTest() {
+    this.alertify.success('success');
+    this.alertify.error('error');
+    this.alertify.warning('warning');
+    this.alertify.message('message');
+  }
+
   login() {
     this.authService.login(this.model).subscribe(
       next => {
         this.alertify.success('Logged in successfully');
       }, error => {
+        console.log(error);
         this.alertify.error(error);
-      }, ()=> {
-        this.router.navigate(['/home']); // insert landing page here
+      }, () => {
+        this.router.navigate(['/values']); // insert landing page here
       }
     );
   }
@@ -35,13 +43,5 @@ export class SigninComponent implements OnInit {
     return this.authService.loggedIn();
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.authService.decodedToken = null;
-    this.authService.currentUser = null;
-    this.alertify.message('Logged out');
-    this.router.navigate(['/home']);
-  }
 
 }
