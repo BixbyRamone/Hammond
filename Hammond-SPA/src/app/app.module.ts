@@ -13,15 +13,24 @@ import { HomeComponent } from './home/home.component';
 import { ValueComponent } from './value/value.component';
 import { SigninComponent } from './signin/signin.component';
 import { NavComponent } from './nav/nav.component';
+import { AdminLandingComponent } from './landingpages/admin-landing/admin-landing.component';
+import { StudentLandingComponent } from './landingpages/student-landing/student-landing.component';
+import { MentorLandingComponent } from './landingpages/mentor-landing/mentor-landing.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
-
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
       AppComponent,
+      AdminLandingComponent,
       ValueComponent,
       HomeComponent,
+      MentorLandingComponent,
       SigninComponent,
+      StudentLandingComponent,
       NavComponent
    ],
    imports: [
@@ -29,7 +38,14 @@ import { NavComponent } from './nav/nav.component';
       BsDropdownModule.forRoot(),
       FormsModule,
       HttpClientModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       AlertifyService,
