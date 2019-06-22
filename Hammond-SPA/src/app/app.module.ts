@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, PaginationModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -17,6 +17,10 @@ import { AdminLandingComponent } from './landingpages/admin-landing/admin-landin
 import { StudentLandingComponent } from './landingpages/student-landing/student-landing.component';
 import { MentorLandingComponent } from './landingpages/mentor-landing/mentor-landing.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { StudentListComponent } from './admin/student-list/student-list.component';
+import { UserItemComponent } from './users/user-item/user-item.component';
+import { UserListResolver } from './_resolvers/user-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -31,13 +35,16 @@ export function tokenGetter() {
       MentorLandingComponent,
       SigninComponent,
       StudentLandingComponent,
-      NavComponent
+      StudentListComponent,
+      NavComponent,
+      UserItemComponent
    ],
    imports: [
       BrowserModule,
       BsDropdownModule.forRoot(),
       FormsModule,
       HttpClientModule,
+      PaginationModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {
@@ -45,11 +52,14 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+      }),
+      TabsModule.forRoot(),
    ],
    providers: [
       AlertifyService,
-      AuthService
+      AuthService,
+      UserDetailResolver,
+      UserListResolver
    ],
    bootstrap: [
       AppComponent

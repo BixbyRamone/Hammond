@@ -34,7 +34,27 @@ export class SigninComponent implements OnInit {
         console.log(error);
         this.alertify.error(error);
       }, () => {
-        this.router.navigate(['/values']); // insert landing page here
+        // switch (this.authService.decodedToken.role) {
+        //   case 'Admin':
+        //     this.router.navigate(['/admin']);
+        //     break;
+        //   case 'Student':
+        //     this.router.navigate(['/student']);
+        //     break;
+        // }
+        console.log(this.authService.decodedToken);
+        if (this.authService.decodedToken.role.includes('Admin')) {
+          this.router.navigate(['/admin']);
+        }
+        if (this.authService.decodedToken.role.includes('Student')) {
+          this.router.navigate(['/student']);
+        }
+        if (this.authService.decodedToken.role.includes('Mentor')) {
+          this.router.navigate(['/mentor']);
+        }
+        if (this.authService.decodedToken.role.includes('Tutor')) {
+          this.router.navigate(['/tutor']);
+        }
       }
     );
   }

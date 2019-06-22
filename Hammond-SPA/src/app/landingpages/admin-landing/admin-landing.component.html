@@ -1,3 +1,13 @@
 <p>
   admin-landing works!
 </p>
+<div class="container">
+  <tabset class="admin-tabset" #adminTabs>
+    <tab heading="events"></tab>
+    <tab heading="assignments"></tab>
+    <tab heading="students">
+      <app-student-list></app-student-list>
+    </tab>
+    <tab heading="volunteers"></tab>
+  </tabset>
+</div>

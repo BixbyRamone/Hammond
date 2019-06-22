@@ -43,8 +43,6 @@ loggedIn() {
 
 roleMatch(allowedRoles): boolean {
   let isMatch = false;
-  debugger
-  console.log(this.decodedToken);
   const userRoles = this.decodedToken.role as Array<string>;
   allowedRoles.forEach(element => {
     if (userRoles.includes(element)) {
