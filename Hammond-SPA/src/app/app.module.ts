@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BsDropdownModule, TabsModule, PaginationModule } from 'ngx-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -21,6 +21,9 @@ import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { StudentListComponent } from './admin/student-list/student-list.component';
 import { UserItemComponent } from './users/user-item/user-item.component';
 import { UserListResolver } from './_resolvers/user-list.resolver';
+import { StudentTabComponent } from './admin/student-tab/student-tab.component';
+import { EventsTabComponent } from './admin/events-tab/events-tab.component';
+import { StudentRegistrationComponent } from './admin/registrations/student-registration/student-registration.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -30,12 +33,15 @@ export function tokenGetter() {
    declarations: [
       AppComponent,
       AdminLandingComponent,
+      EventsTabComponent,
       ValueComponent,
       HomeComponent,
       MentorLandingComponent,
       SigninComponent,
       StudentLandingComponent,
       StudentListComponent,
+      StudentRegistrationComponent,
+      StudentTabComponent,
       NavComponent,
       UserItemComponent
    ],
@@ -45,6 +51,7 @@ export function tokenGetter() {
       FormsModule,
       HttpClientModule,
       PaginationModule.forRoot(),
+      ReactiveFormsModule,
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
          config: {

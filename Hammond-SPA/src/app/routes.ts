@@ -8,6 +8,7 @@ import { MentorLandingComponent } from './landingpages/mentor-landing/mentor-lan
 import { StudentLandingComponent } from './landingpages/student-landing/student-landing.component';
 import { StudentListComponent } from './admin/student-list/student-list.component';
 import { UserListResolver } from './_resolvers/user-list.resolver';
+import { StudentRegistrationComponent } from './admin/registrations/student-registration/student-registration.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,11 +19,14 @@ export const appRoutes: Routes = [
         children: [
             { path: 'values', component: ValueComponent},
 
-            { path: 'admin', component: AdminLandingComponent, 
+            { path: 'admin', component: AdminLandingComponent,
                 resolve: {users: UserListResolver}, data: {roles: ['Admin']} },
 
-            { path: 'admin/student-list', component: StudentListComponent,
+            { path: 'admin/students', component: StudentListComponent,
                 resolve: {users: UserListResolver}, data: {roles: ['Admin']} },
+
+            { path: 'admin/registerstudent',  component: StudentRegistrationComponent,
+                data: {roles: ['Admin']} },
 
             { path: 'mentor', component: MentorLandingComponent, data: {roles: ['Admin', 'Mentor']} },
 
