@@ -24,6 +24,10 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
 import { StudentTabComponent } from './admin/student-tab/student-tab.component';
 import { EventsTabComponent } from './admin/events-tab/events-tab.component';
 import { StudentRegistrationComponent } from './admin/registrations/student-registration/student-registration.component';
+import { EventRegistrationComponent } from './admin/registrations/event-registration/event-registration.component';
+import { AssignmentTabComponent } from './admin/assignment-tab/assignment-tab.component';
+import { VolunteersTabComponent } from './admin/volunteers-tab/volunteers-tab.component';
+import { AssigmentRegistrationComponent } from './admin/registrations/assigment-registration/assigment-registration.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -32,7 +36,10 @@ export function tokenGetter() {
 @NgModule({
    declarations: [
       AppComponent,
+      AssigmentRegistrationComponent,
       AdminLandingComponent,
+      AssignmentTabComponent,
+      EventRegistrationComponent,
       EventsTabComponent,
       ValueComponent,
       HomeComponent,
@@ -43,7 +50,8 @@ export function tokenGetter() {
       StudentRegistrationComponent,
       StudentTabComponent,
       NavComponent,
-      UserItemComponent
+      UserItemComponent,
+      VolunteersTabComponent
    ],
    imports: [
       BrowserModule,
