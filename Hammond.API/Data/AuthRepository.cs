@@ -1,16 +1,17 @@
 using System.Threading.Tasks;
 using Hammond.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Hammond.API.Data
 {
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
+
         public AuthRepository(DataContext context)
         {
             _context = context;
-
         }
         public async Task<User> Login(string username, string password)
         {

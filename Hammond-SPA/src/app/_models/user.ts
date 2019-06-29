@@ -7,5 +7,5 @@ export interface User {
     dateCreated: Date;
     lastActive: Date;
     actScore: number[];
-    userRoles: string;
+    userRole: string;
 }

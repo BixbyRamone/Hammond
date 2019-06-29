@@ -26,8 +26,8 @@ export class StudentRegistrationComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      role: ['student'],
-      position: ['sophmore'],
+      userRole: ['student'],
+      studentLevel: ['sophmore'],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
@@ -46,7 +46,7 @@ export class StudentRegistrationComponent implements OnInit {
       // this.user.position = '';
     // }
 
-      this.authService.register(this.user).subscribe(() => {
+      this.authService.register(this.user, this.user.userRole).subscribe(() => {
         this.alertify.success('Registration succesful');
       }, error => {
         console.log('error: ' + error);

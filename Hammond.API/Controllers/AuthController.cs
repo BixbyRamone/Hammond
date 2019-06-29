@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -42,8 +43,8 @@ namespace Hammond.API.Controllers
             _repo = repo;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        [HttpPost("register/{userRole}")]
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto, string userRole)
         {
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
@@ -53,6 +54,24 @@ namespace Hammond.API.Controllers
 
             if (result.Succeeded)
             {
+                switch (userRole)
+                {
+                    case "student":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Student"}).Wait();
+                        break;
+                    
+                    case "tutor":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Tutor"}).Wait();
+                        break;
+
+                    case "mentor":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Mentor"}).Wait();
+                        break;
+
+                    case "admin":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Admin"}).Wait();
+                        break;
+                }
                 return CreatedAtRoute("GetUser",
                         new { controller = "Users", id = userToCreate.Id }, userToReturn);
             }

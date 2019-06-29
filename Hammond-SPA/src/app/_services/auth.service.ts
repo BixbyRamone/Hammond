@@ -32,8 +32,8 @@ login(model: any) {
     );
 }
 
-register(user: User) {
-  return this.http.post(this.baseUrl + 'register', user);
+register(user: User, usersRole: string) {
+  return this.http.post(this.baseUrl + 'register/' + usersRole, user);
 }
 
 loggedIn() {
