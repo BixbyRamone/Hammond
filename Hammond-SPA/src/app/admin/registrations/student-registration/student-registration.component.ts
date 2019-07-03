@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -11,6 +11,7 @@ import { RoleService } from 'src/app/_services/role.service';
   styleUrls: ['./student-registration.component.css']
 })
 export class StudentRegistrationComponent implements OnInit {
+  @Output() cancelRegister = new EventEmitter();
   user: User;
   registerForm: FormGroup;
 
@@ -57,6 +58,10 @@ export class StudentRegistrationComponent implements OnInit {
 
   passwordMatchValidator(g: FormGroup) {
     return g.get('password').value === g.get('confirmPassword').value ? null : {'mismatch': true};
+  }
+
+  backup() {
+    this.cancelRegister.emit(false);
   }
 
 }

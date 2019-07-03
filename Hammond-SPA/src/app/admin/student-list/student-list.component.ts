@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { UserService } from 'src/app/_services/user.service';
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
+  @Output() cancelList = new EventEmitter();
   users: User[];
   pagination: Pagination;
 
@@ -39,6 +40,11 @@ export class StudentListComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  backup() {
+    console.log('backup');
+    this.cancelList.emit(false);
   }
 
 }

@@ -1,10 +1,26 @@
 <div class="container">
-  <ul>
+    
+    <div *ngIf="!studentListMode && !studentRegisterMode">
+        <ul>
+  
+            <li (click)="listToggle()">View Student List</li>
+            <li (click)="registerToggle()">Register New Student</li>
+            <li><a>Upload Student File</a></li>
+        
+          </ul>
+    </div>
+  
+    <div *ngIf="studentRegisterMode">
+      <app-student-registration (cancelRegister)="cancelStudentRegister($event)"></app-student-registration>
+    </div>
 
-    <li><a [routerLink]="['/admin/students']">View Student List</a></li>
-    <li><a [routerLink]="['/admin/registerstudent']">Register New Student</a></li>
-    <li><a>Upload Student File</a></li>
+    <div *ngIf="studentListMode">
+      <app-student-list (cancelList)="cancelStudentList($event)"></app-student-list>
+    </div>
 
-  </ul>
+    <div>
+      <p>StudentListMode: {{studentListMode}}</p>
+      <p>StudentRegisterMode: {{studentRegisterMode}}</p>
+    </div>
   
 </div>
