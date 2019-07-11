@@ -1,3 +1,20 @@
-<p>
-  assignment-tab works!
-</p>
+<div class="container">
+    
+  <div *ngIf="!assignmentListMode && !assignmentRegisterMode">
+      <ul>
+
+          <li (click)="listToggle()">View Assignments List</li>
+          <li (click)="registerToggle()">Create Assignment</li>
+      
+        </ul>        
+  </div>
+
+  <div *ngIf="assignmentRegisterMode">
+    <app-assigment-registration (cancel)="cancelRegistration($event)"></app-assigment-registration>
+  </div>
+
+  <div *ngIf="assignmentListMode">
+    <app-assignment-list (cancel)="cancelList($event)"></app-assignment-list>
+  </div>
+  
+</div>

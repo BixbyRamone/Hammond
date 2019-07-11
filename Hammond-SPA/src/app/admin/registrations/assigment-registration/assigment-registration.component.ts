@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Assignment } from 'src/app/_models/assignment';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AssingmentService } from 'src/app/_services/assingment.service';
@@ -11,6 +11,7 @@ import { AssingmentService } from 'src/app/_services/assingment.service';
   styleUrls: ['./assigment-registration.component.css']
 })
 export class AssigmentRegistrationComponent implements OnInit {
+  @Output() cancel = new EventEmitter();
   assignment: Assignment;
   registerForm: FormGroup;
 
@@ -21,16 +22,17 @@ export class AssigmentRegistrationComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.createRegisterForm();
   }
 
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      title: [''],
-      content: [''],
-      studentLevel: [''],
-      section: [''],
-      dateDue: [''],
-      assgned: [''],
+      title: ['', Validators.required],
+      content: ['', Validators.required],
+      studentLevel: ['', Validators.required],
+      section: ['', Validators.required],
+      dateDue: ['', Validators.required],
+      assigned: ['', Validators.required],
     });
   }
 
@@ -46,6 +48,10 @@ export class AssigmentRegistrationComponent implements OnInit {
         this.alertify.error(error);
       });
     }
+  }
+
+  backup() {
+    this.cancel.emit(false);
   }
 
 }

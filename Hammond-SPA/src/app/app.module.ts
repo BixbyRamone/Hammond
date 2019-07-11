@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BsDropdownModule, TabsModule, PaginationModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, PaginationModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -28,6 +28,9 @@ import { EventRegistrationComponent } from './admin/registrations/event-registra
 import { AssignmentTabComponent } from './admin/assignment-tab/assignment-tab.component';
 import { VolunteersTabComponent } from './admin/volunteers-tab/volunteers-tab.component';
 import { AssigmentRegistrationComponent } from './admin/registrations/assigment-registration/assigment-registration.component';
+import { StudentDropboxComponent } from './admin/registrations/student-dropbox/student-dropbox.component';
+import { EventsListComponent } from './admin/events-list/events-list.component';
+import { AssignmentListComponent } from './admin/assignment-list/assignment-list.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -38,13 +41,16 @@ export function tokenGetter() {
       AppComponent,
       AssigmentRegistrationComponent,
       AdminLandingComponent,
+      AssignmentListComponent,
       AssignmentTabComponent,
+      EventsListComponent,
       EventRegistrationComponent,
       EventsTabComponent,
       ValueComponent,
       HomeComponent,
       MentorLandingComponent,
       SigninComponent,
+      StudentDropboxComponent,
       StudentLandingComponent,
       StudentListComponent,
       StudentRegistrationComponent,
@@ -55,6 +61,7 @@ export function tokenGetter() {
    ],
    imports: [
       BrowserModule,
+      BsDatepickerModule.forRoot(),
       BsDropdownModule.forRoot(),
       FormsModule,
       HttpClientModule,

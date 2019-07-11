@@ -1,11 +1,11 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-events-list',
-  templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.css']
+  selector: 'app-assignment-list',
+  templateUrl: './assignment-list.component.html',
+  styleUrls: ['./assignment-list.component.css']
 })
-export class EventsListComponent implements OnInit {
+export class AssignmentListComponent implements OnInit {
   @Output() cancel = new EventEmitter();
 
   constructor() { }

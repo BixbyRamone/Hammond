@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class StudentTabComponent implements OnInit {
   studentRegisterMode = false;
   studentListMode = false;
+  dropBoxMode = false;
 
 
   constructor() { }
@@ -17,14 +18,23 @@ export class StudentTabComponent implements OnInit {
 
   registerToggle() {
     this.studentListMode = false;
+    this.dropBoxMode = false;
 
     this.studentRegisterMode = true;
   }
 
   listToggle() {
     this.studentRegisterMode = false;
+    this.dropBoxMode = false;
 
     this.studentListMode = true;
+  }
+
+  dropBoxToggle() {
+    this.studentListMode = false;
+    this.studentRegisterMode = false;
+
+    this.dropBoxMode = true;
   }
 
   cancelStudentRegister(studentRegisterMode: boolean) {
@@ -33,6 +43,14 @@ export class StudentTabComponent implements OnInit {
 
   cancelStudentList(modeSwitch: boolean) {
     this.studentListMode = modeSwitch;
+  }
+
+  cancelDropBox(modeSwitch: boolean) {
+    this.dropBoxMode = modeSwitch;
+  }
+
+  genericCancelTest(modeSwitch: boolean, toBeSwitched: boolean) {
+    toBeSwitched = modeSwitch;
   }
 
   // clearDisplays() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Evnt } from 'src/app/_models/event';
 
 @Component({
@@ -7,11 +7,16 @@ import { Evnt } from 'src/app/_models/event';
   styleUrls: ['./event-registration.component.css']
 })
 export class EventRegistrationComponent implements OnInit {
+  @Output() cancel = new EventEmitter();
   evnt: Evnt;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  backup() {
+    this.cancel.emit(false);
   }
 
 }

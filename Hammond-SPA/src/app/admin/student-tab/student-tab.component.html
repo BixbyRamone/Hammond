@@ -1,11 +1,11 @@
 <div class="container">
     
-    <div *ngIf="!studentListMode && !studentRegisterMode">
+    <div *ngIf="!studentListMode && !studentRegisterMode && !dropBoxMode">
         <ul>
   
             <li (click)="listToggle()">View Student List</li>
             <li (click)="registerToggle()">Register New Student</li>
-            <li><a>Upload Student File</a></li>
+            <li (click)="dropBoxToggle()">Upload Student File</li>
         
           </ul>
     </div>
@@ -18,9 +18,9 @@
       <app-student-list (cancelList)="cancelStudentList($event)"></app-student-list>
     </div>
 
-    <div>
-      <p>StudentListMode: {{studentListMode}}</p>
-      <p>StudentRegisterMode: {{studentRegisterMode}}</p>
+    <div *ngIf="dropBoxMode">
+      <app-student-dropbox (cancelDropBox)="cancelDropBox($event)"></app-student-dropbox>
     </div>
-  
+
+
 </div>

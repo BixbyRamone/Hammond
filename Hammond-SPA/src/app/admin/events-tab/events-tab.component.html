@@ -1,3 +1,20 @@
-<p>
-  events-tab works!
-</p>
+<div class="container">
+    
+  <div *ngIf="!eventListMode && !eventRegisterMode">
+      <ul>
+
+          <li (click)="listToggle()">View Events List</li>
+          <li (click)="registerToggle()">Create Event</li>
+      
+        </ul>        
+  </div>
+
+  <div *ngIf="eventRegisterMode">
+    <app-event-registration (cancel)="cancelEventRegistration($event)"></app-event-registration>
+  </div>
+
+  <div *ngIf="eventListMode">
+    <app-events-list (cancel)="cancelEventList($event)"></app-events-list>
+  </div>
+  
+</div>

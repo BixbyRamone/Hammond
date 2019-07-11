@@ -1,3 +1,50 @@
-<p>
-  assigment-registration works!
-</p>
+<div class="container">
+  <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
+  <p>Assignment Registration</p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    
+    <div class="form-group">
+      <input type="text"
+        [ngClass]="{'is-invalid': registerForm.get('title').errors
+        && registerForm.get('title').touched}"
+        class="form-control"
+        formControlName="title"
+        placeholder="Assignment Title">
+  
+        <div class="invalid-feedback">Please enter title</div>
+    </div>
+
+    <div class="form-group">
+      <textarea type="textarea"
+        [ngClass]="{'is-invalid': registerForm.get('content').errors
+        && registerForm.get('content').touched}"
+        class="form-control"
+        formControlName="content"
+        placeholder="Assignment Description"
+        rows="4"
+        cols="50"></textarea>
+  
+        <div class="invalid-feedback">Please enter content</div>
+    </div>
+
+    
+
+    <div class="form-group col-md-5">
+      <label class="control-label" style="margin-right:10px">Grade:  </label>
+      <br>
+      <label class="radio-inline">  
+        <input class="mr-1 ml-2" type="radio" value="sophmore" formControlName="studentLevel">Sophmore  
+      </label>
+      <br>  
+      <label class="radio-inline ml-2">  
+        <input class="mr-1" type="radio" value="junior" formControlName="studentLevel">Junior  
+      </label>
+      <br>
+      <label class="radio-inline ml-2">  
+          <input class="mr-1" type="radio" value="senior" formControlName="studentLevel">Senior  
+      </label>
+    </div>
+
+  </form>
+</div>
