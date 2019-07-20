@@ -111,8 +111,7 @@ namespace Hammond.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.OrderBy(u => u.LastName).Include(u => u.StudentLevel == userParams.StudentLevel)
-                .AsQueryable();
+            var users = _context.Users.OrderBy(u => u.LastName).AsQueryable();
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
@@ -131,9 +130,10 @@ namespace Hammond.API.Data
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetStudents(string studentLevel)
         {
-            var users = await _context.Users.Include(a => a.UserAssignments).ToListAsync();
+            var users = await _context.Users.Where(u => u.StudentLevel == studentLevel)
+            .Include(a => a.UserAssignments).ToListAsync();
 
             return users;
         }
@@ -141,6 +141,11 @@ namespace Hammond.API.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public void SqlCmdHelper(string sqlCmnd)
+        {
+            _context.Database.ExecuteSqlCommand(sqlCmnd);
         }
     }
 }

@@ -52,18 +52,28 @@ namespace Hammond.API.Controllers
 
             if (assignment.Assigned)
                 assignment.DateAssigned = DateTime.Now;
-
-            var userParams = new UserParams()
-            {
-                StudentLevel = assignmentForCreationDto.StudentLevel,
-                PageSize = 50
-            };
-            var students = _repo.GetUsers(userParams);
+            
+            var students = _repo.GetStudents(assignmentForCreationDto.StudentLevel);
 
             _repo.Add(assignment);
 
+            foreach(var student in students.Result)
+            {
+                var userAssignment = new UserAssignment(){
+                    UserId = student.Id,
+                    AssignmentId = assignment.Id,
+                    Completed = false
+                };
+
+                if (!student.UserAssignments.Contains(userAssignment))
+                _repo.Add(userAssignment);
+            }            
+
+            
+            // _repo.SqlCmdHelper("SET IDENTITY_INSERT dbo.UserAssignments ON");
             if (await _repo.SaveAll())
             {
+                // _repo.SqlCmdHelper("SET IDENTITY_INSERT dbo.UserAssignments OFF");
                 var assignmentToReturn = _mapper.Map<AssignmentToReturnDto>(assignment);
                 return CreatedAtRoute("GetAssignment", new {id = assignment.Id}, assignmentToReturn);
             }

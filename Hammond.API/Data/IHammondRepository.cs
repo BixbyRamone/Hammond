@@ -10,7 +10,7 @@ namespace Hammond.API.Data
          void Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
-        Task<IEnumerable<User>> GetUsers();
+        Task<IEnumerable<User>> GetStudents(string studentLevel);
         Task<PagedList<User>> GetUsers(UserParams userParams);
         Task<User> GetUser(int id);
         Task<Message> GetMessage(int id);
@@ -20,6 +20,7 @@ namespace Hammond.API.Data
         Task<PagedList<Assignment>> GetAssignments(AssignmentParams assignmentParams);
         Task<Assignment> GetUserAssignment(int id);
         Task<PagedList<Assignment>> GetUserAssignments(AssignmentParams assignmentParams);
+        void SqlCmdHelper(string sqlCmnd);
         
     }
 }
