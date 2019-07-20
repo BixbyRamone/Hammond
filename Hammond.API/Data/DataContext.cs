@@ -43,11 +43,13 @@ namespace Hammond.API.Data
 
                 userAssignment.HasOne(ua => ua.User)
                 .WithMany(u => u.UserAssignments)
-                .HasForeignKey(ua => ua.UserId);
+                .HasForeignKey(ua => ua.UserId)
+                .IsRequired();
 
                 userAssignment.HasOne(ua => ua.Assignment)
                 .WithMany(a => a.UserAssignments)
-                .HasForeignKey(ua => ua.AssignmentId);
+                .HasForeignKey(ua => ua.AssignmentId)
+                .IsRequired();
             });
                        
             builder.Entity<Message>()

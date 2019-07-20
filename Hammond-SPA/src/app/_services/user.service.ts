@@ -6,6 +6,7 @@ import { User } from '../_models/user';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
+import { Assignment } from '../_models/assignment';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,10 @@ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
         return paginatedResult;
       })
     );
+}
+
+createAssignment(id: number, assignment: Assignment) {
+  return this.http.post(this.baseUrl + 'assignments/' + id, assignment);
 }
 
 getMessageThread(id: number, recipientId: number) {

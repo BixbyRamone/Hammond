@@ -8,15 +8,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AssingmentService {
-  baseUrl = environment.apiUrl + 'assignment/';
-  currentUser: User;
+  baseUrl = environment.apiUrl + 'assignments/';
+  // currentUser: User;
   assignment: Assignment;
 
 constructor(private http: HttpClient) { }
 
-register(assignment: Assignment) {
-  this.assignment.createdBy = this.currentUser;
-  return this.http.post(this.baseUrl + 'register', assignment);
+register(id: number, assignment: Assignment) {
+  // assignment.createdBy = currentUser;
+  return this.http.post(this.baseUrl + id, assignment);
 }
 
 }

@@ -111,7 +111,8 @@ namespace Hammond.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.OrderBy(u => u.LastName).AsQueryable();
+            var users = _context.Users.OrderBy(u => u.LastName).Include(u => u.StudentLevel == userParams.StudentLevel)
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
@@ -128,6 +129,13 @@ namespace Hammond.API.Data
             }
 
             return await PagedList<User>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
+        }
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _context.Users.Include(a => a.UserAssignments).ToListAsync();
+
+            return users;
         }
 
         public async Task<bool> SaveAll()

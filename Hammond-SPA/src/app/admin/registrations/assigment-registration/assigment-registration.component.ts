@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AssingmentService } from 'src/app/_services/assingment.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-assigment-registration',
@@ -18,6 +19,7 @@ export class AssigmentRegistrationComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private assignmentService: AssingmentService,
+    private userService: UserService,
     private alertify: AlertifyService,
     private fb: FormBuilder) { }
 
@@ -32,19 +34,18 @@ export class AssigmentRegistrationComponent implements OnInit {
       studentLevel: ['', Validators.required],
       section: ['', Validators.required],
       dateDue: ['', Validators.required],
-      assigned: ['', Validators.required],
+      assigned: [false, Validators.required],
     });
   }
 
   register() {
-
     if (this.registerForm.valid) {
       this.assignment = Object.assign({}, this.registerForm.value);
 
-      this.assignmentService.register(this.assignment).subscribe(() => {
+      this.assignmentService.register(this.authService.decodedToken.nameid, this.assignment).subscribe(() => {
         this.alertify.success('Registration succesful');
       }, error => {
-        console.log('error: ' + error);
+        console.log(error);
         this.alertify.error(error);
       });
     }
