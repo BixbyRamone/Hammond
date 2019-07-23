@@ -9,6 +9,7 @@ import { StudentLandingComponent } from './landingpages/student-landing/student-
 import { StudentListComponent } from './admin/student-list/student-list.component';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { StudentRegistrationComponent } from './admin/registrations/student-registration/student-registration.component';
+import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,7 +31,8 @@ export const appRoutes: Routes = [
 
             { path: 'mentor', component: MentorLandingComponent, data: {roles: ['Admin', 'Mentor']} },
 
-            { path: 'student', component: StudentLandingComponent, data: {roles: ['Admin', 'Mentor', 'Student']} }
+            { path: 'student', component: StudentLandingComponent, resolve: {user: StudProfileResolver},
+                 data: {roles: ['Admin', 'Mentor', 'Student']} }
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

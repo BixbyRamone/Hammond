@@ -31,6 +31,9 @@ import { AssigmentRegistrationComponent } from './admin/registrations/assigment-
 import { StudentDropboxComponent } from './admin/registrations/student-dropbox/student-dropbox.component';
 import { EventsListComponent } from './admin/events-list/events-list.component';
 import { AssignmentListComponent } from './admin/assignment-list/assignment-list.component';
+import { StudAssignmentTabComponent } from './student/stud-assignment-tab/stud-assignment-tab.component';
+import { StudProfileTabComponent } from './student/stud-profile-tab/stud-profile-tab.component';
+import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,6 +53,8 @@ export function tokenGetter() {
       HomeComponent,
       MentorLandingComponent,
       SigninComponent,
+      StudAssignmentTabComponent,
+      StudProfileTabComponent,
       StudentDropboxComponent,
       StudentLandingComponent,
       StudentListComponent,
@@ -80,6 +85,7 @@ export function tokenGetter() {
    providers: [
       AlertifyService,
       AuthService,
+      StudProfileResolver,
       UserDetailResolver,
       UserListResolver
    ],
