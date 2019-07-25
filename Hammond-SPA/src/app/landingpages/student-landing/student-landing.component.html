@@ -4,7 +4,7 @@
 <div class="container">
   <tabset class="admin-tabset" #studentTabs>
     <tab heading="My Profile">
-      <app-stud-profile-tab></app-stud-profile-tab>
+      <app-stud-profile-tab [student]="user"></app-stud-profile-tab>
     </tab>
 
     <tab heading="Assignments">

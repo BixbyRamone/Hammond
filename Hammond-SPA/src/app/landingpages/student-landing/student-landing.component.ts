@@ -13,7 +13,6 @@ import { TabsetComponent } from 'ngx-bootstrap';
 })
 export class StudentLandingComponent implements OnInit {
   @ViewChild('studentTabs') studentTabs: TabsetComponent;
-  @Input() student: any;
   user: User;
 
   constructor(
@@ -25,8 +24,7 @@ export class StudentLandingComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
-      this.student = data['user'];
-      console.log(this.student);
+      this.user = data['user'];
     });
 
     this.route.queryParams.subscribe(params => {
