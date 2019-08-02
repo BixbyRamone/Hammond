@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Assignment } from 'src/app/_models/assignment';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { AssingmentService } from 'src/app/_services/assingment.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-stud-assignment-tab',
@@ -13,7 +14,9 @@ import { AssingmentService } from 'src/app/_services/assingment.service';
 })
 export class StudAssignmentTabComponent implements OnInit {
   @Output() cancel = new EventEmitter();
-  assignments: Assignment[];
+  @Input() student: User;
+  user: User;
+  assignments: any[];
   pagination: Pagination;
 
   constructor(
@@ -23,15 +26,25 @@ export class StudAssignmentTabComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      this.assignments = data['assignments'].result;
-      this.pagination = data['assignments'].pagination;
+    this.route.data.subscribe( data => {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.assignments = this.user.userAssignments;
+      console.log(this.assignments);
+
+      this.assignments.forEach(element => {
+        console.log(element.assignment.title);
+      });
     });
   }
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadAssignments();
+  }
+
+  click(): any {
+    console.log('Clicked!');
+    console.log(this.student);
   }
 
   loadAssignments() {

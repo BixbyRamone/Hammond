@@ -11,6 +11,7 @@ export class StudProfileTabComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.student);
   }
 
 }

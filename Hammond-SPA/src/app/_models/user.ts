@@ -1,3 +1,5 @@
+import { Assignment } from './assignment';
+
 export interface User {
     id: number;
     username: string;
@@ -8,4 +10,5 @@ export interface User {
     lastActive: Date;
     actScore: number[];
     userRole: string;
+    userAssignments: Assignment[];
 }
