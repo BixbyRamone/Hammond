@@ -1,6 +1,6 @@
 <div class="">
   <div *ngFor="let assignment of assignments">
-    <p>{{assignment.assignment.title}}</p>
+    <app-assignment-item [assignment]="assignment.assignment"></app-assignment-item>
   </div>
 </div>
 

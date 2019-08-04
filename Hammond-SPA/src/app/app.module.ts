@@ -34,6 +34,7 @@ import { AssignmentListComponent } from './admin/assignment-list/assignment-list
 import { StudAssignmentTabComponent } from './student/stud-assignment-tab/stud-assignment-tab.component';
 import { StudProfileTabComponent } from './student/stud-profile-tab/stud-profile-tab.component';
 import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
+import { AssignmentItemComponent } from './assignments/assignment-item/assignment-item.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -42,6 +43,7 @@ export function tokenGetter() {
 @NgModule({
    declarations: [
       AppComponent,
+      AssignmentItemComponent,
       AssigmentRegistrationComponent,
       AdminLandingComponent,
       AssignmentListComponent,
