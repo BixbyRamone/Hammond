@@ -1,12 +1,13 @@
 <div class="card mb-2">
   <div class="container">
       <div class="card-body">
-          <div class="row">
-            <div class="col-md-1 col-lg-1">{{assignment.id}}: </div>
-            <div [routerLink]="['/assignments/', assignment.id]"  
-            class="link last-name-column col-md-2 col-lg-2">
+          <div class="" [routerLink]="['/student/assignments/', assignment.id]">
+            <div>{{assignment.id}}</div>
+            <div class="row link last-name-column col-md-2 col-lg-2">
               {{assignment.title}}
             </div>
+            <br>
+            <div class="row">Due: {{assignment.dateAssigned | date: 'mediumDate'}}</div>
           </div>
         </div>
   </div>
