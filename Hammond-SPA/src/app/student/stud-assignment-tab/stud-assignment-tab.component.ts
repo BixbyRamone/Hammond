@@ -16,8 +16,11 @@ export class StudAssignmentTabComponent implements OnInit {
   @Output() cancel = new EventEmitter();
   @Input() student: User;
   user: User;
+  detailedAssignment: Assignment;
   assignments: any[];
   pagination: Pagination;
+  assignmentViewMode = false;
+  assignmentListMode = true;
 
   constructor(
     private assignmentService: AssingmentService,
@@ -30,10 +33,6 @@ export class StudAssignmentTabComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.assignments = this.user.userAssignments;
       console.log(this.assignments);
-
-      this.assignments.forEach(element => {
-        console.log(element.assignment.title);
-      });
     });
   }
 
@@ -42,9 +41,17 @@ export class StudAssignmentTabComponent implements OnInit {
     this.loadAssignments();
   }
 
-  click(): any {
-    console.log('Clicked!');
-    console.log(this.student);
+  listToggle() {
+    this.assignmentViewMode = false;
+    this.assignmentListMode = true;
+    this.detailedAssignment = null;
+  }
+
+  detailToggle(passedAssignment) {
+    this.detailedAssignment = passedAssignment.assignment;
+    console.log(this.detailedAssignment);
+    this.assignmentViewMode = true;
+    this.assignmentListMode = false;
   }
 
   loadAssignments() {

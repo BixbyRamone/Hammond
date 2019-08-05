@@ -1,13 +1,13 @@
 <div class="card mb-2">
   <div class="container">
       <div class="card-body">
-          <div class="" [routerLink]="['/student/assignments/', assignment.id]">
-            <div>{{assignment.id}}</div>
+          <div class="">
             <div class="row link last-name-column col-md-2 col-lg-2">
-              {{assignment.title}}
+              {{assignment.assignment.title}}
             </div>
             <br>
-            <div class="row">Due: {{assignment.dateAssigned | date: 'mediumDate'}}</div>
+            <div *ngIf="assignment.completed">Done!</div>
+            <div *ngIf="!assignment.completed" class="row">Due: {{assignment.assignment.dateAssigned | date: 'mediumDate'}}</div>
           </div>
         </div>
   </div>

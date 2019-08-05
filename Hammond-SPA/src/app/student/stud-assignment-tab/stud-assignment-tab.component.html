@@ -1,6 +1,14 @@
-<div class="">
-  <div *ngFor="let assignment of assignments">
-    <app-assignment-item [assignment]="assignment.assignment"></app-assignment-item>
+<div class="container">
+    <i *ngIf="assignmentViewMode" (click)="listToggle()" class="fa fa-arrow-circle-left"></i>
+    <br>
+  <div *ngIf="assignmentListMode">
+      <div *ngFor="let assignment of assignments">
+          <app-assignment-item (click)="detailToggle(assignment)" [assignment]="assignment"></app-assignment-item>
+        </div>
   </div>
+  <div class="container" *ngIf="assignmentViewMode">
+    <app-stud-assignment-detail [assignment]="detailedAssignment"></app-stud-assignment-detail>
+  </div>
+  
 </div>
 

@@ -11,4 +11,5 @@ export interface Assignment {
     assigned: boolean;
     createdBy: User;
     assignments: Assignment[];
+    completed: boolean;
 }

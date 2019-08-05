@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Assignment } from 'src/app/_models/assignment';
 
 @Component({
   selector: 'app-assignment-item',
@@ -7,7 +6,7 @@ import { Assignment } from 'src/app/_models/assignment';
   styleUrls: ['./assignment-item.component.css']
 })
 export class AssignmentItemComponent implements OnInit {
-  @Input() assignment: Assignment;
+  @Input() assignment: any;
 
   constructor() { }
 
