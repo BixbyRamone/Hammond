@@ -49,10 +49,6 @@ export class StudentTabComponent implements OnInit {
     this.dropBoxMode = modeSwitch;
   }
 
-  genericCancelTest(modeSwitch: boolean, toBeSwitched: boolean) {
-    toBeSwitched = modeSwitch;
-  }
-
   // clearDisplays() {
   //   this.studentRegisterMode = false;
   //   this.studentListMode = false;

@@ -36,6 +36,7 @@ import { StudProfileTabComponent } from './student/stud-profile-tab/stud-profile
 import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
 import { AssignmentItemComponent } from './assignments/assignment-item/assignment-item.component';
 import { StudAssignmentDetailComponent } from './student/stud-assignment-detail/stud-assignment-detail.component';
+import { VolunteerRegistrationComponent } from './admin/registrations/volunteer-registration/volunteer-registration.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -66,6 +67,7 @@ export function tokenGetter() {
       StudentTabComponent,
       NavComponent,
       UserItemComponent,
+      VolunteerRegistrationComponent,
       VolunteersTabComponent
    ],
    imports: [

@@ -89,9 +89,9 @@ namespace Hammond.API.Controllers
 
             if (result.Succeeded)
             {
-                var appUser = await _userManager.Users.Include(u => u.UserAssignments).
-                ThenInclude(ua => ua.Assignment).
-                FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
+                var appUser = await _userManager.Users.Include(u => u.UserAssignments)
+                .ThenInclude(ua => ua.Assignment)
+                .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
 
                 var userToReturn = _mapper.Map<UserToReturnDto>(appUser);
 

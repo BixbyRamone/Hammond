@@ -1,3 +1,23 @@
-<p>
-  volunteers-tab works!
-</p>
+<div class="container">
+    
+  <div *ngIf="!volunteerListMode && !volunteerRegisterMode">
+      <ul>
+
+          <li (click)="listToggle()">View Volunteer List</li>
+          <li (click)="registerToggle()">Register New Volunteer</li>
+      
+        </ul>
+  </div>
+
+  <div *ngIf="volunteerRegisterMode">
+    <app-volunteer-registration (cancelRegister)="cancelVolunteerRegister($event)"></app-volunteer-registration>
+  </div>
+
+  <div *ngIf="volunteerListMode">
+    <app-student-list (cancelList)="cancelVolunteerList($event)"></app-student-list>
+  </div>
+
+  
+
+
+</div>

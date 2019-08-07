@@ -1,9 +1,14 @@
-<p>
-    Due: {{assignment.dateDue}}
-  </p>
+
 <p>
   {{assignment.title}}
 </p>
+<p *ngIf="!assignment.completed">
+    Due: {{assignment.dateDue}}
+</p>
+<p *ngIf="assignment.completed">
+  Assignment Completed!
+</p>
+
 <p>
   {{assignment.content}}
 </p>
