@@ -1,0 +1,19 @@
+<div class="container">
+    
+  <div *ngIf="!studentListMode && !studentRegisterMode && !dropBoxMode">
+      <ul>
+
+          <li (click)="myStudentsModeToggle()">My Students</li>
+          <li (click)="allStudentsModeToggle()">MY Class</li>      
+        </ul>
+  </div>
+
+  <div *ngIf="myStudentsMode">
+    <app-mentor-my-students (cancelMyStudentsMode)="cancelMyStudentsMode()"></app-mentor-my-students>
+  </div>
+
+  <div *ngIf="allStudentsMode">
+    <app-mentor-stud-list (cancelAllStudentsMode)="cancelAllStudentsMode()"></app-mentor-stud-list>
+  </div>
+
+</div>

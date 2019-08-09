@@ -1,17 +1,23 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { User } from 'src/app/_models/user';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { debug } from 'util';
 
 @Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css']
+  selector: 'app-mentor-stud-list',
+  templateUrl: './mentor-stud-list.component.html',
+  styleUrls: ['./mentor-stud-list.component.css']
 })
-export class StudentListComponent implements OnInit {
-  @Output() cancelList = new EventEmitter();
+export class MentorStudListComponent implements OnInit {
+  @Output() cancelAllStudents = new EventEmitter();
+  jwtHelper = new JwtHelperService();
+  studentLevel: any;
+  decodedToken: any;
   users: User[];
   pagination: Pagination;
 
@@ -24,6 +30,7 @@ export class StudentListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
+      console.log('subscriber');
     });
   }
 
@@ -33,17 +40,18 @@ export class StudentListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.userService.getUsers(/*this.pagination.currentPage, this.pagination.itemsPerPage*/)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
-      this.pagination = res.pagination;
+      // this.pagination = res.pagination;
     }, error => {
       this.alertify.error(error);
     });
   }
 
   backup() {
-    this.cancelList.emit(false);
+    console.log('backup');
+    this.cancelAllStudents.emit(false);
   }
 
 }

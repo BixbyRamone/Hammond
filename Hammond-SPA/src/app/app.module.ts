@@ -37,6 +37,9 @@ import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
 import { AssignmentItemComponent } from './assignments/assignment-item/assignment-item.component';
 import { StudAssignmentDetailComponent } from './student/stud-assignment-detail/stud-assignment-detail.component';
 import { VolunteerRegistrationComponent } from './admin/registrations/volunteer-registration/volunteer-registration.component';
+import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
+import { MentorStudTabComponent } from './mentor/mentor-stud-tab/mentor-stud-tab.component';
+import { MentorMyStudentsComponent } from './mentor/mentor-my-students/mentor-my-students.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -56,6 +59,9 @@ export function tokenGetter() {
       ValueComponent,
       HomeComponent,
       MentorLandingComponent,
+      MentorMyStudentsComponent,
+      MentorStudTabComponent,
+      MentorStudListComponent,
       SigninComponent,
       StudAssignmentDetailComponent,
       StudAssignmentTabComponent,

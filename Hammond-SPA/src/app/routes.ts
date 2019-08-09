@@ -11,6 +11,7 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
 import { StudentRegistrationComponent } from './admin/registrations/student-registration/student-registration.component';
 import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
 import { StudAssignmentDetailComponent } from './student/stud-assignment-detail/stud-assignment-detail.component';
+import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -30,7 +31,8 @@ export const appRoutes: Routes = [
             { path: 'admin/registerstudent',  component: StudentRegistrationComponent,
                 data: {roles: ['Admin']} },
 
-            { path: 'mentor', component: MentorLandingComponent, data: {roles: ['Admin', 'Mentor']} },
+            { path: 'mentor', component: MentorLandingComponent,
+                resolve: {users: UserListResolver}, data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'student', component: StudentLandingComponent, resolve: {user: StudProfileResolver},
                  data: {roles: ['Admin', 'Mentor', 'Student']} },

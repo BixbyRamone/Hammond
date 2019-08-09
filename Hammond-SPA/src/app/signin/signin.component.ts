@@ -34,14 +34,6 @@ export class SigninComponent implements OnInit {
         console.log(error);
         this.alertify.error(error);
       }, () => {
-        // switch (this.authService.decodedToken.role) {
-        //   case 'Admin':
-        //     this.router.navigate(['/admin']);
-        //     break;
-        //   case 'Student':
-        //     this.router.navigate(['/student']);
-        //     break;
-        // }
         console.log(this.authService.decodedToken);
         if (this.authService.decodedToken.role.includes('Admin')) {
           this.router.navigate(['/admin']);
