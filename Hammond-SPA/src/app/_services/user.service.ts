@@ -16,7 +16,7 @@ export class UserService {
 
 constructor(private http: HttpClient) { }
 
-getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
+getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>> {
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
 
   let params = new HttpParams();
@@ -24,6 +24,12 @@ getUsers(page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
   if (page != null && itemsPerPage != null) {
     params = params.append('pageNumber', page);
     params = params.append('pageSize', itemsPerPage);
+  }
+
+  if (userParams != null) {
+    params = params.append('studentLevel', userParams.studentLevel);
+  } else {
+    params = params.append('studentLevel', this.getStudentLevel());
   }
 
   return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})
@@ -91,5 +97,11 @@ deleteMessage(id: number, userId: number) {
 markAsRead(userId: number, messageId: number) {
   this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + messageId + '/read', {})
     .subscribe();
+}
+
+getStudentLevel() {
+  let info = JSON.parse(localStorage.getItem('user'));
+  info = info.studentLevel;
+  return info;
 }
 }

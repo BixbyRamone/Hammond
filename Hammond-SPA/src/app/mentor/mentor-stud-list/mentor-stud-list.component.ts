@@ -20,6 +20,7 @@ export class MentorStudListComponent implements OnInit {
   decodedToken: any;
   users: User[];
   pagination: Pagination;
+  userParams: any = {};
 
   constructor(
     private userService: UserService,
@@ -32,6 +33,8 @@ export class MentorStudListComponent implements OnInit {
       this.pagination = data['users'].pagination;
       console.log('subscriber');
     });
+
+    this.userParams.studentLevel = this.getStudentLevel();
   }
 
   pageChanged(event: any): void {
@@ -40,13 +43,19 @@ export class MentorStudListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers(/*this.pagination.currentPage, this.pagination.itemsPerPage*/)
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
       // this.pagination = res.pagination;
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  getStudentLevel() {
+    let info = JSON.parse(localStorage.getItem('user'));
+    info = info.studentLevel;
+    return info;
   }
 
   backup() {

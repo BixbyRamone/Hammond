@@ -113,6 +113,11 @@ namespace Hammond.API.Data
         {
             var users = _context.Users.OrderBy(u => u.LastName).AsQueryable();
 
+            if (userParams.StudentLevel != null)
+            {
+                users = users.Where(u => u.StudentLevel == userParams.StudentLevel);
+            }
+
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
                 switch (userParams.OrderBy)
