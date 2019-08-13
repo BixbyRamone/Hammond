@@ -1,19 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Hammond.API.Helpers;
 using Hammond.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Hammond.API.Data
 {
     public class HammondRepository : IHammondRepository
     {
         private readonly DataContext _context;
-        public HammondRepository(DataContext context)
+        private readonly UserManager<User> _userManager;
+
+        public HammondRepository(
+            DataContext context,
+            UserManager<User> userManager)
         {
             _context = context;
-
+            _userManager = userManager;
         }
         public void Add<T>(T entity) where T : class
         {
@@ -111,12 +118,19 @@ namespace Hammond.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.OrderBy(u => u.LastName).AsQueryable();
+            var users = _context.Users.Include(u => u.UserRoles)
+            .ThenInclude(ur => ur.Role)
+            .OrderBy(u => u.LastName).AsQueryable();
 
             if (userParams.StudentLevel != null)
             {
                 users = users.Where(u => u.StudentLevel == userParams.StudentLevel);
+                var test = _userManager.GetUsersInRoleAsync("Student").Result;
+
+                users = users.Where(u => test.Contains(u));
             }
+
+            
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
