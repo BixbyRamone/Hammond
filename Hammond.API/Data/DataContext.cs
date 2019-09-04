@@ -13,9 +13,11 @@ namespace Hammond.API.Data
         public DbSet<ActScore> ActScores { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Group> Group { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Value> Values { get; set; }
         public DbSet<UserAssignment> UserAssignments { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -61,6 +63,18 @@ namespace Hammond.API.Data
                 .HasOne(u => u.Recipient)
                 .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserGroup>(userGroup => {
+                userGroup.HasKey(ug => new {ug.UserId, ug.GroupId});
+
+                userGroup.HasOne(ug => ug.Group)
+                .WithMany(g => g.UserGroups)
+                .HasForeignKey(ug => ug.GroupId);
+
+                userGroup.HasOne(ug => ug.User)
+                .WithMany(u => u.UserGroups)
+                .HasForeignKey(ug => ug.UserId);  
+            });
         }
     }
 }

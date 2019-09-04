@@ -115,14 +115,19 @@ namespace Hammond.API.Data
                 assignmentParams.PageSize);
             throw new System.NotImplementedException();
         }
+        
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
+            // var userst = _context.Users.Include(u => u.UserRoles)
+            // .ThenInclude(ur => ur.Role)
+            // .OrderBy(u => u.LastName).AsQueryable();
+
             var users = _context.Users.Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .OrderBy(u => u.LastName).AsQueryable();
 
-            if (userParams.StudentLevel != null)
+            if (userParams.StudentLevel != null && userParams.StudentLevel != "null")
             {
                 users = users.Where(u => u.StudentLevel == userParams.StudentLevel);
                 var test = _userManager.GetUsersInRoleAsync("Student").Result;
