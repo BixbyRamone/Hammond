@@ -40,6 +40,9 @@ import { VolunteerRegistrationComponent } from './admin/registrations/volunteer-
 import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
 import { MentorStudTabComponent } from './mentor/mentor-stud-tab/mentor-stud-tab.component';
 import { MentorMyStudentsComponent } from './mentor/mentor-my-students/mentor-my-students.component';
+import { GroupsTabComponent } from './admin/groups-tab/groups-tab.component';
+import { GroupsListComponent } from './admin/groups-list/groups-list.component';
+import { GroupRegistrationComponent } from './admin/registrations/group-registration/group-registration.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -56,6 +59,9 @@ export function tokenGetter() {
       EventsListComponent,
       EventRegistrationComponent,
       EventsTabComponent,
+      GroupsListComponent,
+      GroupRegistrationComponent,
+      GroupsTabComponent,
       ValueComponent,
       HomeComponent,
       MentorLandingComponent,
