@@ -119,10 +119,6 @@ namespace Hammond.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            // var userst = _context.Users.Include(u => u.UserRoles)
-            // .ThenInclude(ur => ur.Role)
-            // .OrderBy(u => u.LastName).AsQueryable();
-
             var users = _context.Users.Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .OrderBy(u => u.LastName).AsQueryable();

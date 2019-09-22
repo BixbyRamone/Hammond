@@ -1,4 +1,6 @@
 import { Assignment } from './assignment';
+import { Role } from './role';
+
 
 export interface User {
     id: number;
@@ -10,5 +12,7 @@ export interface User {
     lastActive: Date;
     actScore: number[];
     userRole: string;
+    userRoles: Role[];
     userAssignments: Assignment[];
+    grouped: boolean;
 }

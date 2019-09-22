@@ -20,6 +20,6 @@ export class UserDetailResolver implements Resolve<User> {
                 this.router.navigate(['/home']);
                 return of(null);
             })
-        )
+        );
     }
 }

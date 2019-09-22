@@ -28,6 +28,7 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
 
   if (userParams != null) {
     params = params.append('studentLevel', userParams.studentLevel);
+    params =  params.append('role', userParams.role);
   } else {
     params = params.append('studentLevel', this.getStudentLevel());
   }
