@@ -17,8 +17,6 @@ export class GroupRegistrationComponent implements OnInit {
   users: User[];
   userParams: any = {};
   pagination: Pagination;
-  groupHasMent = false;
-  groupHasStud = false;
   groupToRegister: any = {
     volunteerIds: [],
     studentIds: []
@@ -53,11 +51,9 @@ export class GroupRegistrationComponent implements OnInit {
 
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       this.groupToRegister.studentIds.push(user.id);
-      this.groupHasStud = true;
     }
     if (user.userRoles[0].role.normalizedName === 'MENTOR') {
       this.groupToRegister.volunteerIds.push(user.id);
-      this.groupHasMent = true;
     }
   }
 
