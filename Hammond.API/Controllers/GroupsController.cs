@@ -24,7 +24,7 @@ namespace Hammond.API.Controllers
         }
 
         [HttpPost()]
-        public async Task<IActionResult> CreateGroup(int userId, [FromBody]GroupForCreationDto groupForCreationDto)
+        public async Task<IActionResult> CreateGroup(/*int userId, */[FromBody]GroupForCreationDto groupForCreationDto)
         {
             List<User> volunteers = new List<User>();
             foreach (var volIds in groupForCreationDto.VolunteerIds)
