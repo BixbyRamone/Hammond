@@ -119,7 +119,8 @@ namespace Hammond.API.Data
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.Include(u => u.UserRoles)
+            var users = _context.Users.Include(u => u.UserGroups)
+            .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .OrderBy(u => u.LastName).AsQueryable();
 
@@ -129,6 +130,11 @@ namespace Hammond.API.Data
                 var test = _userManager.GetUsersInRoleAsync("Student").Result;
 
                 users = users.Where(u => test.Contains(u));
+            }
+
+            if (userParams.GetUngrouped)
+            {
+                users = users.Where(u => u.UserGroups.Count == 0);
             }
 
             

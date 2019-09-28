@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { Role } from 'src/app/_models/role';
@@ -16,7 +16,9 @@ import { GroupService } from 'src/app/_services/group.service';
 })
 export class GroupRegistrationComponent implements OnInit {
   @Output() cancel = new EventEmitter();
-  users: User[];
+  @Output() clicked = new EventEmitter();
+  @Input() users: User[];
+  // users: User[];
   userParams: any = {};
   pagination: Pagination;
   groupToRegister: Group = {
@@ -40,13 +42,14 @@ export class GroupRegistrationComponent implements OnInit {
 
   loadUsers() {
     console.log('loadUsers()');
-    this.userService.getUsers(this.pagination.currentPage, 999, this.userParams)
-      .subscribe((res: PaginatedResult<User[]>) => {
-      this.users = res.result;
-      this.pagination = res.pagination;
+    this.userParams.getUngrouped = true;
+    this.userService.getUngroupedUsers(this.userParams)
+      .subscribe((res:  User[]) => {
+      this.users = res;
     }, error => {
       this.alertify.error(error);
     });
+    console.dir(this.users);
   }
 
   groupUser(user: User) {

@@ -43,6 +43,7 @@ import { MentorMyStudentsComponent } from './mentor/mentor-my-students/mentor-my
 import { GroupsTabComponent } from './admin/groups-tab/groups-tab.component';
 import { GroupsListComponent } from './admin/groups-list/groups-list.component';
 import { GroupRegistrationComponent } from './admin/registrations/group-registration/group-registration.component';
+import { UserGroupListResolver } from './_resolvers/user-group-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -105,6 +106,7 @@ export function tokenGetter() {
       AuthService,
       StudProfileResolver,
       UserDetailResolver,
+      UserGroupListResolver,
       UserListResolver
    ],
    bootstrap: [

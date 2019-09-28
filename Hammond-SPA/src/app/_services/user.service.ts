@@ -45,6 +45,14 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
     );
 }
 
+getUngroupedUsers(userParams?): Observable<User[]> {
+  let params = new HttpParams();
+
+  params = params.append('getUngrouped', userParams.getUngrouped);
+
+  return this.http.get<User[]>(this.baseUrl + 'users', {params});
+}
+
 getUser(id): Observable<User> {
   return this.http.get<User>(this.baseUrl + 'users/' + id);
 }

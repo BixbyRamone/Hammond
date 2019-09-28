@@ -6,10 +6,12 @@
     </ul>
   </div>
   <div *ngIf="groupRegisterMode">
-      <app-group-registration (cancel)="cancelGroupRegistration($event)"></app-group-registration>
+      <app-group-registration [users]="loadedUserGroups" (cancel)="cancelGroupRegistration($event)"></app-group-registration>
     </div>
 
     <div *ngIf="groupListMode">
       <app-groups-list (cancel)="cancelGroupList($event)"></app-groups-list>
     </div>
+
+    <button (click)="test()">Button</button>
 </div>

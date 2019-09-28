@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-groups-tab',
@@ -6,12 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./groups-tab.component.css']
 })
 export class GroupsTabComponent implements OnInit {
+  @Input() loadedUserGroups;
   groupRegisterMode = false;
   groupListMode = false;
 
   constructor() { }
 
   ngOnInit() {
+    console.dir(this.loadedUserGroups);
   }
 
   registerToggle() {
@@ -30,6 +32,10 @@ export class GroupsTabComponent implements OnInit {
 
   cancelGroupList(modeSwitch: boolean) {
     this.groupListMode = modeSwitch;
+  }
+
+  test() {
+    console.dir(this.loadedUserGroups);
   }
 
 }
