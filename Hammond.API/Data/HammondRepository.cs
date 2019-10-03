@@ -164,6 +164,47 @@ namespace Hammond.API.Data
             return users;
         }
 
+        public async Task<PagedList<Group>> GetGroups(UserParams userParams)
+        {
+            var groups = _context.Group.Include(g => g.UserGroups)
+            .ThenInclude(ug => ug.User)
+            .AsQueryable();
+
+            // if (userParams.StudentLevel != null && userParams.StudentLevel != "null")
+            // {
+            //     groups = groups.Where(u => u.StudentLevel == userParams.StudentLevel);
+            //     var test = _userManager.GetUsersInRoleAsync("Student").Result;
+
+            //     users = users.Where(u => test.Contains(u));
+            // }
+
+            
+            // if (!string.IsNullOrEmpty(userParams.OrderBy))
+            // {
+            //     switch (userParams.OrderBy)
+            //     {
+            //         case "created":
+            //             users = users.OrderByDescending(u => u.DateCreated);
+            //             break;
+
+            //         default:
+            //             users = users.OrderByDescending(u => u.LastActive);
+            //             break;
+            //     }
+            // }
+
+            return await PagedList<Group>.CreateAsync(groups, userParams.PageNumber, userParams.PageSize);
+        }
+
+        public async Task<Group> GetGroup(int id)
+        {
+            var group = await _context.Group.Include(g => g.UserGroups)
+            .ThenInclude(ug => ug.User)
+            .FirstOrDefaultAsync(g => g.Id == id);
+
+            return group;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
@@ -173,5 +214,6 @@ namespace Hammond.API.Data
         {
             _context.Database.ExecuteSqlCommand(sqlCmnd);
         }
+        
     }
 }

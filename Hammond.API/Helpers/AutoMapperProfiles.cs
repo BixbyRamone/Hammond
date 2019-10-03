@@ -17,6 +17,7 @@ namespace Hammond.API.Helpers
             CreateMap<Assignment, AssignmentForListDto>();
             CreateMap<Assignment, AssignmentForCreationDto>();
             CreateMap<Assignment, AssignmentToReturnDto>();
+            CreateMap<Group, GroupForListDto>();
         }
     }
 }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Hammond.API.Data;
+using Hammond.API.Helpers;
 using Hammond.API.Dtos;
 using Hammond.API.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -16,10 +18,10 @@ namespace Hammond.API.Controllers
     public class GroupsController : ControllerBase
     {
         private readonly IHammondRepository _repo;
-        private readonly IMapper _map;
-        public GroupsController(IHammondRepository repo, IMapper map)
+        private readonly IMapper _mapper;
+        public GroupsController(IHammondRepository repo, IMapper mapper)
         {
-            _map = map;
+            _mapper = mapper;
             _repo = repo;            
         }
 
@@ -77,5 +79,32 @@ namespace Hammond.API.Controllers
             throw new Exception("Creating the assignment failed on save");
             
         }
+
+        [HttpGet()]
+        public async Task<IActionResult> GetGroups([FromQuery]UserParams userParams)
+        {
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var usersFromRepo = await _repo.GetUser(currentUserId);
+
+            userParams.UserId = currentUserId;
+
+            var groups = await _repo.GetGroups(userParams);
+
+            var groupsToReturn = _mapper.Map<IEnumerable<GroupForListDto>>(groups);
+
+            Response.AddPagination(groups.CurrentPage, groups.PageSize, groups.TotalCount, groups.TotalPages);
+
+            return Ok(groupsToReturn);
+
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetGroup(int id)
+        {
+            var group = await _repo.GetGroup(id);
+
+            return Ok(group);
+        } 
     }
 }
