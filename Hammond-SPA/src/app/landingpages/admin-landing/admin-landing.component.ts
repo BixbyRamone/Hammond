@@ -5,6 +5,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { GroupService } from 'src/app/_services/group.service';
+import { Group } from 'src/app/_models/group';
 
 @Component({
   selector: 'app-admin-landing',
@@ -15,11 +17,13 @@ export class AdminLandingComponent implements OnInit {
   @ViewChild('adminTabs') adminTabs: TabsetComponent;
   user: User;
   users: User[];
+  groups: Group[];
   userParams: any = {};
   pagination:  Pagination;
 
   constructor(
     private userService: UserService,
+    private groupService: GroupService,
     private alertify: AlertifyService,
     private route: ActivatedRoute) { }
 
@@ -35,8 +39,12 @@ export class AdminLandingComponent implements OnInit {
     });
   }
 
+  groupLoads() {
+    this.loadUngroupedUsers();
+    this.loadUserGroups();
+  }
+
   loadUngroupedUsers() {
-    console.log('loadUsers()');
     this.userParams.getUngrouped = true;
     this.userService.getUngroupedUsers(this.userParams)
       .subscribe((res:  User[]) => {
@@ -45,6 +53,18 @@ export class AdminLandingComponent implements OnInit {
       this.alertify.error(error);
     });
     console.dir(this.users);
+  }
+
+  loadUserGroups() {
+    console.log('loadGroups');
+    this.groupService.getGroups(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe((res:  PaginatedResult<Group[]>) => {
+        this.groups = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+      console.dir(this.groups);
   }
 
 }

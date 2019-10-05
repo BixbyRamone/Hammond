@@ -44,6 +44,7 @@ import { GroupsTabComponent } from './admin/groups-tab/groups-tab.component';
 import { GroupsListComponent } from './admin/groups-list/groups-list.component';
 import { GroupRegistrationComponent } from './admin/registrations/group-registration/group-registration.component';
 import { UserGroupListResolver } from './_resolvers/user-group-list.resolver';
+import { GroupService } from './_services/group.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -104,6 +105,7 @@ export function tokenGetter() {
    providers: [
       AlertifyService,
       AuthService,
+      GroupService,
       StudProfileResolver,
       UserDetailResolver,
       UserGroupListResolver,

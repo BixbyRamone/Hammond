@@ -6,7 +6,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { RoleService } from 'src/app/_services/role.service';
-import { Group } from 'src/app/_models/group';
+import { GroupToCreate } from 'src/app/_models/groupToCreate';
 import { GroupService } from 'src/app/_services/group.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class GroupRegistrationComponent implements OnInit {
   // users: User[];
   userParams: any = {};
   pagination: Pagination;
-  groupToRegister: Group = {
+  groupToRegister: GroupToCreate = {
     volunteerIds: [],
     studentIds: []
   };

@@ -10,7 +10,7 @@
     </div>
 
     <div *ngIf="groupListMode">
-      <app-groups-list (cancel)="cancelGroupList($event)"></app-groups-list>
+      <app-groups-list [groups]="loadedGroups" (cancel)="cancelGroupList($event)"></app-groups-list>
     </div>
 
     <button (click)="test()">Button</button>

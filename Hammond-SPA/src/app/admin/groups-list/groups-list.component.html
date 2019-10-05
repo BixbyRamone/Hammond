@@ -1,3 +1,12 @@
 <div class="container">
     <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
 </div>
+<div *ngFor="let group of groups">
+    <ul>
+        <li>Group Id: {{group.id}}</li>
+        <li *ngFor="let ug of group.userGroups">{{ug.user.lastName}}, {{ug.user.firstName}} </li>
+        
+        
+    </ul>
+</div>
+<Button (click)="test()">Press</Button>

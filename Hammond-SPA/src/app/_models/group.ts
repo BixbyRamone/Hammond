@@ -1,5 +1,6 @@
+import { UserGroup } from './usergroup';
 
 export interface Group {
-    volunteerIds: number[];
-    studentIds: number[];
+    id: number;
+    usergroups: UserGroup[];
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-groups-list',
@@ -7,6 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class GroupsListComponent implements OnInit {
   @Output() cancel = new EventEmitter();
+  @Input() groups;
 
   constructor() { }
 
@@ -16,6 +17,11 @@ export class GroupsListComponent implements OnInit {
   backup() {
     console.log('backup');
     this.cancel.emit(false);
+  }
+
+  test() {
+    console.log('test()');
+    console.dir(this.groups);
   }
 
 }

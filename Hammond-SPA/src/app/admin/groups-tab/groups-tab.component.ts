@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class GroupsTabComponent implements OnInit {
   @Input() loadedUserGroups;
+  @Input() loadedGroups;
   groupRegisterMode = false;
   groupListMode = false;
 

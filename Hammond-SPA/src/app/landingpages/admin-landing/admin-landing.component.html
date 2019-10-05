@@ -18,8 +18,8 @@
       <app-volunteers-tab></app-volunteers-tab>
     </tab>
 
-    <tab (click)="loadUngroupedUsers()" heading="groups">
-      <app-groups-tab  [loadedUserGroups]="users"></app-groups-tab>
+    <tab (click)="groupLoads()" heading="groups">
+      <app-groups-tab  [loadedUserGroups]="users" [loadedGroups]="groups"></app-groups-tab>
     </tab>
   </tabset>
 </div>
