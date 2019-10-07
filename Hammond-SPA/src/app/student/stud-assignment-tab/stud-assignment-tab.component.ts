@@ -4,7 +4,7 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { AssingmentService } from 'src/app/_services/assingment.service';
+import { AssignmentService } from 'src/app/_services/assignment.service';
 import { User } from 'src/app/_models/user';
 
 @Component({
@@ -23,7 +23,7 @@ export class StudAssignmentTabComponent implements OnInit {
   assignmentListMode = true;
 
   constructor(
-    private assignmentService: AssingmentService,
+    private assignmentService: AssignmentService,
     private alertify: AlertifyService,
     private route: ActivatedRoute
   ) { }

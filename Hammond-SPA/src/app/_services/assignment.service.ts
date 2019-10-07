@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AssingmentService {
+export class AssignmentService {
   baseUrl = environment.apiUrl + 'assignments/';
   assignment: Assignment;
 

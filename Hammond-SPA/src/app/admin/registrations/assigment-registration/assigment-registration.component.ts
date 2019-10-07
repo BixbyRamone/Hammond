@@ -3,7 +3,7 @@ import { Assignment } from 'src/app/_models/assignment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { AssingmentService } from 'src/app/_services/assingment.service';
+import { AssignmentService } from 'src/app/_services/assignment.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class AssigmentRegistrationComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private assignmentService: AssingmentService,
+    private assignmentService: AssignmentService,
     private userService: UserService,
     private alertify: AlertifyService,
     private fb: FormBuilder) { }

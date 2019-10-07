@@ -45,6 +45,8 @@ import { GroupsListComponent } from './admin/groups-list/groups-list.component';
 import { GroupRegistrationComponent } from './admin/registrations/group-registration/group-registration.component';
 import { UserGroupListResolver } from './_resolvers/user-group-list.resolver';
 import { GroupService } from './_services/group.service';
+import { AssignmentService } from './_services/assignment.service';
+import { AssignmentListResolver } from './_resolvers/assignment-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -104,8 +106,10 @@ export function tokenGetter() {
    ],
    providers: [
       AlertifyService,
+      AssignmentService,
       AuthService,
       GroupService,
+      AssignmentListResolver,
       StudProfileResolver,
       UserDetailResolver,
       UserGroupListResolver,
