@@ -7,6 +7,7 @@ import { User } from 'src/app/_models/user';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { GroupService } from 'src/app/_services/group.service';
 import { Group } from 'src/app/_models/group';
+import { Assignment } from 'src/app/_models/assignment';
 
 @Component({
   selector: 'app-admin-landing',
@@ -30,7 +31,7 @@ export class AdminLandingComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      this.pagination = data['users'].pagination;
+      // this.pagination = data['users'].pagination;
     });
 
     this.route.queryParams.subscribe(params => {
@@ -52,7 +53,6 @@ export class AdminLandingComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-    console.dir(this.users);
   }
 
   loadUserGroups() {
@@ -64,7 +64,6 @@ export class AdminLandingComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
-      console.dir(this.groups);
   }
 
 }
