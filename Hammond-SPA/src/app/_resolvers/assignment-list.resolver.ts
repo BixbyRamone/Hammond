@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Assignment } from '../_models/assignment';
-import { UserService } from '../_services/user.service';
+import { AssignmentService } from '../_services/assignment.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -11,11 +11,11 @@ export class AssignmentListResolver implements Resolve<Assignment[]> {
     pageNumber = 1;
     pageSize = 20;
 
-    constructor(private userService: UserService, private router: Router,
+    constructor(private assignmentService: AssignmentService, private router: Router,
             private alertify: AlertifyService) {}
 
             resolve(route: ActivatedRouteSnapshot): Observable<Assignment[]> {
-                return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
+                return this.assignmentService.getAssignments(this.pageNumber, this.pageSize).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');
                         this.router.navigate(['/']);
