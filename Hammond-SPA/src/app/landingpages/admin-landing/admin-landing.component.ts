@@ -31,7 +31,7 @@ export class AdminLandingComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      // this.pagination = data['users'].pagination;
+      this.pagination = data['users'].pagination;
     });
 
     this.route.queryParams.subscribe(params => {

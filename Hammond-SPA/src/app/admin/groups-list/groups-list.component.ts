@@ -18,10 +18,4 @@ export class GroupsListComponent implements OnInit {
     console.log('backup');
     this.cancel.emit(false);
   }
-
-  test() {
-    console.log('test()');
-    console.dir(this.groups);
-  }
-
 }

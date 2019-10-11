@@ -35,8 +35,4 @@ export class GroupsTabComponent implements OnInit {
     this.groupListMode = modeSwitch;
   }
 
-  test() {
-    console.dir(this.loadedUserGroups);
-  }
-
 }
