@@ -22,6 +22,8 @@ namespace Hammond.API.Data
         Task<PagedList<Assignment>> GetUserAssignments(AssignmentParams assignmentParams);
         Task<PagedList<Group>> GetGroups(UserParams userparams);
         Task<Group> GetGroup(int id);
+        Task<PagedList<Event>> GetEvents(UserParams userparams);
+        Task<Event> GetEvent(int id);
         void SqlCmdHelper(string sqlCmnd);
         
     }

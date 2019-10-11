@@ -205,6 +205,20 @@ namespace Hammond.API.Data
             return group;
         }
 
+        public async Task<PagedList<Event>> GetEvents(UserParams userParams)
+        {
+         var evnts = _context.Events.AsQueryable();
+
+         return await PagedList<Event>.CreateAsync(evnts, userParams.PageNumber, userParams.PageSize);
+        }
+
+        public async Task<Event> GetEvent(int id)
+        {
+            var evnt = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+
+            return evnt;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
