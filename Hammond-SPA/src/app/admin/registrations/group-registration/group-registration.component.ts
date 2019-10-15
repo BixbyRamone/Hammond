@@ -17,8 +17,8 @@ import { GroupService } from 'src/app/_services/group.service';
 export class GroupRegistrationComponent implements OnInit {
   @Output() cancel = new EventEmitter();
   @Output() clicked = new EventEmitter();
-  @Input() users: User[];
-  // users: User[];
+  // @Input() users: User[];
+  users: User[];
   userParams: any = {};
   pagination: Pagination;
   groupToRegister: GroupToCreate = {
@@ -53,7 +53,9 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   groupUser(user: User) {
+    console.dir('groupUsers');
     user.grouped = true;
+    console.dir(user);
 
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       this.groupToRegister.studentIds.push(user.id);
@@ -64,8 +66,9 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   ungroupUser(user: User) {
+    console.dir('ungroupUsers');
     user.grouped = false;
-
+    console.dir(user);
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       const elementToRemove = this.groupToRegister.studentIds.indexOf(user.id);
       this.groupToRegister.studentIds.splice(elementToRemove, 1);

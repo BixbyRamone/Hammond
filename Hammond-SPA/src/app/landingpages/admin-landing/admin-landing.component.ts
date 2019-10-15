@@ -66,4 +66,8 @@ export class AdminLandingComponent implements OnInit {
       });
   }
 
+  loadEvents() {
+    console.dir('loadEvents');
+  }
+
 }

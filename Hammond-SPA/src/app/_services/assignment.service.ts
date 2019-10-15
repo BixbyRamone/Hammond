@@ -40,8 +40,10 @@ getAssignments(page?, itemsPerPage?): Observable<PaginatedResult<Assignment[]>> 
         return paginatedResult;
       })
     );
+  }
 
-
+getAssignment(id): Observable<Assignment> {
+  return this.http.get<Assignment>(this.baseUrl + 'assignments/' + id);
 }
 
 }

@@ -13,8 +13,9 @@
     <app-assigment-registration (cancel)="cancelRegistration($event)"></app-assigment-registration>
   </div>
 
-  <div *ngIf="assignmentListMode">
-    <app-assignment-list (cancel)="cancelList($event)"></app-assignment-list>
+  <div *ngIf="assignmentListMode" (click)="loadAssignments()">
+    <app-assignment-list (cancel)="cancelList($event)" [loadedAssignments]="assignments">
+    </app-assignment-list>
   </div>
   
 </div>

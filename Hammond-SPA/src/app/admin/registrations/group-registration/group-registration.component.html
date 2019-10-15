@@ -2,37 +2,34 @@
     <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
   <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-4">
+        <h4>Mentors</h4>
         <ul>
-            <div *ngFor="let user of users" class="">
-                <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Mentor' && user.grouped != true && !user.userRoles[0].user.hasOwnProperty(userGroups)">
-                    {{user.lastName}}, {{user.firstName}}: {{user.userRoles[0].role.name}} => {{user.userRoles[0].user.userGroups[0].groupId}}
-                </li>
-              </div>
+          <div *ngFor="let user of users">
+            <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Mentor' && user.userRoles[0].user.userGroups.length < 1">
+              {{user.lastName}}, {{user.firstName}}
+            </li>
+          </div>
         </ul>        
       </div>
       <div class="col-sm-4 col-md-4 col-lg-4">
         <ul>
-          <div *ngFor="let user of users" class="">
-              <li (click)="ungroupUser(user)" *ngIf="user.userRoles[0].role.name == 'Mentor' && user.grouped && !user.userRoles[0].user.hasOwnProperty(userGroups)">
-                  {{user.lastName}}, {{user.firstName}}: {{user.userRoles[0].role.name}}
-              </li>
-            </div>
-        
-          <div *ngFor="let user of users" class="">
-            <li (click)="ungroupUser(user)" *ngIf="user.userRoles[0].role.name == 'Student' && user.grouped && !user.userRoles[0].user.hasOwnProperty(userGroups)">
-                  {{user.lastName}}, {{user.firstName}}: {{user.userRoles[0].role.name}}
-            </li>
-          </div>
+            <div *ngFor="let user of users">
+                <li (click)="groupUser(user)" *ngIf="user.grouped">
+                  {{user.lastName}}, {{user.firstName}}
+                </li>
+              </div>
+
         </ul>
         <button [disabled]="this.groupToRegister.studentIds.length < 1 || this.groupToRegister.volunteerIds.length < 1" (click)="register()" class="btn btn-success">Register</button>
       </div>
       <div class="col-sm-4 col-md-4 col-lg-4">
+        <h4>Students</h4>
         <ul>
-            <div *ngFor="let user of users" class="">
-              <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Student' && user.grouped != true && !user.userRoles[0].user.hasOwnProperty(userGroups)">
-                    {{user.lastName}}, {{user.firstName}}: {{user.userRoles[0].role.name}} => {{user.userRoles[0].user.userGroups[0]}}
-              </li>
-            </div>
+            <div *ngFor="let user of users">
+                <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Student' && !user.grouped && user.userRoles[0].user.userGroups.length < 1">
+                  {{user.lastName}}, {{user.firstName}}
+                </li>
+              </div>
         </ul>
           
       </div>

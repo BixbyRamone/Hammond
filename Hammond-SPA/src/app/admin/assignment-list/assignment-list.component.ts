@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { AssignmentService } from 'src/app/_services/assignment.service';
 import { Pagination } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { Assignment } from 'src/app/_models/assignment';
 
 @Component({
   selector: 'app-assignment-list',
@@ -11,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AssignmentListComponent implements OnInit {
   @Output() cancel = new EventEmitter();
-  assignments: AssignmentService;
+  @Input() loadedAssignments;
+  assignments: Assignment;
   pagination: Pagination;
 
   constructor(
@@ -24,6 +26,7 @@ export class AssignmentListComponent implements OnInit {
       this.assignments = data['assignments'].result;
       this.pagination = data['assignments'].pagination;
       console.dir(this.assignments);
+      console.dir(this.loadedAssignments);
     });
   }
 
