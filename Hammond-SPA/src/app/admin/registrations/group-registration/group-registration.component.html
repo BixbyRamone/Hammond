@@ -5,7 +5,7 @@
         <h4>Mentors</h4>
         <ul>
           <div *ngFor="let user of users">
-            <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Mentor' && user.userRoles[0].user.userGroups.length < 1">
+            <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Mentor' && user.userRoles[0].user.userGroups.length < 1 && !user.grouped">
               {{user.lastName}}, {{user.firstName}}
             </li>
           </div>
@@ -14,7 +14,7 @@
       <div class="col-sm-4 col-md-4 col-lg-4">
         <ul>
             <div *ngFor="let user of users">
-                <li (click)="groupUser(user)" *ngIf="user.grouped">
+                <li (click)="ungroupUser(user)" *ngIf="user.grouped">
                   {{user.lastName}}, {{user.firstName}}
                 </li>
               </div>
@@ -26,7 +26,7 @@
         <h4>Students</h4>
         <ul>
             <div *ngFor="let user of users">
-                <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Student' && !user.grouped && user.userRoles[0].user.userGroups.length < 1">
+                <li (click)="groupUser(user)" *ngIf="user.userRoles[0].role.name == 'Student' && !user.grouped && user.userRoles[0].user.userGroups.length < 1 && !user.grouped">
                   {{user.lastName}}, {{user.firstName}}
                 </li>
               </div>
