@@ -23,24 +23,10 @@ export class AssignmentListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.route.data.subscribe(data => {
-    //   this.assignments = data['assignments'].result;
-    //   this.pagination = data['assignments'].pagination;
-    //   console.dir(this.assignments);
-    //   console.dir(this.loadedAssignments);
-    // });
   }
 
   backup() {
     this.cancel.emit(false);
-  }
-
-  testTrue() {
-    this.testssss.emit(true);
-  }
-
-  testFalse() {
-    this.testssss.emit(false);
   }
 
 }
