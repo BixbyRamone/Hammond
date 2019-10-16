@@ -8,6 +8,7 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { GroupService } from 'src/app/_services/group.service';
 import { Group } from 'src/app/_models/group';
 import { Assignment } from 'src/app/_models/assignment';
+import { AssignmentService } from 'src/app/_services/assignment.service';
 
 @Component({
   selector: 'app-admin-landing',
@@ -19,11 +20,13 @@ export class AdminLandingComponent implements OnInit {
   user: User;
   users: User[];
   groups: Group[];
+  assignments: Assignment[];
   userParams: any = {};
   pagination:  Pagination;
 
   constructor(
     private userService: UserService,
+    private assignmentService: AssignmentService,
     private groupService: GroupService,
     private alertify: AlertifyService,
     private route: ActivatedRoute) { }
@@ -60,6 +63,17 @@ export class AdminLandingComponent implements OnInit {
     this.groupService.getGroups(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res:  PaginatedResult<Group[]>) => {
         this.groups = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+  }
+
+  loadAssignments() {
+    console.dir('loaded assignments');
+    this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe((res:  PaginatedResult<Assignment[]>) => {
+        this.assignments = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);

@@ -1,8 +1,13 @@
 <div class="container">
   <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
   <p>Assignment List</p>
+  <div class="row">
+    <button (click)="testTrue()">True</button>
+  <button (click)="testFalse()">False</button>
+  </div>
   
-    <div *ngFor="let assignment of assignments">
+  
+    <div *ngFor="let assignment of loadedAssignments">
       <h4>{{assignment.title}}</h4>
       <ul>
         <li>Date Due: {{assignment.dateDue}}</li>

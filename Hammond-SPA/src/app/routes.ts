@@ -26,7 +26,7 @@ export const appRoutes: Routes = [
             { path: 'values', component: ValueComponent},
 
             { path: 'admin', component: AdminLandingComponent,
-                resolve: {users: UserListResolver, assignments: AssignmentListResolver}, data: {roles: ['Admin']} },
+                resolve: {users: UserListResolver}, data: {roles: ['Admin']} },
 
             { path: 'admin/students', component: StudentListComponent,
                 /*resolve: {users: UserListResolver},*/ data: {roles: ['Admin']} },

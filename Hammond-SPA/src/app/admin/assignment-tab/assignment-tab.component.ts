@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Assignment } from 'src/app/_models/assignment';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AssignmentService } from 'src/app/_services/assignment.service';
@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./assignment-tab.component.css']
 })
 export class AssignmentTabComponent implements OnInit {
+  @Input() loadedAssignments;
   assignmentListMode = false;
   assignmentRegisterMode = false;
   assignments: Assignment[];
@@ -53,6 +54,14 @@ export class AssignmentTabComponent implements OnInit {
 
   cancelRegistration(modeSwitch: boolean) {
     this.assignmentRegisterMode = modeSwitch;
+  }
+
+  eventEmitterTest(event: boolean) {
+    if (event) {
+      console.log(event);
+    } else {
+      console.log('False event');
+    }
   }
 
 }
