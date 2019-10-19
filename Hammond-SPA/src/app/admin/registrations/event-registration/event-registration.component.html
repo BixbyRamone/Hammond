@@ -1,4 +1,41 @@
 <div class="container">
   <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
   <p>Event Register</p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="registerEvent()">
+
+      <div class="form-group">
+          <input type="text"
+            [ngClass]="{'is-invalid': registerForm.get('title').errors
+            && registerForm.get('title').touched}"
+            class="form-control"
+            formControlName="title"
+            placeholder="Event Title">
+      
+            <div class="invalid-feedback">Please enter title</div>
+        </div>
+
+        <div class="form-group">
+          <textarea type="textarea"
+            [ngClass]="{'is-invalid': registerForm.get('content').errors
+            && registerForm.get('content').touched}"
+            class="form-control"
+            formControlName="content"
+            placeholder="Event Details"
+            rows="4"
+            cols="50"></textarea>
+          
+          <div class="invalid-feedback">Please Enter in Event Details</div>
+        </div>
+
+        <div class="form-group">
+          <input class="form-control"
+          placeholder="Day of Event" formControlName="eventDate" type="text" bsDatepicker>              
+        </div>
+
+        <div class="form-group text-center">
+          <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid">Register</button>
+        </div>
+
+  </form>
 </div>

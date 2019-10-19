@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-events-tab',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./events-tab.component.css']
 })
 export class EventsTabComponent implements OnInit {
+  @Input() loadedEvents;
   eventRegisterMode = false;
   eventListMode = false;
 

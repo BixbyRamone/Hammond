@@ -9,6 +9,8 @@ import { GroupService } from 'src/app/_services/group.service';
 import { Group } from 'src/app/_models/group';
 import { Assignment } from 'src/app/_models/assignment';
 import { AssignmentService } from 'src/app/_services/assignment.service';
+import { EventService } from 'src/app/_services/event.service';
+import { Evnt } from 'src/app/_models/event';
 
 @Component({
   selector: 'app-admin-landing',
@@ -20,6 +22,7 @@ export class AdminLandingComponent implements OnInit {
   user: User;
   users: User[];
   groups: Group[];
+  evnts: Evnt[];
   assignments: Assignment[];
   userParams: any = {};
   pagination:  Pagination;
@@ -27,6 +30,7 @@ export class AdminLandingComponent implements OnInit {
   constructor(
     private userService: UserService,
     private assignmentService: AssignmentService,
+    private eventService: EventService,
     private groupService: GroupService,
     private alertify: AlertifyService,
     private route: ActivatedRoute) { }
@@ -59,7 +63,6 @@ export class AdminLandingComponent implements OnInit {
   }
 
   loadUserGroups() {
-    console.log('loadGroups');
     this.groupService.getGroups(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res:  PaginatedResult<Group[]>) => {
         this.groups = res.result;
@@ -70,7 +73,6 @@ export class AdminLandingComponent implements OnInit {
   }
 
   loadAssignments() {
-    console.dir('loaded assignments');
     this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res:  PaginatedResult<Assignment[]>) => {
         this.assignments = res.result;
@@ -81,7 +83,13 @@ export class AdminLandingComponent implements OnInit {
   }
 
   loadEvents() {
-    console.dir('loadEvents');
+    this.eventService.getEvents(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe((res: PaginatedResult<Evnt[]>) => {
+        this.evnts = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
   }
 
 }

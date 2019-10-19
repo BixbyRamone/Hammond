@@ -14,7 +14,7 @@
   </div>
 
   <div *ngIf="eventListMode">
-    <app-events-list (cancel)="cancelEventList($event)"></app-events-list>
+    <app-events-list [evnts]="loadedEvents" (cancel)="cancelEventList($event)"></app-events-list>
   </div>
   
 </div>

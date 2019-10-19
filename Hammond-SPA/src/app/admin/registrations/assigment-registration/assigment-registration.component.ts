@@ -24,10 +24,10 @@ export class AssigmentRegistrationComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.createRegisterForm();
+    this.createAssignmentForm();
   }
 
-  createRegisterForm() {
+  createAssignmentForm() {
     this.registerForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],

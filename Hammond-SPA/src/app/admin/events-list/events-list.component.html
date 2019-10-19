@@ -1,4 +1,10 @@
 <div class="container">
   <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
-  <p>Event List</p>
+  <div *ngFor="let event of evnts">
+    <h5>{{event.title}}</h5>
+    <p>{{event.content}}</p>
+
+    <p *ngIf="event.eventDate">{{event.title}} will be occuring on {{event.eventDate | date: 'mediumDate'}}</p>
+    <p *ngIf="!event.eventDate">Date is to be determined</p>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 <br>
 <div class="container">
   <tabset class="admin-tabset" #adminTabs>
-    <tab heading="events">
-      <app-events-tab></app-events-tab>
+    <tab (click)="loadEvents()" heading="events">
+      <app-events-tab [loadedEvents]="evnts"></app-events-tab>
     </tab>
 
     <tab (click)="loadAssignments()" heading="assignments">

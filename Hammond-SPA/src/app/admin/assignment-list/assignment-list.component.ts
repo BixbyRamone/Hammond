@@ -14,8 +14,6 @@ export class AssignmentListComponent implements OnInit {
   @Output() cancel = new EventEmitter();
   @Output() testssss = new EventEmitter();
   @Input() loadedAssignments;
-  assignments: Assignment;
-  pagination: Pagination;
 
   constructor(
     private assignmentService: AssignmentService,

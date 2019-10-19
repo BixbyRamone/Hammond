@@ -10,12 +10,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EventService {
-  baseUrl = environment.apiUrl + 'event';
+  baseUrl = environment.apiUrl + 'events/';
   evnt: Evnt;
 
 constructor(private http: HttpClient) { }
 
-register(id: number, evnt: Event) {
+register(id: number, evnt: Evnt) {
   return this.http.post(this.baseUrl + id, evnt);
 }
 
