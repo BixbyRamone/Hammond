@@ -123,13 +123,47 @@ namespace Hammond.API.Data
             .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .OrderBy(u => u.LastName).AsQueryable();
+            
 
-            if (userParams.StudentLevel != null && userParams.StudentLevel != "null")
+            // int roleId;
+
+            // switch(userParams.RoleName)
+            // {
+            //     case "student":
+            //         roleId = 1;
+            //         break;
+            //     case "tutor":
+            //         roleId = 2;
+            //         break;
+            //     case "mentor":
+            //         roleId = 3;
+            //         break;
+            //     case "admin":
+            //         roleId = 4;
+            //         break;
+            // }
+
+            // switch(userParams.RoleName)
+            // {
+            //     case "Student":
+            //         var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
+            //         users = users.Where(u => usersWithRole.Contains(u));
+            //         break;                
+            //     case "Mentor":
+            //         break;
+            //     case "Admin":
+            //         break;
+            // }
+
+            var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
+                    users = users.Where(u => usersWithRole.Contains(u));
+
+            if (userParams.StudentLevel != null && userParams.StudentLevel != "all")
             {
                 users = users.Where(u => u.StudentLevel == userParams.StudentLevel);
-                var test = _userManager.GetUsersInRoleAsync("Student").Result;
+                // var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
 
-                users = users.Where(u => test.Contains(u));
+                // users = users.Where(u => usersWithRole.Contains(u));
             }
 
             if (userParams.GetUngrouped)

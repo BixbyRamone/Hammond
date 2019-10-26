@@ -36,10 +36,11 @@ export class AdminLandingComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe( data => {
-      this.user = data['user'];
-      this.pagination = data['users'].pagination;
-    });
+    // this.route.data.subscribe( data => {
+    //   this.user = data['user'];
+    //   debugger
+    //   this.pagination = data['users'].pagination;
+    // });
 
     this.route.queryParams.subscribe(params => {
       const selectTab = params['tab'];
@@ -63,7 +64,7 @@ export class AdminLandingComponent implements OnInit {
   }
 
   loadUserGroups() {
-    this.groupService.getGroups(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.groupService.getGroups(/*this.pagination.currentPage*/ 1, /*this.pagination.itemsPerPage*/5)
       .subscribe((res:  PaginatedResult<Group[]>) => {
         this.groups = res.result;
         this.pagination = res.pagination;
@@ -73,23 +74,41 @@ export class AdminLandingComponent implements OnInit {
   }
 
   loadAssignments() {
-    this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.assignmentService.getAssignments(/*this.pagination.currentPage*/ 1, /*this.pagination.itemsPerPage*/5)
       .subscribe((res:  PaginatedResult<Assignment[]>) => {
         this.assignments = res.result;
         this.pagination = res.pagination;
+        console.log(this.assignments);
       }, error => {
         this.alertify.error(error);
       });
+
   }
 
   loadEvents() {
-    this.eventService.getEvents(this.pagination.currentPage, this.pagination.itemsPerPage)
+    this.eventService.getEvents(/*this.pagination.currentPage*/ 1, /*this.pagination.itemsPerPage*/5)
       .subscribe((res: PaginatedResult<Evnt[]>) => {
         this.evnts = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);
       });
+
+  }
+
+  loadStudents() {
+    console.log('loadStudents() Clicked');
+    this.userParams.studentLevel = 'all';
+    this.userParams.roleName = 'Student';
+    this.userService.getUsers(1, 5, this.userParams)
+    .subscribe((res: PaginatedResult<User[]>) => {
+      this.users = res.result;
+      this.pagination = res.pagination;
+      console.dir(this.users);
+    }, error => {
+      this.alertify.error(error);
+    });
+    console.log(this.users);
   }
 
 }

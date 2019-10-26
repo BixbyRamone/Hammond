@@ -2,6 +2,22 @@
   <div class="container mt-4">
       <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
     <div class="">
+      <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
+        <div class="form-group px-2">
+          <label for="gradeLevel">Show: </label>
+            <select name="gradeLevel" id="gradeLevel" class="form-control ml-1"
+              [(ngModel)]="userParams.studentLevel">
+              <option *ngFor="let studLev of studentLevel" [value]="studLev.value">
+                {{studLev.display}}
+              </option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
+        <button type="button" class="btn btn-info" (click)="resetFilter()" style="margin-left:10px">
+          Reset Filter
+        </button>
+      </form>
       <div *ngFor="let user of users" class="">
         <app-user-item [user]="user"></app-user-item>
       </div>

@@ -16,7 +16,7 @@ namespace Hammond.API.Helpers
         public int UserId { get; set; }
         public string OrderBy { get; set; }
         public string StudentLevel { get; set; }
-        public Role Role { get; set; }
+        public string RoleName { get; set; }
         public bool GetUngrouped { get; set; }
     }
 }
