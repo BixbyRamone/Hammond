@@ -41,7 +41,6 @@ export class StudentListComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
-    debugger
     console.dir(this.pagination);
     this.pagination.currentPage = event.page;
     this.loadUsers();
@@ -49,7 +48,6 @@ export class StudentListComponent implements OnInit {
   }
 
   loadUsers() {
-    debugger
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;

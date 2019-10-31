@@ -10,7 +10,12 @@
               <option *ngFor="let studLev of studentLevel" [value]="studLev.value">
                 {{studLev.display}}
               </option>
-            </select>
+            </select>            
+        </div>
+        <div class="form-group">
+          <label for="itemsPerPage">Entires Per Page: </label>
+          <input type="number" class="form-control ml-1" style="width: 70px" id="itemsPerPage"
+          [(ngModel)]="pagination.itemsPerPage" name="itemsPerPage">
         </div>
         
         <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
