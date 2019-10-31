@@ -37,8 +37,8 @@ export class AdminLandingComponent implements OnInit {
 
   ngOnInit() {
     // this.route.data.subscribe( data => {
-    //   this.user = data['user'];
     //   debugger
+    //   this.user = data['user'];
     //   this.pagination = data['users'].pagination;
     // });
 
@@ -96,19 +96,19 @@ export class AdminLandingComponent implements OnInit {
 
   }
 
-  loadStudents() {
-    console.log('loadStudents() Clicked');
-    this.userParams.studentLevel = 'all';
-    this.userParams.roleName = 'Student';
-    this.userService.getUsers(1, 5, this.userParams)
-    .subscribe((res: PaginatedResult<User[]>) => {
-      this.users = res.result;
-      this.pagination = res.pagination;
-      console.dir(this.users);
-    }, error => {
-      this.alertify.error(error);
-    });
-    console.log(this.users);
-  }
+  // loadStudents() {
+  //   console.log('loadStudents() Clicked');
+  //   this.userParams.studentLevel = 'all';
+  //   this.userParams.roleName = 'Student';
+  //   this.userService.getUsers( 1, 5, this.userParams)
+  //   .subscribe((res: PaginatedResult<User[]>) => {
+  //     this.users = res.result;
+  //     this.pagination = res.pagination;
+  //     console.dir(this.users);
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  //   console.log(this.users);
+  // }
 
 }

@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
-import { AssignmentService } from 'src/app/_services/assignment.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
-import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-student-tab',
@@ -12,13 +9,10 @@ import { User } from 'src/app/_models/user';
 })
 export class StudentTabComponent implements OnInit {
   @Input() loadedStudents;
-  @Input() pagination: Pagination ;
   studentRegisterMode = false;
   studentListMode = false;
   dropBoxMode = false;
   userParams: any = {};
-  // pagination:  Pagination;
-  // users: User[];
 
 
   constructor(private userService: UserService,
@@ -60,18 +54,18 @@ export class StudentTabComponent implements OnInit {
     this.dropBoxMode = modeSwitch;
   }
 
-  loadStudents() {
-    console.log('loadStudents() Clicked');
-    this.userParams.studentLevel = 'all';
-    this.userParams.roleName = 'Student';
-    this.userService.getUsers(1, 5, this.userParams)
-    .subscribe((res: PaginatedResult<User[]>) => {
-      this.loadedStudents = res.result;
-      this.pagination = res.pagination;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
+  // loadStudents() {
+  //   console.log('loadStudents() Clicked');
+  //   this.userParams.studentLevel = 'all';
+  //   this.userParams.roleName = 'Student';
+  //   this.userService.getUsers(1, 5, this.userParams)
+  //   .subscribe((res: PaginatedResult<User[]>) => {
+  //     this.loadedStudents = res.result;
+  //     this.pagination = res.pagination;
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  // }
 
   // clearDisplays() {
   //   this.studentRegisterMode = false;

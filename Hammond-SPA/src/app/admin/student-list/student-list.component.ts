@@ -12,12 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentListComponent implements OnInit {
   @Output() cancelList = new EventEmitter();
-  @Input() users;
-  @Input() pagination: Pagination;
-  // users: User[];
-  // pagination: Pagination;
+  // @Input() users;
+  // @Input() pagination: Pagination;
+  users: User[];
+  pagination: Pagination;
   userParams: any = {};
-  studentLevel = [{value: 'null', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
+  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
 
   constructor(
@@ -26,10 +26,12 @@ export class StudentListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.route.data.subscribe(data => {
-    //   this.users = data['users'].result;
-    //   this.pagination = data['users'].pagination;
-    // });
+    this.route.data.subscribe(data => {
+      this.users = data['users'].result;
+      this.pagination = data['users'].pagination;
+    });
+    this.userParams.roleName = 'student';
+    this.userParams.studentLevel = 'all';
     console.log(this.users);
   }
 
@@ -39,18 +41,23 @@ export class StudentListComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
+    debugger
+    console.dir(this.pagination);
     this.pagination.currentPage = event.page;
     this.loadUsers();
+    console.dir('page changed');
   }
 
   loadUsers() {
-    this.userService.getUsers(1, 20, this.userParams)
+    debugger
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
       this.pagination = res.pagination;
     }, error => {
       this.alertify.error(error);
     });
+    console.log(this.users);
   }
 
   backup() {

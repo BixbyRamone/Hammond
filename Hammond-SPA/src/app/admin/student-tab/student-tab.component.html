@@ -4,7 +4,7 @@
         <ul>
   
             <!-- <li [routerLink]="['/admin/students']" (click)="listToggle()">View Student List</li> -->
-            <li (click)="listToggle()">View Student List</li>
+            <li [routerLink]="['/admin/students']">View Student List</li>
             <li (click)="registerToggle()">Register New Student</li>
             <li (click)="dropBoxToggle()">Upload Student File</li>
         
@@ -15,9 +15,9 @@
       <app-student-registration (cancelRegister)="cancelStudentRegister($event)"></app-student-registration>
     </div>
 
-    <div (click)="loadStudents()" *ngIf="studentListMode">
+    <!-- <div  *ngIf="studentListMode">
       <app-student-list [pagination]="pagination" [users]="loadedStudents" (cancelList)="cancelStudentList($event)"></app-student-list>
-    </div>
+    </div> -->
 
     <div *ngIf="dropBoxMode">
       <app-student-dropbox (cancelDropBox)="cancelDropBox($event)"></app-student-dropbox>
