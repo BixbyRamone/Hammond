@@ -48,6 +48,7 @@ import { GroupService } from './_services/group.service';
 import { AssignmentService } from './_services/assignment.service';
 import { AssignmentListResolver } from './_resolvers/assignment-list.resolver';
 import { EventService } from './_services/event.service';
+import { StudentListResolver } from './_resolvers/student-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -112,6 +113,7 @@ export function tokenGetter() {
       EventService,
       GroupService,
       AssignmentListResolver,
+      StudentListResolver,
       StudProfileResolver,
       UserDetailResolver,
       UserGroupListResolver,
