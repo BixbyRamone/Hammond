@@ -11,9 +11,14 @@ import { Assignment } from 'src/app/_models/assignment';
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
-  @Output() cancel = new EventEmitter();
-  @Output() testssss = new EventEmitter();
-  @Input() loadedAssignments;
+  // @Output() cancel = new EventEmitter();
+  // @Output() testssss = new EventEmitter();
+  // @Input() loadedAssignments;
+  assignments: Assignment[];
+  pagination: Pagination;
+  userParams: any = {};
+  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
+                  {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
 
   constructor(
     private assignmentService: AssignmentService,
@@ -21,10 +26,10 @@ export class AssignmentListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-  }
-
-  backup() {
-    this.cancel.emit(false);
+    this.route.data.subscribe(data => {
+      this.assignments = data['assignments'].result;
+      this.pagination = data['assignments'].pagination;
+    });
   }
 
 }

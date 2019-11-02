@@ -11,9 +11,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
-  @Output() cancelList = new EventEmitter();
-  // @Input() users;
-  // @Input() pagination: Pagination;
   users: User[];
   pagination: Pagination;
   userParams: any = {};
@@ -37,6 +34,7 @@ export class StudentListComponent implements OnInit {
 
   resetFilter() {
     this.userParams.studentLevel = 'all';
+    this.pagination.itemsPerPage = 10;
     this.loadUsers();
   }
 
@@ -56,10 +54,6 @@ export class StudentListComponent implements OnInit {
       this.alertify.error(error);
     });
     console.log(this.users);
-  }
-
-  backup() {
-    this.cancelList.emit(false);
   }
 
 }

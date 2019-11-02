@@ -11,12 +11,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./assignment-tab.component.css']
 })
 export class AssignmentTabComponent implements OnInit {
-  @Input() loadedAssignments;
+  // @Input() loadedAssignments;
   assignmentListMode = false;
   assignmentRegisterMode = false;
-  assignments: Assignment[];
-  pagination: Pagination;
-  userParams: any = {};
+  // assignments: Assignment[];
+  // pagination: Pagination;
+  // userParams: any = {};
 
   constructor(
     private assignmentService: AssignmentService,
@@ -27,16 +27,16 @@ export class AssignmentTabComponent implements OnInit {
   ngOnInit() {
   }
 
-  loadAssignments() {
-    console.dir('loaded assignments');
-    this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage)
-      .subscribe((res:  PaginatedResult<Assignment[]>) => {
-        this.assignments = res.result;
-        this.pagination = res.pagination;
-      }, error => {
-        this.alertify.error(error);
-      });
-  }
+  // loadAssignments() {
+  //   console.dir('loaded assignments');
+  //   this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage)
+  //     .subscribe((res:  PaginatedResult<Assignment[]>) => {
+  //       this.assignments = res.result;
+  //       this.pagination = res.pagination;
+  //     }, error => {
+  //       this.alertify.error(error);
+  //     });
+  // }
 
   listToggle() {
     this.assignmentRegisterMode = false;

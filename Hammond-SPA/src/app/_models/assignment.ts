@@ -12,4 +12,5 @@ export interface Assignment {
     createdBy: User;
     assignments: Assignment[];
     completed: boolean;
+    studentLevel: string;
 }

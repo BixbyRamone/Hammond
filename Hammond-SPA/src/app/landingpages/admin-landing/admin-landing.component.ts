@@ -73,17 +73,17 @@ export class AdminLandingComponent implements OnInit {
       });
   }
 
-  loadAssignments() {
-    this.assignmentService.getAssignments(/*this.pagination.currentPage*/ 1, /*this.pagination.itemsPerPage*/5)
-      .subscribe((res:  PaginatedResult<Assignment[]>) => {
-        this.assignments = res.result;
-        this.pagination = res.pagination;
-        console.log(this.assignments);
-      }, error => {
-        this.alertify.error(error);
-      });
+  // loadAssignments() {
+  //   this.assignmentService.getAssignments(/*this.pagination.currentPage*/ 1, /*this.pagination.itemsPerPage*/5)
+  //     .subscribe((res:  PaginatedResult<Assignment[]>) => {
+  //       this.assignments = res.result;
+  //       this.pagination = res.pagination;
+  //       console.log(this.assignments);
+  //     }, error => {
+  //       this.alertify.error(error);
+  //     });
 
-  }
+  // }
 
   loadEvents() {
     this.eventService.getEvents(/*this.pagination.currentPage*/ 1, /*this.pagination.itemsPerPage*/5)
