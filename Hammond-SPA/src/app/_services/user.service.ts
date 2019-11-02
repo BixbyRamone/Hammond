@@ -30,7 +30,7 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
     params = params.append('studentLevel', userParams.studentLevel);
     params =  params.append('roleName', userParams.roleName);
   } else {
-    params = params.append('studentLevel', this.getStudentLevel());
+    params = params.append('studentLevel', this.getStudentLevel()); // why is this here!?
   }
 
   return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})

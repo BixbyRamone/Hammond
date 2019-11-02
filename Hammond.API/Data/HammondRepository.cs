@@ -43,6 +43,10 @@ namespace Hammond.API.Data
         {
             var assignments = _context.Assignments.AsQueryable();
 
+            if (assignmentParams.StudentLevel != null && assignmentParams.StudentLevel != "all")
+            {
+                assignments = assignments.Where(a => a.StudentLevel == assignmentParams.StudentLevel);
+            }
 
             assignments = assignments.OrderByDescending(a => a.DateAssigned);
             return await PagedList<Assignment>.CreateAsync(assignments, assignmentParams.PageNumber,
@@ -123,37 +127,7 @@ namespace Hammond.API.Data
             .Include(u => u.UserRoles)
             .ThenInclude(ur => ur.Role)
             .OrderBy(u => u.LastName).AsQueryable();
-            
-
-            // int roleId;
-
-            // switch(userParams.RoleName)
-            // {
-            //     case "student":
-            //         roleId = 1;
-            //         break;
-            //     case "tutor":
-            //         roleId = 2;
-            //         break;
-            //     case "mentor":
-            //         roleId = 3;
-            //         break;
-            //     case "admin":
-            //         roleId = 4;
-            //         break;
-            // }
-
-            // switch(userParams.RoleName)
-            // {
-            //     case "Student":
-            //         var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
-            //         users = users.Where(u => usersWithRole.Contains(u));
-            //         break;                
-            //     case "Mentor":
-            //         break;
-            //     case "Admin":
-            //         break;
-            // }
+           
 
             var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
                     users = users.Where(u => usersWithRole.Contains(u));

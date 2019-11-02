@@ -1,6 +1,26 @@
 <div class="container">
   <i class="fa fa-arrow-circle-left"></i>
-  <p>Assignment List</p>
+  <form class="form-inline" #form="ngForm" (ngSubmit)="loadAssignments()" novalidate>
+    <div class="form-group px-2">
+      <label for="gradeLevel">Show: </label>
+        <select name="gradeLevel" id="gradeLevel" class="form-control ml-1"
+          [(ngModel)]="assignmentParams.studentLevel">
+          <option *ngFor="let studLev of studentLevel" [value]="studLev.value">
+            {{studLev.display}}
+          </option>
+        </select>            
+    </div>
+    <div class="form-group">
+      <label for="itemsPerPage">Entires Per Page: </label>
+      <input type="number" class="form-control ml-1" style="width: 70px" id="itemsPerPage"
+      [(ngModel)]="pagination.itemsPerPage" name="itemsPerPage">
+    </div>
+    
+    <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filters</button>
+    <button type="button" class="btn btn-info" (click)="resetFilter()" style="margin-left:10px">
+      Reset Filter
+    </button>
+  </form>
     <div *ngFor="let assignment of assignments">
       <h4>{{assignment.title}}</h4>
       <ul>
@@ -8,6 +28,16 @@
         <li>Student Level: {{assignment.studentLevel}}</li>
         <li>Assigned?: {{assignment.assigned}}</li>
       </ul>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <pagination [boundaryLinks]="true"
+                    [totalItems]="pagination.totalItems"
+                    [itemsPerPage]="pagination.itemsPerPage"
+                    [(ngModel)]="pagination.currentPage"
+                    (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
+        </pagination>
       </div>
 
 </div>

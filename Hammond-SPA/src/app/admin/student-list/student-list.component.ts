@@ -39,10 +39,8 @@ export class StudentListComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
-    console.dir(this.pagination);
     this.pagination.currentPage = event.page;
     this.loadUsers();
-    console.dir('page changed');
   }
 
   loadUsers() {

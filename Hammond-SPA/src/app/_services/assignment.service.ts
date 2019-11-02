@@ -20,14 +20,18 @@ register(id: number, assignment: Assignment) {
   return this.http.post(this.baseUrl + id, assignment);
 }
 
-getAssignments(page?, itemsPerPage?): Observable<PaginatedResult<Assignment[]>> {
+getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedResult<Assignment[]>> {
   const paginatedResult: PaginatedResult<Assignment[]> = new PaginatedResult<Assignment[]>();
-
   let params = new HttpParams();
 
   if (page != null && itemsPerPage != null) {
     params = params.append('pageNumber', page);
     params = params.append('pageSize', itemsPerPage);
+  }
+
+  if (assignmentParams != null) {
+    params = params.append('studentLevel', assignmentParams.studentLevel);
+    // params =  params.append('roleName', assignmentParams.roleName);
   }
 
   return this.http.get<Assignment[]>(this.baseUrl, { observe: 'response', params})

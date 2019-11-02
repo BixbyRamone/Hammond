@@ -18,5 +18,6 @@ namespace Hammond.API.Helpers
         public Role Role { get; set; }
         public string AssigmentContainer { get; set; } = "Incomplete";
         public string OrderBy { get; set; }
+        public string StudentLevel { get; set; }
     }
 }
