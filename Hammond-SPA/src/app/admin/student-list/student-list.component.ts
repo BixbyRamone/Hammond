@@ -14,7 +14,8 @@ export class StudentListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
   userParams: any = {};
-  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
+  userType = this.setUserType();
+  studentLevel = [{value: 'all', display: 'All ' + this.userType}, {value: 'sophmore', display: 'Sophmores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
 
   constructor(
@@ -27,7 +28,8 @@ export class StudentListComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
-    this.userParams.roleName = 'student';
+
+    this.userParams.roleName = this.userType;
     this.userParams.studentLevel = 'all';
     console.log(this.users);
   }
@@ -52,6 +54,17 @@ export class StudentListComponent implements OnInit {
       this.alertify.error(error);
     });
     console.log(this.users);
+  }
+
+  setUserType() {
+    const url = window.location.href;
+    const arr = url.split('/');
+
+    let stringToReturn = arr[arr.length - 1];
+
+    stringToReturn = stringToReturn.replace(/^./, stringToReturn[0].toUpperCase());
+
+    return stringToReturn;
   }
 
 }

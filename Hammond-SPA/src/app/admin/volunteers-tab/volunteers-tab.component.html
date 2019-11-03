@@ -3,7 +3,7 @@
   <div *ngIf="!volunteerListMode && !volunteerRegisterMode">
       <ul>
 
-          <li (click)="listToggle()">View Volunteer List</li>
+          <li [routerLink]="['/admin/volunteers']">View Volunteer List</li>
           <li (click)="registerToggle()">Register New Volunteer</li>
       
         </ul>

@@ -19,11 +19,11 @@ import { Evnt } from 'src/app/_models/event';
 })
 export class AdminLandingComponent implements OnInit {
   @ViewChild('adminTabs') adminTabs: TabsetComponent;
-  user: User;
+  // user: User;
   users: User[];
   groups: Group[];
   evnts: Evnt[];
-  assignments: Assignment[];
+  // assignments: Assignment[];
   userParams: any = {};
   pagination:  Pagination;
 

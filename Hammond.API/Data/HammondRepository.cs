@@ -129,8 +129,19 @@ namespace Hammond.API.Data
             .OrderBy(u => u.LastName).AsQueryable();
            
 
-            var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
+            if (userParams.RoleName == "volunteer")
+            {
+                userParams.RoleName = "mentor";
+                // var tutors = _userManager.GetUsersInRoleAsync("tutor").Result;
+                var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
+                // var usersWithRole = tutors.Union(mentors);
+                    users = users.Where(u => usersWithRole.Contains(u)); 
+            }
+            else 
+            {
+                var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
                     users = users.Where(u => usersWithRole.Contains(u));
+            }            
 
             if (userParams.StudentLevel != null && userParams.StudentLevel != "all")
             {
