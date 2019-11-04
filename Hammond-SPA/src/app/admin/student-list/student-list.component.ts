@@ -17,6 +17,8 @@ export class StudentListComponent implements OnInit {
   userType = this.setUserType();
   studentLevel = [{value: 'all', display: 'All ' + this.userType}, {value: 'sophmore', display: 'Sophmores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
+  volunteerType = [{value: 'volunteer', display: 'All ' + this.userType},
+                  {value: 'mentor', display: 'Mentor'}, {value: 'tutor', display: 'Tutor'} ];
 
   constructor(
     private userService: UserService,
@@ -29,13 +31,16 @@ export class StudentListComponent implements OnInit {
       this.pagination = data['users'].pagination;
     });
 
-    this.userParams.roleName = this.userType;
+    this.userParams.roleName = 'volunteer';
     this.userParams.studentLevel = 'all';
+    this.userParams.volunteerType = 'volunteer';
     console.log(this.users);
   }
 
   resetFilter() {
+    this.userParams.roleName = 'volunteer';
     this.userParams.studentLevel = 'all';
+    this.userParams.volunteerType = 'volunteer';
     this.pagination.itemsPerPage = 10;
     this.loadUsers();
   }

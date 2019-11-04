@@ -131,11 +131,10 @@ namespace Hammond.API.Data
 
             if (userParams.RoleName == "volunteer")
             {
-                userParams.RoleName = "mentor";
-                // var tutors = _userManager.GetUsersInRoleAsync("tutor").Result;
-                var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
-                // var usersWithRole = tutors.Union(mentors);
-                    users = users.Where(u => usersWithRole.Contains(u)); 
+                var tutors = _userManager.GetUsersInRoleAsync("tutor").Result;
+                var mentors = _userManager.GetUsersInRoleAsync("mentor").Result;
+                var usersWithRole = mentors.Concat(tutors).Distinct();
+                    users = users.Where(u => usersWithRole.Contains(u));
             }
             else 
             {
