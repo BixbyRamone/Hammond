@@ -30,6 +30,7 @@ export class AssignmentListComponent implements OnInit {
       this.assignments = data['assignments'].result;
       this.pagination = data['assignments'].pagination;
     });
+    this.assignmentParams.studentLevel = 'all';
   }
 
   loadAssignments() {
@@ -50,7 +51,8 @@ export class AssignmentListComponent implements OnInit {
 
   resetFilter() {
     this.pagination.itemsPerPage = 10;
-    this.assignmentParams.studentLevel = 'any';
+    this.assignmentParams.studentLevel = 'all';
+    this.loadAssignments();
   }
 
 }
