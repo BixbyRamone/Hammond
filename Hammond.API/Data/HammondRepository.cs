@@ -136,7 +136,7 @@ namespace Hammond.API.Data
                 var usersWithRole = mentors.Union(tutors);
                     users = users.Where(u => usersWithRole.Contains(u));
             }
-            else 
+            if (userParams.RoleName == "student") 
             {
                 var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
                     users = users.Where(u => usersWithRole.Contains(u));

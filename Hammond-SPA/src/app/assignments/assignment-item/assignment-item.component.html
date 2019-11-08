@@ -8,6 +8,7 @@
             <br>
             <div *ngIf="assignment.completed">Done!</div>
             <div *ngIf="!assignment.completed" class="row">Due: {{assignment.assignment.dateAssigned | date: 'mediumDate'}}</div>
+            <div>{{assignment.assignment.studentLevel}}</div>
           </div>
         </div>
   </div>
