@@ -14,7 +14,7 @@ export class StudentListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
   userParams: any = {};
-  userType: any;
+  userType: string;
   studentLevel = [{value: 'all', display: 'All ' + this.userType}, {value: 'sophmore', display: 'Sophmores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
   volunteerType = [{value: 'volunteer', display: 'All ' + this.userType},
@@ -29,8 +29,10 @@ export class StudentListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
+      this.userType = data['userType'];
     });
-    this.userType = this.setUserType();
+    debugger
+    // this.userType = this.setUserType();
     this.userParams.roleName = this.userType.toLowerCase();
     this.userParams.studentLevel = 'all';
     this.userParams.volunteerType = this.userType.toLowerCase();

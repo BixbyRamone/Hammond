@@ -9,16 +9,13 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserListResolver implements Resolve<User[]> {
     pageNumber = 1;
-    pageSize = 20;
-    userParams: any = {};
+    pageSize = 10;
 
     constructor(private userService: UserService, private router: Router,
             private alertify: AlertifyService) {}
 
             resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-                this.userParams = this.setUpUserParams();
-                const test = typeof(this.userParams.roleName);
-                return this.userService.getUsers(this.pageNumber, this.pageSize, this.userParams).pipe(
+                return this.userService.getUsers(this.pageNumber, this.pageSize).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');
                         this.router.navigate(['/']);
@@ -26,15 +23,4 @@ export class UserListResolver implements Resolve<User[]> {
                     })
                 );
             }
-
-            setUpUserParams() {
-                const url = window.location.href;
-                const arr = url.split('/');
-                const userParams = {
-                    roleName: arr[arr.length - 1],
-                    studentLevel: 'all'
-                };
-                userParams.roleName = userParams.roleName.slice(0, userParams.roleName.length - 1);
-                return userParams;
-              }
 }

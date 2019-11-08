@@ -18,6 +18,7 @@ import { AssignmentListResolver } from './_resolvers/assignment-list.resolver';
 import { StudentListResolver } from './_resolvers/student-list.resolver';
 import { AssignmentListComponent } from './admin/assignment-list/assignment-list.component';
 import { VolunteerListResolver } from './_resolvers/volunteer-list.resolver';
+import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,13 +33,13 @@ export const appRoutes: Routes = [
                 /*resolve: {users: UserListResolver},*/ data: {roles: ['Admin']} },
 
             { path: 'admin/students', component: StudentListComponent,
-                resolve: {users: StudentListResolver}, data: {roles: ['Admin']} },
+                resolve: {users: StudentListResolver}, data: {roles: ['Admin'], userType: 'Student'} },
 
             { path: 'admin/assignments', component: AssignmentListComponent,
                 resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin']} },
 
             { path: 'admin/volunteers', component: StudentListComponent,
-                resolve: {users: VolunteerListResolver}, data: {roles: ['Admin']} },
+                resolve: {users: VolunteerListResolver}, data: {roles: ['Admin'], userType: 'Volunteer'} },
 
             { path: 'admin/groups', component: GroupRegistrationComponent,
                 /*resolve: {users: UserGroupListResolver},*/ data: {roles: ['Admin']} },
@@ -47,7 +48,10 @@ export const appRoutes: Routes = [
                 data: {roles: ['Admin']} },
 
             { path: 'mentor', component: MentorLandingComponent,
-                resolve: {users: UserListResolver}, data: {roles: ['Admin', 'Mentor']} },
+                /*resolve: {users: UserListResolver},*/ data: {roles: ['Admin', 'Mentor']} },
+
+            { path: 'mentor/students', component: MentorStudListComponent,
+                resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'student', component: StudentLandingComponent, resolve: {user: StudProfileResolver},
                  data: {roles: ['Admin', 'Mentor', 'Student']} },

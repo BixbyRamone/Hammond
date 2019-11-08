@@ -32,6 +32,7 @@
           Reset Filter
         </button>
       </form>
+      <div>{{userType}}</div>
       <p>{{userParams.Role}}</p>
       <div *ngFor="let user of users" class="">
         <app-user-item [user]="user"></app-user-item>

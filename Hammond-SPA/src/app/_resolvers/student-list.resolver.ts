@@ -28,10 +28,22 @@ export class StudentListResolver implements Resolve<User[]> {
             }
 
             setUpUserParams() {
-                const userParams = {
-                    roleName: 'student',
-                    studentLevel: 'all'
-                };
+                const url = window.location.href;
+                const arr = url.split('/');
+                let userParams: any = {};
+
+                if (arr[arr.length - 2] === 'mentor' && arr[arr.length - 1] === 'students') {
+                    userParams = {
+                        roleName: 'student',
+                        studentLevel: JSON.parse(localStorage.getItem('user')).studentLevel
+                    };
+                } else {
+                    userParams = {
+                        roleName: 'student',
+                        studentLevel: 'all'
+                    };
+                }
+
                 return userParams;
               }
 }
