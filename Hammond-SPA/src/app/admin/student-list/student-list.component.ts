@@ -31,7 +31,6 @@ export class StudentListComponent implements OnInit {
       this.pagination = data['users'].pagination;
       this.userType = data['userType'];
     });
-    debugger
     // this.userType = this.setUserType();
     this.userParams.roleName = this.userType.toLowerCase();
     this.userParams.studentLevel = 'all';

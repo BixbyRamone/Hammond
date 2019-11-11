@@ -37,6 +37,11 @@ export class StudentListResolver implements Resolve<User[]> {
                         roleName: 'student',
                         studentLevel: JSON.parse(localStorage.getItem('user')).studentLevel
                     };
+                } if (arr[arr.length - 1] === 'mentor') {
+                    userParams = {
+                        roleName: 'mentor',
+                        studentLevel: JSON.parse(localStorage.getItem('user')).studentLevel
+                    }
                 } else {
                     userParams = {
                         roleName: 'student',

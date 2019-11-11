@@ -5,6 +5,14 @@
     </tab>
 
     <tab heading="assignments">
+        <div *ngFor="let assignment of assignments">
+            <h4>{{assignment.title}}</h4>
+            <ul>
+              <li>Date Due: {{assignment.dateDue}}</li>
+              <li>Student Level: {{assignment.studentLevel}}</li>
+              <li>Assigned?: {{assignment.assigned}}</li>
+            </ul>
+            </div>
     </tab>
 
     <tab heading="students">

@@ -10,17 +10,26 @@ import { catchError } from 'rxjs/operators';
 export class AssignmentListResolver implements Resolve<Assignment[]> {
     pageNumber = 1;
     pageSize = 10;
+    userParams: any = {};
 
     constructor(private assignmentService: AssignmentService, private router: Router,
             private alertify: AlertifyService) {}
 
             resolve(route: ActivatedRouteSnapshot): Observable<Assignment[]> {
-                return this.assignmentService.getAssignments(this.pageNumber, this.pageSize).pipe(
+                this.userParams.studentLevel = this.setUserParams();
+                return this.assignmentService.getAssignments(this.pageNumber, this.pageSize, this.userParams).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');
                         this.router.navigate(['/']);
                         return of(null);
                     })
                 );
+            }
+
+            setUserParams() {
+                const user = JSON.parse(localStorage.getItem('user'));
+                console.dir(user);
+
+                return user.studentLevel;
             }
 }

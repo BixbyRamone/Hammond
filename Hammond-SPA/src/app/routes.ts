@@ -48,7 +48,7 @@ export const appRoutes: Routes = [
                 data: {roles: ['Admin']} },
 
             { path: 'mentor', component: MentorLandingComponent,
-                /*resolve: {users: UserListResolver},*/ data: {roles: ['Admin', 'Mentor']} },
+                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'mentor/students', component: MentorStudListComponent,
                 resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor']} },
