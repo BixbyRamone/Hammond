@@ -13,12 +13,13 @@ import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
 import { StudAssignmentDetailComponent } from './student/stud-assignment-detail/stud-assignment-detail.component';
 // import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
 import { GroupRegistrationComponent } from './admin/registrations/group-registration/group-registration.component';
-// import { UserGroupListResolver } from './_resolvers/user-group-list.resolver';
+import { UserGroupListResolver } from './_resolvers/user-group-list.resolver';
 import { AssignmentListResolver } from './_resolvers/assignment-list.resolver';
 import { StudentListResolver } from './_resolvers/student-list.resolver';
 import { AssignmentListComponent } from './admin/assignment-list/assignment-list.component';
 import { VolunteerListResolver } from './_resolvers/volunteer-list.resolver';
 import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
+import { GroupsListComponent } from './admin/groups-list/groups-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -41,8 +42,11 @@ export const appRoutes: Routes = [
             { path: 'admin/volunteers', component: StudentListComponent,
                 resolve: {users: VolunteerListResolver}, data: {roles: ['Admin'], userType: 'Volunteer'} },
 
-            { path: 'admin/groups', component: GroupRegistrationComponent,
-                /*resolve: {users: UserGroupListResolver},*/ data: {roles: ['Admin']} },
+            { path: 'admin/groups', component: GroupsListComponent,
+                resolve: {groups: UserGroupListResolver}, data: {roles: ['Admin']} },
+
+            { path: 'admin/groups/register', component: GroupRegistrationComponent,
+                resolve: {users: UserGroupListResolver}, data: {roles: ['Admin']} },
 
             { path: 'admin/registerstudent',  component: StudentRegistrationComponent,
                 data: {roles: ['Admin']} },

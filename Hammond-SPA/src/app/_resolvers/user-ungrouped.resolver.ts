@@ -5,20 +5,19 @@ import { UserService } from '../_services/user.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Group } from '../_models/group';
-import { GroupService } from '../_services/group.service';
 
 @Injectable()
-export class UserGroupListResolver implements Resolve<Group[]> {
-    pageNumber = 1;
-    pageSize = 10;
+export class UserUngroupedResolver implements Resolve<User[]> {
+    pageNumber = null;
+    pageSize = null;
     userParams: any = {};
 
-    constructor(private groupService: GroupService, private router: Router,
+    constructor(private userService: UserService, private router: Router,
             private alertify: AlertifyService) {}
 
-            resolve(route: ActivatedRouteSnapshot): Observable<Group[]> {
-                return this.groupService.getGroups(this.pageNumber, this.pageSize, this.userParams).pipe(
+            resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
+                this.userParams.getUngrouped = true;
+                return this.userService.getUsers(this.pageNumber, this.pageSize, this.userParams).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');
                         this.router.navigate(['/']);
