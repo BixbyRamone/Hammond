@@ -142,7 +142,7 @@ namespace Hammond.API.Data
                     users = users.Where(u => usersWithRole.Contains(u));
             }            
 
-            if (userParams.StudentLevel != null && userParams.StudentLevel != "all")
+            if (userParams.StudentLevel != null && userParams.StudentLevel != "all" && userParams.StudentLevel != "undefined")
             {
                 users = users.Where(u => u.StudentLevel == userParams.StudentLevel);
                 // var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;

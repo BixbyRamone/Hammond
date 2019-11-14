@@ -2,12 +2,12 @@
   <div *ngIf="!groupListMode && !groupRegisterMode">
     <ul>
       <li [routerLink]="['/admin/groups']">View Groups List</li>
-      <li (click)="registerToggle()">Create Group</li>
+      <li [routerLink]="['/admin/groups/register']">Create Group</li>
     </ul>
   </div>
-  <div *ngIf="groupRegisterMode">
+  <!-- <div *ngIf="groupRegisterMode">
       <app-group-registration (cancel)="cancelGroupRegistration($event)"></app-group-registration>
-    </div>
+    </div> -->
 
     <!-- <div *ngIf="groupListMode">
       <app-groups-list [groups]="loadedGroups" (cancel)="cancelGroupList($event)"></app-groups-list>

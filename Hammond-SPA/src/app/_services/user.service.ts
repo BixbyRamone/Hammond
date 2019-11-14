@@ -18,7 +18,6 @@ constructor(private http: HttpClient) { }
 
 getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>> {
   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
-
   let params = new HttpParams();
 
   if (page != null && itemsPerPage != null) {
@@ -31,6 +30,10 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
     params =  params.append('roleName', userParams.roleName);
   } else {
     params = params.append('studentLevel', this.getStudentLevel()); // why is this here!?
+  }
+
+  if (userParams.getUngrouped === true) {
+    params = params.append('getUngrouped', userParams.getUngrouped);
   }
 
   return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})

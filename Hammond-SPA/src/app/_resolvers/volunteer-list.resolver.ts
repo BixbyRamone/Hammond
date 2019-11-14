@@ -16,8 +16,10 @@ export class VolunteerListResolver implements Resolve<User[]> {
             private alertify: AlertifyService) {}
 
             resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
-                this.userParams = this.setUpUserParams();
-                const test = typeof(this.userParams.roleName);
+                this.userParams = {
+                    roleName: 'volunteer',
+                    studentLevel: 'all'
+                };
                 return this.userService.getUsers(this.pageNumber, this.pageSize, this.userParams).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');
@@ -26,12 +28,4 @@ export class VolunteerListResolver implements Resolve<User[]> {
                     })
                 );
             }
-
-            setUpUserParams() {
-                const userParams = {
-                    roleName: 'volunteer',
-                    studentLevel: 'all'
-                };
-                return userParams;
-              }
 }
