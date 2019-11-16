@@ -3,7 +3,7 @@
   <div *ngIf="!studentListMode && !studentRegisterMode && !dropBoxMode">
       <ul>
 
-          <li (click)="myStudentsModeToggle()">My Students</li>
+          <li [routerLink]="['/mentor/mygroup']">My Students</li>
           <li [routerLink]="['/mentor/students']">My Class</li>      
         </ul>
   </div>

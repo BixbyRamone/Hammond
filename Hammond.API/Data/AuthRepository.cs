@@ -16,6 +16,7 @@ namespace Hammond.API.Data
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.Include(r => r.UserRoles)
+                // .Include(g => g.UserGroups)
                 .SingleOrDefaultAsync(x=> x.UserName == username);
 
             if (user == null)

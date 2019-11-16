@@ -13,6 +13,7 @@ namespace Hammond.API.Dtos
         public string StudentLevel { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastActive { get; set; }
+        public ICollection<UserGroup> UserGroups { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserAssignment> UserAssignments { get; set; }
         public ICollection<Assignment> Assignments { get; set; }

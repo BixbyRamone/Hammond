@@ -51,6 +51,7 @@ import { EventService } from './_services/event.service';
 import { StudentListResolver } from './_resolvers/student-list.resolver';
 import { VolunteerListResolver } from './_resolvers/volunteer-list.resolver';
 import { UserUngroupedResolver } from './_resolvers/user-ungrouped.resolver';
+import { UserMyGroupResolver } from './_resolvers/user-my-group.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -120,6 +121,7 @@ export function tokenGetter() {
       UserDetailResolver,
       UserGroupListResolver,
       UserListResolver,
+      UserMyGroupResolver,
       UserUngroupedResolver,
       VolunteerListResolver
    ],

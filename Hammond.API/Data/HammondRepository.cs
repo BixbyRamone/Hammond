@@ -152,10 +152,13 @@ namespace Hammond.API.Data
 
             if (userParams.GetUngrouped)
             {
-                users = users.Where(u => u.UserGroups.Count == 0);
+                users = users.Where(u => u.UserGroups.Count == 0);                
             }
 
-            
+            // if (userParams.GroupId != null)
+            // {
+            //     // users = users.Where(u => u.UserGroups.Contains());
+            // }
 
             if (!string.IsNullOrEmpty(userParams.OrderBy))
             {
@@ -216,9 +219,10 @@ namespace Hammond.API.Data
 
         public async Task<Group> GetGroup(int id)
         {
-            var group = await _context.Group.Include(g => g.UserGroups)
+            var group = await _context.Group.Where(g => g.Id == id)
+            .Include(g => g.UserGroups)
             .ThenInclude(ug => ug.User)
-            .FirstOrDefaultAsync(g => g.Id == id);
+            .FirstOrDefaultAsync();
 
             return group;
         }

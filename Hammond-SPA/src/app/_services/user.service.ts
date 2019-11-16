@@ -31,9 +31,12 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
   } else {
     params = params.append('studentLevel', this.getStudentLevel()); // why is this here!?
   }
-
   if (userParams.getUngrouped === true) {
     params = params.append('getUngrouped', userParams.getUngrouped);
+  }
+
+  if (userParams.groupId !=  null) {
+    params = params.append('groupId', userParams.groupId);
   }
 
   return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})
