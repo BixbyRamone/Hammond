@@ -25,6 +25,7 @@ export class StudentLandingComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
+      console.dir(this.user);
     });
 
     this.route.queryParams.subscribe(params => {

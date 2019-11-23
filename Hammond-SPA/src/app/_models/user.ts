@@ -1,5 +1,6 @@
 import { Assignment } from './assignment';
 import { Role } from './role';
+import { Group } from './group';
 
 
 export interface User {
@@ -11,6 +12,7 @@ export interface User {
     dateCreated: Date;
     lastActive: Date;
     actScore: number[];
+    userGroups: Group[];
     userRole: string;
     userRoles: Role[];
     userAssignments: Assignment[];

@@ -22,7 +22,7 @@ register(group: GroupToCreate) {
 
 getGroups(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<Group[]>> {
   const paginatedResult: PaginatedResult<Group[]> = new PaginatedResult<Group[]>();
-
+debugger
   let params = new HttpParams();
 
   if (userParams != null) {
