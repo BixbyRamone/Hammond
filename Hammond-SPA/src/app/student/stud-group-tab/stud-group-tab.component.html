@@ -1,3 +1,3 @@
-<p>
-  stud-group-tab works!
+<p *ngFor="let groupMember of group.userGroups">
+  {{groupMember.user.firstName}}
 </p>

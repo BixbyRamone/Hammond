@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { Group } from 'src/app/_models/group';
 import { ActivatedRoute } from '@angular/router';
@@ -9,15 +9,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./stud-group-tab.component.css']
 })
 export class StudGroupTabComponent implements OnInit {
+  @Input() group;
   user: User;
-  group: any[];
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = JSON.parse(localStorage.getItem('user'));
-      this.group = this.user.userGroups;
       console.log(this.group);
     });
   }

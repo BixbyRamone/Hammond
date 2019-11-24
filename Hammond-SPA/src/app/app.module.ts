@@ -53,6 +53,7 @@ import { VolunteerListResolver } from './_resolvers/volunteer-list.resolver';
 import { UserUngroupedResolver } from './_resolvers/user-ungrouped.resolver';
 import { UserMyGroupResolver } from './_resolvers/user-my-group.resolver';
 import { StudGroupTabComponent } from './student/stud-group-tab/stud-group-tab.component';
+import { GroupResolver } from './_resolvers/group.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -118,6 +119,7 @@ export function tokenGetter() {
       EventService,
       GroupService,
       AssignmentListResolver,
+      GroupResolver,
       StudentListResolver,
       StudProfileResolver,
       UserDetailResolver,

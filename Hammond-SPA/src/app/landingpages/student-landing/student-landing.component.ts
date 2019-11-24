@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { Group } from 'src/app/_models/group';
 
 @Component({
   selector: 'app-student-landing',
@@ -14,6 +15,7 @@ import { TabsetComponent } from 'ngx-bootstrap';
 export class StudentLandingComponent implements OnInit {
   @ViewChild('studentTabs') studentTabs: TabsetComponent;
   user: User;
+  group: Group;
 
   constructor(
     private userService: UserService,
@@ -25,6 +27,7 @@ export class StudentLandingComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
+      this.group = data['group']
       console.dir(this.user);
     });
 

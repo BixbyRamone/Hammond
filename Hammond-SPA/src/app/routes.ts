@@ -23,6 +23,7 @@ import { GroupsListComponent } from './admin/groups-list/groups-list.component';
 import { UserUngroupedResolver } from './_resolvers/user-ungrouped.resolver';
 import { UserMyGroupResolver } from './_resolvers/user-my-group.resolver';
 import { MentorMyStudentsComponent } from './mentor/mentor-my-students/mentor-my-students.component';
+import { GroupResolver } from './_resolvers/group.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -63,7 +64,8 @@ export const appRoutes: Routes = [
             { path: 'mentor/mygroup', component: MentorMyStudentsComponent,
                 resolve: {group: UserMyGroupResolver}, data: {roles: ['Admin', 'Mentor']} },
 
-            { path: 'student', component: StudentLandingComponent, resolve: {user: StudProfileResolver},
+            { path: 'student', component: StudentLandingComponent,
+                resolve: {user: StudProfileResolver, group: GroupResolver},
                  data: {roles: ['Admin', 'Mentor', 'Student']} },
 
             { path: 'student/assignments/:id', component: StudAssignmentDetailComponent}
