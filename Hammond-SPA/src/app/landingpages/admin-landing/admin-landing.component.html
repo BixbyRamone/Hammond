@@ -1,25 +1,28 @@
-<br>
-<div class="container">
-  <tabset class="admin-tabset" #adminTabs>
-    <tab (click)="loadEvents()" heading="events">
-      <app-events-tab [loadedEvents]="evnts"></app-events-tab>
-    </tab>
-
-    <tab heading="assignments">
-      <app-assignment-tab></app-assignment-tab>
-    </tab>
-
-    <tab heading="students">
-     <app-student-tab ></app-student-tab>
-      
-    </tab>
-
-    <tab heading="volunteers">
-      <app-volunteers-tab></app-volunteers-tab>
-    </tab>
-
-    <tab (click)="groupLoads()" heading="groups">
-      <app-groups-tab [loadedUserGroups]="users" [loadedGroups]="groups"></app-groups-tab>
-    </tab>
-  </tabset>
-</div>
+ <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+  <br>
+  <div>
+    <tabset class="admin-tabset" #adminTabs>
+      <tab (click)="loadEvents()" heading="events">
+        <app-events-tab [loadedEvents]="evnts"></app-events-tab>
+      </tab>
+  
+      <tab heading="assignments">
+        <app-assignment-tab></app-assignment-tab>
+      </tab>
+  
+      <tab heading="students">
+       <app-student-tab ></app-student-tab>
+        
+      </tab>
+  
+      <tab heading="volunteers">
+        <app-volunteers-tab></app-volunteers-tab>
+      </tab>
+  
+      <tab (click)="groupLoads()" heading="groups">
+        <app-groups-tab [loadedUserGroups]="users" [loadedGroups]="groups"></app-groups-tab>
+      </tab>
+    </tabset>
+  </div>
+  
+ </body>
