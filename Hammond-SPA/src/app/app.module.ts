@@ -55,6 +55,7 @@ import { UserMyGroupResolver } from './_resolvers/user-my-group.resolver';
 import { StudGroupTabComponent } from './student/stud-group-tab/stud-group-tab.component';
 import { GroupResolver } from './_resolvers/group.resolver';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -122,6 +123,7 @@ export function tokenGetter() {
       GroupService,
       AssignmentListResolver,
       GroupResolver,
+      MessagesResolver,
       StudentListResolver,
       StudProfileResolver,
       UserDetailResolver,
