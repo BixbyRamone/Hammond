@@ -86,9 +86,17 @@ namespace Hammond.API.Data
                 messageParams.PageSize);
         }
 
-        public Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
+        public async Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId)
         {
-            throw new System.NotImplementedException();
+            var messages = await _context.Messages
+                .Include(u => u.Sender)
+                .Include(u => u.Recipient)
+                .Where(m => m.RecipientId == userId && m.SenderId == recipientId
+                || m.RecipientId == recipientId && m.SenderId == userId)
+                .OrderByDescending(m => m.DateSent)
+                .ToListAsync();
+
+            return messages;
         }
 
         public async Task<User> GetUser(int id)
