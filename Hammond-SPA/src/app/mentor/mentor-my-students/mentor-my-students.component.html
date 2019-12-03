@@ -1,3 +1,6 @@
-<div *ngFor="let user of usergroup">
-  <div>{{user.user.firstName}} {{user.user.lastName}}</div>
+<i id="back-arrow" class="fa fa-arrow-circle-left" [routerLink]="['/mentor']"></i>
+<div class="container">
+    <div *ngFor="let user of usergroup">
+        <app-user-item [user]="user.user"></app-user-item>
+    </div>
 </div>

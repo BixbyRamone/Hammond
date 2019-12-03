@@ -29,7 +29,7 @@ export class StudentLandingComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      this.group = data['group']
+      this.group = data['group'];
       console.dir(this.user);
     });
 
