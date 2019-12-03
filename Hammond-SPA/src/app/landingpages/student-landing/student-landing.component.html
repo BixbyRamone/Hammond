@@ -1,23 +1,23 @@
-<p>
-  student-landing works!
-</p>
-<div class="container">
-  <tabset class="admin-tabset" #studentTabs>
-    <tab heading="My Profile">
-      <app-stud-profile-tab [student]="user"></app-stud-profile-tab>
-    </tab>
-
-    <tab heading="Assignments">
-      <app-stud-assignment-tab [student]="user"></app-stud-assignment-tab>
-    </tab>
-
-    <tab heading="My Group">
-      <app-stud-group-tab [group]="group"></app-stud-group-tab>
-    </tab>
-
-    <tab heading="Messages">
-      Messaging Component Here
-    </tab>
-
-  </tabset>
-</div>
+<body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+  <br>
+  <div class="container">
+    <tabset class="admin-tabset" #studentTabs>
+      <tab heading="My Profile">
+        <app-stud-profile-tab [student]="user"></app-stud-profile-tab>
+      </tab>
+  
+      <tab heading="Assignments">
+        <app-stud-assignment-tab [student]="user"></app-stud-assignment-tab>
+      </tab>
+  
+      <tab heading="My Group">
+        <app-stud-group-tab [group]="group"></app-stud-group-tab>
+      </tab>
+  
+      <tab heading="Messages">
+        Messaging Component Here
+      </tab>
+  
+    </tabset>
+  </div>
+</body>

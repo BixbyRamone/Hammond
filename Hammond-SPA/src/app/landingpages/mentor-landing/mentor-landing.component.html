@@ -1,22 +1,25 @@
-<br>
-<div class="container">
-  <tabset class="mentor-tabset" #mentorTabs>
-    <tab heading="events">
-    </tab>
 
-    <tab heading="assignments">
-        <div *ngFor="let assignment of assignments">
-            <h4>{{assignment.title}}</h4>
-            <ul>
-              <li>Date Due: {{assignment.dateDue}}</li>
-              <li>Student Level: {{assignment.studentLevel}}</li>
-              <li>Assigned?: {{assignment.assigned}}</li>
-            </ul>
-            </div>
-    </tab>
-
-    <tab heading="students">
-      <app-mentor-stud-tab></app-mentor-stud-tab>
-    </tab>
-  </tabset>
-</div>
+<body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+    <br>
+  <div class="container">
+    <tabset class="mentor-tabset" #mentorTabs>
+      <tab heading="events">
+      </tab>
+  
+      <tab heading="assignments">
+          <div *ngFor="let assignment of assignments">
+              <h4>{{assignment.title}}</h4>
+              <ul>
+                <li>Date Due: {{assignment.dateDue}}</li>
+                <li>Student Level: {{assignment.studentLevel}}</li>
+                <li>Assigned?: {{assignment.assigned}}</li>
+              </ul>
+              </div>
+      </tab>
+  
+      <tab heading="students">
+        <app-mentor-stud-tab></app-mentor-stud-tab>
+      </tab>
+    </tabset>
+  </div>
+</body>

@@ -103,15 +103,16 @@ export class AdminLandingComponent implements OnInit {
           const swipe = direction[0] < 0 ? 'next' : 'previous';
           // Do whatever you want with swipe
           const selectedTab = this.getTabMethod();
-          if (this.swipeCoord[0] > this.swipeCoord[1]) {
-            this.adminTabs.tabs[selectedTab + 1].active = true;
-          } else if (this.swipeCoord[0] < this.swipeCoord[1]) {
-            this.adminTabs.tabs[selectedTab - 1].active = true;
-            // console.log('swipe left');
+
+          if (swipe === 'next') {
+            if (selectedTab !== this.adminTabs.tabs.length - 1) {
+              this.adminTabs.tabs[selectedTab + 1].active = true;
+            }
+          } else if (swipe === 'previous') {
+              if (selectedTab !== 0) {
+                this.adminTabs.tabs[selectedTab - 1].active = true;
+              }
           }
-          console.dir(this.swipeCoord);
-          console.dir(this.swipeTime);
-          console.dir(this.adminTabs.tabs);
       }
     }
   }
