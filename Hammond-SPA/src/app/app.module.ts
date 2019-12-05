@@ -56,6 +56,7 @@ import { StudGroupTabComponent } from './student/stud-group-tab/stud-group-tab.c
 import { GroupResolver } from './_resolvers/group.resolver';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MessagesComponent } from './messages/messages.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -81,6 +82,7 @@ export function tokenGetter() {
       MentorMyStudentsComponent,
       MentorStudTabComponent,
       MentorStudListComponent,
+      MessagesComponent,
       SigninComponent,
       StudAssignmentDetailComponent,
       StudAssignmentTabComponent,
