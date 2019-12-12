@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
@@ -93,6 +94,7 @@ export function tokenGetter() {
       StudentListComponent,
       StudentRegistrationComponent,
       StudentTabComponent,
+      TimeAgoPipe,
       NavComponent,
       UserItemComponent,
       UserProfileComponent,
