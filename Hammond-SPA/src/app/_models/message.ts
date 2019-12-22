@@ -1,9 +1,9 @@
 export interface Message {
     id: number;
     senderId: number;
-    senderKnownAs: string;
+    senderUsername: string;
     recipientId: number;
-    recipientKnownAs: string;
+    recipientUsername: string;
     content: string;
     isRead: boolean;
     dateRead: Date;

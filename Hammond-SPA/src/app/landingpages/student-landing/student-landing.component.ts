@@ -51,15 +51,15 @@ export class StudentLandingComponent implements OnInit {
     });
   }
 
-  loadMessages() {
-    this.userService.getMessages(this.authService.decodedToken.nameid, 1, 15, 'Unread')
-        .subscribe((res: PaginatedResult<Message[]>) => {
-          this.messages = res.result;
-          this.pagination = res.pagination;
-        }, error => {
-          this.alertify.error(error);
-        });
-  }
+  // loadMessages() {
+  //   this.userService.getMessages(this.authService.decodedToken.nameid, 1, 15, 'Unread')
+  //       .subscribe((res: PaginatedResult<Message[]>) => {
+  //         this.messages = res.result;
+  //         this.pagination = res.pagination;
+  //       }, error => {
+  //         this.alertify.error(error);
+  //       });
+  // }
 
   swipe(e: TouchEvent, when: string): void {
     const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY];

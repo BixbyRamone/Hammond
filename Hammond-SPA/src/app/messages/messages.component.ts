@@ -12,7 +12,6 @@ import { AlertifyService } from '../_services/alertify.service';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
-  @Input() inptMessages: Message[];
   messages: Message[];
   pagination: Pagination;
   messageContainer = 'Unread';
@@ -24,28 +23,15 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      // console.log(this.messages);
-      // console.dir(this.inptMessages);
-      // this.userService.getMessages(this.authService.decodedToken.nameid, 1, 15, 'Unread')
-      //   .subscribe((res: PaginatedResult<Message[]>) => {
-      //     this.messages = res.result;
-      //     this.pagination = res.pagination;
-      //   }, error => {
-      //     this.alertify.error(error);
-      //   });
-      // debugger
-      // console.log(this.messages);
       this.messages = data['messages'].result;
       this.pagination = data['messages'].pagination;
     });
   }
 
   loadMessages() {
-    debugger
     this.userService.getMessages(this.authService.decodedToken.nameid, this.pagination.currentPage,
         this.pagination.itemsPerPage, this.messageContainer)
         .subscribe((res: PaginatedResult<Message[]>) => {
-          debugger
           this.messages = res.result;
           this.pagination = res.pagination;
         }, error => {
