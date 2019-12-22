@@ -6,7 +6,8 @@ namespace Hammond.API.Dtos
 {
     public class UserForDetailedDto
     {
-         public string FirstName { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string StudentLevel { get; set; }
         public DateTime LastActive { get; set; }

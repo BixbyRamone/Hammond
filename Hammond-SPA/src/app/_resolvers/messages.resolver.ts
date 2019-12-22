@@ -10,7 +10,7 @@ import { AuthService } from '../_services/auth.service';
 @Injectable()
 export class MessagesResolver implements Resolve<Message[]> {
     pageNumber = 1;
-    pageSize = 10;
+    pageSize = 15;
     messageContainer = 'Unread';
 
     constructor(private userService: UserService,

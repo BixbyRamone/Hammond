@@ -6,6 +6,8 @@ import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { Group } from 'src/app/_models/group';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
+import { Message } from 'src/app/_models/message';
 
 @Component({
   selector: 'app-student-landing',
@@ -18,6 +20,8 @@ export class StudentLandingComponent implements OnInit {
   private swipeTime?: number;
   user: User;
   group: Group;
+  messages: Message[];
+  pagination: Pagination;
 
   constructor(
     private userService: UserService,
@@ -45,6 +49,16 @@ export class StudentLandingComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  loadMessages() {
+    this.userService.getMessages(this.authService.decodedToken.nameid, 1, 15, 'Unread')
+        .subscribe((res: PaginatedResult<Message[]>) => {
+          this.messages = res.result;
+          this.pagination = res.pagination;
+        }, error => {
+          this.alertify.error(error);
+        });
   }
 
   swipe(e: TouchEvent, when: string): void {

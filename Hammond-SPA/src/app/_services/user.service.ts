@@ -60,6 +60,7 @@ getUngroupedUsers(userParams?): Observable<User[]> {
 }
 
 getUser(id): Observable<User> {
+  console.dir(this.baseUrl + 'users/' + id);
   return this.http.get<User>(this.baseUrl + 'users/' + id);
 }
 
@@ -78,7 +79,8 @@ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
     params = params.append('pageNumber', page);
     params = params.append('pageSize', itemsPerPage);
   }
-
+console.dir(params);
+  console.dir(this.baseUrl + 'users/' + id + '/messages', {observe: 'response', params});
   return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages', {observe: 'response', params})
     .pipe(
       map(response => {
@@ -98,6 +100,7 @@ createAssignment(id: number, assignment: Assignment) {
 }
 
 getMessageThread(id: number, recipientId: number) {
+  console.dir(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
   return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
 }
 

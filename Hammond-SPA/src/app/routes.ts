@@ -26,6 +26,7 @@ import { MentorMyStudentsComponent } from './mentor/mentor-my-students/mentor-my
 import { GroupResolver } from './_resolvers/group.resolver';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -37,7 +38,7 @@ export const appRoutes: Routes = [
             { path: 'values', component: ValueComponent},
 
             { path: 'admin', component: AdminLandingComponent,
-                /*resolve: {users: UserListResolver},*/ data: {roles: ['Admin']} },
+                resolve: {messages: MessagesResolver}, data: {roles: ['Admin']} },
 
             { path: 'admin/students', component: StudentListComponent,
                 resolve: {users: StudentListResolver}, data: {roles: ['Admin'], userType: 'Student'} },
@@ -58,7 +59,7 @@ export const appRoutes: Routes = [
                 data: {roles: ['Admin']} },
 
             { path: 'mentor', component: MentorLandingComponent,
-                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin', 'Mentor']} },
+                resolve: {assignments: AssignmentListResolver, messages: MessagesResolver}, data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'mentor/students', component: MentorStudListComponent,
                 resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor']} },
@@ -67,7 +68,7 @@ export const appRoutes: Routes = [
                 resolve: {group: UserMyGroupResolver}, data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'student', component: StudentLandingComponent,
-                resolve: {user: StudProfileResolver, group: GroupResolver},
+                resolve: {user: StudProfileResolver, group: GroupResolver, messages: MessagesResolver},
                  data: {roles: ['Admin', 'Mentor', 'Student']} },
 
             { path: 'student/assignments/:id', component: StudAssignmentDetailComponent},

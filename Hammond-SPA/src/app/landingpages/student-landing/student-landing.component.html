@@ -14,8 +14,8 @@
         <app-stud-group-tab [group]="group"></app-stud-group-tab>
       </tab>
   
-      <tab heading="Messages">
-        <app-messages></app-messages>
+      <tab heading="Messages" (click)="loadMessages()">
+        <app-messages [inptMessages]="messages"></app-messages>
       </tab>
   
     </tabset>

@@ -58,6 +58,7 @@ import { GroupResolver } from './_resolvers/group.resolver';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
+import { UserMessagesComponent } from './users/user-messages/user-messages.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -97,6 +98,7 @@ export function tokenGetter() {
       TimeAgoPipe,
       NavComponent,
       UserItemComponent,
+      UserMessagesComponent,
       UserProfileComponent,
       VolunteerRegistrationComponent,
       VolunteersTabComponent
