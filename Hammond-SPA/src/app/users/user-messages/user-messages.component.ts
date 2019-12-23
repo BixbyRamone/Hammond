@@ -23,7 +23,6 @@ export class UserMessagesComponent implements OnInit {
   }
 
   loadMessages() {
-    debugger
     const currentUserId = +this.authService.decodedToken.nameid;
     this.userService.getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
       .pipe(

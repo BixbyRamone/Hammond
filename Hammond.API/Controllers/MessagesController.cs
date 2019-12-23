@@ -87,7 +87,7 @@ namespace Hammond.API.Controllers
                 return BadRequest("Could not find user");
 
             var message = _mapper.Map<Message>(messageForCreationDto);
-
+            
             _repo.Add(message);
 
             
