@@ -34,7 +34,6 @@ export class StudentLandingComponent implements OnInit {
     this.route.data.subscribe( data => {
       this.user = data['user'];
       this.group = data['group'];
-      console.dir(this.user);
     });
 
     this.route.queryParams.subscribe(params => {

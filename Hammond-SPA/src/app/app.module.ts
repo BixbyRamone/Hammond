@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BsDropdownModule, TabsModule, PaginationModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, PaginationModule, BsDatepickerModule, ButtonsModule } from 'ngx-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -107,6 +107,7 @@ export function tokenGetter() {
       BrowserModule,
       BsDatepickerModule.forRoot(),
       BsDropdownModule.forRoot(),
+      ButtonsModule.forRoot(),
       FormsModule,
       HttpClientModule,
       PaginationModule.forRoot(),
