@@ -1,6 +1,6 @@
  <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <br>
-  <div>
+  <div class="row tab-header-list">
     <tabset class="admin-tabset" #adminTabs>
       <tab (click)="loadEvents()" heading="events">
         <app-events-tab [loadedEvents]="evnts"></app-events-tab>
@@ -11,7 +11,7 @@
       </tab>
   
       <tab heading="students">
-       <app-student-tab ></app-student-tab>
+       <app-student-tab></app-student-tab>
         
       </tab>
   

@@ -3,8 +3,8 @@
   <div *ngIf="!assignmentListMode && !assignmentRegisterMode">
       <ul>
 
-          <li [routerLink]="['/admin/assignments']">View Assignments List</li>
-          <li (click)="registerToggle()">Create Assignment</li>
+          <li class="menu-nav" [routerLink]="['/admin/assignments']">View Assignments List</li>
+          <li class="menu-nav" (click)="registerToggle()">Create Assignment</li>
       
         </ul>        
   </div>

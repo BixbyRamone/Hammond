@@ -3,8 +3,8 @@
   <div *ngIf="!volunteerListMode && !volunteerRegisterMode">
       <ul>
 
-          <li [routerLink]="['/admin/volunteers']">View Volunteer List</li>
-          <li (click)="registerToggle()">Register New Volunteer</li>
+          <li class="menu-nav" [routerLink]="['/admin/volunteers']">View Volunteer List</li>
+          <li class="menu-nav" (click)="registerToggle()">Register New Volunteer</li>
       
         </ul>
   </div>

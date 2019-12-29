@@ -66,3 +66,34 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+
+  /* Expands swipeable area of page */
+  html, body {
+    min-height: 100%;
+    padding-bottom: 50%;
+}
+
+.nav-item , .dropdown, .menu-nav {
+  cursor: pointer;
+}
+
+.nav-tabs {
+  border-radius: 5px;
+}
+
+.tab-header-list {
+  position: static;
+  width: 100% !important;
+}
+
+.nav-tabs .nav-link.active{
+  background-color: #ff9900 !important;
+  color: #fff !important;
+  }
+
+.nav-tabs {
+  background-color: #2f4658 !important;
+  color: #fff !important;
+  }
+

@@ -1,8 +1,8 @@
 <div class="container">
   <div *ngIf="!groupListMode && !groupRegisterMode">
     <ul>
-      <li [routerLink]="['/admin/groups']">View Groups List</li>
-      <li [routerLink]="['/admin/groups/register']">Create Group</li>
+      <li class="menu-nav" [routerLink]="['/admin/groups']">View Groups List</li>
+      <li class="menu-nav" [routerLink]="['/admin/groups/register']">Create Group</li>
     </ul>
   </div>
   <!-- <div *ngIf="groupRegisterMode">
