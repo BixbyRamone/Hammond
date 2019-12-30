@@ -78,8 +78,10 @@
   cursor: pointer;
 }
 
+/* landing page tabs */
 .nav-tabs {
   border-radius: 5px;
+  width: 100%;
 }
 
 .tab-header-list {
@@ -92,8 +94,49 @@
   color: #fff !important;
   }
 
-.nav-tabs {
+.nav-tabs .nav-link {
   background-color: #2f4658 !important;
   color: #fff !important;
   }
 
+/* general li appearance */
+.menu-nav {
+  margin-top: 10px;
+  list-style-type: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.landing-content {
+  margin-top: 30px;
+}
+
+
+/* messaging button attributes  */
+.btn-primary {
+  background-color: #2f4658 !important;
+}
+
+.btn-primary.active {
+  background-color: #ff9900 !important;
+}
+
+/* pagination attributes */
+
+a.page-link {
+  background-color: #4a6e8a !important;
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.pagination-page > a.page-link {
+  background-color: #2f4658 !important;
+  color: #fff !important;
+  font-weight: normal;
+}
+
+.pagination-page.active > a {
+  background-color: #ff9900 !important;
+  color: #fff !important;
+  font-weight: bold;
+}
