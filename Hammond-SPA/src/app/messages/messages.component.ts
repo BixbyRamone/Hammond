@@ -15,6 +15,7 @@ export class MessagesComponent implements OnInit {
   messages: Message[];
   pagination: Pagination;
   messageContainer: 'Unread';
+  selected = 'active ng-touched ng-dirty';
 
   constructor(private userService: UserService,
               private authService: AuthService,

@@ -80,8 +80,8 @@
 
 /* landing page tabs */
 .nav-tabs {
+  border-color: #fff;
   border-radius: 5px;
-  width: 100%;
 }
 
 .tab-header-list {
@@ -89,13 +89,15 @@
   width: 100% !important;
 }
 
-.nav-tabs .nav-link.active{
-  background-color: #ff9900 !important;
+.nav-tabs .nav-link {
+  border-color: #fff;
+  background-color: #2f4658 !important;
   color: #fff !important;
   }
 
-.nav-tabs .nav-link {
-  background-color: #2f4658 !important;
+.nav-tabs .nav-link.active{
+  font-style: bold;
+  background-color: #ff9900 !important;
   color: #fff !important;
   }
 
@@ -113,7 +115,12 @@
 
 
 /* messaging button attributes  */
+#msg-btns {
+  margin-top: 5px;
+}
+
 .btn-primary {
+  border-color: #fff;
   background-color: #2f4658 !important;
 }
 
@@ -140,3 +147,21 @@ a.page-link {
   color: #fff !important;
   font-weight: bold;
 }
+
+@media screen and (min-width: 900px) { 
+  .nav-tabs {
+    margin: auto !important;
+    padding-left: 23%;
+  }
+  }
+
+@media screen and (max-width: 600px) {
+  .nav-tabs {
+    margin: auto !important;
+  }
+  .nav-item {
+    /* width: 33%; */
+    /* text-align: left !important; */
+  }
+}
+

@@ -1,7 +1,7 @@
 <div class="container">
     
   <div *ngIf="!assignmentListMode && !assignmentRegisterMode">
-      <ul>
+      <ul class="landing-content">
 
           <li class="menu-nav" [routerLink]="['/admin/assignments']">View Assignments List</li>
           <li class="menu-nav" (click)="registerToggle()">Create Assignment</li>

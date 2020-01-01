@@ -1,7 +1,7 @@
 <div class="container">
     
   <div *ngIf="!volunteerListMode && !volunteerRegisterMode">
-      <ul>
+      <ul class="landing-content">
 
           <li class="menu-nav" [routerLink]="['/admin/volunteers']">View Volunteer List</li>
           <li class="menu-nav" (click)="registerToggle()">Register New Volunteer</li>

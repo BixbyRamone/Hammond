@@ -1,25 +1,25 @@
  <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <br>
-  <div class="row tab-header-list">
+  <div class="tab-header-list">
     <tabset class="admin-tabset" #adminTabs>
-      <tab (click)="loadEvents()" heading="events">
+      <tab (click)="loadEvents()" heading="Events">
         <app-events-tab [loadedEvents]="evnts"></app-events-tab>
       </tab>
   
-      <tab heading="assignments">
+      <tab heading="Assignments">
         <app-assignment-tab></app-assignment-tab>
       </tab>
   
-      <tab heading="students">
+      <tab heading="Students">
        <app-student-tab></app-student-tab>
         
       </tab>
   
-      <tab heading="volunteers">
+      <tab heading="Volunteers">
         <app-volunteers-tab></app-volunteers-tab>
       </tab>
   
-      <tab (click)="groupLoads()" heading="groups">
+      <tab (click)="groupLoads()" heading="Groups">
         <app-groups-tab [loadedUserGroups]="users" [loadedGroups]="groups"></app-groups-tab>
       </tab>
 

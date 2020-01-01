@@ -1,7 +1,7 @@
-<div class="container mt-5">
+<div id="msg-btns" class="container">
   <div class="row">
     <div class="btn-group">
-      <button class="btn btn-primary" [(ngModel)]="messageContainer"
+      <button class="btn btn-primary" [(ngModel)]="messageContainer" [ngClass]="selected"
         btnRadio="Unread" (click)="loadMessages()">
         <i class="fa fa-envelope"></i> Unread
       </button>
@@ -15,9 +15,8 @@
       </button>
     </div>
   </div>
-
   <div class="row" *ngIf="messages.length == 0">
-    <h3>No messages</h3>
+    <h4>No messages</h4>
   </div>
 
   <div class="row" *ngIf="messages.length > 0">
@@ -62,3 +61,4 @@
               previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
   </pagination>
   </div>
+  
