@@ -11,6 +11,7 @@ namespace Hammond.API.Dtos
         public string LastName { get; set; }
         public string StudentLevel { get; set; }
         public DateTime LastActive { get; set; }
+        public ICollection<ActScore> ActScores { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
     }
 }

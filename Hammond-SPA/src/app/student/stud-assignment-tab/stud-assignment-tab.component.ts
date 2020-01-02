@@ -32,7 +32,6 @@ export class StudAssignmentTabComponent implements OnInit {
     this.route.data.subscribe( data => {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.assignments = this.user.userAssignments;
-      console.log(this.assignments);
     });
   }
 

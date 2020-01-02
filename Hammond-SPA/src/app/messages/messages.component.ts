@@ -26,12 +26,10 @@ export class MessagesComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.messages = data['messages'].result;
       this.pagination = data['messages'].pagination;
-      console.dir(this.messages);
     });
   }
 
   loadMessages() {
-    console.dir(this.messageContainer);
     this.userService.getMessages(this.authService.decodedToken.nameid, this.pagination.currentPage,
         this.pagination.itemsPerPage, this.messageContainer)
         .subscribe((res: PaginatedResult<Message[]>) => {

@@ -160,8 +160,8 @@ a.page-link {
     margin: auto !important;
   }
   .nav-item {
-    /* width: 33%; */
-    /* text-align: left !important; */
+    width: 33%;
+    text-align: left !important;
   }
 }
 

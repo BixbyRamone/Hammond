@@ -17,7 +17,6 @@ export class StudGroupTabComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = JSON.parse(localStorage.getItem('user'));
-      console.log(this.group);
     });
   }
 
