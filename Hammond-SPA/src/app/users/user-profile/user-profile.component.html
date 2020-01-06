@@ -1,11 +1,25 @@
-<p>
-  user-profile works!
-</p>
-<p>
-  {{user.firstName}}
-</p>
+<div class="container">
+  <div class="prof">
+    {{user.firstName}} {{user.lastName}}
+  </div>
 
-<div>
-  <app-user-messages [recipientId]="user.id"></app-user-messages>
+  <div>
+    <div class="row prof-ind" *ngFor="let userRole of user.userRoles">
+      <p *ngIf="userRole !== user.userRoles[0]">, </p>
+      {{userRole.role.name}}
+    </div>
+  </div>
+  
+  <div class="prof">
+    Id# {{user.id}}
+  </div>
+  <div class="prof">
+    Last Active : {{user.lastActive}}
+  </div>
+  
+  <div>
+    <app-user-messages [recipientId]="user.id"></app-user-messages>
+  </div>
 </div>
+
 

@@ -1,7 +1,7 @@
-<div class="card mb-2">
+<div [routerLink]="['/users/', user.id]" class="user-item card mb-2">
   <div class="container">
       <div class="card-body">
-          <div [routerLink]="['/users/', user.id]" class="row">
+          <div class="row">
             <div class="col-md-1 col-lg-1">{{user.id}}: </div>
             <div  
             class="link last-name-column col-md-2 col-lg-2">

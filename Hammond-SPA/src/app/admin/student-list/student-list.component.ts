@@ -35,7 +35,6 @@ export class StudentListComponent implements OnInit {
     this.userParams.roleName = this.userType.toLowerCase();
     this.userParams.studentLevel = 'all';
     this.userParams.volunteerType = this.userType.toLowerCase();
-    console.log(this.users);
   }
 
   resetFilter() {
@@ -59,7 +58,6 @@ export class StudentListComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-    console.log(this.users);
   }
 
   setUserType() {

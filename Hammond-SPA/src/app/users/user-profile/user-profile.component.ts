@@ -15,7 +15,10 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      console.dir(this.user);
+      this.user.userRoles.forEach(element => {
+        console.dir(element);
+      });
+      // console.dir(this.user.userRoles);
     });
   }
 

@@ -103,6 +103,8 @@ namespace Hammond.API.Data
         {
             var user = await _context.Users
                 .Include(u => u.ActScores)
+                .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
