@@ -3,7 +3,7 @@
   <div *ngIf="!eventListMode && !eventRegisterMode">
       <ul class="landing-content">
 
-          <li class="menu-nav" (click)="listToggle()">View Events List</li>
+          <li class="menu-nav" [routerLink]="['/admin/events']">View Events List</li>
           <li class="menu-nav" (click)="registerToggle()">Create Event</li>
       
         </ul>        
@@ -14,7 +14,7 @@
   </div>
 
   <div *ngIf="eventListMode">
-    <app-events-list [evnts]="loadedEvents" (cancel)="cancelEventList($event)"></app-events-list>
+    <app-events-list></app-events-list>
   </div>
   
 </div>

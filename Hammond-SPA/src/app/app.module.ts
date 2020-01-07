@@ -59,6 +59,7 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
 import { UserMessagesComponent } from './users/user-messages/user-messages.component';
+import { EventListResolver } from './_resolvers/event-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -129,6 +130,7 @@ export function tokenGetter() {
       EventService,
       GroupService,
       AssignmentListResolver,
+      EventListResolver,
       GroupResolver,
       MessagesResolver,
       StudentListResolver,

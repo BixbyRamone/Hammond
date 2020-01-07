@@ -27,6 +27,8 @@ import { GroupResolver } from './_resolvers/group.resolver';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { EventListResolver } from './_resolvers/event-list.resolver';
+import { EventsListComponent } from './admin/events-list/events-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -42,6 +44,9 @@ export const appRoutes: Routes = [
 
             { path: 'admin/students', component: StudentListComponent,
                 resolve: {users: StudentListResolver}, data: {roles: ['Admin'], userType: 'Student'} },
+
+            { path: 'admin/events', component: EventsListComponent,
+                resolve: {evnts: EventListResolver}, data: {roles: ['Admin']} },
 
             { path: 'admin/assignments', component: AssignmentListComponent,
                 resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin']} },
