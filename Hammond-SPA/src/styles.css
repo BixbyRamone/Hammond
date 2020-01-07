@@ -74,8 +74,16 @@
     padding-bottom: 50%;
 }
 
-.nav-item , .dropdown, .menu-nav, .user-item {
+.nav-item , .dropdown, .menu-nav, .user-item, .fa-arrow-circle-left {
   cursor: pointer;
+}
+
+.fa-arrow-circle-left {
+  font-size: 30px;
+}
+
+.events-list {
+  margin-left: 15px;
 }
 
 /* landing page tabs */
