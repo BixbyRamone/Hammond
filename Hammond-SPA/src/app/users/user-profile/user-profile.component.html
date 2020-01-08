@@ -1,5 +1,6 @@
-<div class="container">
-  <div class="prof">
+<div class="container mt-4">
+  <i class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i>
+  <div class="prof mt-4">
     {{user.firstName}} {{user.lastName}}
   </div>
 
@@ -17,9 +18,15 @@
     Last Active : {{user.lastActive}}
   </div>
   
-  <div>
+  <div class="mt-4">
     <app-user-messages [recipientId]="user.id"></app-user-messages>
   </div>
+
+  <button class="btn btn-primary mt-5" (click)="deleteUser(user.id)">
+    Delete {{user.firstName}}  {{user.lastName}}'s profile
+  </button>
+
+
 </div>
 
 

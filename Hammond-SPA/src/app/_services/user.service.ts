@@ -94,6 +94,10 @@ console.dir(params);
     );
 }
 
+deleteUser(userId: number, id: number) {
+  return this.http.delete(this.baseUrl + 'users/' + id + '/authId/' + userId);
+}
+
 createAssignment(id: number, assignment: Assignment) {
   return this.http.post(this.baseUrl + 'assignments/' + id, assignment);
 }

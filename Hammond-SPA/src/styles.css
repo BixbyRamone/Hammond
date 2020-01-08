@@ -140,6 +140,7 @@
   margin-top: 5px;
 }
 
+
 .btn-primary {
   border-color: #fff;
   background-color: #2f4658 !important;
@@ -173,6 +174,10 @@ a.page-link {
   .nav-tabs {
     margin: auto !important;
     padding-left: 23%;
+  }
+
+  .message-component {
+    width: 500px;
   }
   }
 
