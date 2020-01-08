@@ -170,6 +170,40 @@ a.page-link {
   font-weight: bold;
 }
 
+#name-edit-link {
+  margin-left: 15px;
+  font-size: 15px;
+  font-style: italic;
+  text-decoration: underline;
+  color: #ff9900;
+  cursor: pointer;
+}
+
+#name-edit {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  width: 400px;
+}
+
+#btn-primary {
+  margin-left: 10px;
+}
+
+#btn-cancel {
+  background-color: #ff9900;
+  color: #fff;
+}
+
+#role-edit-link {
+  margin-left: 15px;
+  font-size: 15px;
+  font-style: italic;
+  text-decoration: underline;
+  color: #ff9900;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 900px) { 
   .nav-tabs {
     margin: auto !important;

@@ -1,13 +1,22 @@
 <div class="container mt-4">
   <i class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i>
-  <div class="prof mt-4">
+  <div *ngIf="!nameEditOn" class="row prof mt-4">
     {{user.firstName}} {{user.lastName}}
+    <p (click)="nameEditClick()" id="name-edit-link">edit</p>
+  </div>
+
+  <div id="name-edit" class="input-group-append" *ngIf="nameEditOn">
+    <input class="form-control input-sm" type="text" value="{{user.firstName}}">
+    <input class="form-control input-sm" type="text" value="{{user.lastName}}">
+    <button id="btn-primary" class="btn btn-primary">Submit</button>
+    <button id="btn-cancel" class="btn">Cancel</button>
   </div>
 
   <div>
     <div class="row prof-ind" *ngFor="let userRole of user.userRoles">
       <p *ngIf="userRole !== user.userRoles[0]">, </p>
       {{userRole.role.name}}
+      <p id="role-edit-link">edit</p>
     </div>
   </div>
   
@@ -15,7 +24,7 @@
     Id# {{user.id}}
   </div>
   <div class="prof">
-    Last Active : {{user.lastActive}}
+    Last Active : {{user.lastActive | date: 'mediumDate'}}
   </div>
   
   <div class="mt-4">

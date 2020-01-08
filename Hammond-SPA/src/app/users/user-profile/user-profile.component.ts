@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class UserProfileComponent implements OnInit {
   user: User;
   alertifyMessage: string;
+  nameEditOn = false;
 
   constructor(
     private authService: AuthService,
@@ -27,7 +28,7 @@ export class UserProfileComponent implements OnInit {
       this.user = data['user'];
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
-      // console.dir(this.user.userRoles);
+      console.dir(this.user.userRoles);
     });
   }
 
@@ -40,6 +41,14 @@ export class UserProfileComponent implements OnInit {
         this.alertify.error('Failed to delete this user');
       });
     });
+  }
+
+  updateUser() {
+    console.log('Update User');
+  }
+
+  nameEditClick() {
+    this.nameEditOn = true;
   }
 
 }
