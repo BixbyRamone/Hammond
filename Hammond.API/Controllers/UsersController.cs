@@ -73,14 +73,14 @@ namespace Hammond.API.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
                 
-            var userFromRepo = await _repo.GetUser(id);
+            var userFromRepo = await _repo.GetUser(userForUpdateDto.id);
 
             _mapper.Map(userForUpdateDto, userFromRepo);
 
             if (await _repo.SaveAll())
                 return NoContent();
 
-            throw new Exception($"Updating user {id} failed on save");
+            throw new Exception($"Updating user {userForUpdateDto.id} failed on save");
         }
 
     }
