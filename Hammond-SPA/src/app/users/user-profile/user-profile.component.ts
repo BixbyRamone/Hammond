@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { NgForm, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  editForm: NgForm;
   user: User;
   alertifyMessage: string;
   nameEditOn = false;
@@ -20,7 +22,8 @@ export class UserProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private fb: FormBuilder
     ) { }
 
   ngOnInit() {
@@ -28,9 +31,19 @@ export class UserProfileComponent implements OnInit {
       this.user = data['user'];
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
+      // this.createEditForm();
       console.dir(this.user.userRoles);
     });
   }
+
+  // createEditForm() {
+  //   this.editForm = this.fb.group({
+  //     firstName: [this.user.firstName],
+  //     lastName: [this.user.lastName],
+  //     roles: [this.user.userRoles]
+  //   });
+  // }
+
 
   deleteUser(id: number) {
     this.alertify.confirm(this.alertifyMessage, () => {
@@ -43,12 +56,23 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  updateUser() {
-    console.log('Update User');
+  updateUser(editForm: NgForm) {
+    this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
+      .subscribe(next => {
+        this.alertify.success('Profile updated successfully');
+        this.editForm.reset(this.user);
+      }, error => {
+        console.log(error);
+        this.alertify.error(error);
+      });
   }
 
   nameEditClick() {
     this.nameEditOn = true;
+  }
+
+  nameEditOff() {
+    this.nameEditOn = false;
   }
 
 }

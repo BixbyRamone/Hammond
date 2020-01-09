@@ -5,11 +5,16 @@
     <p (click)="nameEditClick()" id="name-edit-link">edit</p>
   </div>
 
-  <div id="name-edit" class="input-group-append" *ngIf="nameEditOn">
-    <input class="form-control input-sm" type="text" value="{{user.firstName}}">
-    <input class="form-control input-sm" type="text" value="{{user.lastName}}">
-    <button id="btn-primary" class="btn btn-primary">Submit</button>
-    <button id="btn-cancel" class="btn">Cancel</button>
+  <div id="name-edit" class="row input-group-append" *ngIf="nameEditOn">
+    <!-- <input class="form-control input-sm" type="text" value="{{user.firstName}}"> -->
+    <!-- <input class="form-control input-sm" type="text" value="{{user.lastName}}"> -->
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(editForm)">
+      <input rows="1" class="form-control input-sm" type="text" [(ngModel)]="user.firstName" name="first">
+      <input rows="1" class="form-control input-sm" type="text" [(ngModel)]="user.lastName" name="last">
+      <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
+      <button id="btn-cancel" class="btn" (click)="this.nameEditOff()">Cancel</button>
+    </form>
+    
   </div>
 
   <div>
