@@ -12,10 +12,11 @@ import { NgForm, FormBuilder } from '@angular/forms';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  editForm: NgForm;
+  @ViewChild('editForm') editForm: NgForm;
   user: User;
   alertifyMessage: string;
   nameEditOn = false;
+  roleEditOn = false;
 
   constructor(
     private authService: AuthService,
@@ -49,7 +50,7 @@ export class UserProfileComponent implements OnInit {
     this.alertify.confirm(this.alertifyMessage, () => {
       this.userService.deleteUser(this.authService.decodedToken.nameid, id).subscribe(() => {
         this.alertify.success('User has been deleted');
-        this.router.navigate(['/admin/students'])
+        this.router.navigate(['/admin/students']);
       }, error => {
         this.alertify.error('Failed to delete this user');
       });
@@ -65,14 +66,15 @@ export class UserProfileComponent implements OnInit {
         console.log(error);
         this.alertify.error(error);
       });
+      this.nameEditOn = false;
   }
 
   nameEditClick() {
-    this.nameEditOn = true;
+    this.nameEditOn = !this.nameEditOn;
   }
 
-  nameEditOff() {
-    this.nameEditOn = false;
+  roleEditClick() {
+    this.roleEditOn = !this.roleEditOn;
   }
 
 }

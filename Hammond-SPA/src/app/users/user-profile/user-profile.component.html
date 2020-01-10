@@ -12,7 +12,7 @@
       <input rows="1" class="form-control input-sm" type="text" [(ngModel)]="user.firstName" name="first">
       <input rows="1" class="form-control input-sm" type="text" [(ngModel)]="user.lastName" name="last">
       <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
-      <button id="btn-cancel" class="btn" (click)="this.nameEditOff()">Cancel</button>
+      <button id="btn-cancel" class="btn" (click)="this.nameEditClick()">Cancel</button>
     </form>
     
   </div>
@@ -21,9 +21,28 @@
     <div class="row prof-ind" *ngFor="let userRole of user.userRoles">
       <p *ngIf="userRole !== user.userRoles[0]">, </p>
       {{userRole.role.name}}
-      <p id="role-edit-link">edit</p>
+      <p id="role-edit-link" (click)="roleEditClick()">edit</p>
     </div>
   </div>
+
+  <!-- <div id="name-edit" class="row input-group-append" *ngIf="roleEditOn">
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(editForm)">
+      <label class="radio-inline">  
+        <input class="mr-1 ml-2" type="radio" value="sophmore" formControlName="studentLevel">Sophmore  
+      </label>
+      <br>  
+      <label class="radio-inline ml-2">  
+        <input class="mr-1" type="radio" value="junior" formControlName="studentLevel">Junior  
+      </label>
+      <br>
+      <label class="radio-inline ml-2">  
+          <input class="mr-1" type="radio" value="senior" formControlName="studentLevel">Senior  
+      </label>
+      <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
+      <button id="btn-cancel" class="btn" (click)="this.roleEditClick()">Cancel</button>
+    </form>
+    
+  </div> -->
   
   <div class="prof">
     Id# {{user.id}}
