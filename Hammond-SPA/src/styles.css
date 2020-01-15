@@ -109,6 +109,12 @@
   color: #fff !important;
   }
 
+  a.nav-link:hover {
+    background-color: #4a6e8a !important;
+    border: 3px !important;
+    border-color:  #ff9900 !important;
+  }
+
 /* general li appearance */
 .menu-nav {
   margin-top: 10px;
@@ -202,6 +208,10 @@ a.page-link {
   text-decoration: underline;
   color: #ff9900;
   cursor: pointer;
+}
+
+.admin-tabset {
+  flex: 100%;
 }
 
 @media screen and (min-width: 900px) { 

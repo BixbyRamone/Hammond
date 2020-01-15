@@ -17,6 +17,10 @@ export class UserProfileComponent implements OnInit {
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
+  studentRole = [{value: 'student', display: 'Student', checked: false},
+                 {value: 'tutor', display: 'Tutor', checked: false},
+                 {value: 'mentor', display: 'Mentor', checked: false},
+                 {value: 'admin', display: 'Admin', checked: false} ];
 
   constructor(
     private authService: AuthService,
@@ -32,19 +36,23 @@ export class UserProfileComponent implements OnInit {
       this.user = data['user'];
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
-      // this.createEditForm();
-      console.dir(this.user.userRoles);
+      let iterator = 1;
+      this.studentRole.forEach(element => {
+        element.checked = this.createCheckedState(iterator);
+        iterator++;
+      });
     });
   }
 
-  // createEditForm() {
-  //   this.editForm = this.fb.group({
-  //     firstName: [this.user.firstName],
-  //     lastName: [this.user.lastName],
-  //     roles: [this.user.userRoles]
-  //   });
-  // }
-
+  createCheckedState(roleId: number) {
+    const returnable = this.user.userRoles.filter((opt) => {
+      return opt.role.id === roleId;
+    })[0];
+     if (returnable) {
+       return true;
+     }
+     return false;
+  }
 
   deleteUser(id: number) {
     this.alertify.confirm(this.alertifyMessage, () => {

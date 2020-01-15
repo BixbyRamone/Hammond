@@ -25,24 +25,23 @@
     </div>
   </div>
 
-  <!-- <div id="name-edit" class="row input-group-append" *ngIf="roleEditOn">
+  <div *ngIf="roleEditOn">
     <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(editForm)">
-      <label class="radio-inline">  
-        <input class="mr-1 ml-2" type="radio" value="sophmore" formControlName="studentLevel">Sophmore  
-      </label>
-      <br>  
-      <label class="radio-inline ml-2">  
-        <input class="mr-1" type="radio" value="junior" formControlName="studentLevel">Junior  
-      </label>
-      <br>
-      <label class="radio-inline ml-2">  
-          <input class="mr-1" type="radio" value="senior" formControlName="studentLevel">Senior  
-      </label>
+      <div *ngFor="let r of studentRole">
+        <label>
+          <input
+            type="checkbox"
+            name="role-{{r.display}}"
+            [(ngModel)]="r.checked">
+          {{ r.display }}
+            <br>
+        </label>
+      </div>      
       <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
       <button id="btn-cancel" class="btn" (click)="this.roleEditClick()">Cancel</button>
     </form>
-    
-  </div> -->
+  </div>
+  <br>
   
   <div class="prof">
     Id# {{user.id}}
