@@ -22,7 +22,7 @@
     <div class="row prof-ind" *ngFor="let userRole of user.userRoles">
       <p *ngIf="userRole !== user.userRoles[0]">, </p>
       {{userRole.role.name}}
-      <p *ngIf="testForStudentRole()" id="role-edit-link" (click)="roleEditClick()">edit</p>
+      <p *ngIf="testForStudentRole()===false" id="role-edit-link" (click)="roleEditClick()">edit</p>
     </div>
   </div>
 

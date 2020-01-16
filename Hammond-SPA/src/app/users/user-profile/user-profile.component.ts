@@ -35,6 +35,8 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
+      console.log(this.testForStudentRole());
+
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
       let iterator = 1;
@@ -94,14 +96,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   testForStudentRole() {
-    let found = false;
 for (let i = 0; i < this.user.userRoles.length; i++) {
-    if (this.user.userRoles[i].id === 1) {
-        found = true;
+  console.log(this.user.userRoles[i].role.id);
+  const compVar = this.user.userRoles[i].role.id;
+    if (compVar === 1) {
+      return true;
+      }
         break;
     }
-    return found;
-}
+    return false;
   }
 
   nameEditClick() {
