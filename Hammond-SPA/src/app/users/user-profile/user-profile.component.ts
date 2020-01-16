@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
+import { Role } from 'src/app/_models/role';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -17,10 +18,10 @@ export class UserProfileComponent implements OnInit {
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
-  studentRole = [{value: 'student', display: 'Student', checked: false},
-                 {value: 'tutor', display: 'Tutor', checked: false},
-                 {value: 'mentor', display: 'Mentor', checked: false},
-                 {value: 'admin', display: 'Admin', checked: false} ];
+  studentRole = [{value: 'student', display: 'Student', checked: false, roleId: 1},
+                 {value: 'tutor', display: 'Tutor', checked: false, roleId: 2},
+                 {value: 'mentor', display: 'Mentor', checked: false, roleId: 3},
+                 {value: 'admin', display: 'Admin', checked: false, roleId: 4} ];
 
   constructor(
     private authService: AuthService,
@@ -66,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUser(editForm: NgForm) {
-    this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
+    this.userService.updateUser(this.authService.decodedToken.nameid, this.user, this.getTrueRoles())
       .subscribe(next => {
         this.alertify.success('Profile updated successfully');
         this.editForm.reset(this.user);
@@ -75,6 +76,32 @@ export class UserProfileComponent implements OnInit {
         this.alertify.error(error);
       });
       this.nameEditOn = false;
+  }
+
+  getTrueRoles() {
+    const trueRoles = [];
+    this.studentRole.filter((opt) => {
+      if (opt.checked === true) {
+        const role: Role = {
+          id: opt.roleId,
+          roleName: opt.value,
+          role: opt
+        };
+        trueRoles.push(role);
+      }
+    });
+    return trueRoles;
+  }
+
+  testForStudentRole() {
+    let found = false;
+for (let i = 0; i < this.user.userRoles.length; i++) {
+    if (this.user.userRoles[i].id === 1) {
+        found = true;
+        break;
+    }
+    return found;
+}
   }
 
   nameEditClick() {

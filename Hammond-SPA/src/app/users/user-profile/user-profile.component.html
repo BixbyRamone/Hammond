@@ -1,5 +1,6 @@
 <div class="container mt-4">
-  <i class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i>
+  <i *ngIf="testForStudentRole()" class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i>
+  <i *ngIf="testForStudentRole() === false" class="fa fa-arrow-circle-left" [routerLink]="['/admin/volunteers']"></i>
   <div *ngIf="!nameEditOn" class="row prof mt-4">
     {{user.firstName}} {{user.lastName}}
     <p (click)="nameEditClick()" id="name-edit-link">edit</p>
@@ -21,7 +22,7 @@
     <div class="row prof-ind" *ngFor="let userRole of user.userRoles">
       <p *ngIf="userRole !== user.userRoles[0]">, </p>
       {{userRole.role.name}}
-      <p id="role-edit-link" (click)="roleEditClick()">edit</p>
+      <p *ngIf="testForStudentRole()" id="role-edit-link" (click)="roleEditClick()">edit</p>
     </div>
   </div>
 
