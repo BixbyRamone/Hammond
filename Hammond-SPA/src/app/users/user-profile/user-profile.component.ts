@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
-  studentRole = [{value: 'student', display: 'Student', checked: false, roleId: 1},
+  roleOptions = [{value: 'student', display: 'Student', checked: false, roleId: 1},
                  {value: 'tutor', display: 'Tutor', checked: false, roleId: 2},
                  {value: 'mentor', display: 'Mentor', checked: false, roleId: 3},
                  {value: 'admin', display: 'Admin', checked: false, roleId: 4} ];
@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
       let iterator = 1;
-      this.studentRole.forEach(element => {
+      this.roleOptions.forEach(element => {
         element.checked = this.createCheckedState(iterator);
         iterator++;
       });
@@ -82,10 +82,10 @@ export class UserProfileComponent implements OnInit {
 
   getTrueRoles() {
     const trueRoles = [];
-    this.studentRole.filter((opt) => {
+    this.roleOptions.filter((opt) => {
       if (opt.checked === true) {
-        const role: Role = {
-          id: opt.roleId,
+        const role = {
+          roleId: opt.roleId,
           roleName: opt.value,
           role: opt
         };

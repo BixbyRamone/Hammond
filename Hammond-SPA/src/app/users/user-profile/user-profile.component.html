@@ -28,7 +28,7 @@
 
   <div *ngIf="roleEditOn">
     <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(editForm)">
-      <div *ngFor="let r of studentRole">
+      <div *ngFor="let r of roleOptions">
         <label>
           <input
             type="checkbox"

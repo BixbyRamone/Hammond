@@ -63,7 +63,11 @@ getUser(id): Observable<User> {
   return this.http.get<User>(this.baseUrl + 'users/' + id);
 }
 
-updateUser(id: number, user: User) {
+updateUser(id: number, user: User, newRoles: any) {
+  debugger
+  if (newRoles) {
+    user.userRoles = newRoles;
+  }
   return this.http.put(this.baseUrl + 'users/' + id, user);
 }
 

@@ -6,6 +6,8 @@ using AutoMapper;
 using Hammond.API.Data;
 using Hammond.API.Dtos;
 using Hammond.API.Helpers;
+using Hammond.API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hammond.API.Controllers
@@ -16,8 +18,16 @@ namespace Hammond.API.Controllers
     {
         private readonly IHammondRepository _repo;
         private readonly IMapper _mapper;
-        public UsersController(IHammondRepository repo, IMapper mapper)
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<Role> _roleManager;
+        public UsersController(
+            IHammondRepository repo,
+            IMapper mapper,
+            UserManager<User> userManager,
+            RoleManager<Role> roleManager)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
             _repo = repo;
         }
@@ -72,13 +82,55 @@ namespace Hammond.API.Controllers
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto) {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+
+            var roleHolder =  userForUpdateDto.UserRoles;
                 
             var userFromRepo = await _repo.GetUser(userForUpdateDto.id);
+
+            _userManager.RemoveFromRoleAsync(userFromRepo, "Student").Wait();
+            _userManager.RemoveFromRoleAsync(userFromRepo, "Tutor").Wait();
+            _userManager.RemoveFromRoleAsync(userFromRepo, "Mentor").Wait();
+            _userManager.RemoveFromRoleAsync(userFromRepo, "Admin").Wait();
+
+            foreach (var item in roleHolder)
+            {
+                switch(item.RoleId)
+                {
+                    case 1:
+                        _userManager.AddToRolesAsync(userFromRepo, new [] {"Student"}).Wait();
+                        break;
+
+                    case 2:
+                        _userManager.AddToRolesAsync(userFromRepo, new [] {"Tutor"}).Wait();
+                        break;
+
+                    case 3:
+                        _userManager.AddToRolesAsync(userFromRepo, new [] {"Mentor"}).Wait();
+                        break;
+
+                    case 4:
+                        _userManager.AddToRolesAsync(userFromRepo, new [] {"Admin"}).Wait();
+                        break;
+                }
+            }
+
+            var roleString = _userManager.GetRolesAsync(userFromRepo).Result;
+            userForUpdateDto.UserRoles.Clear();
+
+            foreach (var item in roleString)
+            {
+                var userRole = new UserRole
+                {
+                    User = userFromRepo,
+                    Role = _roleManager.FindByNameAsync(item).Result
+                };
+                userForUpdateDto.UserRoles.Add(userRole);
+            }
 
             _mapper.Map(userForUpdateDto, userFromRepo);
 
             if (await _repo.SaveAll())
-                return NoContent();
+                return Ok(userFromRepo);
 
             throw new Exception($"Updating user {userForUpdateDto.id} failed on save");
         }
