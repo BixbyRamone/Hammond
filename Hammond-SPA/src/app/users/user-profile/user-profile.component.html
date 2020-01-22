@@ -18,23 +18,23 @@
     
   </div>
 
-  <div>
-    <div class="row prof-ind" *ngFor="let userRole of user.userRoles">
-      <p *ngIf="userRole !== user.userRoles[0]">, </p>
-      {{userRole.role.name}}
-      <p *ngIf="testForStudentRole()===false" id="role-edit-link" (click)="roleEditClick()">edit</p>
+  <div class="row prof-ind">
+    <div class="" *ngFor="let userRole of user.userRoles">
+      <!-- <p *ngIf="userRole !== user.userRoles[0]">, </p> -->
+      <div> _{{userRole.role.name}}</div>
     </div>
+    <p *ngIf="testForStudentRole()===false" id="role-edit-link" (click)="roleEditClick()">edit</p>
   </div>
 
   <div *ngIf="roleEditOn">
-    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(editForm)">
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUserRoles(editForm)">
       <div *ngFor="let r of roleOptions">
         <label>
           <input
             type="checkbox"
-            name="role-{{r.display}}"
+            name="role-{{r.name}}"
             [(ngModel)]="r.checked">
-          {{ r.display }}
+          {{ r.name }}
             <br>
         </label>
       </div>      

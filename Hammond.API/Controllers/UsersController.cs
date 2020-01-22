@@ -82,6 +82,22 @@ namespace Hammond.API.Controllers
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto) {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+                
+            var userFromRepo = await _repo.GetUser(userForUpdateDto.id);
+
+            _mapper.Map(userForUpdateDto, userFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPut("roles/{id}")]
+        public async Task<IActionResult> UpdateUserRoles(int id, UserForUpdateDto userForUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
             var roleHolder =  userForUpdateDto.UserRoles;
                 
@@ -129,7 +145,6 @@ namespace Hammond.API.Controllers
 
             _mapper.Map(userForUpdateDto, userFromRepo);
 
-            if (await _repo.SaveAll())
                 return Ok(userFromRepo);
 
             throw new Exception($"Updating user {userForUpdateDto.id} failed on save");

@@ -18,10 +18,10 @@ export class UserProfileComponent implements OnInit {
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
-  roleOptions = [{value: 'student', display: 'Student', checked: false, roleId: 1},
-                 {value: 'tutor', display: 'Tutor', checked: false, roleId: 2},
-                 {value: 'mentor', display: 'Mentor', checked: false, roleId: 3},
-                 {value: 'admin', display: 'Admin', checked: false, roleId: 4} ];
+  roleOptions = [{value: 'student', name: 'Student', checked: false, roleId: 1},
+                 {value: 'tutor', name: 'Tutor', checked: false, roleId: 2},
+                 {value: 'mentor', name: 'Mentor', checked: false, roleId: 3},
+                 {value: 'admin', name: 'Admin', checked: false, roleId: 4} ];
 
   constructor(
     private authService: AuthService,
@@ -69,7 +69,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   updateUser(editForm: NgForm) {
-    this.userService.updateUser(this.authService.decodedToken.nameid, this.user, this.getTrueRoles())
+    this.userService.updateUser(this.authService.decodedToken.nameid, this.user)
       .subscribe(next => {
         this.alertify.success('Profile updated successfully');
         this.editForm.reset(this.user);
@@ -78,6 +78,17 @@ export class UserProfileComponent implements OnInit {
         this.alertify.error(error);
       });
       this.nameEditOn = false;
+    }
+
+  updateUserRoles(editForm: NgForm) {
+    this.userService.updateUserRoles(this.authService.decodedToken.nameid, this.user, this.getTrueRoles())
+      .subscribe(next => {
+        this.alertify.success('Profile updated successfully');
+      }, error => {
+        console.log(error);
+        this.alertify.error(error);
+      });
+      this.roleEditOn = false;
   }
 
   getTrueRoles() {
@@ -92,12 +103,12 @@ export class UserProfileComponent implements OnInit {
         trueRoles.push(role);
       }
     });
+    this.user.userRoles = trueRoles;
     return trueRoles;
   }
 
   testForStudentRole() {
 for (let i = 0; i < this.user.userRoles.length; i++) {
-  console.log(this.user.userRoles[i].role.id);
   const compVar = this.user.userRoles[i].role.id;
     if (compVar === 1) {
       return true;

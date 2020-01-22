@@ -63,12 +63,15 @@ getUser(id): Observable<User> {
   return this.http.get<User>(this.baseUrl + 'users/' + id);
 }
 
-updateUser(id: number, user: User, newRoles: any) {
-  debugger
+updateUser(id: number, user: User) {
+  return this.http.put(this.baseUrl + 'users/' + id, user);
+}
+
+updateUserRoles(id: number, user: User, newRoles: any) {
   if (newRoles) {
     user.userRoles = newRoles;
   }
-  return this.http.put(this.baseUrl + 'users/' + id, user);
+  return this.http.put(this.baseUrl + 'users/roles/' + id, user);
 }
 
 getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
