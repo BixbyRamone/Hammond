@@ -42,6 +42,25 @@
       <button id="btn-cancel" class="btn" (click)="this.roleEditClick()">Cancel</button>
     </form>
   </div>
+
+  <div class="row prof-ind">
+    ACT Scores: 
+  </div>
+  <p *ngIf="!addActOn" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
+  <div *ngIf="addActOn">
+    <div class="row">
+      <input style="width: 90px" type="number" size="2">
+      <p *ngIf="addActOn" class="act-add-link" (click)="this.actAddOnClick()">cancel</p>
+    </div>
+    
+    <div class="row form-group act-date-picker">
+      <input style="width: 90px"   class="form-control"
+    placeholder="Date of Score" type="text" bsDatepicker>  
+    <button>Add Score</button>            
+    </div>
+  </div>
+  
+  
   <br>
   
   <div class="prof">

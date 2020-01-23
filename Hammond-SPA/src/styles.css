@@ -210,6 +210,16 @@ a.page-link {
   cursor: pointer;
 }
 
+.act-add-link {
+  margin-left: 15px;
+  color: #ff9900;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .admin-tabset {
   flex: 100%;
 }

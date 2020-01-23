@@ -5,7 +5,7 @@ import { Role } from 'src/app/_models/role';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
-import { NgForm, FormBuilder } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,10 +18,12 @@ export class UserProfileComponent implements OnInit {
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
+  addActOn = false;
   roleOptions = [{value: 'student', name: 'Student', checked: false, roleId: 1},
                  {value: 'tutor', name: 'Tutor', checked: false, roleId: 2},
                  {value: 'mentor', name: 'Mentor', checked: false, roleId: 3},
                  {value: 'admin', name: 'Admin', checked: false, roleId: 4} ];
+  actForm: FormGroup;
 
   constructor(
     private authService: AuthService,
@@ -91,6 +93,13 @@ export class UserProfileComponent implements OnInit {
       this.roleEditOn = false;
   }
 
+  createActForm() {
+    this.actForm = this.fb.group({
+      score: [''],
+      actDate: ['']
+    });
+  }
+
   getTrueRoles() {
     const trueRoles = [];
     this.roleOptions.filter((opt) => {
@@ -124,6 +133,10 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
 
   roleEditClick() {
     this.roleEditOn = !this.roleEditOn;
+  }
+
+  actAddOnClick() {
+    this.addActOn = !this.addActOn;
   }
 
 }
