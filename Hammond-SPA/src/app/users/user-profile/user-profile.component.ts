@@ -5,7 +5,7 @@ import { Role } from 'src/app/_models/role';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
-import { NgForm, FormBuilder, FormGroup } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,8 +19,7 @@ export class UserProfileComponent implements OnInit {
   nameEditOn = false;
   roleEditOn = false;
   addActOn = false;
-  roleOptions = [{value: 'student', name: 'Student', checked: false, roleId: 1},
-                 {value: 'tutor', name: 'Tutor', checked: false, roleId: 2},
+  roleOptions = [{value: 'tutor', name: 'Tutor', checked: false, roleId: 2},
                  {value: 'mentor', name: 'Mentor', checked: false, roleId: 3},
                  {value: 'admin', name: 'Admin', checked: false, roleId: 4} ];
   actForm: FormGroup;
@@ -37,10 +36,11 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      console.log(this.testForStudentRole());
+      this.createActForm();
 
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
+
       let iterator = 1;
       this.roleOptions.forEach(element => {
         element.checked = this.createCheckedState(iterator);
@@ -95,9 +95,25 @@ export class UserProfileComponent implements OnInit {
 
   createActForm() {
     this.actForm = this.fb.group({
-      score: [''],
-      actDate: ['']
+      score: ['', Validators.required],
+      dayOfScore: ['']
     });
+  }
+
+  submitActScore(formValues: any) {
+    if (this.actForm.valid) {
+      this.userService.updateUserActScores(this.authService.decodedToken.nameid, this.user, this.actForm)
+      .subscribe(next => {
+        this.alertify.success('Profile updated successfully');
+      }, error => {
+        console.log(error);
+        this.alertify.error(error);
+      });
+      this.addActOn = false;
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/users/' + this.user.id]);
+    });
+    }
   }
 
   getTrueRoles() {

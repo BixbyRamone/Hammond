@@ -74,6 +74,12 @@ updateUserRoles(id: number, user: User, newRoles: any) {
   return this.http.put(this.baseUrl + 'users/roles/' + id, user);
 }
 
+updateUserActScores(id: number, user: User, actForm: any) {
+  user.actScores = [];
+  user.actScores.push(actForm.value);
+  return this.http.put(this.baseUrl + 'users/actscores/' + id, user);
+}
+
 getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
   const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
 

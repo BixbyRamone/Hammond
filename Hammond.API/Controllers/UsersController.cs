@@ -150,5 +150,29 @@ namespace Hammond.API.Controllers
             throw new Exception($"Updating user {userForUpdateDto.id} failed on save");
         }
 
+        [HttpPut("actscores/{id}")]
+        public async Task<IActionResult> UpdateUserActScores(int id, UserForUpdateDto userForUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+                
+            var userFromRepo = await _repo.GetUser(userForUpdateDto.id);
+
+            foreach (var score in userForUpdateDto.ActScores)
+            {
+                userFromRepo.ActScores.Add(score);
+            }
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on save");
+
+            
+        }
+
+
+
+
     }
 }

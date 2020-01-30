@@ -23,7 +23,8 @@
       <!-- <p *ngIf="userRole !== user.userRoles[0]">, </p> -->
       <div> _{{userRole.role.name}}</div>
     </div>
-    <p *ngIf="testForStudentRole()===false" id="role-edit-link" (click)="roleEditClick()">edit</p>
+    <p *ngIf="!roleEditOn" id="role-edit-link" (click)="roleEditClick()">edit</p>
+    <p *ngIf="roleEditOn" id="role-edit-link" (click)="roleEditClick()">cancel</p>
   </div>
 
   <div *ngIf="roleEditOn">
@@ -45,21 +46,29 @@
 
   <div class="row prof-ind">
     ACT Scores: 
+  <div id="act-score" *ngFor="let actScore of this.user.actScores">{{actScore.score}}</div>
   </div>
-  <p *ngIf="!addActOn" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
+  <form [formGroup]="actForm" (ngSubmit)="submitActScore()">
+    <p *ngIf="!addActOn" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
   <div *ngIf="addActOn">
-    <div class="row">
-      <input style="width: 90px" type="number" size="2">
+    <div class="row form-group">
+      <input style="width: 90px" type="number" size="2"
+      [ngClass]="{'is-invalid': actForm.get('score').errors
+      && actForm.get('score').touched}"
+      formControlName="score">
       <p *ngIf="addActOn" class="act-add-link" (click)="this.actAddOnClick()">cancel</p>
     </div>
     
     <div class="row form-group act-date-picker">
-      <input style="width: 90px"   class="form-control"
-    placeholder="Date of Score" type="text" bsDatepicker>  
-    <button>Add Score</button>            
+      <input style="width: 90px"  class="form-control"
+    placeholder="Date of Score" type="text"
+    formControlName="dayOfScore"
+    bsDatepicker>  
+    <button class="btn btn-success" type=(submit)>Add Score</button>        
     </div>
   </div>
-  
+  </form> 
+<p>{{this.actForm.value | json}}</p> 
   
   <br>
   

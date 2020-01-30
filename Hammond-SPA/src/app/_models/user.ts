@@ -11,7 +11,7 @@ export interface User {
     studentLevel: string;
     dateCreated: Date;
     lastActive: Date;
-    actScores: number[];
+    actScores: any;
     userGroups: Group[];
     userRole: string;
     userRoles: Role[];
