@@ -46,8 +46,15 @@
 
   <div class="row prof-ind">
     ACT Scores: 
-  <div id="act-score" *ngFor="let actScore of this.user.actScores">{{actScore.score}}</div>
+  <div id="act-exp-link" (click)="actExpandClick()"> Average of {{actAvg }}</div>  
   </div>
+
+  <ng-container *ngIf="actExpandView">
+    <ul>
+    <li id="act-score" *ngFor="let actScore of this.user.actScores">{{actScore.score}} taken on {{actScore.dayOfScore | date: 'mediumDate'}}</li>
+    </ul>
+  </ng-container>
+
   <form [formGroup]="actForm" (ngSubmit)="submitActScore()">
     <p *ngIf="!addActOn" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
   <div *ngIf="addActOn">

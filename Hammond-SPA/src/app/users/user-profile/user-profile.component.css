@@ -5,3 +5,10 @@
 #act-score {
     margin-left: 15px;
 }
+
+#act-exp-link {
+    text-decoration: underline;
+    color:  #ff9900;
+    white-space: pre;
+    cursor: pointer;
+}

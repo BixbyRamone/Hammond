@@ -23,6 +23,8 @@ export class UserProfileComponent implements OnInit {
                  {value: 'mentor', name: 'Mentor', checked: false, roleId: 3},
                  {value: 'admin', name: 'Admin', checked: false, roleId: 4} ];
   actForm: FormGroup;
+  actAvg: any;
+  actExpandView = false;
 
   constructor(
     private authService: AuthService,
@@ -37,6 +39,7 @@ export class UserProfileComponent implements OnInit {
     this.route.data.subscribe( data => {
       this.user = data['user'];
       this.createActForm();
+      this.actAvg = this.averageActScore();
 
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
@@ -143,6 +146,11 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
     return false;
   }
 
+  averageActScore() {
+    const avg = array => array.reduce((p, c) => p + c.score, 0 ) / this.user.actScores.length;
+    return avg(this.user.actScores).toFixed(2);
+  }
+
   nameEditClick() {
     this.nameEditOn = !this.nameEditOn;
   }
@@ -153,6 +161,10 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
 
   actAddOnClick() {
     this.addActOn = !this.addActOn;
+  }
+
+  actExpandClick() {
+    this.actExpandView = !this.actExpandView;
   }
 
 }
