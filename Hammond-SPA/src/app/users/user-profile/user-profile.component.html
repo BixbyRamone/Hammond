@@ -2,7 +2,7 @@
   <i *ngIf="testForStudentRole()" class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i>
   <i *ngIf="testForStudentRole() === false" class="fa fa-arrow-circle-left" [routerLink]="['/admin/volunteers']"></i>
   <div *ngIf="!nameEditOn" class="row prof mt-4">
-    {{user.firstName}} {{user.lastName}}
+    {{user.firstName}} {{user.lastName}}  
     <p (click)="nameEditClick()" id="name-edit-link">edit</p>
   </div>
 
@@ -43,17 +43,19 @@
       <button id="btn-cancel" class="btn" (click)="this.roleEditClick()">Cancel</button>
     </form>
   </div>
-
-  <div class="row prof-ind">
-    ACT Scores: 
-  <div id="act-exp-link" (click)="actExpandClick()"> Average of {{actAvg }}</div>  
-  </div>
-
-  <ng-container *ngIf="actExpandView">
-    <ul>
-    <li id="act-score" *ngFor="let actScore of this.user.actScores">{{actScore.score}} taken on {{actScore.dayOfScore | date: 'mediumDate'}}</li>
-    </ul>
-  </ng-container>
+  <ng-container *ngIf="testForStudentRole()">
+    <div class="row prof-ind">
+      ACT Scores: 
+    <div id="act-exp-link" (click)="actExpandClick()"> Average of {{actAvg }}</div>  
+    </div>
+  
+    <ng-container *ngIf="actExpandView">
+      <ul>
+      <li id="act-score" *ngFor="let actScore of this.user.actScores">{{actScore.score}} taken on {{actScore.dayOfScore | date: 'mediumDate'}}</li>
+      </ul>
+    </ng-container>
+ 
+  
 
   <form [formGroup]="actForm" (ngSubmit)="submitActScore()">
     <p *ngIf="!addActOn" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
@@ -74,8 +76,8 @@
     <button class="btn btn-success" type=(submit)>Add Score</button>        
     </div>
   </div>
-  </form> 
-<p>{{this.actForm.value | json}}</p> 
+  </form>
+</ng-container>
   
   <br>
   

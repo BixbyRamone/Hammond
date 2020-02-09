@@ -136,6 +136,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   testForStudentRole() {
+    debugger
 for (let i = 0; i < this.user.userRoles.length; i++) {
   const compVar = this.user.userRoles[i].role.id;
     if (compVar === 1) {
@@ -145,6 +146,17 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
     }
     return false;
   }
+
+  // ifUserRolesStudent() {
+  // let found = false;
+  // for (let i = 0; i < this.user.userRoles.length; i++) {
+  //   if (this.user.userRoles[i].role.roleName === 'student') {
+  //       found = true;
+  //       break;
+  //     }
+  //   }
+  //   return found;
+  // }
 
   averageActScore() {
     const avg = array => array.reduce((p, c) => p + c.score, 0 ) / this.user.actScores.length;
