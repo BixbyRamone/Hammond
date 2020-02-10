@@ -42,15 +42,16 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      this.groupService.getGroup(this.user.userGroups[0].groupId)
+      if (this.user.userGroups.length > 0) {
+        this.groupService.getGroup(this.user.userGroups[0].groupId)
         .subscribe((res: any) => {
           this.groupMembers = res.userGroups;
           console.dir(this.groupMembers);
         }, error => {
           this.alertify.error(error);
         });
+      }
 
-      console.dir(this.groupMembers);
       this.createActForm();
       this.actAvg = this.averageActScore();
 
