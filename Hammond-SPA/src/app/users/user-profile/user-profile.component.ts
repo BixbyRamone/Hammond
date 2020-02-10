@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
+import { UserGroup } from 'src/app/_models/usergroup';
 import { Role } from 'src/app/_models/role';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GroupService } from 'src/app/_services/group.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +17,7 @@ import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class UserProfileComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  groupMembers: any;
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
@@ -31,6 +34,7 @@ export class UserProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
+    private groupService: GroupService,
     private alertify: AlertifyService,
     private fb: FormBuilder
     ) { }
@@ -38,6 +42,17 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
+      this.groupService.getGroup(this.user.userGroups[0].groupId)
+        .subscribe((res: any) => {
+          this.groupMembers = res.userGroups;
+          console.dir(this.groupMembers);
+        }, error => {
+          this.alertify.error(error);
+        });
+
+      // this.groupMembers.filter(this.user);
+        // debugger
+      console.dir(this.groupMembers);
       this.createActForm();
       this.actAvg = this.averageActScore();
 
@@ -136,7 +151,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   testForStudentRole() {
-    debugger
 for (let i = 0; i < this.user.userRoles.length; i++) {
   const compVar = this.user.userRoles[i].role.id;
     if (compVar === 1) {

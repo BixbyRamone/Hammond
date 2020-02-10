@@ -13,5 +13,6 @@ namespace Hammond.API.Dtos
         public DateTime LastActive { get; set; }
         public ICollection<ActScore> ActScores { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<UserGroup> UserGroups { get; set; }
     }
 }

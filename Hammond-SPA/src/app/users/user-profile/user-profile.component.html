@@ -80,6 +80,13 @@
 </ng-container>
   
   <br>
+
+  <ng-container>
+    <ul *ngFor="let member of groupMembers">
+    <li *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
+    </ul>
+  </ng-container>
+  
   
   <div class="prof">
     Id# {{user.id}}

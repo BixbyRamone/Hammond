@@ -28,6 +28,7 @@ export class StudentListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
+      debugger
       this.pagination = data['users'].pagination;
       this.userType = data['userType'];
     });

@@ -104,8 +104,9 @@ namespace Hammond.API.Data
             var user = await _context.Users
                 .Include(u => u.ActScores)
                 .Include(u => u.UserRoles)
-                .ThenInclude(ur => ur.Role)
-                .FirstOrDefaultAsync(u => u.Id == id);
+                    .ThenInclude(ur => ur.Role)
+                .Include(u => u.UserGroups)
+                .FirstOrDefaultAsync(u => u.Id == id);            
             
             user.ActScores = user.ActScores.OrderBy(x => x.DayOfScore.Date).ToList();
 
@@ -139,7 +140,8 @@ namespace Hammond.API.Data
         {
             var users = _context.Users.Include(u => u.UserGroups)
             .Include(u => u.UserRoles)
-            .ThenInclude(ur => ur.Role)
+                .ThenInclude(ur => ur.Role)
+            .Include(u => u.UserGroups)
             .OrderBy(u => u.LastName).AsQueryable();
            
 
@@ -161,7 +163,7 @@ namespace Hammond.API.Data
                 users = users.Where(u => u.StudentLevel == userParams.StudentLevel);
                 // var usersWithRole = _userManager.GetUsersInRoleAsync(userParams.RoleName).Result;
 
-                // users = users.Where(u => usersWithRole.Contains(u));
+                // users =  users.Where(u => usersWithRole.Contains(u));
             }
 
             if (userParams.GetUngrouped)

@@ -6,6 +6,7 @@ import { PaginatedResult } from '../_models/pagination';
 import { Observable } from 'rxjs';
 import { Group } from '../_models/group';
 import { map } from 'rxjs/operators';
+import { UserGroup } from '../_models/usergroup';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,6 @@ register(group: GroupToCreate) {
 
 getGroups(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<Group[]>> {
   const paginatedResult: PaginatedResult<Group[]> = new PaginatedResult<Group[]>();
-debugger
   let params = new HttpParams();
 
   if (userParams != null) {
@@ -42,8 +42,8 @@ debugger
     );
 }
 
-getGroup(id): Observable<Group> {
-  return this.http.get<Group>(this.baseUrl + id);
+getGroup(id): Observable<UserGroup> {
+  return this.http.get<UserGroup>(this.baseUrl + id);
 }
 
 }
