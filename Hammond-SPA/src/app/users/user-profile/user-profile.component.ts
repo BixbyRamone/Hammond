@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
   groupMembers: any;
+  operatingUserRole: any;
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
@@ -51,7 +52,13 @@ export class UserProfileComponent implements OnInit {
           this.alertify.error(error);
         });
       }
-
+      this.operatingUserRole = this.authService.decodedToken.role;
+      if (this.operatingUserRole.length > 1) {
+        if (this.operatingUserRole.includes('Admin')) {
+          this.operatingUserRole = 'Admin';
+        }
+      }
+      console.dir(this.operatingUserRole);
       this.createActForm();
       this.actAvg = this.averageActScore();
 

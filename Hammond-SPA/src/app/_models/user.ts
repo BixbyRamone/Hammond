@@ -12,6 +12,7 @@ export interface User {
     dateCreated: Date;
     lastActive: Date;
     actScores: any;
+    role: string;
     userGroups: any;
     userRole: string;
     userRoles: Role[];

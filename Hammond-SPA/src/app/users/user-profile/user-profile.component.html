@@ -3,7 +3,7 @@
   <i *ngIf="testForStudentRole() === false" class="fa fa-arrow-circle-left" [routerLink]="['/admin/volunteers']"></i>
   <div *ngIf="!nameEditOn" class="row prof mt-4">
     {{user.firstName}} {{user.lastName}}  
-    <p (click)="nameEditClick()" id="name-edit-link">edit</p>
+    <p *ngIf="operatingUserRole == 'Admin'" (click)="nameEditClick()" id="name-edit-link">edit</p>
   </div>
 
   <div id="name-edit" class="row input-group-append" *ngIf="nameEditOn">
@@ -23,7 +23,7 @@
       <!-- <p *ngIf="userRole !== user.userRoles[0]">, </p> -->
       <div> _{{userRole.role.name}}</div>
     </div>
-    <p *ngIf="!roleEditOn" id="role-edit-link" (click)="roleEditClick()">edit</p>
+    <p *ngIf="!roleEditOn && operatingUserRole == 'Admin'" id="role-edit-link" (click)="roleEditClick()">edit</p>
     <p *ngIf="roleEditOn" id="role-edit-link" (click)="roleEditClick()">cancel</p>
   </div>
 
@@ -82,7 +82,7 @@
   <br>
 
   <ng-container>
-    <h4>Group Members</h4>
+    <div>In a group with:</div>
     <ul *ngFor="let member of groupMembers">
     <li *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
     </ul>
