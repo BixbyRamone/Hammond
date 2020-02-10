@@ -82,6 +82,7 @@
   <br>
 
   <ng-container>
+    <h4>Group Members</h4>
     <ul *ngFor="let member of groupMembers">
     <li *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
     </ul>

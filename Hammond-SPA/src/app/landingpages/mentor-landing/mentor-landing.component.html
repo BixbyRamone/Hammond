@@ -3,10 +3,10 @@
     <br>
   <div class="container">
     <tabset class="mentor-tabset" #mentorTabs>
-      <tab heading="events">
+      <tab heading="Events">
       </tab>
   
-      <tab heading="assignments">
+      <tab heading="Assignments">
           <div *ngFor="let assignment of assignments">
               <h4>{{assignment.title}}</h4>
               <ul>
@@ -17,7 +17,7 @@
               </div>
       </tab>
   
-      <tab heading="students">
+      <tab heading="Students">
         <app-mentor-stud-tab></app-mentor-stud-tab>
       </tab>
 
