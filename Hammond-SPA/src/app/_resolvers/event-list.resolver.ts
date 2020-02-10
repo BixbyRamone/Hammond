@@ -15,7 +15,6 @@ export class EventListResolver implements Resolve<Evnt[]> {
             private alertify: AlertifyService) {}
 
             resolve(route: ActivatedRouteSnapshot): Observable<Evnt[]> {
-                debugger
                 return this.eventService.getEvents(this.pageNumber, this.pageSize).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');

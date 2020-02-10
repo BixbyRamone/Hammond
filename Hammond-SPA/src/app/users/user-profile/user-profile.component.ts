@@ -50,8 +50,6 @@ export class UserProfileComponent implements OnInit {
           this.alertify.error(error);
         });
 
-      // this.groupMembers.filter(this.user);
-        // debugger
       console.dir(this.groupMembers);
       this.createActForm();
       this.actAvg = this.averageActScore();

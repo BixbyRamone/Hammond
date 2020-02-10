@@ -24,7 +24,6 @@ export class EventsListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      debugger
       this.evnts = data['evnts'].result;
       this.pagination = data['evnts'].pagination;
     });
