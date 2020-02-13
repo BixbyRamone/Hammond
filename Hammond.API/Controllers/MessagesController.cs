@@ -70,6 +70,19 @@ namespace Hammond.API.Controllers
             return Ok(messageThread);
         }
 
+        [HttpGet("assignment/{assignmentId}")]
+        public async Task<IActionResult> GetAssignmentMessages(int userId, int assignmentId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var messagesForAssignment = await _repo.GetAssignmentMessages(assignmentId);
+
+            var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesForAssignment);
+
+            return Ok(messagesToReturn);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, [FromBody]MessageForCreationDto messageForCreationDto)
         {

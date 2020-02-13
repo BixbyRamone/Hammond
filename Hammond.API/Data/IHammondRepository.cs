@@ -16,6 +16,7 @@ namespace Hammond.API.Data
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetMessageThread(int userId, int recipientId);
+        Task<IEnumerable<Message>> GetAssignmentMessages(int assignmentId);
         Task<Assignment> GetAssignment(int id);
         Task<PagedList<Assignment>> GetAssignments(AssignmentParams assignmentParams);
         Task<Assignment> GetUserAssignment(int id);

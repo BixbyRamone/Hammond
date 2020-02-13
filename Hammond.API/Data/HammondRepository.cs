@@ -99,6 +99,16 @@ namespace Hammond.API.Data
             return messages;
         }
 
+         public async Task<IEnumerable<Message>> GetAssignmentMessages(int assignmentId)
+        {
+            var messages = await _context.Messages
+                .Where(m => m.AssignmentId == assignmentId)
+                .OrderByDescending(m => m.DateSent)
+                .ToListAsync();
+
+            return messages;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users
@@ -266,6 +276,6 @@ namespace Hammond.API.Data
         {
             _context.Database.ExecuteSqlCommand(sqlCmnd);
         }
-        
+
     }
 }

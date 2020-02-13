@@ -15,5 +15,6 @@ namespace Hammond.API.Models
         public DateTime? DateRead { get; set; }
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
+        public int AssignmentId { get; set; }
     }
 }
