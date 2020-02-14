@@ -29,6 +29,7 @@ import { UserDetailResolver } from './_resolvers/user-detail.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { EventListResolver } from './_resolvers/event-list.resolver';
 import { EventsListComponent } from './admin/events-list/events-list.component';
+import { AssignmentDetailComponent } from './assignments/assignment-item/assignment-detail/assignment-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -78,7 +79,9 @@ export const appRoutes: Routes = [
 
             { path: 'student/assignments/:id', component: StudAssignmentDetailComponent},
 
-            { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } }
+            { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } },
+
+            { path: 'assignments/:id', component: AssignmentDetailComponent }
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

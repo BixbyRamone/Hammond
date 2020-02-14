@@ -35,7 +35,6 @@ import { AssignmentListComponent } from './admin/assignment-list/assignment-list
 import { StudAssignmentTabComponent } from './student/stud-assignment-tab/stud-assignment-tab.component';
 import { StudProfileTabComponent } from './student/stud-profile-tab/stud-profile-tab.component';
 import { StudProfileResolver } from './_resolvers/stud-profile.resolver';
-import { AssignmentItemComponent } from './assignments/assignment-item/assignment-item.component';
 import { StudAssignmentDetailComponent } from './student/stud-assignment-detail/stud-assignment-detail.component';
 import { VolunteerRegistrationComponent } from './admin/registrations/volunteer-registration/volunteer-registration.component';
 import { MentorStudListComponent } from './mentor/mentor-stud-list/mentor-stud-list.component';
@@ -60,6 +59,8 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MessagesComponent } from './messages/messages.component';
 import { UserMessagesComponent } from './users/user-messages/user-messages.component';
 import { EventListResolver } from './_resolvers/event-list.resolver';
+import { AssignmentItemComponent } from './assignments/assignment-item/assignment-item.component';
+import { AssignmentDetailComponent } from './assignments/assignment-item/assignment-detail/assignment-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -68,6 +69,7 @@ export function tokenGetter() {
 @NgModule({
    declarations: [
       AppComponent,
+      AssignmentDetailComponent,
       AssignmentItemComponent,
       AssigmentRegistrationComponent,
       AdminLandingComponent,

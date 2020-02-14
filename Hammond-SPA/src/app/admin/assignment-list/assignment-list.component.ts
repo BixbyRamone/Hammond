@@ -17,6 +17,8 @@ export class AssignmentListComponent implements OnInit {
   assignments: Assignment[];
   pagination: Pagination;
   assignmentParams: any = {};
+  showAssignmentDetail = false;
+  detailedAssignment: any = {};
   studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
 
@@ -44,6 +46,11 @@ export class AssignmentListComponent implements OnInit {
       });
   }
 
+  assignmentDetailClick(detailedAssignment: any) {
+    this.detailedAssignment = detailedAssignment;
+    this.showAssignmentDetail = !this.showAssignmentDetail;
+  }
+
   pageChanged(event: any) {
     this.pagination.currentPage = event.page;
     this.loadAssignments();
@@ -56,3 +63,5 @@ export class AssignmentListComponent implements OnInit {
   }
 
 }
+
+
