@@ -1,5 +1,6 @@
 <div class="container">
-  <i class="fa fa-arrow-circle-left"></i>
+  <i class="fa fa-arrow-circle-left" *ngIf="!showAssignmentDetail" [routerLink]="['/admin']"></i>
+  <i class="fa fa-arrow-circle-left" *ngIf="showAssignmentDetail" (click)="assignmentDetailClick()"></i>
   <form class="form-inline" #form="ngForm" (ngSubmit)="loadAssignments()" novalidate>
     <div class="form-group px-2">
       <label for="gradeLevel">Show: </label>
