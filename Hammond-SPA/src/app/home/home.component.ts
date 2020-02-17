@@ -19,17 +19,19 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    if (this.authService.decodedToken.role.includes('Admin')) {
-      this.router.navigate(['/admin']);
-    }
-    if (this.authService.decodedToken.role.includes('Student')) {
-      this.router.navigate(['/student']);
-    }
-    if (this.authService.decodedToken.role.includes('Mentor')) {
-      this.router.navigate(['/mentor']);
-    }
-    if (this.authService.decodedToken.role.includes('Tutor')) {
-      this.router.navigate(['/tutor']);
+    if (this.authService.decodedToken) {
+      if (this.authService.decodedToken.role.includes('Admin')) {
+        this.router.navigate(['/admin']);
+      }
+      if (this.authService.decodedToken.role.includes('Student')) {
+        this.router.navigate(['/student']);
+      }
+      if (this.authService.decodedToken.role.includes('Mentor')) {
+        this.router.navigate(['/mentor']);
+      }
+      if (this.authService.decodedToken.role.includes('Tutor')) {
+        this.router.navigate(['/tutor']);
+      }
     }
   }
 

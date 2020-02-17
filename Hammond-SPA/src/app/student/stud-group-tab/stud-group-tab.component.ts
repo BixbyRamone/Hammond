@@ -15,10 +15,11 @@ export class StudGroupTabComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.dir(this.group);
     this.route.data.subscribe( data => {
       this.user = JSON.parse(localStorage.getItem('user'));
     });
+    console.dir(this.user);
+    console.dir(this.group);
   }
 
 }

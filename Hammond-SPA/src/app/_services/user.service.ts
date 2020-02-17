@@ -92,7 +92,6 @@ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
     params = params.append('pageSize', itemsPerPage);
   }
 
-console.dir(params);
   return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages', {observe: 'response', params})
     .pipe(
       map(response => {

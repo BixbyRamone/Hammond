@@ -102,6 +102,9 @@ namespace Hammond.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGroup(int id)
         {
+            if (id == 0)
+            return Ok();
+
             var group = await _repo.GetGroup(id);
 
             return Ok(group);

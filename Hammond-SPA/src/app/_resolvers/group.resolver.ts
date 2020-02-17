@@ -14,7 +14,7 @@ export class GroupResolver implements Resolve<Group> {
 
         resolve(route: ActivatedRouteSnapshot): Observable<Group> {
             const user = JSON.parse(localStorage.getItem('user'));
-                return this.groupService.getGroup(JSON.parse(localStorage.getItem('user')).userGroups[0].groupId).pipe(
+            return this.groupService.getGroup(user.userGroups.length > 0 ? user.userGroups[0].groupId : 0).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving your data');
                         this.router.navigate(['/student']);
