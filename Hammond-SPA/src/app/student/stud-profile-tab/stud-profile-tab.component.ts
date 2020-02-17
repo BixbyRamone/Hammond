@@ -18,14 +18,15 @@ export class StudProfileTabComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = JSON.parse(localStorage.getItem('user'));
-      console.log(this.student);
       this.assignments = this.user.userAssignments;
-      this.averageAct = this.calculateAvgScores();
+      if (this.student.actScores.length > 0) {
+        this.averageAct = this.calculateAvgScores();
+      };
     });
   }
 
   calculateAvgScores() {
-    const returnNum = this.student.actScores.reduce((sum, score) => {
+    this.student.actScores.reduce((sum, score) => {
       console.log(sum);
       console.log(score);
       return ((sum + score) / this.student.actScores.length);

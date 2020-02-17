@@ -13,12 +13,13 @@ export class GroupResolver implements Resolve<Group> {
         private router: Router, private alertify: AlertifyService) {}
 
         resolve(route: ActivatedRouteSnapshot): Observable<Group> {
-            return this.groupService.getGroup(JSON.parse(localStorage.getItem('user')).userGroups[0].groupId).pipe(
-                catchError(error => {
-                    this.alertify.error('Problem retrieving your data');
-                    this.router.navigate(['/']);
-                    return of(null);
-                })
-            );
+            const user = JSON.parse(localStorage.getItem('user'));
+                return this.groupService.getGroup(JSON.parse(localStorage.getItem('user')).userGroups[0].groupId).pipe(
+                    catchError(error => {
+                        this.alertify.error('Problem retrieving your data');
+                        this.router.navigate(['/student']);
+                        return of(null);
+                    })
+                );
         }
 }

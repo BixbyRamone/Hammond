@@ -28,7 +28,6 @@ export class AssignmentListResolver implements Resolve<Assignment[]> {
 
             setUserParams() {
                 const user = JSON.parse(localStorage.getItem('user'));
-                console.dir(user);
                 if (!user.studentLevel) {
                     user.studentLevel = 'all';
                 }

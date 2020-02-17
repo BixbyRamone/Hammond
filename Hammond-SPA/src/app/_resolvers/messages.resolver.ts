@@ -13,7 +13,8 @@ export class MessagesResolver implements Resolve<Message[]> {
     pageSize = 15;
     messageContainer = 'Unread';
 
-    constructor(private userService: UserService,
+    constructor(
+            private userService: UserService,
             private router: Router,
             private alertify: AlertifyService,
             private authService: AuthService) {}
@@ -23,8 +24,8 @@ export class MessagesResolver implements Resolve<Message[]> {
                      this.pageNumber, this.pageSize,
                      this.messageContainer).pipe(
                     catchError(error => {
-                        this.alertify.error('Problem retrieving messages');
-                        this.router.navigate(['/']);
+                        // this.alertify.error('Problem retrieving messages');
+                        this.router.navigate(['/student']);
                         return of(null);
                     })
                 );

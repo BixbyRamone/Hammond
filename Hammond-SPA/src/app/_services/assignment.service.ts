@@ -6,6 +6,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+import { Message } from '../_models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedRes
 
 getAssignment(id): Observable<Assignment> {
   return this.http.get<Assignment>(this.baseUrl + 'assignments/' + id);
+}
+
+getAssignmentMessages(userId, assignmentId): Observable<Message[]> {
+  return this.http.get<Message[]>(environment.apiUrl + 'users/' + userId + '/messages/assignment/' + assignmentId);
 }
 
 }

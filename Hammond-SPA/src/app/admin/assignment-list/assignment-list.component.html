@@ -1,7 +1,7 @@
 <div class="container">
   <i class="fa fa-arrow-circle-left" *ngIf="!showAssignmentDetail" [routerLink]="['/admin']"></i>
   <i class="fa fa-arrow-circle-left" *ngIf="showAssignmentDetail" (click)="assignmentDetailClick()"></i>
-  <form class="form-inline" #form="ngForm" (ngSubmit)="loadAssignments()" novalidate>
+  <form *ngIf="!showAssignmentDetail" class="form-inline" #form="ngForm" (ngSubmit)="loadAssignments()" novalidate>
     <div class="form-group px-2">
       <label for="gradeLevel">Show: </label>
         <select name="gradeLevel" id="gradeLevel" class="form-control ml-1"
@@ -22,20 +22,22 @@
       Reset Filter
     </button>
   </form>
+  <br>
   <ng-container *ngIf="!showAssignmentDetail">
-    <div *ngFor="let assignment of assignments" (click)="assignmentDetailClick(assignment)">
-      <h4>{{assignment.title}}</h4>
-      <ul>
-        <li>Date Due: {{assignment.dateDue}}</li>
-        <li>Student Level: {{assignment.studentLevel}}</li>
-        <li>Assigned?: {{assignment.assigned}}</li>
-      </ul>
+      <div class="" *ngFor="let assignment of assignments" (click)="assignmentDetailClick(assignment)">
+        <div class="user-item card mb-2">
+          <div class="card-body">
+            <h4>{{assignment.title}}</h4>
+            <p>{{assignment.dateDue}}</p>
+          </div>
+        </div>
+        
     </div>
   </ng-container>
   
   <app-assignment-detail *ngIf="showAssignmentDetail" [assignment]="detailedAssignment"></app-assignment-detail>
 
-      <div class="d-flex justify-content-center">
+      <div *ngIf="!showAssignmentDetail" class="d-flex justify-content-center">
         <pagination [boundaryLinks]="true"
                     [totalItems]="pagination.totalItems"
                     [itemsPerPage]="pagination.itemsPerPage"

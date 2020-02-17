@@ -1,3 +1,6 @@
-<div *ngFor="let groupMember of group.userGroups">
-  <app-user-item [user]="groupMember.user"></app-user-item>
-</div>
+<ng-container>
+  <div *ngFor="let groupMember of group.userGroups">
+    <app-user-item *ngIf="groupMember.user.id != user.id" [user]="groupMember.user"></app-user-item>
+  </div>
+</ng-container>
+

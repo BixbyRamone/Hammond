@@ -7,7 +7,7 @@ namespace Hammond.API.Dtos
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Contnet { get; set; }
+        public string Content { get; set; }
         public string StudentLevel { get; set; }
         public string Section { get; set; } // i.e. Tutoring or Mentoring
         public DateTime DateAssigned { get; set; }
