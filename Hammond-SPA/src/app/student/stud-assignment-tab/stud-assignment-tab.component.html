@@ -3,12 +3,12 @@
     <br>
   <div *ngIf="assignmentListMode">
       <div *ngFor="let assignment of assignments">
-          <app-assignment-item (click)="detailToggle(assignment)" [assignment]="assignment"></app-assignment-item>
+          <app-assignment-item [assignment]="assignment"></app-assignment-item>
         </div>
   </div>
-  <div class="container" *ngIf="assignmentViewMode">
-    <app-stud-assignment-detail [assignment]="detailedAssignment"></app-stud-assignment-detail>
-  </div>
+  <!-- <div class="container" *ngIf="assignmentViewMode">
+    <app-assignment-detail [assignment]="detailedAssignment"></app-assignment-detail>
+  </div> -->
   
 </div>
 

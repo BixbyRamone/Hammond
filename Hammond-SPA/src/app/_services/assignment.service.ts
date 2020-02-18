@@ -48,7 +48,7 @@ getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedRes
   }
 
 getAssignment(id): Observable<Assignment> {
-  return this.http.get<Assignment>(this.baseUrl + 'assignments/' + id);
+  return this.http.get<Assignment>(this.baseUrl + id);
 }
 
 getAssignmentMessages(userId, assignmentId): Observable<Message[]> {

@@ -30,6 +30,7 @@ import { MessagesResolver } from './_resolvers/messages.resolver';
 import { EventListResolver } from './_resolvers/event-list.resolver';
 import { EventsListComponent } from './admin/events-list/events-list.component';
 import { AssignmentDetailComponent } from './assignments/assignment-item/assignment-detail/assignment-detail.component';
+import { AssignmentDetailResolver } from './_resolvers/assignment-detail.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -77,11 +78,11 @@ export const appRoutes: Routes = [
                 resolve: {user: StudProfileResolver, group: GroupResolver, messages: MessagesResolver },
                  data: {roles: ['Admin', 'Mentor', 'Student']} },
 
-            { path: 'student/assignments/:id', component: StudAssignmentDetailComponent},
+            { path: 'student/assignments/:id', component: AssignmentDetailComponent, resolve: { assignment: AssignmentDetailResolver } },
 
             { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } },
 
-            { path: 'assignments/:id', component: AssignmentDetailComponent }
+            { path: 'assignments/:id', component: AssignmentDetailComponent, resolve: { assignment: AssignmentDetailResolver } }
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

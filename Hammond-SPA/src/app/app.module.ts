@@ -61,6 +61,7 @@ import { UserMessagesComponent } from './users/user-messages/user-messages.compo
 import { EventListResolver } from './_resolvers/event-list.resolver';
 import { AssignmentItemComponent } from './assignments/assignment-item/assignment-item.component';
 import { AssignmentDetailComponent } from './assignments/assignment-item/assignment-detail/assignment-detail.component';
+import { AssignmentDetailResolver } from './_resolvers/assignment-detail.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -127,6 +128,7 @@ export function tokenGetter() {
    ],
    providers: [
       AlertifyService,
+      AssignmentDetailResolver,
       AssignmentService,
       AuthService,
       EventService,

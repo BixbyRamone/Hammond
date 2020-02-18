@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Message } from 'src/app/_models/message';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -12,8 +13,9 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./assignment-detail.component.css']
 })
 export class AssignmentDetailComponent implements OnInit {
-  @Input() assignment: any;
+  // @Input() assignment: any;
   @Input() user: User;
+  assignment: any;
   messages: Message[];
   newMessage: any = {};
 
@@ -21,9 +23,15 @@ export class AssignmentDetailComponent implements OnInit {
     private assignmentService: AssignmentService,
     private userService: UserService,
     private authService: AuthService,
-    private alertify: AlertifyService) { }
+    private alertify: AlertifyService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe( data => {
+      this.assignment = data['assignment'];
+      this.user = JSON.parse(localStorage.getItem('user'));
+    });
+    console.dir(this.assignment);
     this.loadAssignmentMessages(this.user.id, this.assignment.id);
   }
 
