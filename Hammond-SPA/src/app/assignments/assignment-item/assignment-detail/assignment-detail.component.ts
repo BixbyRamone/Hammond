@@ -47,12 +47,12 @@ export class AssignmentDetailComponent implements OnInit {
 
   sendMessage() {
     this.newMessage.recipientId = this.user.id;
+    this.newMessage.assignmentId = this.assignment.id;
     // this.newMessage.senderId = this.authService.currentUser.id;
     // this.newMessage.senderPhotoUrl = this.authService.currentUser.photoUrl;
     // this.newMessage.senderKnownAs = this.authService.currentUser.username;
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
       .subscribe((message: Message) => {
-        // debugger;
       this.messages.unshift(message);
       this.newMessage.content = '';
     }, error => {
