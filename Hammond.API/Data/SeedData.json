@@ -6,7 +6,8 @@
       "Password": "password",
       "Created": "2017-03-16",
       "LastActive": "2017-03-16",
-      "ActScore": 6
+      "ActScore": 6,
+      "StudentLevel": "senior"
     },
     {
       "FirstName": "Hurst",
@@ -15,7 +16,8 @@
       "Password": "password",
       "Created": "2017-04-26",
       "LastActive": "2017-04-26",
-      "ActScore": 35
+      "ActScore": 35,
+      "StudentLevel": "sophomore"
     },
     {
       "FirstName": "Hendrix",
@@ -24,7 +26,8 @@
       "Password": "password",
       "Created": "2017-04-21",
       "LastActive": "2017-04-21",
-      "ActScore": 19
+      "ActScore": 19,
+      "StudentLevel": "sophomore"
     },
     {
       "FirstName": "Evelyn",
@@ -33,7 +36,8 @@
       "Password": "password",
       "Created": "2017-08-25",
       "LastActive": "2017-08-25",
-      "ActScore": 17
+      "ActScore": 17,
+      "StudentLevel": "junior"
     },
     {
       "FirstName": "Elisa",
@@ -42,6 +46,7 @@
       "Password": "password",
       "Created": "2017-06-22",
       "LastActive": "2017-06-22",
-      "ActScore": 32
+      "ActScore": 32,
+      "StudentLevel": "junior"
     }
   ]
