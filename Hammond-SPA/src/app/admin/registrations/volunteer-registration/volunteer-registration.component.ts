@@ -30,7 +30,7 @@ export class VolunteerRegistrationComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = this.fb.group({
       userRole: ['', Validators.required],
-      studentLevel: ['sophmore', Validators.required],
+      studentLevel: ['sophomore', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],

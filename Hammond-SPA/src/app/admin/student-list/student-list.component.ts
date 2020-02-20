@@ -15,7 +15,7 @@ export class StudentListComponent implements OnInit {
   pagination: Pagination;
   userParams: any = {};
   userType: string;
-  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
+  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophomore', display: 'Sophomores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
   volunteerType = [{value: 'volunteer', display: 'All Volunteers'},
                   {value: 'mentor', display: 'Mentors'}, {value: 'tutor', display: 'Tutors'} ];

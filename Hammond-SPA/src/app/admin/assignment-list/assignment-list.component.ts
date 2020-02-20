@@ -19,7 +19,7 @@ export class AssignmentListComponent implements OnInit {
   assignmentParams: any = {};
   showAssignmentDetail = false;
   detailedAssignment: any = {};
-  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophmore', display: 'Sophmores'},
+  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophomore', display: 'Sophomores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
 
   constructor(

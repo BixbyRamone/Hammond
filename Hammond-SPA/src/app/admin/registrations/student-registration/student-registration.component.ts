@@ -28,7 +28,7 @@ export class StudentRegistrationComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = this.fb.group({
       userRole: ['student'],
-      studentLevel: ['sophmore'],
+      studentLevel: ['sophomore'],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
