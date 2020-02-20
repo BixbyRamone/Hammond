@@ -18,6 +18,14 @@ export class AssignmentDetailComponent implements OnInit {
   assignment: any;
   messages: Message[];
   newMessage: any = {};
+  userInfo: any = {};
+  userInfoArray: any = [];
+  currentStyle = {};
+  colorOptions = [{'color': 'cornflowerblue'},
+                  {'color': 'coral'},
+                  {'color': 'gold'},
+                  {'color': 'lawngreen'},
+                  {'color': 'blueviolet'}];
 
   constructor(
     private assignmentService: AssignmentService,
@@ -29,20 +37,43 @@ export class AssignmentDetailComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.assignment = data['assignment'];
+      this.messages = data['messages'];
       this.user = JSON.parse(localStorage.getItem('user'));
     });
-    console.dir(this.assignment);
-    this.loadAssignmentMessages(this.user.id, this.assignment.id);
+    this.generateMessageColor();
+    // this.loadAssignmentMessages(this.user.id, this.assignment.id);
+    console.dir(this.messages);
   }
 
   loadAssignmentMessages(id, assignmentId) {
-    console.dir('loaded assignments');
     this.assignmentService.getAssignmentMessages(id, assignmentId)
-      .subscribe((res:  Message[]) => {
-        this.messages = res;
+      .subscribe((res: Message[]) => {
+         this.messages = res;
       }, error => {
         this.alertify.error(error);
       });
+  }
+
+  generateMessageColor() {
+    let colorOptionsIterator = -1;
+    for (let index = 0; index < this.messages.length; index++) {
+      this.userInfo.id = this.messages[index].senderId;
+      colorOptionsIterator++;
+      console.dir(colorOptionsIterator);
+      this.userInfo.color = this.colorOptions[colorOptionsIterator];
+      if (!this.userInfoArray.includes(this.userInfo)) {
+        this.userInfoArray.push(this.userInfo);
+      }
+
+      this.userInfoArray.forEach(userInfoElement => {
+        this.messages.forEach(messageElement => {
+          if (userInfoElement.id === messageElement.senderId) {
+            messageElement.fontColor = userInfoElement.color;
+          }
+        });
+      });
+
+    }
   }
 
   sendMessage() {
