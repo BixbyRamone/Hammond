@@ -86,6 +86,7 @@ export class AssignmentDetailComponent implements OnInit {
       .subscribe((message: Message) => {
       this.messages.unshift(message);
       this.newMessage.content = '';
+      this.generateMessageColor();
     }, error => {
       this.alertify.error(error);
     });

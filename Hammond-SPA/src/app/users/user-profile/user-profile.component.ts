@@ -43,7 +43,9 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      console.dir(this.user);
+      this.user.userAssignments.forEach(element => {
+        console.dir(element.assignment);
+      });
       if (this.user.userGroups.length > 0) {
         this.groupService.getGroup(this.user.userGroups[0].groupId)
         .subscribe((res: any) => {
@@ -59,7 +61,6 @@ export class UserProfileComponent implements OnInit {
           this.operatingUserRole = 'Admin';
         }
       }
-      console.dir(this.operatingUserRole);
       this.createActForm();
       this.actAvg = this.averageActScore();
 

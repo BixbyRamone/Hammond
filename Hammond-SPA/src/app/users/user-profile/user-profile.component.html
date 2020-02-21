@@ -85,8 +85,9 @@
     <div *ngIf="user.userAssignments">
       Assignments:
     </div>
-    <ul *ngFor="let assignemt of user.userAssignments">
-    <li>{{assignemt.assignment.title}}</li>
+    <ul *ngFor="let assignment of user.userAssignments">
+    <li *ngIf="operatingUserRole === 'Student'" [routerLink]="['/student/assignments', assignment.assignmentId]">{{assignment.assignmentId}}= {{assignment.assignment.title}}</li>
+    <li *ngIf="operatingUserRole === 'Mentor'" [routerLink]="['/student/assignments', assignment.assignmentId]">{{assignment.assignmentId}}: {{assignment.assignment.title}}</li>
     </ul>
   </ng-container>
 

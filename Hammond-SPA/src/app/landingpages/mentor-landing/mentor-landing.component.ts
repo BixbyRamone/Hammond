@@ -27,8 +27,6 @@ export class MentorLandingComponent implements OnInit {
       this.assignments = data['assignments'].result;
     });
 
-    console.dir(this.assignments);
-
     this.route.queryParams.subscribe(params => {
       const selectTab = params['tab'];
       this.mentorTabs.tabs[selectTab > 0 ? selectTab : 0].active = true;

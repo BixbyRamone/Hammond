@@ -31,7 +31,6 @@ export class MentorStudListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
-      console.log('subscriber');
     });
 
     this.userParams.studentLevel = this.getStudentLevel();
@@ -43,7 +42,6 @@ export class MentorStudListComponent implements OnInit {
   }
 
   loadUsers() {
-    debugger
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
@@ -60,7 +58,6 @@ export class MentorStudListComponent implements OnInit {
   }
 
   backup() {
-    console.log('backup');
     this.cancelAllStudents.emit(false);
   }
 
