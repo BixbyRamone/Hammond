@@ -67,7 +67,8 @@ export const appRoutes: Routes = [
                 data: {roles: ['Admin']} },
 
             { path: 'mentor', component: MentorLandingComponent,
-                resolve: { assignments: AssignmentListResolver }, data: {roles: ['Admin', 'Mentor']} },
+                resolve: { assignments: AssignmentListResolver, group: GroupResolver, messages: MessagesResolver },
+                data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'mentor/students', component: MentorStudListComponent,
                 resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor']} },
@@ -84,8 +85,8 @@ export const appRoutes: Routes = [
 
             { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } },
 
-            { path: 'assignments/:id', component: AssignmentDetailComponent,
-                resolve: { assignment: AssignmentDetailResolver } }
+            { path: 'mentor/assignments/:id', component: AssignmentDetailComponent,
+                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver } }
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}
