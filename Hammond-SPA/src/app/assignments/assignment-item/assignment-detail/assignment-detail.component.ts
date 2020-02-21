@@ -59,6 +59,9 @@ export class AssignmentDetailComponent implements OnInit {
     for (let index = 0; index < this.messages.length; index++) {
       this.userInfo.id = this.messages[index].senderId;
       colorOptionsIterator++;
+      if (colorOptionsIterator > this.colorOptions.length) {
+        colorOptionsIterator = 0;
+      }
       console.dir(colorOptionsIterator);
       this.userInfo.color = this.colorOptions[colorOptionsIterator];
       if (!this.userInfoArray.includes(this.userInfo)) {
@@ -86,7 +89,7 @@ export class AssignmentDetailComponent implements OnInit {
       .subscribe((message: Message) => {
       this.messages.unshift(message);
       this.newMessage.content = '';
-      this.generateMessageColor();
+      // this.generateMessageColor();
     }, error => {
       this.alertify.error(error);
     });
