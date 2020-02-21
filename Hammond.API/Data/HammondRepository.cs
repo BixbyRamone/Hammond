@@ -116,6 +116,8 @@ namespace Hammond.API.Data
                 .Include(u => u.UserRoles)
                     .ThenInclude(ur => ur.Role)
                 .Include(u => u.UserGroups)
+                .Include(u => u.UserAssignments)
+                    .ThenInclude(ua => ua.Assignment)
                 .FirstOrDefaultAsync(u => u.Id == id);            
             
             user.ActScores = user.ActScores.OrderBy(x => x.DayOfScore.Date).ToList();

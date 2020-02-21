@@ -24,7 +24,6 @@ export class MentorLandingComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
-      this.user = data['user'];
       this.assignments = data['assignments'].result;
     });
 

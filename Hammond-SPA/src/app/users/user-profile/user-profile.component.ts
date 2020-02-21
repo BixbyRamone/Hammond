@@ -43,6 +43,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
+      console.dir(this.user);
       if (this.user.userGroups.length > 0) {
         this.groupService.getGroup(this.user.userGroups[0].groupId)
         .subscribe((res: any) => {

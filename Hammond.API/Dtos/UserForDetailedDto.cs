@@ -14,5 +14,6 @@ namespace Hammond.API.Dtos
         public ICollection<ActScore> ActScores { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
+        public ICollection<UserAssignment> UserAssignments { get; set; }
     }
 }

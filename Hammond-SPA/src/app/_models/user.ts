@@ -16,6 +16,6 @@ export interface User {
     userGroups: any;
     userRole: string;
     userRoles: Role[];
-    userAssignments: Assignment[];
+    userAssignments: any;
     grouped: boolean;
 }

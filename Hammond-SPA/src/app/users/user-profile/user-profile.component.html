@@ -46,7 +46,7 @@
   <ng-container *ngIf="testForStudentRole()">
     <div class="row prof-ind">
       ACT Scores: 
-    <div id="act-exp-link" (click)="actExpandClick()"> Average of {{actAvg }}</div>  
+    <div *ngIf="user.actScores.length > 0" id="act-exp-link" (click)="actExpandClick()"> Average of {{actAvg }} <i class="fa fa-caret-down"></i></div>  
     </div>
   
     <ng-container *ngIf="actExpandView">
@@ -82,7 +82,16 @@
   <br>
 
   <ng-container>
-    <div>In a group with:</div>
+    <div *ngIf="user.userAssignments">
+      Assignments:
+    </div>
+    <ul *ngFor="let assignemt of user.userAssignments">
+    <li>{{assignemt.assignment.title}}</li>
+    </ul>
+  </ng-container>
+
+  <ng-container>
+    <div *ngIf="groupMembers">In a group with:</div>
     <ul *ngFor="let member of groupMembers">
     <li *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
     </ul>
