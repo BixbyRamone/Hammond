@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/_models/user';
 import { Group } from 'src/app/_models/group';
 import { UserGroup } from 'src/app/_models/usergroup';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-mentor-my-students',
@@ -12,8 +12,11 @@ import { UserGroup } from 'src/app/_models/usergroup';
 export class MentorMyStudentsComponent implements OnInit {
   group: Group;
   usergroup: UserGroup[];
+  currentUserId: number;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -21,6 +24,7 @@ export class MentorMyStudentsComponent implements OnInit {
       this.usergroup = this.group.userGroups;
       console.dir(this.usergroup);
     });
+    this.currentUserId = this.authService.decodedToken.nameid;
   }
 
 }
