@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserUngroupedResolver implements Resolve<User[]> {
     pageNumber = null;
-    pageSize = null;
+    pageSize = 60;
     userParams: any = {};
 
     constructor(private userService: UserService, private router: Router,
