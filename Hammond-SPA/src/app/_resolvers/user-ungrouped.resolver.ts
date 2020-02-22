@@ -17,6 +17,9 @@ export class UserUngroupedResolver implements Resolve<User[]> {
 
             resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
                 this.userParams.getUngrouped = true;
+                if (!this.userParams.studentLevel) {
+                    this.userParams.studentLevel = 'Sophomore';
+                }
                 return this.userService.getUsers(this.pageNumber, this.pageSize, this.userParams).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving data');

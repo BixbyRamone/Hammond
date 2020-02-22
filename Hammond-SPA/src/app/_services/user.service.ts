@@ -55,6 +55,7 @@ getUngroupedUsers(userParams?): Observable<User[]> {
   let params = new HttpParams();
 
   params = params.append('getUngrouped', userParams.getUngrouped);
+  params = params.append('studentLevel', userParams.studentLevel);
 
   return this.http.get<User[]>(this.baseUrl + 'users', {params});
 }

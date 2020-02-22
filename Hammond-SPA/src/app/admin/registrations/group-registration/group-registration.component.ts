@@ -25,6 +25,8 @@ export class GroupRegistrationComponent implements OnInit {
     volunteerIds: [],
     studentIds: []
   };
+  studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'}, 
+                  {value: 'senior', display: 'Seniors'} ];
 
   constructor(
     private route: ActivatedRoute,
@@ -36,12 +38,11 @@ export class GroupRegistrationComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
-      console.dir(this.users);
     });
+    this.userParams.studentLevel = 'sophomore';
   }
 
   loadUsers() {
-    console.log('loadUsers()');
     this.userParams.getUngrouped = true;
     this.userService.getUngroupedUsers(this.userParams)
       .subscribe((res:  User[]) => {
@@ -50,6 +51,11 @@ export class GroupRegistrationComponent implements OnInit {
       this.alertify.error(error);
     });
     console.dir(this.users);
+  }
+
+  resetFilter() {
+    this.userParams.studentLevel = 'all';
+    this.loadUsers();
   }
 
   groupUser(user: User) {

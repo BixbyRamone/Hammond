@@ -15,7 +15,7 @@ export class StudentListComponent implements OnInit {
   pagination: Pagination;
   userParams: any = {};
   userType: string;
-  studentLevel = [{value: 'all', display: 'All Students'}, {value: 'sophomore', display: 'Sophomores'},
+  studentLevel = [{value: 'all', display: 'All Grades'}, {value: 'sophomore', display: 'Sophomores'},
                   {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
   volunteerType = [{value: 'volunteer', display: 'All Volunteers'},
                   {value: 'mentor', display: 'Mentors'}, {value: 'tutor', display: 'Tutors'} ];
@@ -30,6 +30,7 @@ export class StudentListComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
       this.userType = data['userType'];
+      debugger
     });
     // this.userType = this.setUserType();
     this.userParams.roleName = this.userType.toLowerCase();
@@ -51,6 +52,7 @@ export class StudentListComponent implements OnInit {
   }
 
   loadUsers() {
+    debugger
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
