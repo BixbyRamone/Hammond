@@ -25,7 +25,7 @@ export class GroupRegistrationComponent implements OnInit {
     volunteerIds: [],
     studentIds: []
   };
-  studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'}, 
+  studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'},
                   {value: 'senior', display: 'Seniors'} ];
 
   constructor(

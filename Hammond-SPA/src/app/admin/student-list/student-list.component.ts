@@ -30,7 +30,6 @@ export class StudentListComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
       this.userType = data['userType'];
-      debugger
     });
     // this.userType = this.setUserType();
     this.userParams.roleName = this.userType.toLowerCase();
@@ -52,7 +51,6 @@ export class StudentListComponent implements OnInit {
   }
 
   loadUsers() {
-    debugger
     this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
