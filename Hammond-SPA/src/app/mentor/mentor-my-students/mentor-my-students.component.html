@@ -1,6 +1,8 @@
-<i id="back-arrow" class="fa fa-arrow-circle-left" [routerLink]="['/mentor']"></i>
 <div class="container">
-    <div *ngFor="let user of usergroup">
-        <app-user-item [user]="user.user"></app-user-item>
-    </div>
+    <i id="back-arrow" class="fa fa-arrow-circle-left" [routerLink]="['/mentor']"></i>
+    <ng-container class="container">
+        <div *ngFor="let user of usergroup">
+            <app-user-item *ngIf="currentUserId != user.user.id" [user]="user.user"></app-user-item>
+        </div>
+    </ng-container>
 </div>
