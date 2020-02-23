@@ -17,6 +17,8 @@ export class MentorLandingComponent implements OnInit {
   private swipeTime?: number;
   user: User;
   assignments: Assignment[];
+  events: Event[];
+  space: '&nbsp;';
 
   constructor(private userService: UserService,
     private alertify: AlertifyService,
@@ -25,6 +27,8 @@ export class MentorLandingComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.assignments = data['assignments'].result;
+      this.events = data['events'].result;
+      console.dir(this.events);
     });
 
     this.route.queryParams.subscribe(params => {
