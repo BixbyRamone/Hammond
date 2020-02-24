@@ -12,3 +12,7 @@
     white-space: pre;
     cursor: pointer;
 }
+
+.card {
+    cursor: pointer;
+}

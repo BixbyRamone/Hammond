@@ -2,13 +2,12 @@
   <div class="container">
       <div class="card-body">
           <div class="">
-            <div class="row link last-name-column col-md-2 col-lg-2">
+            <h4 class="row link last-name-column col-md-2 col-lg-2">
               {{assignment.assignment.title}}
-            </div>
-            <br>
+            </h4>
             <div *ngIf="assignment.completed">Done!</div>
             <div *ngIf="!assignment.completed" class="row">Due: {{assignment.assignment.dateDue | date: 'mediumDate'}}</div>
-            <div>{{assignment.assignment.studentLevel}}</div>
+            <p>Click for details</p>
           </div>
         </div>
   </div>

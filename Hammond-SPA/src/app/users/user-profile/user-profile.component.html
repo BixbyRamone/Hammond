@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <i *ngIf="testForStudentRole()" class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i>
+  <!-- <i *ngIf="testForStudentRole()" class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i> -->
   <i *ngIf="testForStudentRole() === false" class="fa fa-arrow-circle-left" [routerLink]="['/admin/volunteers']"></i>
   <div *ngIf="!nameEditOn" class="row prof mt-4">
     {{user.firstName}} {{user.lastName}}  
@@ -58,7 +58,7 @@
   
 
   <form [formGroup]="actForm" (ngSubmit)="submitActScore()">
-    <p *ngIf="!addActOn" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
+    <p *ngIf="!addActOn && operatingUserRole != 'Student'" class="act-add-link" (click)="this.actAddOnClick()">add ACT score</p>
   <div *ngIf="addActOn">
     <div class="row form-group">
       <input style="width: 90px" type="number" size="2"
@@ -82,20 +82,29 @@
   <br>
 
   <ng-container>
-    <div *ngIf="user.userAssignments">
-      Assignments:
-    </div>
-    <ul *ngFor="let assignment of user.userAssignments">
-    <li *ngIf="operatingUserRole === 'Student'" [routerLink]="['/student/assignments', assignment.assignmentId]">{{assignment.assignmentId}}= {{assignment.assignment.title}}</li>
-    <li *ngIf="operatingUserRole === 'Mentor'" [routerLink]="['/student/assignments', assignment.assignmentId]">{{assignment.assignmentId}}: {{assignment.assignment.title}}</li>
+    <h4 *ngIf="user.userAssignments">
+      Assignments: <i class="fa fa-caret-left"></i> &nbsp; <i class="fa fa-caret-right"></i>
+    </h4>
+    <ul style="list-style-type:none;" *ngFor="let assignment of user.userAssignments">
+      <div class="card">
+        <div class="container">
+          <li class="card-body" *ngIf="operatingUserRole === 'Student'" [routerLink]="['/student/assignments', assignment.assignmentId]"><strong>{{assignment.assignment.title}}</strong>: {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
+          <li class="card-body" *ngIf="operatingUserRole === 'Mentor'" [routerLink]="['/student/assignments', assignment.assignmentId]"><strong>{{assignment.assignment.title}}</strong>: {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
+        </div>
+      </div>
     </ul>
   </ng-container>
 
   <ng-container>
-    <div *ngIf="groupMembers">In a group with:</div>
-    <ul *ngFor="let member of groupMembers">
-    <li *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
-    </ul>
+    <h4 *ngIf="groupMembers">In a group with:</h4>
+    <br>
+      <ul class="" style="list-style-type:none;" *ngFor="let member of groupMembers">
+        <div class="card">
+          <div class="container">
+            <li class="card-body" *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
+          </div>
+        </div>
+      </ul>
   </ng-container>
   
   

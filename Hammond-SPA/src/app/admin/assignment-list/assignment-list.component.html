@@ -28,7 +28,7 @@
         <div class="user-item card mb-2">
           <div class="card-body">
             <h4>{{assignment.title}}</h4>
-            <p>{{assignment.dateDue}}</p>
+            <p>Due: &nbsp;{{assignment.dateDue | date: 'mediumDate'}}</p>
           </div>
         </div>
         
