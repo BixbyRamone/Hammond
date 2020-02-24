@@ -4,28 +4,47 @@
   <div class="container">
     <tabset class="mentor-tabset" #mentorTabs>
       <tab heading="Events">
-        <div *ngFor="let event of events" class="row">
-          <strong>{{event.title}}:&nbsp;&nbsp;</strong>
-          <p>{{event.eventDate | date: 'mediumDate'}}</p>
+        <br>
+        <div *ngFor="let event of events" class="">
+          <div class="card row">
+            <div class="container">
+              <div class="card-body">
+                <strong>{{event.title}}:&nbsp;&nbsp;</strong>
+                <p>{{event.eventDate | date: 'mediumDate'}}</p>
+              </div>
+            </div>
+          </div>
+          <br>
         </div>
       </tab>
   
       <tab heading="Assignments">
+        <br>
           <div *ngFor="let assignment of assignments">
-              <h4>{{assignment.title}}</h4>
-              <ul>
+            <div class="card row">
+              <div class="container">
+                <div class="card-body">
+                  <h4>{{assignment.title}}</h4>
+              <ul style="list-style-type:none;"> 
                 <li>Date Due: {{assignment.dateDue}}</li>
                 <li>Student Level: {{assignment.studentLevel}}</li>
                 <li>Assigned?: {{assignment.assigned}}</li>
               </ul>
+                </div>
+              </div>
+            </div>
+            <br>
+              
               </div>
       </tab>
   
       <tab heading="Students">
+        <br>
         <app-mentor-stud-tab></app-mentor-stud-tab>
       </tab>
 
       <tab heading="Messages">
+        <br>
         <app-messages></app-messages>
       </tab>
       
