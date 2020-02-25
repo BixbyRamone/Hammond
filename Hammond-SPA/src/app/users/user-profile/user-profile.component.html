@@ -89,7 +89,7 @@
       <div class="card">
         <div class="container">
           <li class="card-body" *ngIf="operatingUserRole === 'Student'" [routerLink]="['/student/assignments', assignment.assignmentId]"><strong>{{assignment.assignment.title}}</strong>: {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
-          <li class="card-body" *ngIf="operatingUserRole === 'Mentor'" [routerLink]="['/student/assignments', assignment.assignmentId]"><strong>{{assignment.assignment.title}}</strong>: {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
+          <li class="card-body" *ngIf="operatingUserRole === 'Mentor' || 'Admin' || 'Tutor'" [routerLink]="['/student/assignments', assignment.assignmentId]"><strong>{{assignment.assignment.title}}</strong>: {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
         </div>
       </div>
     </ul>

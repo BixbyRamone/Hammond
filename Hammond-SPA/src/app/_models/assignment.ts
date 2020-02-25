@@ -10,7 +10,7 @@ export interface Assignment {
     dateDue: Date;
     assigned: boolean;
     createdBy: User;
-    assignments: Assignment[];
+    // assignments: Assignment[];
     completed: boolean;
     studentLevel: string;
 }
