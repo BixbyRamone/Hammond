@@ -53,17 +53,7 @@ namespace Hammond.API.Controllers
         {
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
-            // var assignmentParams = new AssignmentParams
-            // {
-            //     StudentLevel = userForRegisterDto.StudentLevel
-            // };
-
             var assignments = await _context.Assignments.Where(a => a.StudentLevel == userToCreate.StudentLevel).ToListAsync();
-
-            // var assignmentsList = from pertAssignmts in assignments
-            //                 where pertAssignmts.StudentLevel == userToCreate.StudentLevel
-            //                 select pertAssignmts;
-            
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
