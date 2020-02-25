@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { UserGroup } from 'src/app/_models/usergroup';
@@ -8,6 +8,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/_services/group.service';
+import { DOCUMENT } from '@angular/platform-browser';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-user-profile',
@@ -31,13 +33,14 @@ export class UserProfileComponent implements OnInit {
   actExpandView = false;
 
   constructor(
+    @Inject(DOCUMENT) private _document: Document,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private groupService: GroupService,
     private alertify: AlertifyService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
     ) { }
 
   ngOnInit() {
@@ -133,9 +136,7 @@ export class UserProfileComponent implements OnInit {
         this.alertify.error(error);
       });
       this.addActOn = false;
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/users/' + this.user.id]);
-    });
+      this._document.defaultView.location.reload();
     }
   }
 
