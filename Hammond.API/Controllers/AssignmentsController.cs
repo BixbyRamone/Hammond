@@ -68,9 +68,7 @@ namespace Hammond.API.Controllers
                 if (!student.UserAssignments.Contains(userAssignment))
                 _repo.Add(userAssignment);
             }            
-
             
-            // _repo.SqlCmdHelper("SET IDENTITY_INSERT dbo.UserAssignments ON");
             if (await _repo.SaveAll())
             {
                 // _repo.SqlCmdHelper("SET IDENTITY_INSERT dbo.UserAssignments OFF");
