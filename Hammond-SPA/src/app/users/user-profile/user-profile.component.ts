@@ -8,7 +8,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/_services/group.service';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { debug } from 'util';
 
 @Component({
