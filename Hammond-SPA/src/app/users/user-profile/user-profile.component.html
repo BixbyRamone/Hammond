@@ -98,6 +98,7 @@
           [routerLink]="['/student', user.id, 'assignment', assignment.assignmentId]">
           <strong>{{assignment.assignment.title}}</strong>: 
           {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
+          <li>Assignment Id#: {{assignment.assignmentId}}</li>
 
         </div>
       </div>

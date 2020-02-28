@@ -14,7 +14,13 @@ export class AssignmentDetailResolver implements Resolve<Assignment> {
         private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Assignment> {
-        return this.assignmentService.getAssignment(route.params['id']).pipe(
+        let id: number;
+        if (route.params['assId']) {
+            id = route.params['assId'];
+        } else {
+            id = route.params['id'];
+        }
+        return this.assignmentService.getAssignment(id).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/home']);
