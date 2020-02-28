@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-assignment-item',
@@ -7,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AssignmentItemComponent implements OnInit {
   @Input() assignment: any;
+  @Input() user: User;
 
   constructor() { }
 

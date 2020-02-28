@@ -120,6 +120,7 @@ getMessageThread(id: number, recipientId: number) {
 }
 
 sendMessage(id: number, message: Message) {
+  debugger
   return this.http.post(this.baseUrl + 'users/' + id + '/messages', message);
 }
 

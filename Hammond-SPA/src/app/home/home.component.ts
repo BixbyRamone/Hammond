@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.decodedToken) {
+      if (!this.authService.decodedToken) {
+
+      }
       if (this.authService.decodedToken.role.includes('Admin')) {
         this.router.navigate(['/admin']);
       }

@@ -3,7 +3,7 @@
     <br>
   <div *ngIf="assignmentListMode">
       <div *ngFor="let assignment of assignments">
-          <app-assignment-item [assignment]="assignment"></app-assignment-item>
+          <app-assignment-item [user]="student" [assignment]="assignment"></app-assignment-item>
         </div>
   </div>
   <!-- <div class="container" *ngIf="assignmentViewMode">

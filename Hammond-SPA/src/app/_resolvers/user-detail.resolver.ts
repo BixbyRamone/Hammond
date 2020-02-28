@@ -14,7 +14,13 @@ export class UserDetailResolver implements Resolve<User> {
         private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> {
-        return this.userService.getUser(route.params['id']).pipe(
+        let id: number;
+        if (route.params['assId']) {
+            id = route.params['assId'];
+        } else {
+            id = route.params['id'];
+        }
+        return this.userService.getUser(id).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/home']);

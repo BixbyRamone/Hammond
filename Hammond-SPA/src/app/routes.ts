@@ -81,8 +81,8 @@ export const appRoutes: Routes = [
                 resolve: {user: StudProfileResolver, group: GroupResolver, messages: MessagesResolver },
                  data: {roles: ['Admin', 'Mentor', 'Student']} },
 
-            { path: 'student/assignments/:id', component: AssignmentDetailComponent,
-                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver } },
+            { path: 'student/:id/assignment/:assId', component: AssignmentDetailComponent,
+                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver } },
 
             { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } },
 

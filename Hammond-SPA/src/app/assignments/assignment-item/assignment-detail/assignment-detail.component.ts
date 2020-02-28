@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AssignmentDetailComponent implements OnInit {
   // @Input() assignment: any;
   @Input() user: User;
+  accessor: User;
   assignment: any;
   messages: Message[];
   newMessage: any = {};
@@ -23,9 +24,11 @@ export class AssignmentDetailComponent implements OnInit {
   currentStyle = {};
   colorOptions = [{'color': 'cornflowerblue'},
                   {'color': 'coral'},
-                  {'color': 'gold'},
+                  {'color': 'goldenrod'},
                   {'color': 'lawngreen'},
-                  {'color': 'blueviolet'}];
+                  {'color': 'blueviolet'},
+                  {'color': 'darkred'}];
+                  test: any;
 
   constructor(
     private assignmentService: AssignmentService,
@@ -38,7 +41,10 @@ export class AssignmentDetailComponent implements OnInit {
     this.route.data.subscribe( data => {
       this.assignment = data['assignment'];
       this.messages = data['messages'];
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user = data['user'];
+      console.dir(this.user);
+      this.accessor = JSON.parse(localStorage.getItem('user'));
+      console.dir(this.accessor);
     });
     this.generateMessageColor();
     // this.loadAssignmentMessages(this.user.id, this.assignment.id);
@@ -82,7 +88,8 @@ export class AssignmentDetailComponent implements OnInit {
   sendMessage() {
     this.newMessage.recipientId = this.user.id;
     this.newMessage.assignmentId = this.assignment.id;
-    // this.newMessage.senderId = this.authService.currentUser.id;
+    this.newMessage.senderId = this.accessor.id;
+    debugger
     // this.newMessage.senderPhotoUrl = this.authService.currentUser.photoUrl;
     // this.newMessage.senderKnownAs = this.authService.currentUser.username;
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
@@ -94,5 +101,4 @@ export class AssignmentDetailComponent implements OnInit {
       this.alertify.error(error);
     });
   }
-
 }

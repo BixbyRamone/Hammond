@@ -27,8 +27,6 @@ export class StudProfileTabComponent implements OnInit {
 
   calculateAvgScores() {
     this.student.actScores.reduce((sum, score) => {
-      console.log(sum);
-      console.log(score);
       return ((sum + score) / this.student.actScores.length);
     });
     return null;
