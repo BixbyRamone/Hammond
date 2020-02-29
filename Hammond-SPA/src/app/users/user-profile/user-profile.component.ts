@@ -1,15 +1,12 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
-import { UserGroup } from 'src/app/_models/usergroup';
-import { Role } from 'src/app/_models/role';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/_services/group.service';
 import { DOCUMENT } from '@angular/common';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-user-profile',
@@ -68,7 +65,7 @@ export class UserProfileComponent implements OnInit {
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
 
-      let iterator = 2;
+      let iterator = 2; // starts at 2 to line up with id #'s;
       this.roleOptions.forEach(element => {
         element.checked = this.createCheckedState(iterator);
         iterator++;
