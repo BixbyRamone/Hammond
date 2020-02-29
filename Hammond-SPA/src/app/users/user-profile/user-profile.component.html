@@ -94,11 +94,10 @@
           <strong>{{assignment.assignment.title}}</strong>: 
           {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
 
-          <li class="card-body" *ngIf="operatingUserRole === 'Mentor' || 'Admin' || 'Tutor'"
+          <li class="card-body" *ngIf="operatingUserRole === 'Mentor' || operatingUserRole === 'Admin' || operatingUserRole === 'Tutor'"
           [routerLink]="['/student', user.id, 'assignment', assignment.assignmentId]">
           <strong>{{assignment.assignment.title}}</strong>: 
           {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
-          <li>Assignment Id#: {{assignment.assignmentId}}</li>
 
         </div>
       </div>

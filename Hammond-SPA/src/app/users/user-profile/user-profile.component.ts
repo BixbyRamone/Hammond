@@ -68,7 +68,7 @@ export class UserProfileComponent implements OnInit {
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
 
-      let iterator = 1;
+      let iterator = 2;
       this.roleOptions.forEach(element => {
         element.checked = this.createCheckedState(iterator);
         iterator++;
@@ -78,6 +78,7 @@ export class UserProfileComponent implements OnInit {
 
   createCheckedState(roleId: number) {
     const returnable = this.user.userRoles.filter((opt) => {
+      console.dir(opt);
       return opt.role.id === roleId;
     })[0];
      if (returnable) {
