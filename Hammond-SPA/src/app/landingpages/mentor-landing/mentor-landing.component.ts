@@ -18,7 +18,6 @@ export class MentorLandingComponent implements OnInit {
   user: User;
   assignments: Assignment[];
   events: Event[];
-  space: '&nbsp;';
 
   constructor(private userService: UserService,
     private alertify: AlertifyService,

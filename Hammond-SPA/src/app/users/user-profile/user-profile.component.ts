@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
   user: User;
   groupMembers: any;
   operatingUserRole: any;
+  operatingUserName: any;
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
@@ -54,6 +55,9 @@ export class UserProfileComponent implements OnInit {
         });
       }
       this.operatingUserRole = this.authService.decodedToken.role;
+      this.operatingUserName = this.authService.decodedToken.unique_name;
+
+      // may change so that admin needs to be in specific role to access admin features
       if (this.operatingUserRole.length > 1) {
         if (this.operatingUserRole.includes('Admin')) {
           this.operatingUserRole = 'Admin';

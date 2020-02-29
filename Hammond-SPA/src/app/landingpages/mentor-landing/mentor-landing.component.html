@@ -20,7 +20,7 @@
   
       <tab heading="Assignments">
         <br>
-          <div *ngFor="let assignment of assignments">
+          <div *ngFor="let assignment of assignments" [routerLink]="['/admin/assignments']">
             <div class="card row">
               <div class="container">
                 <div class="card-body">

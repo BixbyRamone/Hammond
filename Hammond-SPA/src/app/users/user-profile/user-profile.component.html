@@ -108,9 +108,10 @@
     <h4 *ngIf="groupMembers">In a group with:</h4>
     <br>
       <ul class="" style="list-style-type:none;" *ngFor="let member of groupMembers">
-        <div class="card">
+        <div class="card" *ngIf="member.userId != user.id && member.user.userName != operatingUserName">
           <div class="container">
-            <li class="card-body" *ngIf="member.userId != user.id">{{member.user.lastName}}, {{member.user.firstName}}</li>
+            <li class="card-body">
+              {{member.user.lastName}}, {{member.user.firstName}}</li>
           </div>
         </div>
       </ul>
