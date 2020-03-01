@@ -44,12 +44,10 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.user = data['user'];
-      console.dir(this.user);
       if (this.user.userGroups.length > 0) {
         this.groupService.getGroup(this.user.userGroups[0].groupId)
         .subscribe((res: any) => {
           this.groupMembers = res.userGroups;
-          console.dir(this.groupMembers);
         }, error => {
           this.alertify.error(error);
         });
@@ -79,7 +77,6 @@ export class UserProfileComponent implements OnInit {
 
   createCheckedState(roleId: number) {
     const returnable = this.user.userRoles.filter((opt) => {
-      console.dir(opt);
       return opt.role.id === roleId;
     })[0];
      if (returnable) {
