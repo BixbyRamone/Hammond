@@ -1,11 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
-import { Role } from 'src/app/_models/role';
 import { UserService } from 'src/app/_services/user.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { RoleService } from 'src/app/_services/role.service';
 import { GroupToCreate } from 'src/app/_models/groupToCreate';
 import { GroupService } from 'src/app/_services/group.service';
 
@@ -25,6 +23,7 @@ export class GroupRegistrationComponent implements OnInit {
     volunteerIds: [],
     studentIds: []
   };
+  isGroup = 0;
   studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'},
                   {value: 'senior', display: 'Seniors'} ];
 
@@ -59,9 +58,7 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   groupUser(user: User) {
-    console.dir('groupUsers');
     user.grouped = true;
-    console.dir(user);
 
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       this.groupToRegister.studentIds.push(user.id);
@@ -69,12 +66,12 @@ export class GroupRegistrationComponent implements OnInit {
     if (user.userRoles[0].role.normalizedName === 'MENTOR') {
       this.groupToRegister.volunteerIds.push(user.id);
     }
+
+    this.isGroup++;
   }
 
   ungroupUser(user: User) {
-    console.dir('ungroupUsers');
     user.grouped = false;
-    console.dir(user);
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       const elementToRemove = this.groupToRegister.studentIds.indexOf(user.id);
       this.groupToRegister.studentIds.splice(elementToRemove, 1);
@@ -83,6 +80,8 @@ export class GroupRegistrationComponent implements OnInit {
       const elementToRemove = this.groupToRegister.volunteerIds.indexOf(user.id);
       this.groupToRegister.volunteerIds.splice(elementToRemove, 1);
     }
+
+    this.isGroup--;
   }
 
   register() {
