@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Group } from '../_models/group';
 import { map } from 'rxjs/operators';
 import { UserGroup } from '../_models/usergroup';
+import { Identifiers } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,10 @@ getGroups(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<Group[]
 
 getGroup(id): Observable<UserGroup> {
   return this.http.get<UserGroup>(this.baseUrl + id);
+}
+
+disbandGroup(groupId: number, userId: number) {
+  return this.http.delete(this.baseUrl + groupId + '/authId/' + userId);
 }
 
 }

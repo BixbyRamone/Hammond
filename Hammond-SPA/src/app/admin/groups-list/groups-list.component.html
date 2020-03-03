@@ -1,11 +1,15 @@
 <div class="container">
     <i class="fa fa-arrow-circle-left" [routerLink]="['/admin']"></i>
 </div>
-<div *ngFor="let group of groups">
-    <ul>
-        <li>Group Id: {{group.id}}</li>
-        <li *ngFor="let ug of group.userGroups">{{ug.user.lastName}}, {{ug.user.firstName}} </li>
+<div class="container">
+    <div *ngFor="let group of groups">
+        <div class="card">
+            <ul class="card-body" style="list-style-type:none">
+                <li><strong>Group Id: {{group.id}}</strong></li>
+                <li *ngFor="let ug of group.userGroups">{{ug.user.lastName}}, {{ug.user.firstName}} </li>
+            </ul>
+            <button class="btn btn-primary" (click)="disbandGroup(group.id)">Disband Group</button>
+        </div>
         
-        
-    </ul>
+    </div>
 </div>

@@ -108,6 +108,23 @@ namespace Hammond.API.Controllers
             var group = await _repo.GetGroup(id);
 
             return Ok(group);
-        } 
+        }
+
+        [HttpDelete("{groupId}/authId/{userId}")]
+        public async Task<IActionResult> DisbandGroup(int groupId, int userId)
+        {
+            var group = await _repo.GetGroup(groupId);
+
+            _repo.Delete(group);
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed To Delete User");
+
+            
+        }
     }
 }
