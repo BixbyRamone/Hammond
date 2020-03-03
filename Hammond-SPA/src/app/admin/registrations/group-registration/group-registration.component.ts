@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Inject } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/_services/user.service';
@@ -6,11 +6,32 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { GroupToCreate } from 'src/app/_models/groupToCreate';
 import { GroupService } from 'src/app/_services/group.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-group-registration',
   templateUrl: './group-registration.component.html',
-  styleUrls: ['./group-registration.component.css']
+  styleUrls: ['./group-registration.component.css'],
+  animations: [
+    trigger('fade', [
+      state('show', style({
+        opacity: 1
+      })),
+      state('hide', style({
+        opacity: 0
+      })),
+      transition('show => hide', animate('1000ms ease-out'))
+
+    ])
+  ]
 })
 export class GroupRegistrationComponent implements OnInit {
   @Output() cancel = new EventEmitter();
@@ -23,11 +44,13 @@ export class GroupRegistrationComponent implements OnInit {
     volunteerIds: [],
     studentIds: []
   };
+  show = true;
   isGroup = 0;
   studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'},
                   {value: 'senior', display: 'Seniors'} ];
 
   constructor(
+    @Inject(DOCUMENT) private _document: Document,
     private route: ActivatedRoute,
     private userService: UserService,
     private alertify: AlertifyService,
@@ -42,6 +65,7 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   loadUsers() {
+    debugger
     this.userParams.getUngrouped = true;
     this.userService.getUngroupedUsers(this.userParams)
       .subscribe((res:  User[]) => {
@@ -91,11 +115,21 @@ export class GroupRegistrationComponent implements OnInit {
       console.dir(error);
       this.alertify.error(error);
     });
+    this.toggle();
+    this._document.defaultView.location.reload();
   }
 
   backup() {
     console.log('backup');
     this.cancel.emit(false);
+  }
+
+  get stateName() {
+    return this.show ? 'show' : 'hide';
+  }
+
+  toggle() {
+    this.show = !this.show;
   }
 
 }

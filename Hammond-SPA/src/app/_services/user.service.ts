@@ -54,6 +54,8 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
 getUngroupedUsers(userParams?): Observable<User[]> {
   let params = new HttpParams();
 
+  debugger
+
   params = params.append('getUngrouped', userParams.getUngrouped);
   params = params.append('studentLevel', userParams.studentLevel);
 
