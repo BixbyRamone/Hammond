@@ -14,7 +14,6 @@ import {
   transition,
   // ...
 } from '@angular/animations';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-group-registration',
@@ -50,7 +49,6 @@ export class GroupRegistrationComponent implements OnInit {
                   {value: 'senior', display: 'Seniors'} ];
 
   constructor(
-    @Inject(DOCUMENT) private _document: Document,
     private route: ActivatedRoute,
     private userService: UserService,
     private alertify: AlertifyService,
@@ -65,7 +63,6 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   loadUsers() {
-    debugger
     this.userParams.getUngrouped = true;
     this.userService.getUngroupedUsers(this.userParams)
       .subscribe((res:  User[]) => {
@@ -111,12 +108,14 @@ export class GroupRegistrationComponent implements OnInit {
   register() {
     this.groupService.register(this.groupToRegister).subscribe(() => {
       this.alertify.success('Group Registered');
+      this.loadUsers();
     }, error => {
       console.dir(error);
       this.alertify.error(error);
     });
     this.toggle();
-    this._document.defaultView.location.reload();
+    this.isGroup = 0;
+    // this._document.defaultView.location.reload();
   }
 
   backup() {
