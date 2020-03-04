@@ -53,9 +53,6 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
 
 getUngroupedUsers(userParams?): Observable<User[]> {
   let params = new HttpParams();
-
-  debugger
-
   params = params.append('getUngrouped', userParams.getUngrouped);
   params = params.append('studentLevel', userParams.studentLevel);
 
@@ -122,7 +119,6 @@ getMessageThread(id: number, recipientId: number) {
 }
 
 sendMessage(id: number, message: Message) {
-  debugger
   return this.http.post(this.baseUrl + 'users/' + id + '/messages', message);
 }
 
