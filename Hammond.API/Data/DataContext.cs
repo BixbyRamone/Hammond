@@ -69,11 +69,13 @@ namespace Hammond.API.Data
 
                 userGroup.HasOne(ug => ug.Group)
                 .WithMany(g => g.UserGroups)
-                .HasForeignKey(ug => ug.GroupId);
+                .HasForeignKey(ug => ug.GroupId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 userGroup.HasOne(ug => ug.User)
                 .WithMany(u => u.UserGroups)
-                .HasForeignKey(ug => ug.UserId);  
+                .HasForeignKey(ug => ug.UserId)
+                .OnDelete(DeleteBehavior.Restrict); 
             });
         }
     }

@@ -47,6 +47,10 @@ getGroup(id): Observable<UserGroup> {
   return this.http.get<UserGroup>(this.baseUrl + id);
 }
 
+removeUserFromGroup(id: number, userId: number) {
+  return this.http.delete(this.baseUrl + 'user/' + id + '/authId/' + userId);
+}
+
 disbandGroup(groupId: number, userId: number) {
   return this.http.delete(this.baseUrl + groupId + '/authId/' + userId);
 }

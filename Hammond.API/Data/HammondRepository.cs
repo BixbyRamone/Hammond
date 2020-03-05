@@ -281,5 +281,9 @@ namespace Hammond.API.Data
             _context.Database.ExecuteSqlCommand(sqlCmnd);
         }
 
+        public async Task<UserGroup> GetUserGroup(int id)
+        {
+            return await _context.UserGroups.FirstOrDefaultAsync(ug => ug.UserId == id);
+        }
     }
 }

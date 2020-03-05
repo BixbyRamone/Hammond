@@ -113,6 +113,9 @@ namespace Hammond.API.Controllers
         [HttpDelete("{groupId}/authId/{userId}")]
         public async Task<IActionResult> DisbandGroup(int groupId, int userId)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var group = await _repo.GetGroup(groupId);
 
             _repo.Delete(group);
@@ -125,6 +128,24 @@ namespace Hammond.API.Controllers
             return BadRequest("Failed To Delete User");
 
             
+        }
+
+        [HttpDelete("user/{id}/authId/{userId}")]
+        public async Task<IActionResult> RemoveUserFromGroup(int id, int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var userGroupToDel = await _repo.GetUserGroup(id);
+
+            _repo.Delete(userGroupToDel);
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed To Remove User From Group");
         }
     }
 }
