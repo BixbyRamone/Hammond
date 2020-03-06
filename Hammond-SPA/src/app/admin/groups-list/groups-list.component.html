@@ -1,13 +1,28 @@
 <div class="container">
     <i class="fa fa-arrow-circle-left" [routerLink]="['/admin']"></i>
 </div>
+<form class="form-inline" #form="ngForm" (ngSubmit)="loadGroups()" novalidate>
+    <div class="form-group px-2">
+      <label for="gradeLevel">Grade: </label>
+        <select name="gradeLevel" id="gradeLevel" class="form-control ml-1"
+          [(ngModel)]="userParams.studentLevel">
+          <option *ngFor="let studLev of studentLevel" [value]="studLev.value">
+            {{studLev.display}}
+          </option>
+        </select>            
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filter</button>
+    <!-- <button type="button" class="btn btn-info" (click)="resetFilter()" style="margin-left:10px">
+      Reset Filter
+    </button> -->
+  </form>
 <div class="container">
     <div *ngFor="let group of groups">
         <div class="card">
             <ul class="card-body" style="list-style-type:none">
                 <li><strong>Group Id: {{group.id}}</strong></li>
                 <li *ngFor="let ug of group.userGroups">{{ug.user.lastName}}, {{ug.user.firstName}}
-                    <i (click)="removeMember(ug.user)" class="fa fa-minus-circle"></i></li>
+                    <i (click)="removeMember(ug)" class="fa fa-minus-circle"></i></li>
             </ul>
             <button class="btn btn-primary" (click)="disbandGroup(group.id)">Disband Group</button>
         </div>

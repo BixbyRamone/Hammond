@@ -70,7 +70,6 @@ export class GroupRegistrationComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-    console.dir(this.users);
   }
 
   resetFilter() {

@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { GroupService } from 'src/app/_services/group.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
+import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-groups-list',
@@ -13,6 +14,10 @@ import { User } from 'src/app/_models/user';
 })
 export class GroupsListComponent implements OnInit {
   groups: Group[];
+  pagination: Pagination;
+  userParams: any = {};
+  studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'},
+                  {value: 'senior', display: 'Seniors'} ];
 
   constructor(
       private route: ActivatedRoute,
@@ -28,28 +33,44 @@ export class GroupsListComponent implements OnInit {
     console.dir(this.groups);
   }
 
+  loadGroups() {
+    this.groupService.getGroups(this.userParams)
+      .subscribe((res: PaginatedResult<Group[]>) => {
+        this.groups = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+  }
+
   disbandGroup(id: number) {
     console.dir(this.groupService);
     this.alertify.confirm('Are yousure you want to disband this group?', () => {
       this.groupService.disbandGroup(id, this.authService.decodedToken.nameid).subscribe(() => {
-        this.alertify.success('User has been deleted');
+        this.loadGroups();
+        this.alertify.success('Group has been disbanded');
       }, error => {
-        this.alertify.error('Failed to delete this user');
+        this.alertify.error('Failed to disband group');
       });
     });
   }
 
-  removeMember(user: User) {
-    console.dir(this.groupService);
-    const idTest: number = user.id;
-    this.alertify.confirm('Remove ' + user.firstName + ' from this group?', () => {
-      this.groupService.removeUserFromGroup(idTest, this.authService.decodedToken.nameid).subscribe(() => {
+  removeMember(ug: any) {
+    if (ug.group.userGroups.length === 0) {
+      this.disbandGroup(ug.group.id);
+    } else {
+      console.dir(ug);
+      const id: number = ug.user.id;
+      this.alertify.confirm('Remove ' + ug.user.firstName + ' ' + ug.user.lastName + ' from this group?', () => {
+      this.groupService.removeUserFromGroup(id, this.authService.decodedToken.nameid).subscribe(() => {
+        this.loadGroups();
         this.alertify.success('User has been removed from group');
-      }, error => {
-        this.alertify.error('Failed to remove user from group');
-        console.log(error);
+          }, error => {
+         this.alertify.error('Failed to remove user from group');
+            console.log(error);
+        });
       });
-    });
+    }
   }
 
 }
