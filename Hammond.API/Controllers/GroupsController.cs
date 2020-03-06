@@ -43,6 +43,7 @@ namespace Hammond.API.Controllers
             }
 
             Group newGroup = new Group();
+            newGroup.StudentLevel = students[0].StudentLevel;
             _repo.Add(newGroup);
 
             foreach(var user in volunteers)

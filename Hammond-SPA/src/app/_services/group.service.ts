@@ -26,9 +26,14 @@ getGroups(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<Group[]
   const paginatedResult: PaginatedResult<Group[]> = new PaginatedResult<Group[]>();
   let params = new HttpParams();
 
-  if (userParams != null) {
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  if (userParams) {
     params = params.append('studentLevel', userParams.studentLevel);
-    params = params.append('groupId', userParams.groupId);
+    // params = params.append('groupId', userParams.groupId);
   }
 
   return this.http.get<Group[]>(this.baseUrl, { observe: 'response', params})

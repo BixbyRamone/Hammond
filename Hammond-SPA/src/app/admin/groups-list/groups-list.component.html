@@ -17,10 +17,12 @@
     </button> -->
   </form>
 <div class="container">
-    <div *ngFor="let group of groups">
+    <div class="mt-2" *ngFor="let group of groups">
         <div class="card">
             <ul class="card-body" style="list-style-type:none">
-                <li><strong>Group Id: {{group.id}}</strong></li>
+                <li>
+                    <strong>{{group.userGroups[0].user.studentLevel.toLocaleUpperCase()}}'S - Id#: {{group.id}}</strong>
+                </li>
                 <li *ngFor="let ug of group.userGroups">{{ug.user.lastName}}, {{ug.user.firstName}}
                     <i (click)="removeMember(ug)" class="fa fa-minus-circle"></i></li>
             </ul>
@@ -28,4 +30,5 @@
         </div>
         
     </div>
+    
 </div>

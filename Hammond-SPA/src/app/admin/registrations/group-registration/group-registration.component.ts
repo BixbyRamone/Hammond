@@ -86,6 +86,7 @@ export class GroupRegistrationComponent implements OnInit {
     if (user.userRoles[0].role.normalizedName === 'MENTOR') {
       this.groupToRegister.volunteerIds.push(user.id);
     }
+    console.dir(this.groupToRegister);
 
     this.isGroup++;
   }
@@ -100,7 +101,7 @@ export class GroupRegistrationComponent implements OnInit {
       const elementToRemove = this.groupToRegister.volunteerIds.indexOf(user.id);
       this.groupToRegister.volunteerIds.splice(elementToRemove, 1);
     }
-
+    console.dir(this.groupToRegister);
     this.isGroup--;
   }
 
@@ -114,6 +115,10 @@ export class GroupRegistrationComponent implements OnInit {
     });
     this.toggle();
     this.isGroup = 0;
+    this.groupToRegister = {
+      volunteerIds: [],
+      studentIds: []
+    };
     // this._document.defaultView.location.reload();
   }
 

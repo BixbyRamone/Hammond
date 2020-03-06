@@ -29,23 +29,25 @@ export class GroupsListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.groups = data['groups'].result;
+      this.pagination = data['groups'].pagination;
     });
     console.dir(this.groups);
   }
 
   loadGroups() {
-    this.groupService.getGroups(this.userParams)
+    this.groupService.getGroups(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<Group[]>) => {
         this.groups = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);
+        console.log(error);
       });
   }
 
   disbandGroup(id: number) {
     console.dir(this.groupService);
-    this.alertify.confirm('Are yousure you want to disband this group?', () => {
+    this.alertify.confirm('Are you sure you want to disband this group?', () => {
       this.groupService.disbandGroup(id, this.authService.decodedToken.nameid).subscribe(() => {
         this.loadGroups();
         this.alertify.success('Group has been disbanded');

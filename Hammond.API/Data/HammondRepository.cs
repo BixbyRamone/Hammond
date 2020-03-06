@@ -221,13 +221,13 @@ namespace Hammond.API.Data
             .ThenInclude(ug => ug.User)
             .AsQueryable();
 
-            // if (userParams.StudentLevel != null && userParams.StudentLevel != "null")
-            // {
-            //     groups = groups.Where(u => u.StudentLevel == userParams.StudentLevel);
-            //     var test = _userManager.GetUsersInRoleAsync("Student").Result;
+            if (userParams.StudentLevel != null && userParams.StudentLevel != "null")
+            {
+                groups = groups.Where(g => g.StudentLevel == userParams.StudentLevel);
+                var test = _userManager.GetUsersInRoleAsync("Student").Result;
 
-            //     users = users.Where(u => test.Contains(u));
-            // }
+                // users = users.Where(u => test.Contains(u));
+            }
 
             
             // if (!string.IsNullOrEmpty(userParams.OrderBy))
