@@ -1,5 +1,5 @@
 <div class="card mb-2" [routerLink]="['/student', user.id, 'assignment', assignment.assignmentId]">
-  <div class="container">
+  <!-- <div class="container">
       <div class="card-body">
           <div class="">
             <h4 class="row link last-name-column col-md-2 col-lg-2">
@@ -10,6 +10,13 @@
             <p>Click for details</p>
           </div>
         </div>
-  </div>
+  </div> -->
+
+  
+  <div class="card-body"
+  [routerLink]="['/student', user.id, 'assignment', assignment.assignmentId]">
+  <strong>{{assignment.assignment.title}}</strong>: 
+  {{assignment.assignment.dateDue | date: 'mediumDate'}}</div>
+
   
 </div>

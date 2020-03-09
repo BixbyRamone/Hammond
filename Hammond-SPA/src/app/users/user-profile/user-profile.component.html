@@ -86,21 +86,22 @@
       Assignments: <i class="fa fa-caret-left"></i> &nbsp; <i class="fa fa-caret-right"></i>
     </h4>
     <ul style="list-style-type:none;" *ngFor="let assignment of user.userAssignments">
-      <div class="card">
+      <!-- <div class="card">
         <div class="container">
 
           <li class="card-body" *ngIf="operatingUserRole === 'Student'"
-          [routerLink]="['/student', user.id, '/assignment', assignment.assignmentId]">
-          <strong>{{assignment.assignment.title}}</strong>: 
-          {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
-
-          <li class="card-body" *ngIf="operatingUserRole === 'Mentor' || operatingUserRole === 'Admin' || operatingUserRole === 'Tutor'"
           [routerLink]="['/student', user.id, 'assignment', assignment.assignmentId]">
           <strong>{{assignment.assignment.title}}</strong>: 
           {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
 
+          <li class="card-body" *ngIf="operatingUserRole === 'Mentor' || operatingUserRole === 'Admin' || operatingUserRole === 'Tutor'"
+          [routerLink]="['/mentor', user.id, 'assignment', assignment.assignmentId]">
+          <strong>{{assignment.assignment.title}}</strong>: 
+          {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
+
         </div>
-      </div>
+      </div> -->
+      <app-assignment-item [user]="user" [assignment]="assignment"></app-assignment-item>
     </ul>
   </ng-container>
 

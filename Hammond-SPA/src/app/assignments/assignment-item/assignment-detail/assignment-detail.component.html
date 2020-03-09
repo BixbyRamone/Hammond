@@ -1,19 +1,17 @@
-<p>assignment details</p>
-<p>
-  {{assignment.title}}
-</p>
-<p>
-  {{assignment.content}}
-</p>
-
-<div class="container">
+<div class="container mt-3">
+  <h3>
+    {{assignment.title}}
+  </h3>
+  <p>
+    {{assignment.content}}
+  </p>
   <div *ngIf="user" class="card message-component">
     <div class="card-body">
       <div *ngIf="messages?.length === 0">
-        <p>No messages yet. Say 'hi' by using the message box below</p>
+        <p>Discuss this assignment:</p>
       </div>
   
-      <ul class="chat">
+      <ul style="list-style-type:none;" class="chat">
         <li *ngFor="let message of messages">
           <!-- To them -->
           <div [ngStyle]="message.fontColor" *ngIf="message.senderId == user.id">

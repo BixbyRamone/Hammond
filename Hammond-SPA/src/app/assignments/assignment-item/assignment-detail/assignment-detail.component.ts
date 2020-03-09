@@ -42,6 +42,7 @@ export class AssignmentDetailComponent implements OnInit {
       this.assignment = data['assignment'];
       this.messages = data['messages'];
       this.user = data['user'];
+      debugger
       console.dir(this.user);
       this.accessor = JSON.parse(localStorage.getItem('user'));
       console.dir(this.accessor);
