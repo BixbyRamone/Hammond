@@ -20,8 +20,14 @@ export class AssignmentMessageResolver implements Resolve<Message[]> {
             private authService: AuthService) {}
 
         resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
+            let id: number;
+        if (route.params['assId']) {
+            id = route.params['assId'];
+        } else {
+            id = route.params['id'];
+        }
                 return this.assignmentService.getAssignmentMessages(this.authService.decodedToken.nameid,
-                    route.params['id']).pipe(
+                   id).pipe(
                     catchError(error => {
                         this.alertify.error('Problem retrieving messages');
                         this.router.navigate(['/student']);
