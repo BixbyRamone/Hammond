@@ -24,6 +24,14 @@
   </form>
   <br>
   <ng-container *ngIf="!showAssignmentDetail">
+    <div *ngFor="let assignment of assignments">
+      <div class="card">
+        <div class="card-body"
+      [routerLink]="['/admin/assignment', assignment.id]">
+      <strong>{{assignment.title}}</strong>: 
+      {{assignment.dateDue | date: 'mediumDate'}}</div>
+    </div>
+      </div>
       <div class="" *ngFor="let assignment of assignments" (click)="assignmentDetailClick(assignment)">
         <div class="user-item card mb-2">
           <div class="card-body">

@@ -40,32 +40,40 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'values', component: ValueComponent},
-
+            // Admin Pages
             { path: 'admin', component: AdminLandingComponent,
-                resolve: {messages: MessagesResolver}, data: {roles: ['Admin']} },
+                resolve: {messages: MessagesResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/students', component: StudentListComponent,
-                resolve: {users: StudentListResolver}, data: {roles: ['Admin'], userType: 'Student'} },
+                resolve: {users: StudentListResolver}, data: {roles: ['Admin'], userType: 'Student', operatingRole: 'Admin'} },
 
             { path: 'admin/events', component: EventsListComponent,
-                resolve: {evnts: EventListResolver}, data: {roles: ['Admin']} },
+                resolve: {evnts: EventListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/assignments', component: AssignmentListComponent,
-                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin']} },
+                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/volunteers', component: StudentListComponent,
-                resolve: {users: VolunteerListResolver}, data: {roles: ['Admin'], userType: 'Volunteer'} },
+                resolve: {users: VolunteerListResolver}, data: {roles: ['Admin'], userType: 'Volunteer', operatingRole: 'Admin'} },
 
             { path: 'admin/groups', component: GroupsListComponent,
-                resolve: {groups: UserGroupListResolver}, data: {roles: ['Admin']} },
+                resolve: {groups: UserGroupListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/groups/register', component: GroupRegistrationComponent,
-                resolve: {users: UserUngroupedResolver}, data: {roles: ['Admin']} },
+                resolve: {users: UserUngroupedResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/registerstudent',  component: StudentRegistrationComponent,
-                data: {roles: ['Admin']} },
+                data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
+            { path: 'admin/users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver },
+                data: { operatingRole: 'Admin' } },
+
+            { path: 'admin/assignment/:id', component: AssignmentDetailComponent,
+                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
+                data: { operatingRole: 'Admin' } },
+            // ===============
+
+            // Mentor Pages
             { path: 'mentor', component: MentorLandingComponent,
                 resolve: { assignments: AssignmentListResolver, group: GroupResolver, messages: MessagesResolver,
                     events: EventListResolver },
@@ -87,7 +95,10 @@ export const appRoutes: Routes = [
             { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } },
 
             { path: 'mentor/assignments/:id', component: AssignmentDetailComponent,
-                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver } }
+                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver } },
+
+            { path: 'assignment/:id', component: AssignmentDetailComponent,
+                resolve: { assignment: AssignmentDetailResolver }}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

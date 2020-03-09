@@ -22,6 +22,7 @@ export class AssignmentDetailComponent implements OnInit {
   userInfo: any = {};
   userInfoArray: any = [];
   currentStyle = {};
+  operatingRole: string;
   colorOptions = [{'color': 'cornflowerblue'},
                   {'color': 'coral'},
                   {'color': 'goldenrod'},
@@ -39,10 +40,12 @@ export class AssignmentDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
+      this.operatingRole = data['operatingRole'];
       this.assignment = data['assignment'];
-      this.messages = data['messages'];
+      if (this.operatingRole !== 'Admin') {
+        this.messages = data['messages'];
+      }
       this.user = data['user'];
-      debugger
       console.dir(this.user);
       this.accessor = JSON.parse(localStorage.getItem('user'));
       console.dir(this.accessor);

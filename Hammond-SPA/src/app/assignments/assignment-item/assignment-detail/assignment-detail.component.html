@@ -5,7 +5,7 @@
   <p>
     {{assignment.content}}
   </p>
-  <div *ngIf="user" class="card message-component">
+  <div *ngIf="user && operatingRole !== 'Admin'" class="card message-component">
     <div class="card-body">
       <div *ngIf="messages?.length === 0">
         <p>Discuss this assignment:</p>
