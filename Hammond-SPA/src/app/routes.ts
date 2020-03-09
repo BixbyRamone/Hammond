@@ -80,14 +80,22 @@ export const appRoutes: Routes = [
                 data: {roles: ['Admin', 'Mentor']} },
 
             { path: 'mentor/students', component: MentorStudListComponent,
-                resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor']} },
+                resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor'], operatingRole: 'Mentor'} },
 
             { path: 'mentor/mygroup', component: MentorMyStudentsComponent,
-                resolve: {group: UserMyGroupResolver}, data: {roles: ['Admin', 'Mentor']} },
+                resolve: {group: UserMyGroupResolver}, data: {roles: ['Admin', 'Mentor'], operatingRole: 'Mentor'} },
+
+            { path: 'mentor/assignments', component: AssignmentListComponent,
+                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Mentor'], operatingRole: 'Mentor'} },
+
+            { path: 'mentor/assignment/:id', component: AssignmentDetailComponent,
+                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
+                data: { operatingRole: 'Mentor' } },
+            // =================
 
             { path: 'student', component: StudentLandingComponent,
                 resolve: {user: StudProfileResolver, group: GroupResolver, messages: MessagesResolver },
-                 data: {roles: ['Admin', 'Mentor', 'Student']} },
+                 data: {roles: ['Admin', 'Mentor', 'Student'], operatingRole: 'Admin'} },
 
             { path: 'student/:id/assignment/:assId', component: AssignmentDetailComponent,
                 resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver } },
