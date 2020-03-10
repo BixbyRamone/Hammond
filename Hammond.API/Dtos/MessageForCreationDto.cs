@@ -9,6 +9,7 @@ namespace Hammond.API.Dtos
         public DateTime DateSent { get; set; }
         public string Content { get; set; }
         public int AssignmentId { get; set; }
+        public int GroupId { get; set; }
         public MessageForCreationDto()
         {
             DateSent = DateTime.Now;

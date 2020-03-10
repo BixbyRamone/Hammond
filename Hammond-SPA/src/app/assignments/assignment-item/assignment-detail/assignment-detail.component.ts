@@ -5,7 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Message } from 'src/app/_models/message';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -23,6 +23,7 @@ export class AssignmentDetailComponent implements OnInit {
   userInfoArray: any = [];
   currentStyle = {};
   operatingRole: string;
+  href: string;
   colorOptions = [{'color': 'cornflowerblue'},
                   {'color': 'coral'},
                   {'color': 'goldenrod'},
@@ -36,7 +37,8 @@ export class AssignmentDetailComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
@@ -51,6 +53,7 @@ export class AssignmentDetailComponent implements OnInit {
       console.dir(this.accessor);
     });
     this.generateMessageColor();
+    this.href = this.router.url;
     // this.loadAssignmentMessages(this.user.id, this.assignment.id);
     console.dir(this.messages);
   }
@@ -90,9 +93,10 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   sendMessage() {
-    this.newMessage.recipientId = this.user.id;
+    this.newMessage.recipientId = this.getRecipientId();
     this.newMessage.assignmentId = this.assignment.id;
     this.newMessage.senderId = this.accessor.id;
+    this.newMessage.groupId = this.accessor.userGroups[0].groupId;
     // this.newMessage.senderPhotoUrl = this.authService.currentUser.photoUrl;
     // this.newMessage.senderKnownAs = this.authService.currentUser.username;
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
@@ -103,5 +107,12 @@ export class AssignmentDetailComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  getRecipientId() {
+    const url = this.href.split('/');
+    const returnable = url[url.length - 3];
+
+    return returnable;
   }
 }

@@ -76,7 +76,17 @@ namespace Hammond.API.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var messagesForAssignment = await _repo.GetAssignmentMessages(assignmentId);
+            // convoluted way of getting groupId
+            var user = await _repo.GetUser(userId);
+            var u = user.UserGroups;
+            var groupId = 0;
+            foreach (var ug in u)
+            {
+                groupId = ug.GroupId;
+                break;
+            }
+
+            var messagesForAssignment = await _repo.GetAssignmentMessages(assignmentId, groupId);
 
             var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesForAssignment);
 

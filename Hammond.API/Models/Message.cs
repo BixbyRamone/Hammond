@@ -16,5 +16,6 @@ namespace Hammond.API.Models
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
         public int AssignmentId { get; set; }
+        public int GroupId { get; set; }
     }
 }

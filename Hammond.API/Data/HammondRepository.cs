@@ -99,12 +99,13 @@ namespace Hammond.API.Data
             return messages;
         }
 
-         public async Task<IEnumerable<Message>> GetAssignmentMessages(int assignmentId)
+         public async Task<IEnumerable<Message>> GetAssignmentMessages(int assignmentId, int groupId)
         {
             var messages = await _context.Messages
                 .Include(u => u.Sender)
                 .Include(u => u.Recipient)
                 .Where(m => m.AssignmentId == assignmentId)
+                .Where(m => m.GroupId == groupId)
                 .OrderByDescending(m => m.DateSent)
                 .ToListAsync();
 
