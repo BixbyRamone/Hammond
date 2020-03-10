@@ -15,6 +15,7 @@ export class AssignmentListComponent implements OnInit {
   // @Output() testssss = new EventEmitter();
   // @Input() loadedAssignments;
   assignments: Assignment[];
+  operatingRole: string;
   pagination: Pagination;
   assignmentParams: any = {};
   showAssignmentDetail = false;
@@ -29,6 +30,7 @@ export class AssignmentListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
+      this.operatingRole = data['operatingRole'];
       this.assignments = data['assignments'].result;
       this.pagination = data['assignments'].pagination;
     });

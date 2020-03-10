@@ -21,14 +21,13 @@
       <tab heading="Assignments">
         <br>
           <div *ngFor="let assignment of assignments">
-            <div class="card row" [routerLink]="['/mentor/assignments']">
+            <div class="card row" [routerLink]="['/mentor/assignments', assignment.id]">
               <div class="container">
                 <div class="card-body">
                   <h4>{{assignment.title}}</h4>
               <ul style="list-style-type:none;"> 
-                <li>Date Due: {{assignment.dateDue}}</li>
-                <li>Student Level: {{assignment.studentLevel}}</li>
-                <li>Assigned?: {{assignment.assigned}}</li>
+                <li>Date Due: {{assignment.dateDue | date: 'mediumDate'}}</li>
+                <li>Click for details</li>
               </ul>
                 </div>
               </div>
