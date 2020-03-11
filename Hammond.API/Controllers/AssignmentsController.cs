@@ -103,5 +103,23 @@ namespace Hammond.API.Controllers
             return  Ok(assignmentsToReturn);
         }
 
+        [HttpDelete("{id}/authId/{userId}")]
+        public async Task<IActionResult> DeleteAssignment(int id, int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var assignment = await _repo.GetAssignment(id);
+
+            _repo.Delete(assignment);
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed To Delete User");
+        }
+
     }
 }

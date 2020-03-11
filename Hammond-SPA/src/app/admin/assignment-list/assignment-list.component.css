@@ -2,3 +2,8 @@
     width: 400px;
     cursor: pointer;
 }
+
+.fa {
+    float: right;
+    color: red;
+}

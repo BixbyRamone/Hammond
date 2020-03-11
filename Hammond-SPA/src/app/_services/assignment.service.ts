@@ -55,4 +55,8 @@ getAssignmentMessages(userId, assignmentId): Observable<Message[]> {
   return this.http.get<Message[]>(environment.apiUrl + 'users/' + userId + '/messages/assignment/' + assignmentId);
 }
 
+deleteAssignment(userId: number, id: number) {
+  return this.http.delete(this.baseUrl + id + '/authId/' + userId);
+}
+
 }

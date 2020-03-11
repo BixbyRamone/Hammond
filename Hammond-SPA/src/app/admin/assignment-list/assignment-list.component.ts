@@ -2,8 +2,9 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { AssignmentService } from 'src/app/_services/assignment.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Assignment } from 'src/app/_models/assignment';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-assignment-list',
@@ -26,7 +27,9 @@ export class AssignmentListComponent implements OnInit {
   constructor(
     private assignmentService: AssignmentService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -46,6 +49,17 @@ export class AssignmentListComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
+  }
+
+  deleteAssignment(id: number) {
+    this.alertify.confirm('Are you sure you want to delete this assignment?', () => {
+      this.assignmentService.deleteAssignment(this.authService.decodedToken.nameid, id).subscribe(() => {
+        this.alertify.success('Assignment has been deleted');
+        this.router.navigate(['/admin/assignments']);
+      }, error => {
+        this.alertify.error('Failed to delete assignment');
+      });
+    });
   }
 
   assignmentDetailClick(detailedAssignment: any) {
