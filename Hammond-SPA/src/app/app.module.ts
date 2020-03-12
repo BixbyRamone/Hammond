@@ -64,6 +64,7 @@ import { AssignmentItemComponent } from './assignments/assignment-item/assignmen
 import { AssignmentDetailComponent } from './assignments/assignment-item/assignment-detail/assignment-detail.component';
 import { AssignmentDetailResolver } from './_resolvers/assignment-detail.resolver';
 import { AssignmentMessageResolver } from './_resolvers/assignment-message.resolver';
+import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -73,6 +74,7 @@ export function tokenGetter() {
    declarations: [
       AppComponent,
       AssignmentDetailComponent,
+      AssignmentEditComponent,
       AssignmentItemComponent,
       AssigmentRegistrationComponent,
       AdminLandingComponent,

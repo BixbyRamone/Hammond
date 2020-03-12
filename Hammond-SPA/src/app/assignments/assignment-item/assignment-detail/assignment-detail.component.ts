@@ -52,7 +52,9 @@ export class AssignmentDetailComponent implements OnInit {
       this.accessor = JSON.parse(localStorage.getItem('user'));
       console.dir(this.accessor);
     });
-    this.generateMessageColor();
+    if (this.messages) {
+      this.generateMessageColor();
+    }
     this.href = this.router.url;
     // this.loadAssignmentMessages(this.user.id, this.assignment.id);
     console.dir(this.messages);

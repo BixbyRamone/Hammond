@@ -79,6 +79,34 @@ namespace Hammond.API.Controllers
             throw new Exception("Creating the assignment failed on save");
         }
 
+        [HttpPut("{id}")]
+        private async Task<IActionResult> UpdateAssignment(int id, [FromBody]AssignmentForCreationDto assignmentForUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+                var assignmentFromRepo = await _repo.GetAssignment(assignmentForUpdateDto.Id);
+
+                // _mapper.Map(assignmentForUpdateDto, assignmentFromRepo);
+                assignmentFromRepo = new Assignment
+            {
+                Title = assignmentForUpdateDto.Title,
+                Content = assignmentForUpdateDto.Content,
+                StudentLevel = assignmentForUpdateDto.StudentLevel,
+                Section = assignmentForUpdateDto.Section,
+                DateAssigned = assignmentForUpdateDto.DateAssigned,
+                DateDue = assignmentForUpdateDto.DateDue,
+                Assigned = assignmentForUpdateDto.Assigned,
+                CreatedBy = assignmentForUpdateDto.CreatedBy
+            };
+                
+
+                if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on save");
+        }
+
         [HttpGet("{id}", Name="GetAssignment")]
         public async Task<IActionResult> GetAssignment(int id)
         {

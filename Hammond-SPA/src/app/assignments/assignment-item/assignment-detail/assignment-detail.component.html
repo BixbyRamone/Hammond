@@ -3,9 +3,12 @@
   <h3>
     {{assignment.title}}
   </h3>
+  <p><strong>Due on: {{assignment.dateDue}}</strong></p>
   <p>
     {{assignment.content}}
   </p>
+
+  <!-- Messaging -->
   <div *ngIf="user && operatingRole !== 'Admin'" class="card message-component">
     <div class="card-body">
       <div *ngIf="messages?.length === 0">

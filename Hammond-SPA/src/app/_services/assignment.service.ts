@@ -21,6 +21,11 @@ register(id: number, assignment: Assignment) {
   return this.http.post(this.baseUrl + id, assignment);
 }
 
+updateAssignment(id: number, assignment: Assignment) {
+  debugger
+  return this.http.put(this.baseUrl + id, assignment);
+}
+
 getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedResult<Assignment[]>> {
   const paginatedResult: PaginatedResult<Assignment[]> = new PaginatedResult<Assignment[]>();
   let params = new HttpParams();

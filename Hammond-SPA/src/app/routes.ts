@@ -32,6 +32,7 @@ import { EventsListComponent } from './admin/events-list/events-list.component';
 import { AssignmentDetailComponent } from './assignments/assignment-item/assignment-detail/assignment-detail.component';
 import { AssignmentDetailResolver } from './_resolvers/assignment-detail.resolver';
 import { AssignmentMessageResolver } from './_resolvers/assignment-message.resolver';
+import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -68,7 +69,7 @@ export const appRoutes: Routes = [
             { path: 'admin/users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver },
                 data: { operatingRole: 'Admin' } },
 
-            { path: 'admin/assignment/:id', component: AssignmentDetailComponent,
+            { path: 'admin/assignment/:id', component: AssignmentEditComponent,
                 resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
                 data: { operatingRole: 'Admin' } },
             // ===============
