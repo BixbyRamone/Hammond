@@ -80,25 +80,19 @@ namespace Hammond.API.Controllers
         }
 
         [HttpPut("{id}")]
-        private async Task<IActionResult> UpdateAssignment(int id, [FromBody]AssignmentForCreationDto assignmentForUpdateDto)
+        public async Task<IActionResult> UpdateAssignment(int id, AssignmentForUpdateDto assignmentForUpdateDto)
         {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
                 var assignmentFromRepo = await _repo.GetAssignment(assignmentForUpdateDto.Id);
 
-                // _mapper.Map(assignmentForUpdateDto, assignmentFromRepo);
-                assignmentFromRepo = new Assignment
-            {
-                Title = assignmentForUpdateDto.Title,
-                Content = assignmentForUpdateDto.Content,
-                StudentLevel = assignmentForUpdateDto.StudentLevel,
-                Section = assignmentForUpdateDto.Section,
-                DateAssigned = assignmentForUpdateDto.DateAssigned,
-                DateDue = assignmentForUpdateDto.DateDue,
-                Assigned = assignmentForUpdateDto.Assigned,
-                CreatedBy = assignmentForUpdateDto.CreatedBy
-            };
+            assignmentFromRepo.Title = assignmentForUpdateDto.Title;
+            assignmentFromRepo.Content = assignmentForUpdateDto.Content;
+            assignmentFromRepo.StudentLevel = assignmentForUpdateDto.StudentLevel;
+            assignmentFromRepo.Section = assignmentForUpdateDto.Section;
+            assignmentFromRepo.DateDue = assignmentForUpdateDto.DateDue;
+            assignmentFromRepo.Assigned = assignmentForUpdateDto.Assigned;
                 
 
                 if (await _repo.SaveAll())

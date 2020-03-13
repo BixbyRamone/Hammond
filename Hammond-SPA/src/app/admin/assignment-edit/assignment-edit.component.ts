@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AssignmentService } from 'src/app/_services/assignment.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Assignment } from 'src/app/_models/assignment';
 import { AuthService } from 'src/app/_services/auth.service';
 
@@ -20,7 +20,8 @@ export class AssignmentEditComponent implements OnInit {
               private assignmentService: AssignmentService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private authService: AuthService) { }
+              private authService: AuthService,
+            private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -33,6 +34,7 @@ export class AssignmentEditComponent implements OnInit {
 
   createAssignmentForm() {
     this.editForm = this.fb.group({
+      id: [this.assignment.id],
       title: [this.assignment.title, Validators.required],
       content: [this.assignment.content, Validators.required],
       studentLevel: [this.assignment.studentLevel, Validators.required],
@@ -48,6 +50,7 @@ export class AssignmentEditComponent implements OnInit {
 
       this.assignmentService.updateAssignment(this.authService.decodedToken.nameid, this.assignment).subscribe(() => {
         this.aleritfy.success('Assignment updated');
+        this.router.navigate(['/admin/assignments']);
       }, error => {
         console.log(error);
         this.aleritfy.error(error);

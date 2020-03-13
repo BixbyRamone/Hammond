@@ -22,7 +22,6 @@ register(id: number, assignment: Assignment) {
 }
 
 updateAssignment(id: number, assignment: Assignment) {
-  debugger
   return this.http.put(this.baseUrl + id, assignment);
 }
 
