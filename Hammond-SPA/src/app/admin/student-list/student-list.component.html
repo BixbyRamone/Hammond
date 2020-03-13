@@ -2,6 +2,7 @@
   <div class="container mt-4">
       <i class="fa fa-arrow-circle-left" [routerLink]="['/admin']"></i>
     <div class="">
+      <h4>{{userType}}s</h4>
       <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
         <div class="form-group px-2">
           <label for="gradeLevel">Grade: </label>
@@ -32,8 +33,7 @@
           Reset Filter
         </button>
       </form>
-      <div>{{userType}}</div>
-      <p>{{userParams.Role}}</p>
+      <br>
       <div *ngFor="let user of users" class="">
         <app-user-item [user]="user"></app-user-item>
       </div>

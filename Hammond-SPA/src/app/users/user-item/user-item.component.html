@@ -15,14 +15,16 @@
             class="link user-name-column col-md-3 col-lg-3">
               {{user.username}}
             </div>
-            <div 
+            <!-- <div 
             class="link user-name-column col-md-3 col-lg-3">
               <div *ngFor="let role of user.userRoles">{{role.role.name}}</div>
-            </div>
+            </div> -->
             <div *ngIf="user.studentLevel">
               {{user.studentLevel}}
             </div>
+             
           </div>
+          <i (click)="deleteUser(user.id)" class="fa fa-trash"></i>
         </div>
   </div>
   
