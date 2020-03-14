@@ -52,7 +52,9 @@
   
     <ng-container *ngIf="actExpandView">
       <ul>
-      <li id="act-score" *ngFor="let actScore of this.user.actScores">{{actScore.score}} taken on {{actScore.dayOfScore | date: 'mediumDate'}}</li>
+      <li id="act-score" *ngFor="let actScore of this.user.actScores">
+        {{actScore.score}} taken on {{actScore.dayOfScore | date: 'mediumDate'}}
+        <i (click)="deleteActScore(actScore.id)" class="fa fa-minus-circle"></i></li>
       </ul>
     </ng-container>
  
@@ -131,7 +133,7 @@
     <app-user-messages [recipientId]="user.id"></app-user-messages>
   </div>
 
-  <button class="btn btn-primary mt-5" (click)="deleteUser(user.id)">
+  <button *ngIf="operatingUserRole=='Admin'" class="btn btn-primary mt-5" (click)="deleteUser(user.id)">
     Delete {{user.firstName}}  {{user.lastName}}'s profile
   </button>
 

@@ -167,8 +167,23 @@ namespace Hammond.API.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
-
             
+        }
+
+        [HttpDelete("actScores/{id}/authId/{authId}")]
+        public async Task<IActionResult> DeleteActScore(int id, int authId)
+        {
+            if (authId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var actScoreToDelete = await _repo.GetActScore(id);
+
+            _repo.Delete(actScoreToDelete);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Removing ACT score failed on save");
         }
 
 

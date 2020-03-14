@@ -286,5 +286,10 @@ namespace Hammond.API.Data
         {
             return await _context.UserGroups.FirstOrDefaultAsync(ug => ug.UserId == id);
         }
+
+        public async Task<ActScore> GetActScore(int id)
+        {
+            return await _context.ActScores.FirstOrDefaultAsync(a => a.Id == id);
+        }
     }
 }

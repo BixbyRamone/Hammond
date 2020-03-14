@@ -80,6 +80,10 @@ updateUserActScores(id: number, user: User, actForm: any) {
   return this.http.put(this.baseUrl + 'users/actscores/' + id, user);
 }
 
+deleteActScore(authId: number, id: number) {
+  return this.http.delete(this.baseUrl + 'users/actScores/' + id + '/authId/' + authId);
+}
+
 getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
   const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
 

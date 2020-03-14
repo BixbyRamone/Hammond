@@ -20,3 +20,8 @@
 .username {
     font-weight: bold;
 }
+
+.fa-minus-circle {
+    color: red;
+    cursor: pointer;
+}

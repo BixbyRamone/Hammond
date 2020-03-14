@@ -140,6 +140,18 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  deleteActScore(id: number) {
+    this.alertify.confirm('Remove this ACT score?', () => {
+      this.userService.deleteActScore(this.authService.decodedToken.nameid, id).subscribe(() => {
+        this.alertify.success('ACT score deleted');
+        this._document.defaultView.location.reload();
+      }, error => {
+        console.log(error);
+        this.alertify.error('Failed to remove ACT score');
+      });
+    });
+  }
+
   getTrueRoles() {
     const trueRoles = [];
     this.roleOptions.filter((opt) => {
