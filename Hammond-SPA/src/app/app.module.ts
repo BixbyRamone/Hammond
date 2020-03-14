@@ -65,6 +65,8 @@ import { AssignmentDetailComponent } from './assignments/assignment-item/assignm
 import { AssignmentDetailResolver } from './_resolvers/assignment-detail.resolver';
 import { AssignmentMessageResolver } from './_resolvers/assignment-message.resolver';
 import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
+import { EventEditComponent } from './admin/events-tab/event-edit/event-edit.component';
+import { EventViewResolver } from './_resolvers/event-view.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -80,6 +82,7 @@ export function tokenGetter() {
       AdminLandingComponent,
       AssignmentListComponent,
       AssignmentTabComponent,
+      EventEditComponent,
       EventsListComponent,
       EventRegistrationComponent,
       EventsTabComponent,
@@ -141,6 +144,7 @@ export function tokenGetter() {
       GroupService,
       AssignmentListResolver,
       EventListResolver,
+      EventViewResolver,
       GroupResolver,
       MessagesResolver,
       StudentListResolver,

@@ -3,7 +3,8 @@ import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { Evnt } from 'src/app/_models/event';
 import { EventService } from 'src/app/_services/event.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-events-list',
@@ -15,17 +16,21 @@ export class EventsListComponent implements OnInit {
   // @Input() evnts;
   pagination: Pagination;
   evnts: Evnt[];
+  alertifyMessage: string;
 
   constructor(
     private eventService: EventService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.evnts = data['evnts'].result;
       this.pagination = data['evnts'].pagination;
+      this.alertifyMessage = 'Are you certain that you want to delete ';
     });
   }
 
@@ -36,6 +41,18 @@ export class EventsListComponent implements OnInit {
       this.pagination = res.pagination;
     }, error => {
       this.alertify.error(error);
+    });
+  }
+
+  deleteEvent(evnt: Evnt) {
+    this.alertify.confirm(this.alertifyMessage + evnt.title , () => {
+      this.eventService.deleteEvent(this.authService.decodedToken.nameid, evnt.id).subscribe(() => {
+        this.alertify.success('Event has been deleted');
+        this.router.navigate(['/admin/events']);
+      }, error => {
+        console.log(error);
+        this.alertify.error('Failed to delete this event');
+      });
     });
   }
 

@@ -43,7 +43,15 @@ getEvents(page?, itemsPerPage?): Observable<PaginatedResult<Evnt[]>> {
 }
 
 getEvent(id): Observable<Evnt> {
-  return this.http.get<Evnt>(this.baseUrl + 'events/' + id);
+  return this.http.get<Evnt>(this.baseUrl + id);
+}
+
+deleteEvent(authId: number, id: number) {
+  return this.http.delete(this.baseUrl + id + '/authId/' + authId);
+}
+
+updateEvent(id: number, event: Evnt) {
+  return this.http.put(this.baseUrl + id, event);
 }
 
 }

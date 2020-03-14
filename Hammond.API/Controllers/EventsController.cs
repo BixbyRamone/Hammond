@@ -68,5 +68,42 @@ namespace Hammond.API.Controllers
 
             throw new Exception("Creating the assignment failed on save");
         }
+
+        [HttpDelete("{id}/authId/{userId}")]
+        public async Task<IActionResult> DeleteEvent(int id, int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var eventToDel = await _repo.GetEvent(id);
+
+            _repo.Delete(eventToDel);
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed To Delete Event");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateEvent(int id, [FromBody]EventForUpdateDto eventToUpdateDto)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var eventToUpdate = await _repo.GetEvent(eventToUpdateDto.Id);
+
+            _mapper.Map(eventToUpdateDto, eventToUpdate);
+
+            if (await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+                
+
+            throw new Exception($"Updating event {id} failed on save");            
+        }
     }
 }

@@ -15,12 +15,13 @@
   </form>
   <br>
   <div class="events-list" *ngFor="let event of evnts">
-    <div class="card row">
+    <div class="card row" [routerLink]="['/admin/events/', event.id]">
       <div class="container">
         <div class="card-body">
           <strong>{{event.title}}:&nbsp;&nbsp;</strong>
           <p *ngIf="event.eventDate">{{event.title}} will be occuring on {{event.eventDate | date: 'mediumDate'}}</p>
           <p *ngIf="!event.eventDate">Date is to be determined</p>
+          <i (click)="deleteEvent(event)" class="fa fa-trash"></i>
         </div>
       </div>
     </div>

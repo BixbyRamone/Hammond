@@ -1,0 +1,8 @@
+.fa-trash {
+    float: right;
+    color: red;
+}
+
+.card {
+    cursor: pointer;
+}
