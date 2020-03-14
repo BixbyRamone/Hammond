@@ -129,7 +129,7 @@
     Last Active : {{user.lastActive | date: 'mediumDate'}}
   </div>
   
-  <div class="mt-4">
+  <div *ngIf="user.id.toString() != operatingUserId.toString()" class="mt-4">
     <app-user-messages [recipientId]="user.id"></app-user-messages>
   </div>
 

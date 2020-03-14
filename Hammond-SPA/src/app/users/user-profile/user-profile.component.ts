@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   groupMembers: any;
   operatingUserRole: any;
   operatingUserName: any;
+  operatingUserId: number;
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
@@ -43,6 +44,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
+      this.operatingUserId = this.authService.decodedToken.nameid;
       this.user = data['user'];
       if (this.user.userGroups.length > 0) {
         this.groupService.getGroup(this.user.userGroups[0].groupId)
@@ -52,6 +54,9 @@ export class UserProfileComponent implements OnInit {
           this.alertify.error(error);
         });
       }
+      console.log(this.operatingUserId);
+      console.log(this.user.id);
+      console.log(this.operatingUserId==this.user.id);
       this.operatingUserRole = this.authService.decodedToken.role;
       this.operatingUserName = this.authService.decodedToken.unique_name;
       console.log(this.user);

@@ -82,7 +82,7 @@ namespace Hammond.API.Controllers
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto) {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
-                
+            userForUpdateDto.ActScores = null; // prevent ACT scores from interfering with profile update
             var userFromRepo = await _repo.GetUser(userForUpdateDto.id);
 
             _mapper.Map(userForUpdateDto, userFromRepo);
