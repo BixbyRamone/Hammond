@@ -14,16 +14,17 @@
       <input rows="1" class="form-control input-sm" type="text" [(ngModel)]="user.lastName" name="last">
       <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
       <button id="btn-cancel" class="btn" (click)="this.nameEditClick()">Cancel</button>
-    </form>
-    
+    </form>    
   </div>
-
+  <div class="username">Username: {{user.username}}</div>
   <div class="row prof-ind">
     <div class="" *ngFor="let userRole of user.userRoles">
       <!-- <p *ngIf="userRole !== user.userRoles[0]">, </p> -->
       <div> _{{userRole.role.name}}</div>
     </div>
-    <p *ngIf="!roleEditOn && operatingUserRole == 'Admin'" id="role-edit-link" (click)="roleEditClick()">edit</p>
+    <p *ngIf="!roleEditOn && operatingUserRole == 'Admin' && user.userRoles[0].role.name != 'Student'"
+    id="role-edit-link"
+    (click)="roleEditClick()">edit</p>
     <p *ngIf="roleEditOn" id="role-edit-link" (click)="roleEditClick()">cancel</p>
   </div>
 

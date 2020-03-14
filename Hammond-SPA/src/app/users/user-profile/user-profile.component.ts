@@ -54,7 +54,7 @@ export class UserProfileComponent implements OnInit {
       }
       this.operatingUserRole = this.authService.decodedToken.role;
       this.operatingUserName = this.authService.decodedToken.unique_name;
-
+      console.log(this.user);
       // may change so that admin needs to be in specific role to access admin features
       if (this.operatingUserRole.length > 1) {
         if (this.operatingUserRole.includes('Admin')) {
