@@ -4,4 +4,18 @@
 
 .fa-plus-circle, .fa-minus-circle {
     float: right;
+    color: slategray;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .fa-upper {
+    display: none;
+    }
+}
+@media only screen and (min-width: 800px) {
+    .fa-lower {
+    display: none;
+    }
 }

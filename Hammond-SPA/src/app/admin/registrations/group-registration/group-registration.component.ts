@@ -109,6 +109,9 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   createGroup(groupIdsObj: any) {
+    if (this.show === false) {
+      this.toggle();
+    }
     this.usersInGroup = [];
     groupIdsObj.volunteerIds.forEach(id => {
       const usr = this.users.find(u => u.id === id);
@@ -135,6 +138,7 @@ export class GroupRegistrationComponent implements OnInit {
       volunteerIds: [],
       studentIds: []
     };
+    this.usersInGroup = [];
     // this._document.defaultView.location.reload();
   }
 
