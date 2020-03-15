@@ -79,7 +79,6 @@ export class UserProfileComponent implements OnInit {
       });
       this.studentLeveltOptions.forEach(element => {
         element.checked = element.value === this.user.studentLevel;
-        console.log(this.studentLeveltOptions);
       });
     });
   }
@@ -133,9 +132,18 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateStudentLevel(this.authService.decodedToken.nameid, this.user, sL.value)
       .subscribe(next => {
         this.alertify.success('Profile updated successfully');
+        console.log(this.user);
+        if (this.user.userGroups.length > 0) {
+          this.groupService.removeUserFromGroup(this.user.id, this.authService.decodedToken.nameid).subscribe(() => {
+          }, er => {
+            console.log(er);
+            this.alertify.error(er);
+      });
+        }
       }, error => {
         console.log(error);
         this.alertify.error(error.message);
+
       });
       this.studentLevelEditOn = false;
   }
@@ -240,7 +248,6 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
          item.checked = true;
       }
     });
-    console.log(this.studentLeveltOptions);
   }
 
 }
