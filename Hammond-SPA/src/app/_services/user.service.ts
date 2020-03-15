@@ -74,6 +74,14 @@ updateUserRoles(id: number, user: User, newRoles: any) {
   return this.http.put(this.baseUrl + 'users/roles/' + id, user);
 }
 
+updateStudentLevel(id: number, user: User, studLev: string) {
+  if (studLev) {
+    user.studentLevel = studLev;
+  }
+  debugger
+  return this.http.put(this.baseUrl + 'users/' + id, user);
+}
+
 updateUserActScores(id: number, user: User, actForm: any) {
   user.actScores = [];
   user.actScores.push(actForm.value);

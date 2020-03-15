@@ -44,6 +44,32 @@
       <button id="btn-cancel" class="btn" (click)="this.roleEditClick()">Cancel</button>
     </form>
   </div>
+
+  <div class="row">
+    <div class="prof-ind">{{user.studentLevel}}</div>
+  <p *ngIf="!roleEditOn && operatingUserRole == 'Admin' && user.userRoles[0].role.name != 'Student'"
+    id="stud-level-edit-link"
+    (click)="studentLevelEditOn = !studentLevelEditOn">edit</p>
+  </div>
+  
+  <div *ngIf="studentLevelEditOn">
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateStudentLevel(editForm)">
+      <div *ngFor="let s of studentLeveltOptions">
+        <label class="radio-inline">
+          <input
+            type="radio"
+            name="stud-lev"
+            [checked]="s.checked"
+            (click)="radioChecked(s.id)">
+          {{ s.name }}
+            <br>
+        </label>
+      </div>      
+      <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
+      <button id="btn-cancel" class="btn" (click)="studentLevelEditOn = !studentLevelEditOn">Cancel</button>
+    </form>
+  </div>
+
   <ng-container *ngIf="testForStudentRole()">
     <div class="row prof-ind">
       ACT Scores: 

@@ -23,10 +23,14 @@ export class UserProfileComponent implements OnInit {
   alertifyMessage: string;
   nameEditOn = false;
   roleEditOn = false;
+  studentLevelEditOn = false;
   addActOn = false;
   roleOptions = [{value: 'tutor', name: 'Tutor', checked: false, roleId: 2},
                  {value: 'mentor', name: 'Mentor', checked: false, roleId: 3},
                  {value: 'admin', name: 'Admin', checked: false, roleId: 4} ];
+  studentLeveltOptions = [{value: 'sophomore', name: 'Sophomore', checked: false, id: 1},
+                          {value: 'junior', name: 'Junior', checked: false, id: 2},
+                          {value: 'senior', name: 'Senior', checked: false, id: 3}];
   actForm: FormGroup;
   actAvg: any;
   actExpandView = false;
@@ -54,12 +58,8 @@ export class UserProfileComponent implements OnInit {
           this.alertify.error(error);
         });
       }
-      console.log(this.operatingUserId);
-      console.log(this.user.id);
-      console.log(this.operatingUserId==this.user.id);
       this.operatingUserRole = this.authService.decodedToken.role;
       this.operatingUserName = this.authService.decodedToken.unique_name;
-      console.log(this.user);
       // may change so that admin needs to be in specific role to access admin features
       if (this.operatingUserRole.length > 1) {
         if (this.operatingUserRole.includes('Admin')) {
@@ -74,14 +74,18 @@ export class UserProfileComponent implements OnInit {
 
       let iterator = 2; // starts at 2 to line up with id #'s;
       this.roleOptions.forEach(element => {
-        element.checked = this.createCheckedState(iterator);
+        element.checked = this.createCheckedState(iterator, this.user.userRoles);
         iterator++;
+      });
+      this.studentLeveltOptions.forEach(element => {
+        element.checked = element.value === this.user.studentLevel;
+        console.log(this.studentLeveltOptions);
       });
     });
   }
 
-  createCheckedState(roleId: number) {
-    const returnable = this.user.userRoles.filter((opt) => {
+  createCheckedState(roleId: number, array: any[]) {
+    const returnable = array.filter((opt) => {
       return opt.role.id === roleId;
     })[0];
      if (returnable) {
@@ -119,9 +123,21 @@ export class UserProfileComponent implements OnInit {
         this.alertify.success('Profile updated successfully');
       }, error => {
         console.log(error);
-        this.alertify.error(error);
+        this.alertify.error(error.message);
       });
       this.roleEditOn = false;
+  }
+
+  updateStudentLevel(editForm: NgForm) {
+    const sL = this.studentLeveltOptions.find(e => e.checked === true);
+    this.userService.updateStudentLevel(this.authService.decodedToken.nameid, this.user, sL.value)
+      .subscribe(next => {
+        this.alertify.success('Profile updated successfully');
+      }, error => {
+        console.log(error);
+        this.alertify.error(error.message);
+      });
+      this.studentLevelEditOn = false;
   }
 
   createActForm() {
@@ -214,6 +230,17 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
 
   actExpandClick() {
     this.actExpandView = !this.actExpandView;
+  }
+
+  radioChecked(id) {
+    this.studentLeveltOptions.forEach(item => {
+      if (item.id !== id) {
+         item.checked = false;
+      } else {
+         item.checked = true;
+      }
+    });
+    console.log(this.studentLeveltOptions);
   }
 
 }

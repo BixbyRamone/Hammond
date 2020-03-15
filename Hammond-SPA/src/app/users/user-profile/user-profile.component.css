@@ -25,3 +25,13 @@
     color: red;
     cursor: pointer;
 }
+
+#stud-level-edit-link {
+  margin-left: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+  color: #ff9900;
+  cursor: pointer;
+}
