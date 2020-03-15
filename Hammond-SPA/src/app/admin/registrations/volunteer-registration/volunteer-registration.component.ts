@@ -48,8 +48,9 @@ export class VolunteerRegistrationComponent implements OnInit {
       this.authService.register(this.user, this.user.userRole).subscribe(() => {
         this.alertify.success('Registration succesful');
       }, error => {
-        console.log('error: ' + error);
-        this.alertify.error(error);
+        // const util = require('util');
+        // console.dir(util.inspect(error, false, null, true /* enable colors */));
+        this.alertify.error(error.error[0].description);
       });
     }
   }
