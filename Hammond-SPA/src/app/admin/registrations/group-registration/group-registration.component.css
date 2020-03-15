@@ -1,3 +1,7 @@
 .card {
     cursor: pointer;
 }
+
+.fa-plus-circle, .fa-minus-circle {
+    float: right;
+}

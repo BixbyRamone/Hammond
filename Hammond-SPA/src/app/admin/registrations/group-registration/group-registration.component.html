@@ -24,6 +24,7 @@
               user.userRoles[0].user.userGroups.length < 1 && !user.grouped">
                 <li class="card-body" (click)="groupUser(user)">
                   {{user.lastName}}, {{user.firstName}}
+                  <i class="fa fa-plus-circle"></i>
                 </li>
               </div>
           </div>
@@ -33,9 +34,10 @@
         <h4>&nbsp;</h4>
         <ul class="" style="list-style-type: none;">
           <div *ngIf="isGroup > 0" class="card">
-            <div class="card-body" *ngFor="let user of users">
+            <div class="card-body" *ngFor="let user of usersInGroup">
               <li (click)="ungroupUser(user)" *ngIf="user.grouped">
                 {{user.lastName}}, {{user.firstName}}
+                <i class="fa fa-minus-circle"></i>
               </li>
             </div>
             <button [disabled]="this.groupToRegister.studentIds.length < 1 ||
@@ -53,6 +55,7 @@
                user.userRoles[0].user.userGroups.length < 1 && !user.grouped">
                 <li class="card-body" (click)="groupUser(user)">
                   {{user.lastName}}, {{user.firstName}}
+                  <i class="fa fa-plus-circle"></i>
                 </li>
               </div>
               </div>

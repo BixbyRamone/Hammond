@@ -37,6 +37,7 @@ export class GroupRegistrationComponent implements OnInit {
   @Output() clicked = new EventEmitter();
   // @Input() users: User[];
   users: User[];
+  usersInGroup: User[];
   userParams: any = {};
   pagination: Pagination;
   groupToRegister: GroupToCreate = {
@@ -86,6 +87,7 @@ export class GroupRegistrationComponent implements OnInit {
     if (user.userRoles[0].role.normalizedName === 'MENTOR') {
       this.groupToRegister.volunteerIds.push(user.id);
     }
+    this.createGroup(this.groupToRegister);
     console.dir(this.groupToRegister);
 
     this.isGroup++;
@@ -101,8 +103,22 @@ export class GroupRegistrationComponent implements OnInit {
       const elementToRemove = this.groupToRegister.volunteerIds.indexOf(user.id);
       this.groupToRegister.volunteerIds.splice(elementToRemove, 1);
     }
+    this.createGroup(this.groupToRegister);
     console.dir(this.groupToRegister);
     this.isGroup--;
+  }
+
+  createGroup(groupIdsObj: any) {
+    this.usersInGroup = [];
+    groupIdsObj.volunteerIds.forEach(id => {
+      const usr = this.users.find(u => u.id === id);
+      this.usersInGroup.push(usr);
+    });
+    groupIdsObj.studentIds.forEach(id => {
+      const usr = this.users.find(u => u.id === id);
+      this.usersInGroup.push(usr);
+    });
+    console.log(this.usersInGroup);
   }
 
   register() {
