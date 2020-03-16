@@ -68,7 +68,7 @@ export class UserProfileComponent implements OnInit {
       }
       this.createActForm();
       this.actAvg = this.averageActScore();
-
+      console.log(this.user);
       this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
       this.user.lastName + '\'s profile?';
 

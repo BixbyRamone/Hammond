@@ -20,6 +20,8 @@ namespace Hammond.API.Dtos
 
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public string Email { get; set; }
         public string StudentLevel { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime LastActive { get; set; }

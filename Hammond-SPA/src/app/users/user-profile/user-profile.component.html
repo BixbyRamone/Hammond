@@ -5,6 +5,9 @@
     {{user.firstName}} {{user.lastName}}  
     <p *ngIf="operatingUserRole == 'Admin'" (click)="nameEditClick()" id="name-edit-link">edit</p>
   </div>
+  <div class="row prof">
+    {{user.email}}
+  </div>
 
   <div id="name-edit" class="row input-group-append" *ngIf="nameEditOn">
     <!-- <input class="form-control input-sm" type="text" value="{{user.firstName}}"> -->
