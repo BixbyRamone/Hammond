@@ -79,4 +79,17 @@ export class GroupsListComponent implements OnInit {
     }
   }
 
+  resetFilter() {
+    // this.userParams.roleName = this.userType.toLowerCase();
+    this.userParams.studentLevel = 'all';
+    // this.userParams.volunteerType = this.userType.toLowerCase();
+    this.pagination.itemsPerPage = 10;
+    this.loadGroups();
+  }
+
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadGroups();
+  }
+
 }
