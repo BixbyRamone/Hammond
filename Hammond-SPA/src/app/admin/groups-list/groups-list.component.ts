@@ -16,7 +16,9 @@ export class GroupsListComponent implements OnInit {
   groups: Group[];
   pagination: Pagination;
   userParams: any = {};
-  studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'},
+  studentLevel = [{value: 'all', display: 'All'},
+                  {value: 'sophomore', display: 'Sophomores'},
+                  {value: 'junior', display: 'Juniors'},
                   {value: 'senior', display: 'Seniors'} ];
 
   constructor(
@@ -32,12 +34,14 @@ export class GroupsListComponent implements OnInit {
       this.pagination = data['groups'].pagination;
     });
     console.dir(this.groups);
+    this.userParams.studentLevel = 'all';
   }
 
   loadGroups() {
     this.groupService.getGroups(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<Group[]>) => {
         this.groups = res.result;
+        console.log(this.groups);
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);

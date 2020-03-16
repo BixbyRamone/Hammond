@@ -15,10 +15,13 @@ export class StudentListComponent implements OnInit {
   pagination: Pagination;
   userParams: any = {};
   userType: string;
-  studentLevel = [{value: 'all', display: 'All Grades'}, {value: 'sophomore', display: 'Sophomores'},
-                  {value: 'junior', display: 'Juniors'}, {value: 'senior', display: 'Seniors'} ];
+  studentLevel = [{value: 'all', display: 'All Grades'},
+                  {value: 'sophomore', display: 'Sophomores'},
+                  {value: 'junior', display: 'Juniors'},
+                  {value: 'senior', display: 'Seniors'} ];
   volunteerType = [{value: 'volunteer', display: 'All Volunteers'},
-                  {value: 'mentor', display: 'Mentors'}, {value: 'tutor', display: 'Tutors'} ];
+                  {value: 'mentor', display: 'Mentors'},
+                  {value: 'tutor', display: 'Tutors'} ];
 
   constructor(
     private userService: UserService,

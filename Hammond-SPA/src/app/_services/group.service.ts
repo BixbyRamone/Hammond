@@ -32,7 +32,9 @@ getGroups(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<Group[]
   }
 
   if (userParams) {
-    params = params.append('studentLevel', userParams.studentLevel);
+    if (userParams.studentLevel !== 'all') {
+      params = params.append('studentLevel', userParams.studentLevel);
+    }
     // params = params.append('groupId', userParams.groupId);
   }
 
