@@ -3,10 +3,7 @@
   <i *ngIf="testForStudentRole() === false" class="fa fa-arrow-circle-left" [routerLink]="['/admin/volunteers']"></i>
   <div *ngIf="!nameEditOn" class="row prof mt-4">
     {{user.firstName}} {{user.lastName}}  
-    <p *ngIf="operatingUserRole == 'Admin'" (click)="nameEditClick()" id="name-edit-link">edit</p>
-  </div>
-  <div class="row prof">
-    {{user.email}}
+    <p  class="edit-link" *ngIf="operatingUserRole == 'Admin'" (click)="nameEditClick()" id="name-edit-link">edit</p>
   </div>
 
   <div id="name-edit" class="row input-group-append" *ngIf="nameEditOn">
@@ -19,13 +16,34 @@
       <button id="btn-cancel" class="btn" (click)="this.nameEditClick()">Cancel</button>
     </form>    
   </div>
-  <div class="username">Username: {{user.username}}</div>
+
+  <div class="small-bold">Username: {{user.username}}</div>
+
+  <div *ngIf="!emailEditOn" class="row small-bold ml-1">
+    {{user.email}}
+    <p class="edit-link"
+        *ngIf="operatingUserRole == 'Admin'"
+        (click)="emailEditOn = !emailEditOn"
+        id="email-edit-link">edit</p>
+  </div>
+
+  <div id="email-edit" class="row input-group-append" *ngIf="emailEditOn">
+    <!-- <input class="form-control input-sm" type="text" value="{{user.firstName}}"> -->
+    <!-- <input class="form-control input-sm" type="text" value="{{user.lastName}}"> -->
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(editForm)">
+      <input rows="1" class="form-control input-sm" type="text" [(ngModel)]="user.email" name="email">
+      <button id="btn-primary" class="btn btn-primary" type="submit">Update</button>
+      <button id="btn-cancel" class="btn" (click)="emailEditOn = !emailEditOn">Cancel</button>
+    </form>    
+  </div>
+
   <div class="row prof-ind">
     <div class="" *ngFor="let userRole of user.userRoles">
       <!-- <p *ngIf="userRole !== user.userRoles[0]">, </p> -->
       <div> _{{userRole.role.name}}</div>
     </div>
     <p *ngIf="!roleEditOn && operatingUserRole == 'Admin' && user.userRoles[0].role.name != 'Student'"
+    class="edit-link"
     id="role-edit-link"
     (click)="roleEditClick()">edit</p>
     <p *ngIf="roleEditOn" id="role-edit-link" (click)="roleEditClick()">cancel</p>
@@ -51,6 +69,7 @@
   <div class="row">
     <div class="prof-ind">{{user.studentLevel}}</div>
   <p *ngIf="!roleEditOn && operatingUserRole == 'Admin' && user.userRoles[0].role.name != 'Student'"
+  class="edit-link"
     id="stud-level-edit-link"
     (click)="studentLevelEditOn = !studentLevelEditOn">edit</p>
   </div>
@@ -74,9 +93,13 @@
   </div>
 
   <ng-container *ngIf="testForStudentRole()">
-    <div class="row prof-ind">
+    <div class="act-sect row prof-ind">
       ACT Scores: 
-    <div *ngIf="user.actScores.length > 0" id="act-exp-link" (click)="actExpandClick()"> Average of {{actAvg }} <i class="fa fa-caret-down"></i></div>  
+    <div *ngIf="user.actScores.length > 0" id="act-exp-link" (click)="actExpandView = !actExpandView">
+       Average of {{actAvg }}
+       <i *ngIf="!actExpandView" class="fa fa-caret-down"></i>
+       <i *ngIf="actExpandView" class="fa fa-caret-up"></i>
+      </div>  
     </div>
   
     <ng-container *ngIf="actExpandView">
@@ -118,21 +141,7 @@
       Assignments: <i class="fa fa-caret-left"></i> &nbsp; <i class="fa fa-caret-right"></i>
     </h4>
     <ul style="list-style-type:none;" *ngFor="let assignment of user.userAssignments">
-      <!-- <div class="card">
-        <div class="container">
-
-          <li class="card-body" *ngIf="operatingUserRole === 'Student'"
-          [routerLink]="['/student', user.id, 'assignment', assignment.assignmentId]">
-          <strong>{{assignment.assignment.title}}</strong>: 
-          {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
-
-          <li class="card-body" *ngIf="operatingUserRole === 'Mentor' || operatingUserRole === 'Admin' || operatingUserRole === 'Tutor'"
-          [routerLink]="['/mentor', user.id, 'assignment', assignment.assignmentId]">
-          <strong>{{assignment.assignment.title}}</strong>: 
-          {{assignment.assignment.dateDue | date: 'mediumDate'}}</li>
-
-        </div>
-      </div> -->
+      
       <app-assignment-item [user]="user" [assignment]="assignment"></app-assignment-item>
     </ul>
   </ng-container>

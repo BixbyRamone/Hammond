@@ -24,6 +24,7 @@ export class UserProfileComponent implements OnInit {
   nameEditOn = false;
   roleEditOn = false;
   studentLevelEditOn = false;
+  emailEditOn = false;
   addActOn = false;
   roleOptions = [{value: 'tutor', name: 'Tutor', checked: false, roleId: 2},
                  {value: 'mentor', name: 'Mentor', checked: false, roleId: 3},
@@ -114,6 +115,7 @@ export class UserProfileComponent implements OnInit {
         this.alertify.error(error);
       });
       this.nameEditOn = false;
+      this.emailEditOn = false;
     }
 
   updateUserRoles(editForm: NgForm) {
@@ -234,10 +236,6 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
 
   actAddOnClick() {
     this.addActOn = !this.addActOn;
-  }
-
-  actExpandClick() {
-    this.actExpandView = !this.actExpandView;
   }
 
   radioChecked(id) {

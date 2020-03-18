@@ -6,18 +6,25 @@
     margin-left: 15px;
 }
 
-#act-exp-link {
+.edit-link {
+    margin-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
     text-decoration: underline;
-    color:  #ff9900;
-    white-space: pre;
+    color: #ff9900;
     cursor: pointer;
+}
+
+.act-sect {
+    margin-top: 4px;
 }
 
 .card {
     cursor: pointer;
 }
 
-.username {
+.small-bold {
     font-weight: bold;
 }
 
@@ -26,7 +33,7 @@
     cursor: pointer;
 }
 
-#stud-level-edit-link {
+/* #stud-level-edit-link {
   margin-left: 15px;
   font-size: 15px;
   font-weight: bold;
@@ -34,4 +41,4 @@
   text-decoration: underline;
   color: #ff9900;
   cursor: pointer;
-}
+} */
