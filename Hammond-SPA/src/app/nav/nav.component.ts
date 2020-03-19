@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  roles: any;
-  role: any;
+  roles: any = null;
+  role: any = null;
 
   constructor(
     public authService: AuthService,
@@ -18,7 +18,7 @@ export class NavComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.getRoles();
+    // this.getRoles();
     }
 
   loggedIn() {
@@ -38,11 +38,15 @@ export class NavComponent implements OnInit {
   }
 
   getRoles() {
-    this.roles = this.authService.decodedToken.role;
+    if (this.authService.decodedToken) {
+      this.roles = this.authService.decodedToken.role;
     if ((typeof this.roles) === 'string') {
       this.role = this.roles;
       this.roles = null;
     }
+    }
+    console.log(this.role);
+    console.log(this.roles);
   }
 
 }

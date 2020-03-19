@@ -13,29 +13,7 @@
       <li *ngIf="role" class="nav-item">
         <a class="nav-link">{{role}}</a>
       </li>
-
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/messages']">Messages</a>
-      </li>
-      
-      
-      
     </ul>
-
-    <!-- <ng-container class="dropdown" *ngIf="roles" dropdown>
-
-      <a class="dropdown-toggle text-light" dropdownToggle>
-        Roles
-      </a>
-    
-      <div class="dropdown-menu mt-3" *dropdownMenu>
-        <div *ngFor="let r of roles">
-          <a class="nav-link" [routerLink]="['/', r.toLowerCase() ]">
-            {{r}}
-          </a>
-        </div>
-      </div>
-  </ng-container> -->
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
 
