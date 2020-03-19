@@ -1,6 +1,6 @@
 <div class="container">
     <i class="fa fa-arrow-circle-left" [routerLink]="['/admin']"></i>
-    <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
+    <form (change)="loadUsers()" class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
       <div class="form-group px-2">
         <label for="gradeLevel">Grade: </label>
           <select name="gradeLevel" id="gradeLevel" class="form-control ml-1"
@@ -10,7 +10,7 @@
             </option>
           </select>            
       </div>
-      <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filter</button>
+      <!-- <button type="submit" class="btn btn-primary" style="margin-left:10px">Apply Filter</!-->
       <!-- <button type="button" class="btn btn-info" (click)="resetFilter()" style="margin-left:10px">
         Reset Filter
       </button> -->

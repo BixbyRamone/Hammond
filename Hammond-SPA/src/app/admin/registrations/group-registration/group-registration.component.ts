@@ -142,6 +142,10 @@ export class GroupRegistrationComponent implements OnInit {
     // this._document.defaultView.location.reload();
   }
 
+  test() {
+    console.log('change');
+  }
+
   backup() {
     console.log('backup');
     this.cancel.emit(false);
