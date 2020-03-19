@@ -27,7 +27,6 @@ export class MentorLandingComponent implements OnInit {
     this.route.data.subscribe( data => {
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;
-      console.dir(this.events);
     });
 
     this.route.queryParams.subscribe(params => {

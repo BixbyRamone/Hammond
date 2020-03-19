@@ -45,12 +45,12 @@
   <div class="card-footer">
     <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && sendMessage()">
       <div class="input-group">
-        <input type="text"
+        <textarea type="textarea"
         [(ngModel)]="newMessage.content"
         name="content"
         required
         class="form-control input-sm"
-        placeholder="send a private message">
+        placeholder="send a private message"></textarea>
         <div class="input-group-append">
           <button class="btn btn-primary" [disabled]="!messageForm.valid">Send</button>
         </div>
