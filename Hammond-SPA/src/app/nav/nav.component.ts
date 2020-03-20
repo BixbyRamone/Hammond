@@ -45,8 +45,6 @@ export class NavComponent implements OnInit {
       this.roles = null;
     }
     }
-    console.log(this.role);
-    console.log(this.roles);
   }
 
 }

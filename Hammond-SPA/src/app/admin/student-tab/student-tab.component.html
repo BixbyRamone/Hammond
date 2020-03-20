@@ -20,7 +20,8 @@
     </div> -->
 
     <div *ngIf="dropBoxMode">
-      <app-student-dropbox (cancelDropBox)="cancelDropBox($event)"></app-student-dropbox>
+      <app-file-uploader (cancelUploader)="cancelDropBox($event)"></app-file-uploader>
+      <!-- <app-student-dropbox (cancelDropBox)="cancelDropBox($event)"></app-student-dropbox> -->
     </div>
 
 

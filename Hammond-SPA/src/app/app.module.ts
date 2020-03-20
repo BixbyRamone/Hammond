@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
@@ -67,6 +68,7 @@ import { AssignmentMessageResolver } from './_resolvers/assignment-message.resol
 import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
 import { EventEditComponent } from './admin/events-tab/event-edit/event-edit.component';
 import { EventViewResolver } from './_resolvers/event-view.resolver';
+import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -112,7 +114,8 @@ export function tokenGetter() {
       UserMessagesComponent,
       UserProfileComponent,
       VolunteerRegistrationComponent,
-      VolunteersTabComponent
+      VolunteersTabComponent,
+      FileUploaderComponent
    ],
    imports: [
       BrowserModule,
@@ -121,6 +124,7 @@ export function tokenGetter() {
       BsDropdownModule.forRoot(),
       ButtonsModule.forRoot(),
       FormsModule,
+      FileUploadModule,
       HttpClientModule,
       PaginationModule.forRoot(),
       ReactiveFormsModule,
