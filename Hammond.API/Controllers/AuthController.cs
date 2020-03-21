@@ -97,6 +97,20 @@ namespace Hammond.API.Controllers
             return BadRequest(result.Errors);
         }
 
+        [HttpPost("registerxls/{id}")]
+        public async Task<IActionResult> MassUpload(int id, [FromForm]XlsForUploadDto xlsForUploadDto){
+
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            // var test = await _repo.GetUser(id);
+
+            var file = xlsForUploadDto.File;
+
+            return Ok();
+            throw new Exception("");
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {

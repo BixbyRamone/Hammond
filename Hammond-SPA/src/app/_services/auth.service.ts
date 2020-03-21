@@ -51,4 +51,9 @@ roleMatch(allowedRoles): boolean {
   });
   return isMatch;
 }
+
+test(id: number, uploader: any) {
+  debugger
+  return this.http.post(this.baseUrl + 'registerxls/' + id, uploader);
+}
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../_services/auth.service';
+import { UpFile } from '../_models/uploapd_file';
 
 @Component({
   selector: 'app-file-uploader',
@@ -29,7 +30,7 @@ export class FileUploaderComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + '/users/' + this.authService.decodedToken.nameid + '/photos',
+      url: 'http://localhost:5000/api/auth/registerxls/' + this.authService.decodedToken.nameid,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       // allowedFileType: ['xls'],
@@ -37,6 +38,27 @@ export class FileUploaderComponent implements OnInit {
       autoUpload: false,
 
     });
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const res: UpFile = JSON.parse(response);
+      }
+    };
+  }
+
+  test() {
+    debugger
+    this.authService.test(this.authService.decodedToken.nameid, this.uploader).subscribe(() => {
+      console.log('Success');
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  backup() {
+    this.cancelUploader.emit(false);
   }
 
 }

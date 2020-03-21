@@ -179,15 +179,11 @@ namespace Hammond.API.Controllers
             var actScoreToDelete = await _repo.GetActScore(id);
 
             _repo.Delete(actScoreToDelete);
-
+ 
             if (await _repo.SaveAll())
                 return NoContent();
 
             throw new Exception($"Removing ACT score failed on save");
         }
-
-
-
-
     }
 }
