@@ -18,6 +18,7 @@ namespace Hammond.API.Data
         public DbSet<Value> Values { get; set; }
         public DbSet<UserAssignment> UserAssignments { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
+        public DbSet<Session> Sessions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
