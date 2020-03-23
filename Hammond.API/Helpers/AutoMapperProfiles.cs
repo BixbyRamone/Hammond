@@ -22,6 +22,8 @@ namespace Hammond.API.Helpers
             CreateMap<EventForCreationDto, Event>();
             CreateMap<Event,  EventToReturnDto>();
             CreateMap<EventForUpdateDto, Event>();
+            CreateMap<SessionForCreationDto, Session>();
+            CreateMap<Session, SessionToReturnDto>();
         }
     }
 }

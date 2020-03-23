@@ -291,5 +291,10 @@ namespace Hammond.API.Data
         {
             return await _context.ActScores.FirstOrDefaultAsync(a => a.Id == id);
         }
+
+        public async Task<Session> GetSession(int id)
+        {
+            return await _context.Sessions.FirstOrDefaultAsync(s => s.Id == id);
+        }
     }
 }

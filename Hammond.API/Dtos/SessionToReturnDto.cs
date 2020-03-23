@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Hammond.API.Models;
 
-namespace Hammond.API.Models
+namespace Hammond.API.Dtos
 {
-    public class Session
+    public class SessionToReturnDto
     {
-        public int Id { get; set; }
         public string Description { get; set; }
-        public DateTime? DayOfSession { get; set; }
+        public DateTime DayOfSession { get; set; }
         public ICollection<SessionAssignment> SessionAssignments { get; set; }
     }
 }

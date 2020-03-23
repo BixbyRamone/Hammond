@@ -4,14 +4,16 @@ using Hammond.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hammond.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200323224922_SessionAssignmentJoin")]
+    partial class SessionAssignmentJoin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,6 +58,8 @@ namespace Hammond.API.Migrations
 
                     b.Property<string>("Section");
 
+                    b.Property<int?>("SessionId");
+
                     b.Property<string>("StudentLevel");
 
                     b.Property<string>("Title");
@@ -63,6 +67,8 @@ namespace Hammond.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
+
+                    b.HasIndex("SessionId");
 
                     b.ToTable("Assignments");
                 });
@@ -174,25 +180,6 @@ namespace Hammond.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sessions");
-                });
-
-            modelBuilder.Entity("Hammond.API.Models.SessionAssignment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AssignmentId");
-
-                    b.Property<int>("SessionId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AssignmentId");
-
-                    b.HasIndex("SessionId");
-
-                    b.ToTable("SessionAssignment");
                 });
 
             modelBuilder.Entity("Hammond.API.Models.User", b =>
@@ -392,6 +379,10 @@ namespace Hammond.API.Migrations
                     b.HasOne("Hammond.API.Models.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById");
+
+                    b.HasOne("Hammond.API.Models.Session")
+                        .WithMany("Assignments")
+                        .HasForeignKey("SessionId");
                 });
 
             modelBuilder.Entity("Hammond.API.Models.Event", b =>
@@ -412,19 +403,6 @@ namespace Hammond.API.Migrations
                         .WithMany("MessagesSent")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Hammond.API.Models.SessionAssignment", b =>
-                {
-                    b.HasOne("Hammond.API.Models.Assignment", "Assigment")
-                        .WithMany("SessionAssignments")
-                        .HasForeignKey("AssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Hammond.API.Models.Session", "Session")
-                        .WithMany("SessionAssignments")
-                        .HasForeignKey("SessionId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Hammond.API.Models.UserAssignment", b =>

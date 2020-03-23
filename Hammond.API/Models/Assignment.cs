@@ -15,6 +15,7 @@ namespace Hammond.API.Models
         public bool Assigned { get; set; }
         public User CreatedBy { get; set; }
         public ICollection<UserAssignment> UserAssignments { get; set; }
+        public ICollection<SessionAssignment> SessionAssignments { get; set; }
 
         // public void Register(IEnumerable<User> students)
         // {
