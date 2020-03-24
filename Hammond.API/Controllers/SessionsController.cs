@@ -32,7 +32,7 @@ namespace Hammond.API.Controllers
 
             if (sessionForCreationDto.DayOfSession == null)
             {
-                sessionForCreationDto.DayOfSession = DateTime.Today.AddDays(((int)DateTime.Today.DayOfWeek - (int)DayOfWeek.Saturday) + 7);
+                sessionForCreationDto.DayOfSession = DateTime.Today.AddDays(((int)DayOfWeek.Saturday) - (int)DateTime.Today.DayOfWeek);
             }
 
             var session = _mapper.Map<Session>(sessionForCreationDto);
