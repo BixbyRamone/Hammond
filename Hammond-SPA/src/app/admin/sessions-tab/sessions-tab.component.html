@@ -1,0 +1,30 @@
+<!-- <div class="container">
+  <div>
+    <ul class="landing-content">
+      <li class="menu-nav" [routerLink]="['/admin/sessions']">View Sessions</li>
+      <li class="menu-nav" [routerLink]="['/admin/sessions/register']">Create Session</li>
+    </ul>
+  </div>
+
+</div> -->
+
+<div class="container">
+    
+  <div *ngIf="!sessionListMode && !sessionRegisterMode">
+      <ul class="landing-content">
+
+          <li class="menu-nav" [routerLink]="['/admin/sessions']">View Sessions List</li>
+          <li class="menu-nav" [routerLink]="['/admin/sessions/register']">Create Session</li>
+      
+        </ul>        
+  </div>
+
+  <div *ngIf="sessionRegisterMode">
+    <app-session-registration (cancel)="cancelEventRegistration($event)"></app-session-registration>
+  </div>
+
+  <div *ngIf="sessionListMode">
+    <app-events-list></app-events-list>
+  </div>
+  
+</div>

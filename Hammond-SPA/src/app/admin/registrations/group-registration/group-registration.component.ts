@@ -80,7 +80,7 @@ export class GroupRegistrationComponent implements OnInit {
 
   groupUser(user: User) {
     user.grouped = true;
-
+debugger
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       this.groupToRegister.studentIds.push(user.id);
     }
@@ -109,6 +109,7 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   createGroup(groupIdsObj: any) {
+    debugger
     if (this.show === false) {
       this.toggle();
     }

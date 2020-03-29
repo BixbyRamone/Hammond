@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileUploadModule } from 'ng2-file-upload';
+import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
@@ -68,7 +69,9 @@ import { AssignmentMessageResolver } from './_resolvers/assignment-message.resol
 import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
 import { EventEditComponent } from './admin/events-tab/event-edit/event-edit.component';
 import { EventViewResolver } from './_resolvers/event-view.resolver';
-import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+
+import { SessionsTabComponent } from './admin/sessions-tab/sessions-tab.component';
+import { SessionRegistrationComponent } from './admin/registrations/session-registration/session-registration.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -98,6 +101,8 @@ export function tokenGetter() {
       MentorStudTabComponent,
       MentorStudListComponent,
       MessagesComponent,
+      SessionsTabComponent,
+      SessionRegistrationComponent,
       SigninComponent,
       StudAssignmentDetailComponent,
       StudAssignmentTabComponent,

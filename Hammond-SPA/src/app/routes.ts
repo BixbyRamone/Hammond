@@ -35,6 +35,8 @@ import { AssignmentMessageResolver } from './_resolvers/assignment-message.resol
 import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
 import { EventEditComponent } from './admin/events-tab/event-edit/event-edit.component';
 import { EventViewResolver } from './_resolvers/event-view.resolver';
+import { SessionsTabComponent } from './admin/sessions-tab/sessions-tab.component';
+import { SessionRegistrationComponent } from './admin/registrations/session-registration/session-registration.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -77,6 +79,10 @@ export const appRoutes: Routes = [
             { path: 'admin/assignment/:id', component: AssignmentEditComponent,
                 resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
                 data: { operatingRole: 'Admin' } },
+
+            { path: 'admin/sessions/register', component: SessionRegistrationComponent,
+                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
+
             // ===============
 
             // Mentor Pages

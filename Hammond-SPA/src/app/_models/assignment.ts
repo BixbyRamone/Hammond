@@ -13,4 +13,5 @@ export interface Assignment {
     // assignments: Assignment[];
     completed: boolean;
     studentLevel: string;
+    grouped: boolean;
 }
