@@ -38,12 +38,15 @@ export class SessionRegistrationComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.assignments = data['assignments'].result;
+      this.pagination = data['assignments'].pagination;
     });
     this.createSessionForm();
+    this.userParams.studentLevel = 'sophomore';
   }
 
   loadAssignments() {
     this.pagination.itemsPerPage = 15;
+    debugger
     this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<Assignment[]>) => {
         this.assignments = res.result;
@@ -66,7 +69,6 @@ export class SessionRegistrationComponent implements OnInit {
 
     this.createSessionForView(this.sessionToCreate);
     this.isSession++;
-    console.log(this.assignmentsInSession);
   }
 
   ungroupAssignment(assignment: Assignment) {
@@ -95,7 +97,6 @@ export class SessionRegistrationComponent implements OnInit {
       description: this.sessionForm.value.description,
       assignments: this.sessAssignArray(),
     });
-    console.log(this.session);
     this.sessionService.register(this.authService.decodedToken.nameid, this.session).subscribe(() => {
       this.alertify.success('Session Created');
     }, error => {
@@ -103,6 +104,7 @@ export class SessionRegistrationComponent implements OnInit {
       this.alertify.error(error);
     });
     this.assignmentsInSession = [];
+    this.loadAssignments();
   }
 
   sessAssignArray() {

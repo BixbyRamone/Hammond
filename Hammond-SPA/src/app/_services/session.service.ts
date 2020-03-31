@@ -16,7 +16,6 @@ export class SessionService {
 constructor(private http: HttpClient) { }
 
 register(userId: number, session: Session) {
-  debugger
   return this.http.post(this.baseUrl + userId, session);
 }
 
