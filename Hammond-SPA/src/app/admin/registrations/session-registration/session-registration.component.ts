@@ -7,6 +7,7 @@ import { SessionService } from 'src/app/_services/session.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Session } from 'src/app/_models/session';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-session-registration',
@@ -22,6 +23,7 @@ export class SessionRegistrationComponent implements OnInit {
   sessionToCreate = {
     assignmentIds: []
   };
+  sessionForm: FormGroup;
   isSession = 0;
   studentLevel = [{value: 'sophomore', display: 'Sophomores'}, {value: 'junior', display: 'Juniors'},
                   {value: 'senior', display: 'Seniors'} ];
@@ -30,12 +32,14 @@ export class SessionRegistrationComponent implements OnInit {
               private route: ActivatedRoute,
               private alertify: AlertifyService,
               private sessionService: SessionService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.assignments = data['assignments'].result;
     });
+    this.createSessionForm();
   }
 
   loadAssignments() {
@@ -47,6 +51,13 @@ export class SessionRegistrationComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
+  }
+
+  createSessionForm() {
+    this.sessionForm = this.fb.group({
+      description: [''],
+      date: ['']
+    });
   }
 
   groupAssignment(assignment: Assignment) {
@@ -80,8 +91,8 @@ export class SessionRegistrationComponent implements OnInit {
   register() {
     this.session = Object.assign({}, {
       id: null,
-      dayOfSession: null,
-      description: 'hunh',
+      dayOfSession: this.sessionForm.value.date,
+      description: this.sessionForm.value.description,
       assignments: this.sessAssignArray(),
     });
     console.log(this.session);

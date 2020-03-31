@@ -16,23 +16,40 @@
     </button> -->
   </form>
 <div class="row">
-    <div id="group-col" class="col-sm-4 col-md-4 col-lg-4">
+    <div id="group-col" class="col-sm-6 col-md-6 col-lg-6">
       <h4>&nbsp;</h4>
       <ul class="" style="list-style-type: none;">
-        <div *ngIf="isSession > 0" class="card">
+        <div class="card">
+          <h4 *ngIf="isSession === 0">Add Assignmenets</h4>
           <div class="card-body" *ngFor="let assignment of assignmentsInSession">
             <li (click)="ungroupAssignment(assignment)" *ngIf="assignment.grouped">
               {{assignment.title}}
               <i class="fa fa-minus-circle"></i>
             </li>
           </div>
+          <form [formGroup]="sessionForm">
+            <div class="form-group">
+              <input class="form-control"
+              type="text"
+              formControlName="description"
+              placeholder="Description">
+            </div>
+            <div class="form-group">
+              <input class="form-control"
+              bsDatepicker
+              placeholder="Date"
+              formControlName="date">
+            <p>leave blank to assign session to upcoming Saturday</p>
+            </div>
+          </form>
+          
           <button [disabled]="sessionToCreate.assignmentIds.length < 1" (click)="register()"
-          class="btn btn-success">Create Group</button>
+          class="btn btn-success">Create Session</button>
         </div>
       </ul>
       
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-6 col-md-6 col-lg-6">
       <h4>Assignments</h4>
       <ul style="list-style-type: none;">
           <div *ngFor="let assignment of assignments">
