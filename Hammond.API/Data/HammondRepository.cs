@@ -296,5 +296,19 @@ namespace Hammond.API.Data
         {
             return await _context.Sessions.FirstOrDefaultAsync(s => s.Id == id);
         }
+
+        public async Task<PagedList<Session>> GetSessions(UserParams sessionParams)
+        {
+            var sessions = _context.Sessions.AsQueryable();
+
+             if (sessionParams.StudentLevel != null && sessionParams.StudentLevel != "all")
+            {
+                sessions = sessions.Where(a => a.StudentLevel == sessionParams.StudentLevel);
+            }
+
+            sessions = sessions.OrderByDescending(s => s.DayOfSession);
+            return await PagedList<Session>.CreateAsync(sessions, sessionParams.PageNumber,
+                sessionParams.PageSize);
+        }
     }
 }

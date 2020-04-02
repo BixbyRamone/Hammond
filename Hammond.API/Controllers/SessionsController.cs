@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Hammond.API.Data;
+using Hammond.API.Helpers;
 using Hammond.API.Dtos;
 using Hammond.API.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -72,6 +74,18 @@ namespace Hammond.API.Controllers
                 return NotFound();
 
             return Ok(sessionFromRepo);
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> GetSessions([FromQuery]UserParams userParams)
+        {
+            var sessions = await _repo.GetSessions(userParams);
+
+            var sessionsToReturn = _mapper.Map<IEnumerable<SessionToReturnDto>>(sessions);
+
+            Response.AddPagination(sessions.CurrentPage, sessions.PageSize, sessions.TotalCount, sessions.TotalPages);
+
+            return Ok(sessionsToReturn);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Hammond.API.Data
         Task<UserGroup> GetUserGroup(int id);
         Task<ActScore> GetActScore(int id);
         Task<Session> GetSession(int id);
+        Task<PagedList<Session>> GetSessions(UserParams userparams);
         void SqlCmdHelper(string sqlCmnd);
         
     }

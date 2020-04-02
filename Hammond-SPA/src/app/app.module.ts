@@ -69,9 +69,10 @@ import { AssignmentMessageResolver } from './_resolvers/assignment-message.resol
 import { AssignmentEditComponent } from './admin/assignment-edit/assignment-edit.component';
 import { EventEditComponent } from './admin/events-tab/event-edit/event-edit.component';
 import { EventViewResolver } from './_resolvers/event-view.resolver';
-
 import { SessionsTabComponent } from './admin/sessions-tab/sessions-tab.component';
 import { SessionRegistrationComponent } from './admin/registrations/session-registration/session-registration.component';
+import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
+import { SessionListResolver } from './_resolvers/session-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -101,6 +102,7 @@ export function tokenGetter() {
       MentorStudTabComponent,
       MentorStudListComponent,
       MessagesComponent,
+      SessionsListComponent,
       SessionsTabComponent,
       SessionRegistrationComponent,
       SigninComponent,
@@ -156,6 +158,7 @@ export function tokenGetter() {
       EventViewResolver,
       GroupResolver,
       MessagesResolver,
+      SessionListResolver,
       StudentListResolver,
       StudProfileResolver,
       UserDetailResolver,

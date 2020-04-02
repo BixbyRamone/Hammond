@@ -103,7 +103,7 @@ namespace Hammond.API.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            // var test = await _repo.GetUser(id);
+            // var test = await _context.GetUser(id);
 
             var file = xlsForUploadDto.File;
 

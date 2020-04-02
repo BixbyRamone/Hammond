@@ -46,7 +46,6 @@ export class SessionRegistrationComponent implements OnInit {
 
   loadAssignments() {
     this.pagination.itemsPerPage = 15;
-    debugger
     this.assignmentService.getAssignments(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
       .subscribe((res: PaginatedResult<Assignment[]>) => {
         this.assignments = res.result;
@@ -91,10 +90,12 @@ export class SessionRegistrationComponent implements OnInit {
   }
 
   register() {
+    debugger
     this.session = Object.assign({}, {
       id: null,
       dayOfSession: this.sessionForm.value.date,
       description: this.sessionForm.value.description,
+      studentLevel: this.userParams.studentLevel,
       assignments: this.sessAssignArray(),
     });
     this.sessionService.register(this.authService.decodedToken.nameid, this.session).subscribe(() => {
@@ -108,7 +109,7 @@ export class SessionRegistrationComponent implements OnInit {
   }
 
   sessAssignArray() {
-    let newArray = [];
+    const newArray = [];
     this.assignmentsInSession.forEach(asgn => {
       newArray.push(asgn);
     });

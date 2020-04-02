@@ -8,6 +8,7 @@ namespace Hammond.API.Dtos
     {
         public string Description { get; set; }
         public DateTime? DayOfSession { get; set; }
+        public string StudentLevel { get; set; }
         public ICollection<Assignment> Assignments { get; set; }
     }
 }

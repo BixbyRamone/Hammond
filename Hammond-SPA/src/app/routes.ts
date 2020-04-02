@@ -37,6 +37,8 @@ import { EventEditComponent } from './admin/events-tab/event-edit/event-edit.com
 import { EventViewResolver } from './_resolvers/event-view.resolver';
 import { SessionsTabComponent } from './admin/sessions-tab/sessions-tab.component';
 import { SessionRegistrationComponent } from './admin/registrations/session-registration/session-registration.component';
+import { SessionListResolver } from './_resolvers/session-list.resolver';
+import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -78,6 +80,9 @@ export const appRoutes: Routes = [
 
             { path: 'admin/assignment/:id', component: AssignmentEditComponent,
                 resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
+                data: { operatingRole: 'Admin' } },
+
+            { path: 'admin/sessions', component: SessionsListComponent, resolve: { sessions: SessionListResolver },
                 data: { operatingRole: 'Admin' } },
 
             { path: 'admin/sessions/register', component: SessionRegistrationComponent,
