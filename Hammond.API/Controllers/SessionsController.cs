@@ -37,6 +37,12 @@ namespace Hammond.API.Controllers
                 sessionForCreationDto.DayOfSession = DateTime.Today.AddDays(((int)DayOfWeek.Saturday) - (int)DateTime.Today.DayOfWeek);
             }
 
+            UserParams userParamsForDelete = new UserParams();
+            userParamsForDelete.StudentLevel = sessionForCreationDto.StudentLevel;
+            userParamsForDelete.OlderSessionsDelete = true;
+
+            var sessionsToDelete = _repo.GetSessions(userParamsForDelete);
+
             var session = _mapper.Map<Session>(sessionForCreationDto);
 
             _repo.Add(session);

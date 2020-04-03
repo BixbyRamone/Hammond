@@ -301,9 +301,18 @@ namespace Hammond.API.Data
         {
             var sessions = _context.Sessions.AsQueryable();
 
+            if (sessionParams.OlderSessionsDelete == true)
+            {
+                sessions = sessions.Where(s => s.DayOfSession < DateTime.Now);
+                foreach (var ses in sessions)
+                {
+                    this.Delete(ses);
+                }
+            }
+
              if (sessionParams.StudentLevel != null && sessionParams.StudentLevel != "all")
             {
-                sessions = sessions.Where(a => a.StudentLevel == sessionParams.StudentLevel);
+                sessions = sessions.Where(s => s.StudentLevel == sessionParams.StudentLevel);
             }
 
             sessions = sessions.OrderByDescending(s => s.DayOfSession);
