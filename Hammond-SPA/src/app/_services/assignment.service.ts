@@ -32,7 +32,6 @@ getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedRes
     params = params.append('pageNumber', page);
     params = params.append('pageSize', itemsPerPage);
   }
-
   if (assignmentParams != null) {
     params = params.append('studentLevel', assignmentParams.studentLevel);
     // params =  params.append('roleName', assignmentParams.roleName);

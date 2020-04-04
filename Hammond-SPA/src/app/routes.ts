@@ -39,6 +39,7 @@ import { SessionsTabComponent } from './admin/sessions-tab/sessions-tab.componen
 import { SessionRegistrationComponent } from './admin/registrations/session-registration/session-registration.component';
 import { SessionListResolver } from './_resolvers/session-list.resolver';
 import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
+import { AssignmentForSessionResolver } from './_resolvers/assignments-for-session.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -86,7 +87,7 @@ export const appRoutes: Routes = [
                 data: { operatingRole: 'Admin' } },
 
             { path: 'admin/sessions/register', component: SessionRegistrationComponent,
-                resolve: {assignments: AssignmentListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
+                resolve: {assignments: AssignmentForSessionResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             // ===============
 

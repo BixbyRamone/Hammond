@@ -73,6 +73,7 @@ import { SessionsTabComponent } from './admin/sessions-tab/sessions-tab.componen
 import { SessionRegistrationComponent } from './admin/registrations/session-registration/session-registration.component';
 import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
 import { SessionListResolver } from './_resolvers/session-list.resolver';
+import { AssignmentForSessionResolver } from './_resolvers/assignments-for-session.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -148,6 +149,7 @@ export function tokenGetter() {
    providers: [
       AlertifyService,
       AssignmentDetailResolver,
+      AssignmentForSessionResolver,
       AssignmentMessageResolver,
       AssignmentService,
       AuthService,
