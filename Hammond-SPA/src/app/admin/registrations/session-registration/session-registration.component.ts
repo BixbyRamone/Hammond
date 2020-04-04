@@ -68,6 +68,7 @@ export class SessionRegistrationComponent implements OnInit {
 
     this.createSessionForView(this.sessionToCreate);
     this.isSession++;
+    console.log(assignment);
   }
 
   ungroupAssignment(assignment: Assignment) {
@@ -77,6 +78,7 @@ export class SessionRegistrationComponent implements OnInit {
 
     this.createSessionForView(this.sessionToCreate);
     this.isSession--;
+    console.log(assignment);
   }
 
   createSessionForView(sessionIdsObj: any) {
@@ -87,10 +89,10 @@ export class SessionRegistrationComponent implements OnInit {
       // this.session.sessionAssignments.push(sess);
       this.assignmentsInSession.push(sess);
     });
+    console.log(this.assignmentsInSession);
   }
 
   register() {
-    debugger
     this.session = Object.assign({}, {
       id: null,
       dayOfSession: this.sessionForm.value.date,
@@ -99,13 +101,16 @@ export class SessionRegistrationComponent implements OnInit {
       assignments: this.sessAssignArray(),
     });
     this.sessionService.register(this.authService.decodedToken.nameid, this.session).subscribe(() => {
+
       this.alertify.success('Session Created');
     }, error => {
       console.log(error);
-      this.alertify.error(error);
+      this.alertify.error(error.message);
     });
     this.assignmentsInSession = [];
+    this.sessionToCreate.assignmentIds = [];
     this.loadAssignments();
+    console.log(this.assignmentsInSession);
   }
 
   sessAssignArray() {

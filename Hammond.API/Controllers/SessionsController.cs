@@ -41,7 +41,7 @@ namespace Hammond.API.Controllers
             userParamsForDelete.StudentLevel = sessionForCreationDto.StudentLevel;
             userParamsForDelete.OlderSessionsDelete = true;
 
-            var sessionsToDelete = _repo.GetSessions(userParamsForDelete);
+            var sessionsToDelete = await _repo.GetSessions(userParamsForDelete);
 
             var session = _mapper.Map<Session>(sessionForCreationDto);
 
