@@ -28,12 +28,6 @@ export class SessionsListComponent implements OnInit {
       this.sessions = data['sessions'].result;
       this.pagination = data['sessions'].pagination;
     });
-    this.sessions.forEach(element => {
-      console.log(element.sessionAssignments);
-      element.sessionAssignments.forEach(x => {
-        console.log(x.assigment);
-      });
-    });
     this.userParams.studentLevel = 'all';
   }
 
