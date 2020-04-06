@@ -99,6 +99,7 @@ export class SessionRegistrationComponent implements OnInit {
       description: this.sessionForm.value.description,
       studentLevel: this.userParams.studentLevel,
       assignments: this.sessAssignArray(),
+      sessionAssignments: null
     });
     this.sessionService.register(this.authService.decodedToken.nameid, this.session).subscribe(() => {
 

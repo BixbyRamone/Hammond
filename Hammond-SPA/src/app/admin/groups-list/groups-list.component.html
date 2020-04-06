@@ -29,7 +29,8 @@
                     <strong>{{group.userGroups[0].user.studentLevel.toLocaleUpperCase()}}'S - Id#: {{group.id}}</strong>
                 </li>
                 <li *ngFor="let ug of group.userGroups">{{ug.user.lastName}}, {{ug.user.firstName}}
-                    <i (click)="removeMember(ug)" class="fa fa-minus-circle"></i></li>
+                    <i (click)="removeMember(ug)" class="fa fa-minus-circle"></i>
+                  </li>
             </ul>
             <button class="btn btn-primary" (click)="disbandGroup(group.id)">Disband Group</button>
         </div>

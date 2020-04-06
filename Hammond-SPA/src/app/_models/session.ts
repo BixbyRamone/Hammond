@@ -6,4 +6,5 @@ export interface Session {
     dayOfSession: Date;
     studentLevel: string;
     assignments: Assignment[];
+    sessionAssignments: Assignment[];
 }

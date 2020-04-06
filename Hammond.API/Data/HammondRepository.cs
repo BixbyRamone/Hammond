@@ -299,7 +299,10 @@ namespace Hammond.API.Data
 
         public async Task<PagedList<Session>> GetSessions(UserParams sessionParams)
         {
-            var sessions = _context.Sessions.AsQueryable();
+            var sessions = _context.Sessions
+                                    .Include(s => s.SessionAssignments)
+                                    .ThenInclude(sa => sa.Assigment)
+                                    .AsQueryable();
 
             if (sessionParams.OlderSessionsDelete == true)
             {
@@ -315,7 +318,7 @@ namespace Hammond.API.Data
                 sessions = sessions.Where(s => s.StudentLevel == sessionParams.StudentLevel);
             }
 
-            sessions = sessions.OrderByDescending(s => s.DayOfSession);
+            sessions = sessions.OrderBy(s => s.DayOfSession);
             return await PagedList<Session>.CreateAsync(sessions, sessionParams.PageNumber,
                 sessionParams.PageSize);
         }

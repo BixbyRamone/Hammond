@@ -4,6 +4,7 @@ import { Assignment } from '../_models/assignment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Session } from '../_models/session';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,18 @@ register(userId: number, session: Session) {
 }
 
 getSessions(sessionParams?) {
-  let result: Session[];
+  // let result: Session[];
+  const paginatedResult: PaginatedResult<Session[]> = new PaginatedResult<Session[]>();
   const params = new HttpParams;
 
   return this.http.get<Session[]>(this.baseUrl, { observe: 'response', params})
     .pipe(
-      map(resoponse => {
-        result = resoponse.body;
-        return result;
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
       })
     );
 }
