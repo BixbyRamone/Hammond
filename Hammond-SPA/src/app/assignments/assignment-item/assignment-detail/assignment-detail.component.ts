@@ -30,7 +30,6 @@ export class AssignmentDetailComponent implements OnInit {
                   {'color': 'lawngreen'},
                   {'color': 'blueviolet'},
                   {'color': 'darkred'}];
-                  test: any;
 
   constructor(
     private assignmentService: AssignmentService,
