@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { Assignment } from 'src/app/_models/assignment';
+import { Session } from 'src/app/_models/session';
 
 @Component({
   selector: 'app-mentor-landing',
@@ -18,6 +19,7 @@ export class MentorLandingComponent implements OnInit {
   user: User;
   assignments: Assignment[];
   events: Event[];
+  session: Session;
 
   constructor(private userService: UserService,
     private alertify: AlertifyService,
@@ -25,8 +27,11 @@ export class MentorLandingComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
+      this.session = data['session'].result;
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;
+      console.log(this.session);
+      debugger
     });
 
     this.route.queryParams.subscribe(params => {

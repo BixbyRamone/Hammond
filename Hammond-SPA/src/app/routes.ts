@@ -40,6 +40,7 @@ import { SessionRegistrationComponent } from './admin/registrations/session-regi
 import { SessionListResolver } from './_resolvers/session-list.resolver';
 import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
 import { AssignmentForSessionResolver } from './_resolvers/assignments-for-session.resolver';
+import { SessionNextResolver } from './_resolvers/session-next.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -94,8 +95,8 @@ export const appRoutes: Routes = [
             // Mentor Pages
             { path: 'mentor', component: MentorLandingComponent,
                 resolve: { assignments: AssignmentListResolver, group: GroupResolver, messages: MessagesResolver,
-                    events: EventListResolver },
-                data: {roles: ['Admin', 'Mentor']} },
+                    events: EventListResolver, session: SessionNextResolver },
+                data: {roles: ['Admin', 'Mentor'], operatingRole: 'Mentor'} },
 
             { path: 'mentor/students', component: MentorStudListComponent,
                 resolve: {users: StudentListResolver}, data: {roles: ['Admin', 'Mentor'], operatingRole: 'Mentor'} },

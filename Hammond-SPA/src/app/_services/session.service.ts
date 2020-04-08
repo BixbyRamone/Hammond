@@ -5,6 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Session } from '../_models/session';
 import { PaginatedResult } from '../_models/pagination';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ export class SessionService {
   assignment: Assignment;
   session: Session;
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient,
+            private router: Router) { }
 
 register(userId: number, session: Session) {
   return this.http.post(this.baseUrl + userId, session);
@@ -23,7 +26,17 @@ register(userId: number, session: Session) {
 getSessions(sessionParams?) {
   // let result: Session[];
   const paginatedResult: PaginatedResult<Session[]> = new PaginatedResult<Session[]>();
-  const params = new HttpParams;
+  let params = new HttpParams;
+  if (sessionParams) {
+    if (sessionParams.studentLevel !== 'all') {
+      params = params.append('studentLevel', sessionParams.studentLevel);
+    }
+    if (sessionParams.getNextSession) {
+      params = params.append('getNextSession', sessionParams.getNextSession);
+    }
+  }
+
+  console.log(this.http.get<Session[]>(this.baseUrl, { observe: 'response', params}));
 
   return this.http.get<Session[]>(this.baseUrl, { observe: 'response', params})
     .pipe(
@@ -35,6 +48,17 @@ getSessions(sessionParams?) {
         return paginatedResult;
       })
     );
+}
+
+getNextSession(sessionParams?) {
+  debugger
+  let params = new HttpParams;
+
+  if (sessionParams.studentLevel !== 'all') {
+    params = params.append('studentLevel', sessionParams.studentLevel);
+  }
+  console.log(this.http.get<Session>(this.baseUrl + 'next', {params}));
+  return this.http.get<Session>(this.baseUrl + 'next', {params});
 }
 
 }

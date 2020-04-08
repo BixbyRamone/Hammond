@@ -82,16 +82,38 @@ namespace Hammond.API.Controllers
             return Ok(sessionFromRepo);
         }
 
+        [HttpGet("next")]
+        public async Task<IActionResult> GetNextSession([FromQuery]UserParams userParams)
+        {
+            var sessionFromRepo = await _repo.GetNextSession(userParams);
+
+            if (sessionFromRepo == null)
+                return NotFound();
+
+            return Ok(sessionFromRepo);
+        }
+
         [HttpGet()]
         public async Task<IActionResult> GetSessions([FromQuery]UserParams userParams)
         {
-            var sessions = await _repo.GetSessions(userParams);
+            
+            if (userParams.GetNextSession)
+            {
+                var session = await _repo.GetNextSession(userParams);
+                return Ok(session);
+            }
+            else
+            {
+                var sessions = await _repo.GetSessions(userParams);
+                var sessionsToReturn = _mapper.Map<IEnumerable<SessionToReturnDto>>(sessions);
 
-            var sessionsToReturn = _mapper.Map<IEnumerable<SessionToReturnDto>>(sessions);
+                Response.AddPagination(sessions.CurrentPage, sessions.PageSize, sessions.TotalCount, sessions.TotalPages);
 
-            Response.AddPagination(sessions.CurrentPage, sessions.PageSize, sessions.TotalCount, sessions.TotalPages);
+                return Ok(sessionsToReturn);
+            }
+            
 
-            return Ok(sessionsToReturn);
+            
         }
     }
 }

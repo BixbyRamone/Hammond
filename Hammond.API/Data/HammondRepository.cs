@@ -322,5 +322,13 @@ namespace Hammond.API.Data
             return await PagedList<Session>.CreateAsync(sessions, sessionParams.PageNumber,
                 sessionParams.PageSize);
         }
+
+        public async Task<Session> GetNextSession(UserParams userparams)
+        {
+             return await _context.Sessions
+                .FirstOrDefaultAsync(s => s.DayOfSession == DateTime.Today
+                    .AddDays(((int)DayOfWeek.Saturday) - (int)DateTime.Today.DayOfWeek)
+                    && s.StudentLevel == userparams.StudentLevel);
+        }
     }
 }

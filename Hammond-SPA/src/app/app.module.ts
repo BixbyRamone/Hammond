@@ -74,6 +74,7 @@ import { SessionRegistrationComponent } from './admin/registrations/session-regi
 import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
 import { SessionListResolver } from './_resolvers/session-list.resolver';
 import { AssignmentForSessionResolver } from './_resolvers/assignments-for-session.resolver';
+import { SessionNextResolver } from './_resolvers/session-next.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -161,6 +162,7 @@ export function tokenGetter() {
       GroupResolver,
       MessagesResolver,
       SessionListResolver,
+      SessionNextResolver,
       StudentListResolver,
       StudProfileResolver,
       UserDetailResolver,

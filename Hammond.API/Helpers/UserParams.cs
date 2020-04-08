@@ -20,5 +20,6 @@ namespace Hammond.API.Helpers
         public bool GetUngrouped { get; set; }
         public int GroupId { get; set; }
         public bool OlderSessionsDelete { get; set; }
+        public bool GetNextSession { get; set; }
     }
 }

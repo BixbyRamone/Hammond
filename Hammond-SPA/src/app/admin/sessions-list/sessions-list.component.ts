@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { SessionService } from 'src/app/_services/session.service';
-import { Pagination } from 'src/app/_models/pagination';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { Session } from 'src/app/_models/session';
 
 @Component({
@@ -32,7 +32,14 @@ export class SessionsListComponent implements OnInit {
   }
 
   loadSessions() {
-    console.log('load');
+    this.sessionService.getSessions(this.userParams)
+      .subscribe((res: PaginatedResult<Session[]>) => {
+        this.sessions = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+        console.log(error);
+      })
   }
 
   resetFilter() {
