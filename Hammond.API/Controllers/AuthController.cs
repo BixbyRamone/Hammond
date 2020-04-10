@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -106,6 +107,18 @@ namespace Hammond.API.Controllers
             // var test = await _context.GetUser(id);
 
             var file = xlsForUploadDto.File;
+
+            // Stream stream = file.OpenReadStream();
+
+            var filePath = Path.GetTempFileName();
+
+            if (file.Length > 0)
+            {
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
 
             return Ok();
             throw new Exception("");

@@ -33,7 +33,7 @@ export class FileUploaderComponent implements OnInit {
       url: 'http://localhost:5000/api/auth/registerxls/' + this.authService.decodedToken.nameid,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
-      // allowedFileType: ['xls'],
+      allowedFileType: ['xls'],
       removeAfterUpload: true,
       autoUpload: false,
 
