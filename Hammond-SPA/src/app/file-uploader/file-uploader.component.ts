@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../_services/auth.service';
@@ -10,6 +10,7 @@ import { UpFile } from '../_models/uploapd_file';
   styleUrls: ['./file-uploader.component.css']
 })
 export class FileUploaderComponent implements OnInit {
+  @Input() roleToReg: string;
   @Output() cancelUploader = new EventEmitter();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
@@ -30,7 +31,8 @@ export class FileUploaderComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: 'http://localhost:5000/api/auth/registerxls/' + this.authService.decodedToken.nameid,
+      url: 'http://localhost:5000/api/auth/registerxls/'
+       + this.authService.decodedToken.nameid + '/' + this.roleToReg,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['xls'],
@@ -38,6 +40,7 @@ export class FileUploaderComponent implements OnInit {
       autoUpload: false,
 
     });
+    console.log(this.uploader);
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
@@ -49,7 +52,6 @@ export class FileUploaderComponent implements OnInit {
   }
 
   test() {
-    debugger
     this.authService.test(this.authService.decodedToken.nameid, this.uploader).subscribe(() => {
       console.log('Success');
     }, error => {

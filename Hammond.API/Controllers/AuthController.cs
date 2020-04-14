@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CsvHelper;
 using Hammond.API.Data;
 using Hammond.API.Dtos;
 using Hammond.API.Helpers;
@@ -98,27 +99,106 @@ namespace Hammond.API.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPost("registerxls/{id}")]
-        public async Task<IActionResult> MassUpload(int id, [FromForm]XlsForUploadDto xlsForUploadDto){
+        [HttpPost("registerxls/{id}/{roleToReg}")]
+        public async Task<IActionResult> MassUpload(int id, string roleToReg, [FromForm]XlsForUploadDto xlsForUploadDto){
 
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            // var test = await _context.GetUser(id);
+            Stream stream = xlsForUploadDto.File.OpenReadStream();
 
-            var file = xlsForUploadDto.File;
+            List<string> cohorts = new List<string>();
+            List<string> lastNames = new List<string>();
+            List<string> firstNames = new List<string>();
+            List<string> emails = new List<string>();
+            List<string> streetAdress = new List<string>();
+            List<string> city = new List<string>();
+            List<User> userList = new List<User>();
+            List<string> userNames = new List<string>();
+            int it = 1;
 
-            // Stream stream = file.OpenReadStream();
-
-            var filePath = Path.GetTempFileName();
-
-            if (file.Length > 0)
-            {
-                using (var stream = new FileStream(filePath, FileMode.Create))
+            using (var reader = new StreamReader(stream))
+                // using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
-                    await file.CopyToAsync(stream);
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        cohorts.Add(values[0]);
+                        lastNames.Add(values[1]);
+                        firstNames.Add(values[2]);
+                        emails.Add(values[9]);
+                        streetAdress.Add(values[11]);
+                        city.Add(values[12]);
+                    }
+                    Console.WriteLine("Stop");       
                 }
+
+                while(it < lastNames.Count)
+                {
+                    if (lastNames[it] != "")
+                    {
+                        string userName = UserNameGenerator.ReturnUserName(firstNames[it], lastNames[it], userNames);
+                        string sL = StudLevCalc.ReturnStudLev(cohorts, it);
+                        string pw = UserNameGenerator.ReturnPassword(streetAdress[it], city[it]);
+                        
+                        UserForRegisterDto userFromFile = new UserForRegisterDto
+                        {
+                            FirstName = firstNames[it],
+                            LastName = lastNames[it],
+                            Email = emails[it],
+                            StudentLevel = sL,
+                            Username = userName,
+                            Password = pw,
+                        };
+
+                        var userToCreate = _mapper.Map<User>(userFromFile);
+
+            var assignments = await _context.Assignments.Where(a => a.StudentLevel == userToCreate.StudentLevel).ToListAsync();
+
+            var result = await _userManager.CreateAsync(userToCreate, userFromFile.Password);
+
+            var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+
+            foreach(var assignment in assignments)
+            {
+                var userAssignment = new UserAssignment
+                {
+                    UserId = userToReturn.Id,
+                    AssignmentId = assignment.Id,
+                    Completed = false
+                };
+                _context.Add(userAssignment);
             }
+
+            if (result.Succeeded)
+            {
+                switch (roleToReg)
+                {
+                    case "student":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Student"}).Wait();
+                        break;
+                    
+                    case "tutor":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Tutor"}).Wait();
+                        break;
+
+                    case "mentor":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Mentor"}).Wait();
+                        break;
+
+                    case "admin":
+                        _userManager.AddToRolesAsync(userToCreate, new [] {"Admin"}).Wait();
+                        break;
+                }
+                return Ok();
+            }
+                    }
+                    it++;
+                }
+               
+            
 
             return Ok();
             throw new Exception("");

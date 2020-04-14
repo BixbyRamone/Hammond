@@ -8,11 +8,11 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   styleUrls: ['./student-tab.component.css']
 })
 export class StudentTabComponent implements OnInit {
-  @Input() loadedStudents;
   studentRegisterMode = false;
   studentListMode = false;
   dropBoxMode = false;
   userParams: any = {};
+  roleToReg = 'student';
 
 
   constructor(private userService: UserService,
