@@ -106,6 +106,8 @@ namespace Hammond.API.Controllers
                 return Unauthorized();
 
             Stream stream = xlsForUploadDto.File.OpenReadStream();
+            UserParams userParams = new UserParams();
+            userParams.RoleName = roleToReg;
 
             List<string> cohorts = new List<string>();
             List<string> lastNames = new List<string>();
@@ -115,6 +117,7 @@ namespace Hammond.API.Controllers
             List<string> city = new List<string>();
             List<User> userList = new List<User>();
             List<string> userNames = new List<string>();
+            var usersFromDb = _context.Users.ToList();
             int it = 1;
 
             using (var reader = new StreamReader(stream))
@@ -137,13 +140,14 @@ namespace Hammond.API.Controllers
 
                 while(it <= lastNames.Count)
                 {
-                    if (lastNames[it] == "Butts")
+                    if (firstNames[it] == "Eamon")
                     {
                         Console.WriteLine("Test");
                     }
                     if (lastNames[it] != "")
                     {
-                        string userName = UserNameGenerator.ReturnUserName(firstNames[it], lastNames[it], userNames).Trim();
+                        string userName = UserNameGenerator.ReturnUserName(firstNames[it], lastNames[it], usersFromDb, userNames).Trim();
+                        userNames.Add(userName);
                         string sL = StudLevCalc.ReturnStudLev(cohorts, it);
                         string pw = UserNameGenerator.ReturnPassword(streetAdress[it], city[it]).Trim();
                         
@@ -196,7 +200,6 @@ namespace Hammond.API.Controllers
                                     _userManager.AddToRolesAsync(userToCreate, new [] {"Admin"}).Wait();
                                     break;
                             }
-                    
                         }
                     }
                     it++;
