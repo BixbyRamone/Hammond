@@ -19,6 +19,9 @@ namespace Hammond.API.Helpers
 
         public static string ReturnPassword(string address, string cityName)
         {
+            if (cityName == "")
+                cityName = "Cleveland";
+                
             string[] aa = address.Split(" ");
             string pass = aa[0] + cityName;
             if (pass.Length > 15)

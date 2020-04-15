@@ -135,19 +135,23 @@ namespace Hammond.API.Controllers
                     Console.WriteLine("Stop");       
                 }
 
-                while(it < lastNames.Count)
+                while(it <= lastNames.Count)
                 {
+                    if (lastNames[it] == "Butts")
+                    {
+                        Console.WriteLine("Test");
+                    }
                     if (lastNames[it] != "")
                     {
-                        string userName = UserNameGenerator.ReturnUserName(firstNames[it], lastNames[it], userNames);
+                        string userName = UserNameGenerator.ReturnUserName(firstNames[it], lastNames[it], userNames).Trim();
                         string sL = StudLevCalc.ReturnStudLev(cohorts, it);
-                        string pw = UserNameGenerator.ReturnPassword(streetAdress[it], city[it]);
+                        string pw = UserNameGenerator.ReturnPassword(streetAdress[it], city[it]).Trim();
                         
                         UserForRegisterDto userFromFile = new UserForRegisterDto
                         {
-                            FirstName = firstNames[it],
-                            LastName = lastNames[it],
-                            Email = emails[it],
+                            FirstName = firstNames[it].Trim(),
+                            LastName = lastNames[it].Trim(),
+                            Email = emails[it].Trim(),
                             StudentLevel = sL,
                             Username = userName,
                             Password = pw,
@@ -155,51 +159,49 @@ namespace Hammond.API.Controllers
 
                         var userToCreate = _mapper.Map<User>(userFromFile);
 
-            var assignments = await _context.Assignments.Where(a => a.StudentLevel == userToCreate.StudentLevel).ToListAsync();
+                        var assignments = await _context.Assignments.Where(a => a.StudentLevel == userToCreate.StudentLevel).ToListAsync();
 
-            var result = await _userManager.CreateAsync(userToCreate, userFromFile.Password);
+                        var result = await _userManager.CreateAsync(userToCreate, userFromFile.Password);
 
-            var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+                        var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
 
-            foreach(var assignment in assignments)
-            {
-                var userAssignment = new UserAssignment
-                {
-                    UserId = userToReturn.Id,
-                    AssignmentId = assignment.Id,
-                    Completed = false
-                };
-                _context.Add(userAssignment);
-            }
+                        if (result.Succeeded)
+                        {
+                            foreach(var assignment in assignments)
+                            {
+                                var userAssignment = new UserAssignment
+                                {
+                                    UserId = userToReturn.Id,
+                                    AssignmentId = assignment.Id,
+                                    Completed = false
+                                };
+                                _context.Add(userAssignment);
+                            }
 
-            if (result.Succeeded)
-            {
-                switch (roleToReg)
-                {
-                    case "student":
-                        _userManager.AddToRolesAsync(userToCreate, new [] {"Student"}).Wait();
-                        break;
+                            switch (roleToReg)
+                            {
+                                case "student":
+                                    _userManager.AddToRolesAsync(userToCreate, new [] {"Student"}).Wait();
+                                    break;
+                                
+                                case "tutor":
+                                    _userManager.AddToRolesAsync(userToCreate, new [] {"Tutor"}).Wait();
+                                    break;
+
+                                case "mentor":
+                                    _userManager.AddToRolesAsync(userToCreate, new [] {"Mentor"}).Wait();
+                                    break;
+
+                                case "admin":
+                                    _userManager.AddToRolesAsync(userToCreate, new [] {"Admin"}).Wait();
+                                    break;
+                            }
                     
-                    case "tutor":
-                        _userManager.AddToRolesAsync(userToCreate, new [] {"Tutor"}).Wait();
-                        break;
-
-                    case "mentor":
-                        _userManager.AddToRolesAsync(userToCreate, new [] {"Mentor"}).Wait();
-                        break;
-
-                    case "admin":
-                        _userManager.AddToRolesAsync(userToCreate, new [] {"Admin"}).Wait();
-                        break;
-                }
-                return Ok();
-            }
+                        }
                     }
                     it++;
                 }
                
-            
-
             return Ok();
             throw new Exception("");
         }
