@@ -19,10 +19,11 @@ export class SessionNextResolver implements Resolve<Session> {
     resolve(route: ActivatedRouteSnapshot): Observable<Session> {
         this.userParams.studentLevel = this.setUserParams();
         this.userParams.getNextSession = true;
-        return this.sessionService.getSessions(this.userParams).pipe(
+        return this.sessionService.getNextSession(this.userParams).pipe(
             catchError(error => {
-                this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/home']);
+                debugger
+                // this.alertify.error('Problem retrieving data');
+                // this.router.navigate(['/']);
                 return of(null);
             })
         );
