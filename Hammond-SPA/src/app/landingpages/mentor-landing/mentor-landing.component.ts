@@ -19,7 +19,7 @@ export class MentorLandingComponent implements OnInit {
   user: User;
   assignments: Assignment[];
   events: Event[];
-  session: Session;
+  session: any;
 
   constructor(private userService: UserService,
     private alertify: AlertifyService,
@@ -27,9 +27,10 @@ export class MentorLandingComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
-      this.session = data['session'].result;
+      this.session = data['session'];
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;
+      debugger
       console.log(this.session);
     });
 

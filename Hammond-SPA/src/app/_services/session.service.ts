@@ -51,7 +51,6 @@ getSessions(sessionParams?) {
 }
 
 getNextSession(sessionParams?) {
-  debugger
   let params = new HttpParams;
 
   if (sessionParams.studentLevel !== 'all') {

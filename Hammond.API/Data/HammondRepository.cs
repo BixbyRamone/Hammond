@@ -325,7 +325,7 @@ namespace Hammond.API.Data
 
         public async Task<Session> GetNextSession(UserParams userparams)
         {
-             return await _context.Sessions
+            return await _context.Sessions
                 .Include(s => s.SessionAssignments)
                 .ThenInclude(sa => sa.Assigment)
                 .FirstOrDefaultAsync(s => s.DayOfSession == DateTime.Today
