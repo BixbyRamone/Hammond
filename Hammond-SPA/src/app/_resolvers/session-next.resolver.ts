@@ -21,9 +21,6 @@ export class SessionNextResolver implements Resolve<Session> {
         this.userParams.getNextSession = true;
         return this.sessionService.getNextSession(this.userParams).pipe(
             catchError(error => {
-                debugger
-                // this.alertify.error('Problem retrieving data');
-                // this.router.navigate(['/']);
                 return of(null);
             })
         );
