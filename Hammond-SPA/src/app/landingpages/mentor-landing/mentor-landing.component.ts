@@ -30,7 +30,6 @@ export class MentorLandingComponent implements OnInit {
       this.session = data['session'];
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;
-      debugger
       console.log(this.session);
     });
 
