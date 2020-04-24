@@ -51,13 +51,13 @@ export class FileUploaderComponent implements OnInit {
     };
   }
 
-  test() {
-    this.authService.test(this.authService.decodedToken.nameid, this.uploader).subscribe(() => {
-      console.log('Success');
-    }, error => {
-      console.log(error);
-    });
-  }
+  // massUpload() {
+  //   this.authService.massUpload(this.authService.decodedToken.nameid, this.uploader).subscribe(() => {
+  //     console.log('Success');
+  //   }, error => {
+  //     console.log(error);
+  //   });
+  // }
 
   backup() {
     this.cancelUploader.emit(false);
