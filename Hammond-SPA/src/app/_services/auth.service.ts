@@ -52,8 +52,7 @@ roleMatch(allowedRoles): boolean {
   return isMatch;
 }
 
-test(id: number, uploader: any) {
-  debugger
+massUpload(id: number, uploader: any) {
   return this.http.post(this.baseUrl + 'registerxls/' + id, uploader);
 }
 }
