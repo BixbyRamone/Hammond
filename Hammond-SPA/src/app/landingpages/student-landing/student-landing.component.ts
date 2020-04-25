@@ -8,6 +8,7 @@ import { TabsetComponent } from 'ngx-bootstrap';
 import { Group } from 'src/app/_models/group';
 import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 import { Message } from 'src/app/_models/message';
+import { Session } from 'src/app/_models/session';
 
 @Component({
   selector: 'app-student-landing',
@@ -21,6 +22,7 @@ export class StudentLandingComponent implements OnInit {
   user: User;
   group: Group;
   messages: Message[];
+  session: any;
   pagination: Pagination;
 
   constructor(
@@ -35,6 +37,7 @@ export class StudentLandingComponent implements OnInit {
       this.user = data['user'];
       this.group = data['group'];
       this.messages = data['messages'];
+      this.session = data['session'];
     });
 
     console.dir(this.user);

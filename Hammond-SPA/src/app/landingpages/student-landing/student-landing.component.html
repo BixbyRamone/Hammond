@@ -2,6 +2,27 @@
   <br>
   <div class="container">
     <tabset class="admin-tabset" #studentTabs>
+      <tab heading="Next Session">
+        <br>
+
+        <div *ngIf="!session">
+         <h5>No Session Has Been Created Yet</h5>
+        </div>
+
+        <div *ngIf="session">
+          <h5>Next Session is on {{session.dayOfSession | date: 'mediumDate'}}</h5>
+          <div *ngFor="let item of session.sessionAssignments">
+            <div class="card row" [routerLink]="['/mentor/assignments', item.assignmentId]">
+              <div class="container">
+                <div class="card-body">
+                  <h6>{{item.assigment.title}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tab>
+      
       <tab heading="My Profile">
         <app-stud-profile-tab [student]="user"></app-stud-profile-tab>
       </tab>
