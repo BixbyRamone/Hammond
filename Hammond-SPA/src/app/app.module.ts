@@ -75,6 +75,8 @@ import { SessionsListComponent } from './admin/sessions-list/sessions-list.compo
 import { SessionListResolver } from './_resolvers/session-list.resolver';
 import { AssignmentForSessionResolver } from './_resolvers/assignments-for-session.resolver';
 import { SessionNextResolver } from './_resolvers/session-next.resolver';
+import { UngroupedStudentResolver } from './_resolvers/ungrouped-student.resolver';
+import { UngroupedMentorResolver } from './_resolvers/ungroupded-mentor.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -165,6 +167,8 @@ export function tokenGetter() {
       SessionNextResolver,
       StudentListResolver,
       StudProfileResolver,
+      UngroupedMentorResolver,
+      UngroupedStudentResolver,
       UserDetailResolver,
       UserGroupListResolver,
       UserListResolver,

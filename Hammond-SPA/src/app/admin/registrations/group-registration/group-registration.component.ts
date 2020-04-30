@@ -37,9 +37,12 @@ export class GroupRegistrationComponent implements OnInit {
   @Output() clicked = new EventEmitter();
   // @Input() users: User[];
   users: User[];
+  mentors: User[];
+  students: User[];
   usersInGroup: User[];
   userParams: any = {};
-  pagination: Pagination;
+  studPagination: Pagination;
+  mentPagination: Pagination;
   groupToRegister: GroupToCreate = {
     volunteerIds: [],
     studentIds: []
@@ -58,16 +61,38 @@ export class GroupRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data['users'].result;
+      this.students = data['students'].result;
+      this.studPagination = data['students'].pagination;
+      this.mentors = data['mentors'].result;
+      this.mentPagination = data['mentors'].pagination;
+      debugger
     });
     this.userParams.studentLevel = 'sophomore';
   }
 
   loadUsers() {
+    debugger
+    this.loadMentors();
+    this.loadStudents();
+  }
+
+  loadMentors() {
     this.userParams.getUngrouped = true;
-    this.userService.getUngroupedUsers(this.userParams)
-      .subscribe((res:  User[]) => {
-      this.users = res;
+    this.userService.getUngroupedUsers(this.userParams, this.mentPagination.currentPage, this.mentPagination.itemsPerPage)
+      .subscribe((res:  PaginatedResult<User[]>) => {
+      this.mentors = res.result;
+      this.mentPagination = res.pagination
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  loadStudents() {
+    this.userParams.getUngrouped = true;
+    this.userService.getUngroupedUsers(this.userParams, this.studPagination.currentPage, this.studPagination.itemsPerPage)
+      .subscribe((res:  PaginatedResult<User[]>) => {
+      this.students = res.result;
+      this.studPagination = res.pagination;
     }, error => {
       this.alertify.error(error);
     });
@@ -76,11 +101,11 @@ export class GroupRegistrationComponent implements OnInit {
   resetFilter() {
     this.userParams.studentLevel = 'all';
     this.loadUsers();
+    debugger
   }
 
   groupUser(user: User) {
     user.grouped = true;
-debugger
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
       this.groupToRegister.studentIds.push(user.id);
     }
@@ -140,7 +165,6 @@ debugger
       studentIds: []
     };
     this.usersInGroup = [];
-    // this._document.defaultView.location.reload();
   }
 
   test() {

@@ -183,7 +183,7 @@ namespace Hammond.API.Data
 
             if (userParams.GetUngrouped)
             {
-                users = users.Where(u => u.UserGroups.Count == 0);                
+                users = users.Where(u => u.UserGroups.Count == 0);
             }
 
             // if (userParams.GroupId != null)

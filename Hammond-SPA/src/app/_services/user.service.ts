@@ -51,12 +51,30 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
     );
 }
 
-getUngroupedUsers(userParams?): Observable<User[]> {
+getUngroupedUsers(userParams?, page?, itemsPerPage?): Observable<PaginatedResult<User[]>> {
+  const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
   let params = new HttpParams();
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
   params = params.append('getUngrouped', userParams.getUngrouped);
   params = params.append('studentLevel', userParams.studentLevel);
+  params = params.append('roleName', userParams.roleName);
 
-  return this.http.get<User[]>(this.baseUrl + 'users', {params});
+  return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
+
+  // return this.http.get<User[]>(this.baseUrl + 'users', {params});
 }
 
 getUser(id): Observable<User> {

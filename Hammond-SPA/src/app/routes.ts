@@ -41,6 +41,8 @@ import { SessionListResolver } from './_resolvers/session-list.resolver';
 import { SessionsListComponent } from './admin/sessions-list/sessions-list.component';
 import { AssignmentForSessionResolver } from './_resolvers/assignments-for-session.resolver';
 import { SessionNextResolver } from './_resolvers/session-next.resolver';
+import { UngroupedMentorResolver } from './_resolvers/ungroupded-mentor.resolver';
+import { UngroupedStudentResolver } from './_resolvers/ungrouped-student.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -72,7 +74,8 @@ export const appRoutes: Routes = [
                 resolve: {groups: UserGroupListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/groups/register', component: GroupRegistrationComponent,
-                resolve: {users: UserUngroupedResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
+                resolve: {students: UngroupedStudentResolver, mentors: UngroupedMentorResolver },
+                data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/registerstudent',  component: StudentRegistrationComponent,
                 data: {roles: ['Admin'], operatingRole: 'Admin'} },

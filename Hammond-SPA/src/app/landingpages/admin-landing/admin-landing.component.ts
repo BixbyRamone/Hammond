@@ -58,8 +58,8 @@ export class AdminLandingComponent implements OnInit {
   loadUngroupedUsers() {
     this.userParams.getUngrouped = true;
     this.userService.getUngroupedUsers(this.userParams)
-      .subscribe((res:  User[]) => {
-      this.users = res;
+      .subscribe((res:  PaginatedResult<User[]>) => {
+      this.users = res.result;
     }, error => {
       this.alertify.error(error);
     });

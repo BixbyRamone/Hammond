@@ -19,7 +19,7 @@
       <div class="col-sm-4 col-md-4 col-lg-4">
         <h4>Mentors</h4>
         <ul style="list-style-type: none;">
-          <div class="" *ngFor="let user of users">
+          <div class="" *ngFor="let user of mentors">
               <div class="card" *ngIf="user.userRoles[0].role.name == 'Mentor' &&
               user.userRoles[0].user.userGroups.length < 1 && !user.grouped">
                 <li class="card-body" (click)="groupUser(user)">
@@ -50,8 +50,8 @@
       <div class="col-sm-4 col-md-4 col-lg-4">
         <h4>Students</h4>
         <ul style="list-style-type: none;">
-            <div *ngFor="let user of users">
-              <div class="card" *ngIf="user.userRoles[0].role.name == 'Student' && !user.grouped &&
+            <div *ngFor="let user of students">
+              <div class="card" *ngIf="!user.grouped &&
                user.userRoles[0].user.userGroups.length < 1 && !user.grouped">
                 <li class="card-body" (click)="groupUser(user)">
                   {{user.lastName}}, {{user.firstName}}
