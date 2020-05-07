@@ -70,12 +70,13 @@ export class GroupRegistrationComponent implements OnInit {
   }
 
   loadUsers() {
-    this.loadMentors();
     this.loadStudents();
+    this.loadMentors();
   }
 
   loadMentors() {
     this.userParams.getUngrouped = true;
+    this.userParams.roleName = 'volunteer';
     this.userService.getUngroupedUsers(this.userParams, this.mentPagination.currentPage, this.mentPagination.itemsPerPage)
       .subscribe((res:  PaginatedResult<User[]>) => {
       this.mentors = res.result;
@@ -83,10 +84,12 @@ export class GroupRegistrationComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+    this.userParams.roleName = null;
   }
 
   loadStudents() {
     this.userParams.getUngrouped = true;
+    this.userParams.roleName = 'student';
     this.userService.getUngroupedUsers(this.userParams, this.studPagination.currentPage, this.studPagination.itemsPerPage)
       .subscribe((res:  PaginatedResult<User[]>) => {
       this.students = res.result;
@@ -94,15 +97,15 @@ export class GroupRegistrationComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+    this.userParams.roleName = null;
   }
 
-  resetFilter() {
-    this.userParams.studentLevel = 'all';
-    this.loadUsers();
-  }
+  // resetFilter() {
+  //   this.userParams.studentLevel = 'all';
+  //   this.loadUsers();
+  // }
 
   groupUser(user: User) {
-    debugger
     user.grouped = true;
     this.usersInGroup.push(user);
     if (user.userRoles[0].role.normalizedName === 'STUDENT') {
@@ -111,7 +114,6 @@ export class GroupRegistrationComponent implements OnInit {
     if (user.userRoles[0].role.normalizedName === 'MENTOR') {
       this.groupToRegister.volunteerIds.push(user.id);
     }
-    // this.createGroup(this.groupToRegister);
     console.dir(this.groupToRegister);
     console.log(this.usersInGroup);
 
@@ -130,26 +132,8 @@ export class GroupRegistrationComponent implements OnInit {
       const elementToRemove = this.groupToRegister.volunteerIds.indexOf(user.id);
       this.groupToRegister.volunteerIds.splice(elementToRemove, 1);
     }
-    this.createGroup(this.groupToRegister);
     console.dir(this.groupToRegister);
     this.isGroup--;
-  }
-
-  createGroup(groupIdsObj: any) {
-    if (this.show === false) {
-      this.toggle();
-    }
-    this.usersInGroup = [];
-    groupIdsObj.volunteerIds.forEach(id => {
-      const usr = this.mentors.find(u => u.id === id);
-      this.usersInGroup.push(usr);
-    });
-    groupIdsObj.studentIds.forEach(id => {
-      const usr = this.students.find(u => u.id === id);
-      this.usersInGroup.push(usr);
-    });
-    console.dir(this.groupToRegister);
-    console.log(this.usersInGroup);
   }
 
   register() {
@@ -177,13 +161,8 @@ export class GroupRegistrationComponent implements OnInit {
   studentPageChanged(event: any): void {
     this.studPagination.currentPage = event.page;
     this.loadStudents();
-    console.dir(this.groupToRegister);
-    console.log(this.usersInGroup);
   }
 
-  test() {
-    console.log('change');
-  }
 
   backup() {
     console.log('backup');

@@ -96,7 +96,6 @@ updateStudentLevel(id: number, user: User, studLev: string) {
   if (studLev) {
     user.studentLevel = studLev;
   }
-  debugger
   return this.http.put(this.baseUrl + 'users/' + id, user);
 }
 
