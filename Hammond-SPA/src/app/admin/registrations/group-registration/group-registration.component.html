@@ -15,9 +15,19 @@
         Reset Filter
       </button> -->
     </form>
+    
   <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-4">
         <h4>Mentors</h4>
+        <div class="d-flex justify-content-center">
+          <pagination [boundaryLinks]="true"
+                      [totalItems]="mentPagination.totalItems"
+                      [itemsPerPage]="mentPagination.itemsPerPage"
+                      [(ngModel)]="mentPagination.currentPage"
+                      (pageChanged)="mentorPageChanged($event)"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
+          </pagination>
+        </div>
         <ul style="list-style-type: none;">
           <div class="" *ngFor="let user of mentors">
               <div class="card" *ngIf="user.userRoles[0].role.name == 'Mentor' &&
@@ -49,6 +59,15 @@
       </div>
       <div class="col-sm-4 col-md-4 col-lg-4">
         <h4>Students</h4>
+        <div class="d-flex justify-content-center">
+          <pagination [boundaryLinks]="true"
+                      [totalItems]="studPagination.totalItems"
+                      [itemsPerPage]="studPagination.itemsPerPage"
+                      [(ngModel)]="studPagination.currentPage"
+                      (pageChanged)="studentPageChanged($event)"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
+          </pagination>
+        </div>
         <ul style="list-style-type: none;">
             <div *ngFor="let user of students">
               <div class="card" *ngIf="!user.grouped &&

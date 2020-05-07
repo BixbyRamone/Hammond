@@ -17,7 +17,7 @@ export class UngroupedMentorResolver implements Resolve<User[]> {
 
             resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
                 this.userParams.getUngrouped = true;
-                this.userParams.roleName = 'mentor';
+                this.userParams.roleName = 'volunteer';
                 if (!this.userParams.studentLevel) {
                     this.userParams.studentLevel = 'sophomore';
                 }
