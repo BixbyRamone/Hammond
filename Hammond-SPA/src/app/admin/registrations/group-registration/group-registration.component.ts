@@ -81,6 +81,12 @@ export class GroupRegistrationComponent implements OnInit {
       .subscribe((res:  PaginatedResult<User[]>) => {
       this.mentors = res.result;
       this.mentPagination = res.pagination;
+      for (let index = 0; index < this.mentors.length; index++) {
+        const element = this.mentors[index];
+        if (this.usersInGroup.indexOf(element) > -1) {
+          element.grouped = true;
+        }
+      }
     }, error => {
       this.alertify.error(error);
     });
@@ -94,6 +100,14 @@ export class GroupRegistrationComponent implements OnInit {
       .subscribe((res:  PaginatedResult<User[]>) => {
       this.students = res.result;
       this.studPagination = res.pagination;
+      for (let index = 0; index < this.students.length; index++) {
+        const element = this.students[index];
+        for (let i = 0; i < this.groupToRegister.studentIds.length; i++) {
+          if (this.groupToRegister.studentIds[i] == element.id) {
+            element.grouped = true;
+          }
+        }
+      }
     }, error => {
       this.alertify.error(error);
     });
