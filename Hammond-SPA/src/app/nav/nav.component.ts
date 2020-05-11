@@ -18,15 +18,13 @@ export class NavComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    if (this.authService.loggedIn()) {
-      this.getRoles();
-    } else {
+    if (!this.authService.loggedIn()) {
       this.logout();
     }
     }
 
   loggedIn() {
-    // this.getRoles();
+    this.getRoles();
     console.log(this.authService.loggedIn());
     return this.authService.loggedIn();
   }
