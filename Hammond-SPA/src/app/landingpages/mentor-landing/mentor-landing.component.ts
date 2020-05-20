@@ -27,6 +27,7 @@ export class MentorLandingComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe( data => {
+      this.user = JSON.parse(localStorage.getItem('user'));
       this.session = data['session'];
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;

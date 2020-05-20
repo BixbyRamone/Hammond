@@ -110,7 +110,7 @@ export const appRoutes: Routes = [
             { path: 'mentor/assignments', component: AssignmentListComponent,
                 resolve: {assignments: AssignmentListResolver}, data: {roles: ['Mentor'], operatingRole: 'Mentor'} },
 
-            { path: 'mentor/assignment/:id', component: AssignmentDetailComponent,
+            { path: 'mentor/:id/assignments/:assId', component: AssignmentDetailComponent,
                 resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
                 data: { operatingRole: 'Mentor' } },
             // =================
@@ -125,8 +125,8 @@ export const appRoutes: Routes = [
 
             { path: 'users/:id', component: UserProfileComponent, resolve: { user: UserDetailResolver } },
 
-            { path: 'mentor/assignments/:id', component: AssignmentDetailComponent,
-                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver } },
+            // { path: 'mentor/assignments/:id', component: AssignmentDetailComponent,
+            //     resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver } },
 
             { path: 'assignment/:id', component: AssignmentDetailComponent,
                 resolve: { assignment: AssignmentDetailResolver }}

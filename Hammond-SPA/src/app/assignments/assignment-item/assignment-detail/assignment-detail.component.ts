@@ -111,6 +111,8 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   getRecipientId() {
+    const test = this.href;
+    debugger
     const url = this.href.split('/');
     const returnable = url[url.length - 3];
 

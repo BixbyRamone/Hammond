@@ -25,7 +25,6 @@ export class NavComponent implements OnInit {
 
   loggedIn() {
     this.getRoles();
-    console.log(this.authService.loggedIn());
     return this.authService.loggedIn();
   }
 
