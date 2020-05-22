@@ -19,6 +19,7 @@ namespace Hammond.API.Data
         public DbSet<UserAssignment> UserAssignments { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<AssignmentMessage> AssignmentMessages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -64,6 +65,9 @@ namespace Hammond.API.Data
                 .HasOne(u => u.Recipient)
                 .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<AssignmentMessage>()
+                .Ignore(am => am.RecipientIds);
 
             builder.Entity<UserGroup>(userGroup => {
                 userGroup.HasKey(ug => new {ug.UserId, ug.GroupId});

@@ -111,7 +111,8 @@ export const appRoutes: Routes = [
                 resolve: {assignments: AssignmentListResolver}, data: {roles: ['Mentor'], operatingRole: 'Mentor'} },
 
             { path: 'mentor/:id/assignments/:assId', component: AssignmentDetailComponent,
-                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver, user: UserDetailResolver },
+                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver,
+                    user: UserDetailResolver, group: GroupResolver },
                 data: { operatingRole: 'Mentor' } },
             // =================
 

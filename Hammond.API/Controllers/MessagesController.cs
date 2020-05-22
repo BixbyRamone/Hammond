@@ -125,6 +125,43 @@ namespace Hammond.API.Controllers
             throw new Exception("Creating the message failed on save");
         }
 
+        [HttpPost("assignment")]
+        public async Task<IActionResult> CreateAssignmentMessage(int userId, [FromBody]AssignmentMessageForCreationDto assignmentMessageForCreationDto)
+        {
+            var sender = await _repo.GetUser(userId);
+
+            if (sender.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+            
+            assignmentMessageForCreationDto.SenderId = userId;
+
+            for (int i = 0; i < assignmentMessageForCreationDto.RecipientIds.Length; i++)
+            {
+                var recipient = await _repo.GetUser(assignmentMessageForCreationDto.RecipientIds[i]);
+
+                var message = _mapper.Map<Message>(assignmentMessageForCreationDto);
+                message.RecipientId = recipient.Id;
+                message.Recipient = recipient;
+
+                _repo.Add(message);
+            }
+
+            var assignmentMessage = _mapper.Map<AssignmentMessage>(assignmentMessageForCreationDto);
+            
+            _repo.Add(assignmentMessage);
+
+            
+
+            if (await _repo.SaveAll()) {
+                var messageToReturn = _mapper.Map<AssignmentMessageToReturnDto>(assignmentMessage);
+                
+                return CreatedAtRoute("GetMessage", new {id = assignmentMessage.Id}, messageToReturn);
+            }
+                
+
+            throw new Exception("Creating the message failed on save");
+        }
+
         [HttpPost("{id}")]
         public async Task<IActionResult> DeleteMessage(int id, int userId)
         {

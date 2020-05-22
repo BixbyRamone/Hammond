@@ -14,6 +14,7 @@ namespace Hammond.API.Helpers
             CreateMap<UserForUpdateDto, User>();
             CreateMap<User, UserToReturnDto>();
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
+            CreateMap<AssignmentMessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>();
             CreateMap<Assignment, AssignmentForListDto>();
             CreateMap<Assignment, AssignmentForCreationDto>();
@@ -24,6 +25,9 @@ namespace Hammond.API.Helpers
             CreateMap<EventForUpdateDto, Event>();
             CreateMap<SessionForCreationDto, Session>();
             CreateMap<Session, SessionToReturnDto>();
+            CreateMap<AssignmentMessageForCreationDto, AssignmentMessage>().ReverseMap();
+            CreateMap<AssignmentMessage, AssignmentMessageToReturnDto>();
+
         }
     }
 }

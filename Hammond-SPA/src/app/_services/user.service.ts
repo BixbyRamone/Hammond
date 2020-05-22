@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
 import { Assignment } from '../_models/assignment';
+import { AssignmentMessage } from '../_models/assignmentMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -149,6 +150,11 @@ getMessageThread(id: number, recipientId: number) {
 
 sendMessage(id: number, message: Message) {
   return this.http.post(this.baseUrl + 'users/' + id + '/messages', message);
+}
+
+sendAssignmentMessage(id: number, message: AssignmentMessage) {
+  debugger
+  return this.http.post(this.baseUrl + 'users/' + id + '/messages/assignment', message);
 }
 
 deleteMessage(id: number, userId: number) {

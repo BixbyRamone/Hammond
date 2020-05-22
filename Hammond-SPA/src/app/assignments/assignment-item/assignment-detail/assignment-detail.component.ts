@@ -6,6 +6,7 @@ import { Message } from 'src/app/_models/message';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Group } from 'src/app/_models/group';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -17,6 +18,7 @@ export class AssignmentDetailComponent implements OnInit {
   @Input() user: User;
   accessor: User;
   assignment: any;
+  group: Group;
   messages: Message[];
   newMessage: any = {};
   userInfo: any = {};
@@ -43,6 +45,8 @@ export class AssignmentDetailComponent implements OnInit {
     this.route.data.subscribe( data => {
       this.operatingRole = data['operatingRole'];
       this.assignment = data['assignment'];
+      this.group = data['group'];
+      debugger
       if (this.operatingRole !== 'Admin') {
         this.messages = data['messages'];
       }
@@ -94,13 +98,13 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   sendMessage() {
-    this.newMessage.recipientId = this.getRecipientId();
+    this.newMessage.recipientIds = this.getRecipientId();
     this.newMessage.assignmentId = this.assignment.id;
     this.newMessage.senderId = this.accessor.id;
     this.newMessage.groupId = this.accessor.userGroups[0].groupId;
     // this.newMessage.senderPhotoUrl = this.authService.currentUser.photoUrl;
     // this.newMessage.senderKnownAs = this.authService.currentUser.username;
-    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
+    this.userService.sendAssignmentMessage(this.authService.decodedToken.nameid, this.newMessage)
       .subscribe((message: Message) => {
       this.messages.unshift(message);
       this.newMessage.content = '';
@@ -111,11 +115,12 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   getRecipientId() {
-    const test = this.href;
-    debugger
-    const url = this.href.split('/');
-    const returnable = url[url.length - 3];
+    const recipientIds = [];
+    for (let i = 0; i < this.group.userGroups.length; i++) {
+      const element = this.group.userGroups[i].userId ;
+      recipientIds.push(element);
+    }
 
-    return returnable;
+    return recipientIds;
   }
 }
