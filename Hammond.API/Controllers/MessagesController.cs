@@ -88,7 +88,7 @@ namespace Hammond.API.Controllers
 
             var messagesForAssignment = await _repo.GetAssignmentMessages(assignmentId, groupId);
 
-            var messagesToReturn = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesForAssignment);
+            var messagesToReturn = _mapper.Map<IEnumerable<AssignmentMessageToReturnDto>>(messagesForAssignment);
 
             return Ok(messagesToReturn);
         }

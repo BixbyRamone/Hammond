@@ -46,7 +46,6 @@ export class AssignmentDetailComponent implements OnInit {
       this.operatingRole = data['operatingRole'];
       this.assignment = data['assignment'];
       this.group = data['group'];
-      debugger
       if (this.operatingRole !== 'Admin') {
         this.messages = data['messages'];
       }

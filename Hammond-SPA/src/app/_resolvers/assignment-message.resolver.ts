@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Message } from '../_models/message';
+import { AssignmentMessage } from '../_models/assignmentMessage';
 import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { AuthService } from '../_services/auth.service';
 import { AssignmentService } from '../_services/assignment.service';
 
 @Injectable()
-export class AssignmentMessageResolver implements Resolve<Message[]> {
+export class AssignmentMessageResolver implements Resolve<AssignmentMessage[]> {
     pageNumber = 1;
     pageSize = 15;
     messageContainer = 'Unread';
@@ -19,7 +19,7 @@ export class AssignmentMessageResolver implements Resolve<Message[]> {
             private alertify: AlertifyService,
             private authService: AuthService) {}
 
-        resolve(route: ActivatedRouteSnapshot): Observable<Message[]> {
+        resolve(route: ActivatedRouteSnapshot): Observable<AssignmentMessage[]> {
             let id: number;
         if (route.params['assId']) {
             id = route.params['assId'];

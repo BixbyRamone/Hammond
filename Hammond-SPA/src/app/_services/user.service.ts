@@ -153,7 +153,6 @@ sendMessage(id: number, message: Message) {
 }
 
 sendAssignmentMessage(id: number, message: AssignmentMessage) {
-  debugger
   return this.http.post(this.baseUrl + 'users/' + id + '/messages/assignment', message);
 }
 
