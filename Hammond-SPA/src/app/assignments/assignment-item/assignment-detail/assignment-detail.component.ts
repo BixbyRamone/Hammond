@@ -7,6 +7,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/_models/group';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -72,28 +73,20 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   generateMessageColor() {
-    let colorOptionsIterator = -1;
-    for (let index = 0; index < this.messages.length; index++) {
-      this.userInfo.id = this.messages[index].senderId;
-      colorOptionsIterator++;
-      if (colorOptionsIterator > this.colorOptions.length) {
-        colorOptionsIterator = 0;
-      }
-      console.dir(colorOptionsIterator);
-      this.userInfo.color = this.colorOptions[colorOptionsIterator];
-      if (!this.userInfoArray.includes(this.userInfo)) {
-        this.userInfoArray.push(this.userInfo);
-      }
-
-      this.userInfoArray.forEach(userInfoElement => {
-        this.messages.forEach(messageElement => {
-          if (userInfoElement.id === messageElement.senderId) {
-            messageElement.fontColor = userInfoElement.color;
-          }
-        });
-      });
-
+    const sortedGroup = this.group.userGroups.sort((a, b) => a.userId - b.userId);
+    for (let i = 0; i < sortedGroup.length; i++) {
+      sortedGroup[i].groupChatCol = this.colorOptions[i];
     }
+
+    for (let j = 0; j < this.messages.length; j++) {
+      const fontColorGetter = sortedGroup.find(u => u.userId === this.messages[j].senderId);
+
+      this.messages[j].fontColor = fontColorGetter.groupChatCol;
+      if (this.accessor.id === this.messages[j].senderId) {
+        this.userInfo.color = fontColorGetter.groupChatCol;
+      }
+    }
+
   }
 
   sendMessage() {
@@ -105,9 +98,9 @@ export class AssignmentDetailComponent implements OnInit {
     // this.newMessage.senderKnownAs = this.authService.currentUser.username;
     this.userService.sendAssignmentMessage(this.authService.decodedToken.nameid, this.newMessage)
       .subscribe((message: Message) => {
+      message.fontColor = this.userInfo.color;
       this.messages.unshift(message);
       this.newMessage.content = '';
-      // this.generateMessageColor();
     }, error => {
       this.alertify.error(error);
     });
@@ -116,10 +109,9 @@ export class AssignmentDetailComponent implements OnInit {
   getRecipientId() {
     const recipientIds = [];
     for (let i = 0; i < this.group.userGroups.length; i++) {
-      const element = this.group.userGroups[i].userId ;
+      const element = this.group.userGroups[i].user.id ;
       recipientIds.push(element);
     }
-
     return recipientIds;
   }
 }

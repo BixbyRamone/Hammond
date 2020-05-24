@@ -1,4 +1,4 @@
-<div class="container mt-3">
+  <div class="container mt-3">
   <i class="fa fa-arrow-circle-left" [routerLink]="['/', operatingRole]"></i>
   <h3>
     {{assignment.title}}
@@ -15,7 +15,7 @@
         <p>Discuss this assignment:</p>
       </div>
   
-      <ul style="list-style-type:none;" class="chat">
+      <ul style="list-style-type:none; width: 450px; height: 250px; overflow: auto" class="chat">
         <li *ngFor="let message of messages">
           <!-- To them -->
           <div [ngStyle]="message.fontColor" *ngIf="message.senderId == user.id">
