@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { AssignmentService } from 'src/app/_services/assignment.service';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -7,12 +7,14 @@ import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/_models/group';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-assignment-detail',
   templateUrl: './assignment-detail.component.html',
-  styleUrls: ['./assignment-detail.component.css']
+  styleUrls: ['./assignment-detail.component.css'],
+  queries: {
+  'tabsContentRef': new ViewChild( 'tabsContentRef' )
+    }
 })
 export class AssignmentDetailComponent implements OnInit {
   // @Input() assignment: any;
@@ -27,6 +29,7 @@ export class AssignmentDetailComponent implements OnInit {
   currentStyle = {};
   operatingRole: string;
   href: string;
+  tabsContentRef!: ElementRef;
   colorOptions = [{'color': 'cornflowerblue'},
                   {'color': 'coral'},
                   {'color': 'goldenrod'},
@@ -101,6 +104,7 @@ export class AssignmentDetailComponent implements OnInit {
       message.fontColor = this.userInfo.color;
       this.messages.unshift(message);
       this.newMessage.content = '';
+      this.scrollTabContentToTop();
     }, error => {
       this.alertify.error(error);
     });
@@ -113,5 +117,10 @@ export class AssignmentDetailComponent implements OnInit {
       recipientIds.push(element);
     }
     return recipientIds;
+  }
+
+  scrollTabContentToTop(): void {
+    debugger
+  this.tabsContentRef.nativeElement.scrollTo( 0, 0 );
   }
 }

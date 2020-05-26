@@ -15,16 +15,17 @@
         <p>Discuss this assignment:</p>
       </div>
   
-      <ul style="list-style-type:none; width: 450px; height: 250px; overflow: auto" class="chat">
+      <ul #tabsContentRef style="list-style-type:none; width: 450px; height: 220px; overflow: auto" class="chat">
         <li *ngFor="let message of messages">
           <!-- To them -->
-          <div [ngStyle]="message.fontColor" *ngIf="message.senderId == user.id">
+          <div [ngStyle]="message.fontColor" *ngIf="message.senderId == accessor.id">
             <span class="chat-image float-left">
+              
             </span>
             <div class="chat-body">
               <div class="chat-header">
                 <strong class="primary-font">{{message.senderUsername}}</strong>
-                <small class="text-muted float-right">
+                <small class="text-muted">
                   <span class="fa fa-clock-o">{{message.dateSent | timeAgo}}</span>
                 </small>
               </div>
@@ -32,18 +33,18 @@
             </div>
           </div>
           <!-- To me -->
-          <div [ngStyle]="message.fontColor" *ngIf="message.senderId != user.id">
-            <span class="chat-image float-right">
+          <div class="text-align: right" [ngStyle]="message.fontColor" *ngIf="message.senderId != accessor.id">
+            <!-- <span class="chat-image float-right"> -->
               <!-- <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="rounded-circle">  -->
-            </span>
+            <!-- </span> -->
             <div class="chat-body">
               <div class="chat-header">
                   <small class="text-muted">
                     <span class="fa fa-clock-o">{{message.dateSent | timeAgo}}</span>
-                    <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
-                    <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeAgo}})</span>
+                    <!-- <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
+                    <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeAgo}})</span> -->
                   </small>
-                <strong class="primary-font float-right">{{message.senderUsername}}</strong>
+                <strong class="primary-font">{{message.senderUsername}}</strong>
                 
               </div>
               <p>{{message.content}}</p>
