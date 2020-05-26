@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AssignmentService } from 'src/app/_services/assignment.service';
-import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-assigment-registration',
@@ -15,11 +14,11 @@ export class AssigmentRegistrationComponent implements OnInit {
   @Output() cancel = new EventEmitter();
   assignment: Assignment;
   registerForm: FormGroup;
+  section: string;
 
   constructor(
     private authService: AuthService,
     private assignmentService: AssignmentService,
-    private userService: UserService,
     private alertify: AlertifyService,
     private fb: FormBuilder) { }
 
@@ -35,10 +34,15 @@ export class AssigmentRegistrationComponent implements OnInit {
       section: ['', Validators.required],
       dateDue: ['', Validators.required],
       assigned: [false, Validators.required],
+      subject: [null]
     });
+
   }
 
   register() {
+    if (this.registerForm.value.section !== 'tutor') {
+      this.registerForm.value.subject = null;
+    }
     if (this.registerForm.valid) {
       this.assignment = Object.assign({}, this.registerForm.value);
 

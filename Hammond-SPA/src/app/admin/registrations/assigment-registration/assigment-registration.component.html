@@ -58,6 +58,22 @@
       </label>
     </div>
 
+    <div class="form-group col-md-5" *ngIf="registerForm.value.section == 'tutor'">
+      <label style="margin-right: 10px;" class="control-label">Subject:  </label>
+      <br>
+      <label class="radio-inline">
+        <input type="radio" class="mr-1" value="actscience" formControlName="subject">ACT Science
+      </label>
+      <br>
+      <label class="radio-inline">
+        <input type="radio" class="mr-1" value="actmath" formControlName="subject">ACT Math
+      </label>
+      <br>
+      <label class="radio-inline">
+        <input type="radio" class="mr-1" value="wact" formControlName="subject">Writing and Critical Thinking
+      </label>
+    </div>
+
     <div class="form-group">
       <input [ngClass]="{'is-invalid': registerForm.get('dateDue').errors
         && registerForm.get('dateDue').touched}" class="form-control"
