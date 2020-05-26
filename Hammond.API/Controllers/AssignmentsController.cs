@@ -79,6 +79,7 @@ namespace Hammond.API.Controllers
             assignmentFromRepo.Section = assignmentForUpdateDto.Section;
             assignmentFromRepo.DateDue = assignmentForUpdateDto.DateDue;
             assignmentFromRepo.Assigned = assignmentForUpdateDto.Assigned;
+            assignmentFromRepo.Subject = assignmentForUpdateDto.Subject;
                 
 
                 if (await _repo.SaveAll())

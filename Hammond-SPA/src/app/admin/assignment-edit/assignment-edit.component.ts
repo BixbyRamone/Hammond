@@ -41,6 +41,7 @@ export class AssignmentEditComponent implements OnInit {
       section: [this.assignment.section, Validators.required],
       dateDue: [this.assignment.dateDue, Validators.required],
       assigned: [this.assignment.assigned, Validators.required],
+      subject: [this.assignment.subject]
     });
   }
 
