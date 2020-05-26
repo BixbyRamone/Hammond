@@ -47,7 +47,8 @@ namespace Hammond.API.Controllers
                 DateAssigned = assignmentForCreationDto.DateAssigned,
                 DateDue = assignmentForCreationDto.DateDue,
                 Assigned = assignmentForCreationDto.Assigned,
-                CreatedBy = assignmentForCreationDto.CreatedBy
+                CreatedBy = assignmentForCreationDto.CreatedBy,
+                Subject = assignmentForCreationDto.Subject
             };
 
             if (assignment.Assigned)

@@ -9,6 +9,7 @@ namespace Hammond.API.Dtos
         public string Content { get; set; }
         public string StudentLevel { get; set; }
         public string Section { get; set; } // i.e. Tutoring or Mentoring
+        public string Subject { get; set; }
         public DateTime DateDue { get; set; }
         public bool Assigned { get; set; }
     }

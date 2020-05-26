@@ -6,6 +6,7 @@ export interface Assignment {
     content: string;
     studentlevel: string;
     section: string;
+    subject: string;
     dateAssigned: Date;
     dateDue: Date;
     assigned: boolean;
