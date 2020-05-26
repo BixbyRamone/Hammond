@@ -17,7 +17,7 @@ namespace Hammond.API.Helpers
             CreateMap<AssignmentMessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>();
             CreateMap<Assignment, AssignmentForListDto>();
-            CreateMap<Assignment, AssignmentForCreationDto>();
+            CreateMap<AssignmentForCreationDto, Assignment>();
             CreateMap<Assignment, AssignmentToReturnDto>();
             CreateMap<Group, GroupForListDto>();
             CreateMap<EventForCreationDto, Event>();

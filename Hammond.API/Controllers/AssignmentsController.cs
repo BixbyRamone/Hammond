@@ -34,22 +34,7 @@ namespace Hammond.API.Controllers
                 return Unauthorized();
 
             assignmentForCreationDto.CreatedBy = assignmentCreator;
-            // var assignment = _mapper.Map<Assignment>(assignmentForCreationDto);
-
-            // var usersToAssognTo = _repo.GetUsers();
-
-            var assignment = new Assignment
-            {
-                Title = assignmentForCreationDto.Title,
-                Content = assignmentForCreationDto.Content,
-                StudentLevel = assignmentForCreationDto.StudentLevel,
-                Section = assignmentForCreationDto.Section,
-                DateAssigned = assignmentForCreationDto.DateAssigned,
-                DateDue = assignmentForCreationDto.DateDue,
-                Assigned = assignmentForCreationDto.Assigned,
-                CreatedBy = assignmentForCreationDto.CreatedBy,
-                Subject = assignmentForCreationDto.Subject
-            };
+            var assignment = _mapper.Map<Assignment>(assignmentForCreationDto);
 
             if (assignment.Assigned)
                 assignment.DateAssigned = DateTime.Now;
