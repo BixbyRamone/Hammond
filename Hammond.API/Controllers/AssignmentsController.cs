@@ -72,15 +72,8 @@ namespace Hammond.API.Controllers
                 return Unauthorized();
 
                 var assignmentFromRepo = await _repo.GetAssignment(assignmentForUpdateDto.Id);
-
-            assignmentFromRepo.Title = assignmentForUpdateDto.Title;
-            assignmentFromRepo.Content = assignmentForUpdateDto.Content;
-            assignmentFromRepo.StudentLevel = assignmentForUpdateDto.StudentLevel;
-            assignmentFromRepo.Section = assignmentForUpdateDto.Section;
-            assignmentFromRepo.DateDue = assignmentForUpdateDto.DateDue;
-            assignmentFromRepo.Assigned = assignmentForUpdateDto.Assigned;
-            assignmentFromRepo.Subject = assignmentForUpdateDto.Subject;
                 
+                _mapper.Map(assignmentForUpdateDto, assignmentFromRepo);
 
                 if (await _repo.SaveAll())
                 return NoContent();
