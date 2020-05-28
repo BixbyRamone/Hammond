@@ -26,7 +26,6 @@ export class AssignmentDetailComponent implements OnInit {
   newMessage: any = {};
   userInfo: any = {};
   userInfoArray: any = [];
-  currentStyle = {};
   operatingRole: string;
   href: string;
   tabsContentRef!: ElementRef;
@@ -120,7 +119,7 @@ export class AssignmentDetailComponent implements OnInit {
   }
 
   scrollTabContentToTop(): void {
-    debugger
   this.tabsContentRef.nativeElement.scrollTo( 0, 0 );
   }
+
 }

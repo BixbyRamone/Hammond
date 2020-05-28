@@ -7,6 +7,16 @@
   <p>
     {{assignment.content}}
   </p>
+  <form *ngIf="accessor.role == 'mentor' || 'tutor'">
+    <label>
+      <input
+        type="checkbox"
+        name="complete"
+        [(ngModel)]="assignment.completed">
+        Assignment Completed
+        <br>
+    </label>
+  </form>
 
   <!-- Messaging -->
   <div *ngIf="user && operatingRole !== 'Admin'" class="card message-component">
@@ -15,7 +25,7 @@
         <p>Discuss this assignment:</p>
       </div>
   
-      <ul #tabsContentRef style="list-style-type:none; width: 450px; height: 220px; overflow: auto" class="chat">
+      <ul #tabsContentRef [style.height]="messages.length > 3 ? '220px' : 'auto'" style="list-style-type:none; width: 450px; height: 220px; overflow: auto" class="chat">
         <li *ngFor="let message of messages">
           <!-- To them -->
           <div [ngStyle]="message.fontColor" *ngIf="message.senderId == accessor.id">
