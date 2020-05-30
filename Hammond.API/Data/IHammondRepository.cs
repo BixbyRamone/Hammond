@@ -19,7 +19,7 @@ namespace Hammond.API.Data
         Task<IEnumerable<AssignmentMessage>> GetAssignmentMessages(int assignmentId, int groupId);
         Task<Assignment> GetAssignment(int id);
         Task<PagedList<Assignment>> GetAssignments(AssignmentParams assignmentParams);
-        Task<Assignment> GetUserAssignment(int id);
+        Task<UserAssignment> GetUserAssignment(int id);
         Task<PagedList<Assignment>> GetUserAssignments(AssignmentParams assignmentParams);
         Task<PagedList<Group>> GetGroups(UserParams userparams);
         Task<Group> GetGroup(int id);

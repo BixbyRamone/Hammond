@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
+import { UserAssignment } from '../_models/userAssignment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ register(id: number, assignment: Assignment) {
 
 updateAssignment(id: number, assignment: Assignment) {
   return this.http.put(this.baseUrl + id, assignment);
+}
+
+updateUserAssignment(id: number, ua: UserAssignment) {
+  debugger
+  return this.http.put(environment.apiUrl + 'userAssignment/' + id, ua);
 }
 
 getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedResult<Assignment[]>> {
@@ -51,6 +57,10 @@ getAssignments(page?, itemsPerPage?, assignmentParams?): Observable<PaginatedRes
 
 getAssignment(id): Observable<Assignment> {
   return this.http.get<Assignment>(this.baseUrl + id);
+}
+
+getUserAssignment(id): Observable<UserAssignment> {
+  return this.http.get<UserAssignment>(environment.apiUrl + 'userAssignment/' + id);
 }
 
 getAssignmentMessages(userId, assignmentId): Observable<Message[]> {

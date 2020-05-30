@@ -7,6 +7,8 @@ import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/_models/group';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { UserAssignment } from 'src/app/_models/userAssignment';
 
 @Component({
   selector: 'app-assignment-detail',
@@ -17,10 +19,11 @@ import { Group } from 'src/app/_models/group';
     }
 })
 export class AssignmentDetailComponent implements OnInit {
-  // @Input() assignment: any;
   @Input() user: User;
+  editForm: FormGroup;
   accessor: User;
   assignment: any;
+  userAssignment: UserAssignment;
   group: Group;
   messages: Message[];
   newMessage: any = {};
@@ -42,27 +45,34 @@ export class AssignmentDetailComponent implements OnInit {
     private authService: AuthService,
     private alertify: AlertifyService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.operatingRole = data['operatingRole'];
-      this.assignment = data['assignment'];
+      this.assignment = data['assignment'].assignment;
+      this.userAssignment = data['assignment'];
       this.group = data['group'];
       if (this.operatingRole !== 'Admin') {
         this.messages = data['messages'];
       }
       this.user = data['user'];
-      console.dir(this.user);
       this.accessor = JSON.parse(localStorage.getItem('user'));
-      console.dir(this.accessor);
+      this.createAssignmentCheckboxForm();
     });
     if (this.messages) {
       this.generateMessageColor();
     }
     this.href = this.router.url;
     // this.loadAssignmentMessages(this.user.id, this.assignment.id);
-    console.dir(this.messages);
+    console.dir(this.assignment);
+  }
+
+  createAssignmentCheckboxForm() {
+    this.editForm = this.fb.group({
+      completed: [this.userAssignment.completed]
+    });
   }
 
   loadAssignmentMessages(id, assignmentId) {
@@ -116,6 +126,17 @@ export class AssignmentDetailComponent implements OnInit {
       recipientIds.push(element);
     }
     return recipientIds;
+  }
+
+  edit(compBool: boolean) {
+    if (this.editForm.valid) {
+      this.userAssignment.completed = compBool;
+      this.assignmentService.updateUserAssignment(this.authService.decodedToken.nameid, this.userAssignment).subscribe(() => {
+        console.log('success');
+      }, error => {
+        console.log(error);
+      });
+    }
   }
 
   scrollTabContentToTop(): void {

@@ -3,7 +3,7 @@
   <h3>
     {{assignment.title}}
   </h3>
-  <p><strong>Due on: {{assignment.dateDue}}</strong></p>
+  <p><strong>Due on: {{assignment.dateDue | date: 'mediumDate'}}</strong></p>
   <p>
     {{assignment.content}}
   </p>
@@ -11,8 +11,9 @@
     <label>
       <input
         type="checkbox"
-        name="complete"
-        [(ngModel)]="assignment.completed">
+        name="completed"
+        (ngModel)="userAssignment.completed"
+        (change)="edit(!userAssignment.completed)">
         Assignment Completed
         <br>
     </label>

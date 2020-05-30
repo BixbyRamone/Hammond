@@ -1,6 +1,9 @@
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Hammond.API.Data;
+using Hammond.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +29,21 @@ namespace Hammond.API.Controllers
             var assignment = await _repo.GetUserAssignment(id);
 
             return Ok(assignment);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUserAssignment(int id, UserAssignment userAssignment)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var userAssignmentFromRepo = await _repo.GetUserAssignment(userAssignment.AssignmentId);
+            userAssignmentFromRepo.Completed = userAssignment.Completed;
+
+             if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating UserAssignment {id} failed on save");
         }
 
         

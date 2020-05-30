@@ -15,4 +15,5 @@ export interface Assignment {
     completed: boolean;
     studentLevel: string;
     grouped: boolean;
+    userAssignment: any;
 }

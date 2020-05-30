@@ -43,6 +43,7 @@ import { AssignmentForSessionResolver } from './_resolvers/assignments-for-sessi
 import { SessionNextResolver } from './_resolvers/session-next.resolver';
 import { UngroupedMentorResolver } from './_resolvers/ungroupded-mentor.resolver';
 import { UngroupedStudentResolver } from './_resolvers/ungrouped-student.resolver';
+import { UserAssignmentDetailResolver } from './_resolvers/user-assignment-detail.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -111,7 +112,7 @@ export const appRoutes: Routes = [
                 resolve: {assignments: AssignmentListResolver}, data: {roles: ['Mentor'], operatingRole: 'Mentor'} },
 
             { path: 'mentor/:id/assignments/:assId', component: AssignmentDetailComponent,
-                resolve: { assignment: AssignmentDetailResolver, messages: AssignmentMessageResolver,
+                resolve: { assignment: UserAssignmentDetailResolver, messages: AssignmentMessageResolver,
                     user: UserDetailResolver, group: GroupResolver },
                 data: { operatingRole: 'Mentor' } },
             // =================

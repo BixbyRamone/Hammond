@@ -34,7 +34,8 @@ export class AssigmentRegistrationComponent implements OnInit {
       section: ['', Validators.required],
       dateDue: ['', Validators.required],
       assigned: [false, Validators.required],
-      subject: [null]
+      subject: [null],
+      completed: [false]
     });
 
   }

@@ -127,11 +127,11 @@ namespace Hammond.API.Data
             return user;
         }
 
-        public async Task<Assignment> GetUserAssignment(int id)
+        public async Task<UserAssignment> GetUserAssignment(int id)
         {
-            var assignment = await _context.Assignments
-                            .Include(x => x.UserAssignments)
-                            .FirstOrDefaultAsync(a => a.Id == id);
+            var assignment = await _context.UserAssignments
+                            .Include(x => x.Assignment)
+                            .FirstOrDefaultAsync(a => a.AssignmentId == id);
 
             return assignment;
         }
