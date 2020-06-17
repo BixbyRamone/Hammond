@@ -39,7 +39,7 @@ export class EventEditComponent implements OnInit {
     });
   }
 
-  updateEvent(id: number) {
+  updateEvent() {
     if (this.editForm.valid) {
       this.event = Object.assign({}, this.editForm.value);
 

@@ -3,6 +3,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../_services/auth.service';
 import { UpFile } from '../_models/uploapd_file';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-file-uploader',
@@ -15,10 +16,11 @@ export class FileUploaderComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   response: string;
-  baseUrl = environment;
+  baseUrl = environment.apiUrl;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private alertify: AlertifyService
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class FileUploaderComponent implements OnInit {
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: 'http://localhost:5000/api/auth/registerxls/'
+      url: this.baseUrl + '/auth/registerxls/'
        + this.authService.decodedToken.nameid + '/' + this.roleToReg,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
@@ -48,6 +50,7 @@ export class FileUploaderComponent implements OnInit {
       if (response) {
         const res: UpFile = JSON.parse(response);
       }
+      this.alertify.success('File Successfully Uploaded');
     };
   }
 

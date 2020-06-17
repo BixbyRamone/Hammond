@@ -9,7 +9,6 @@
             [ngClass]="{'is-invalid': editForm.get('title').errors
             && editForm.get('title').touched}"
             name="title"
-            [ngModel]="event.title"
             class="form-control"
             formControlName="title"
             placeholder="Event Title">
@@ -22,7 +21,6 @@
             [ngClass]="{'is-invalid': editForm.get('content').errors
             && editForm.get('content').touched}"
             name="content"
-            [ngModel]="event.content"
             class="form-control"
             formControlName="content"
             placeholder="Event Details"
