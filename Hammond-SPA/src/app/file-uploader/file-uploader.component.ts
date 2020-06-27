@@ -29,11 +29,12 @@ export class FileUploaderComponent implements OnInit {
 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
+    console.log('OVER DROP ZONE');
   }
 
   initializeUploader() {
     this.uploader = new FileUploader({
-      url: this.baseUrl + '/auth/registerxls/'
+      url: this.baseUrl + 'auth/registerxls/'
        + this.authService.decodedToken.nameid + '/' + this.roleToReg,
       authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
@@ -42,12 +43,15 @@ export class FileUploaderComponent implements OnInit {
       autoUpload: false,
 
     });
+    console.log('THIS.UPLOADER');
     console.log(this.uploader);
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
+      console.log('FILE ADDED');
     };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
+        debugger
         const res: UpFile = JSON.parse(response);
       }
       this.alertify.success('File Successfully Uploaded');
