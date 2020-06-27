@@ -12,9 +12,6 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
-  // @Output() cancel = new EventEmitter();
-  // @Output() testssss = new EventEmitter();
-  // @Input() loadedAssignments;
   assignments: Assignment[];
   operatingRole: string;
   pagination: Pagination;
