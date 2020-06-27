@@ -1,17 +1,24 @@
-<div [routerLink]="['/users/', user.id]" class="user-item card mb-2">
+<div class="user-item card mb-2">
   <div class="container">
       <div class="card-body">
           <div class="row">
-            <div class="col-md-1 col-lg-1">{{user.id}}: </div>
+            <input
+            type="checkbox"
+            class="col-md-1 col-lg-1"
+            (click)="checkUncheckUsers(user.id, $event.srcElement.checked)">
+            <!-- <div [routerLink]="['/users/', user.id]" class="col-md-1 col-lg-1">{{user.id}}: </div> -->
             <div  
+            [routerLink]="['/users/', user.id]"
             class="link last-name-column col-md-2 col-lg-2">
               {{user.lastName}},
             </div>
             <div
+            [routerLink]="['/users/', user.id]"
             class="link first-name-column col-md-2 col-lg-2">
               {{user.firstName}}
             </div>
             <div
+            [routerLink]="['/users/', user.id]"
             class="link user-name-column col-md-3 col-lg-3">
               {{user.username}}
             </div>

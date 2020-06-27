@@ -35,7 +35,8 @@
       </form>
       <br>
       <div *ngFor="let user of users" class="">
-        <app-user-item [user]="user"></app-user-item>
+        <app-user-item [user]="user"
+        (checkedUser)="usersForDeletion($event)"></app-user-item>
       </div>
     </div>
   </div>

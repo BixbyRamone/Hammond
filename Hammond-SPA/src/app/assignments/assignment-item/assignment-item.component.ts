@@ -19,7 +19,6 @@ export class AssignmentItemComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.operatingUserRole = data.operatingUserRole;
-      console.dir(this.assignment);
     });
   }
 

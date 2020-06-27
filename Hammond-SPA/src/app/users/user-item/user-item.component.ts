@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class UserItemComponent implements OnInit {
   @Input() user: User;
+  @Output() checkedUser = new EventEmitter();
   alertifyMessage: string;
 
   constructor(private alertify: AlertifyService,
@@ -34,6 +35,15 @@ export class UserItemComponent implements OnInit {
         this.alertify.error('Failed to delete this user');
       });
     });
+  }
+
+  checkUncheckUsers(id: number, isChecked: boolean) {
+    // ouput user id to hosting component
+    const userClickedOb = {
+      userId: id,
+      userIsChecked: isChecked
+    };
+    this.checkedUser.emit(userClickedOb);
   }
 
 }

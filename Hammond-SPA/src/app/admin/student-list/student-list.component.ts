@@ -15,6 +15,7 @@ export class StudentListComponent implements OnInit {
   pagination: Pagination;
   userParams: any = {};
   userType: string;
+  usersForDeletionArray = [];
   studentLevel = [{value: 'all', display: 'All Grades'},
                   {value: 'sophomore', display: 'Sophomores'},
                   {value: 'junior', display: 'Juniors'},
@@ -74,4 +75,14 @@ export class StudentListComponent implements OnInit {
     return stringToReturn;
   }
 
+  usersForDeletion(userObjs: any) {
+    if (userObjs.userIsChecked) {
+      this.usersForDeletionArray.push(userObjs.userId);
+    }
+    if (!userObjs.userIsChecked) {
+      const idxToSlice = this.usersForDeletionArray.indexOf(userObjs.userId);
+      this.usersForDeletionArray.splice(idxToSlice, 1);
+    }
+    console.log(this.usersForDeletionArray);
+  }
 }
