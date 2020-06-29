@@ -121,7 +121,6 @@ namespace Hammond.API.Controllers
             int it = 1;
 
             using (var reader = new StreamReader(stream))
-                // using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
                     while (!reader.EndOfStream)
                     {
@@ -140,10 +139,10 @@ namespace Hammond.API.Controllers
 
                 while(it <= lastNames.Count)
                 {
-                    if (firstNames[it] == "Eamon")
-                    {
-                        Console.WriteLine("Test");
-                    }
+                    // if (firstNames[it] == "Eamon")
+                    // {
+                    //     Console.WriteLine("Test");
+                    // }
                     if (lastNames[it] != "")
                     {
                         string userName = UserNameGenerator.ReturnUserName(firstNames[it], lastNames[it], usersFromDb, userNames).Trim();

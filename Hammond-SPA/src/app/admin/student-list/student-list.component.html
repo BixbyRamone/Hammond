@@ -32,6 +32,15 @@
         <button type="button" class="btn btn-info" (click)="resetFilter()" style="margin-left:10px">
           Reset Filter
         </button>
+        <button 
+          [disabled]="usersForDeletionArray.length < 1"
+          type="button" 
+          class="btn btn-danger"
+          (click)="massDeleteUsers()"
+          style="margin-left:10px">
+          Delete Selected
+        </button>
+        
       </form>
       <br>
       <div *ngFor="let user of users" class="">

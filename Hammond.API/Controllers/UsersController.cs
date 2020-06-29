@@ -78,6 +78,27 @@ namespace Hammond.API.Controllers
             return BadRequest("Failed To Delete User");
         }
 
+        [HttpPut("massdelete/authId/{userId}")]
+        public async Task<IActionResult> MassUserDelete(int userId, [FromBody]int[] ids)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            foreach (int id in ids)
+            {
+                var user = await _repo.GetUser(id);
+
+                _repo.Delete(user);
+            }
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed To Delete User");
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto) {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

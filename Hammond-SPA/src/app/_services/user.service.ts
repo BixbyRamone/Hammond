@@ -140,6 +140,11 @@ deleteUser(userId: number, id: number) {
   return this.http.delete(this.baseUrl + 'users/' + id + '/authId/' + userId);
 }
 
+massDeleteUsers(userId: number, idArray: number[]) {
+  console.log(idArray);
+  return this.http.put(this.baseUrl + 'users/massdelete/authId/' + userId, idArray);
+}
+
 createAssignment(id: number, assignment: Assignment) {
   return this.http.post(this.baseUrl + 'assignments/' + id, assignment);
 }

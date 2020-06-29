@@ -3,7 +3,8 @@ import { User } from 'src/app/_models/user';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-student-list',
@@ -26,6 +27,8 @@ export class StudentListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
+    private router: Router,
     private alertify: AlertifyService,
     private route: ActivatedRoute) { }
 
@@ -52,6 +55,7 @@ export class StudentListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadUsers();
+    this.usersForDeletionArray = [];
   }
 
   loadUsers() {
@@ -84,5 +88,20 @@ export class StudentListComponent implements OnInit {
       this.usersForDeletionArray.splice(idxToSlice, 1);
     }
     console.log(this.usersForDeletionArray);
+  }
+
+  massDeleteUsers() {
+    this.alertify.confirm('Delete selected users?', () => {
+      this.userService.massDeleteUsers(this.authService.decodedToken.nameid, this.usersForDeletionArray)
+      .subscribe(() => {
+        this.alertify.success('Users Deleted');
+        this.usersForDeletionArray = [];
+        this.loadUsers();
+      }, error => {
+        this.alertify.error('Deletion Failed');
+        this.usersForDeletionArray = [];
+        this.loadUsers();
+      });
+    });
   }
 }
