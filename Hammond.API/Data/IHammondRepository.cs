@@ -12,6 +12,7 @@ namespace Hammond.API.Data
         Task<bool> SaveAll();
         Task<IEnumerable<User>> GetStudents(string studentLevel);
         Task<PagedList<User>> GetUsers(UserParams userParams);
+        List<User> GetAllUsers();
         Task<User> GetUser(int id);
         Task<Message> GetMessage(int id);
         Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);

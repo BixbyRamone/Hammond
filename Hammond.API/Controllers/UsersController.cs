@@ -100,7 +100,8 @@ namespace Hammond.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto) {
+        public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+        {
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
             userForUpdateDto.ActScores = null; // prevent ACT scores from interfering with profile update
@@ -112,6 +113,43 @@ namespace Hammond.API.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPut("graduate/{id}")]
+        public async Task<IActionResult> GraduateUsers(int id)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            Console.WriteLine("Graduate Triggered");
+            Console.WriteLine(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+
+                var userParams = new UserParams();
+
+            var allUsers = _repo.GetAllUsers();
+
+            foreach (var user in allUsers)
+            {
+                switch (user.StudentLevel)
+                {
+                    case "sophomore":
+                        user.StudentLevel = "junior";
+                        break;
+
+                    case "junior":
+                        user.StudentLevel = "senior";
+                        break;
+
+                    case "senior":
+                        user.StudentLevel = null;
+                        break;
+                }
+            }
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+             throw new Exception("Graduating Students Failed");
         }
 
         [HttpPut("roles/{id}")]

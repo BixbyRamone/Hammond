@@ -328,5 +328,10 @@ namespace Hammond.API.Data
                     .AddDays(((int)DayOfWeek.Saturday) - (int)DateTime.Today.DayOfWeek)
                     && s.StudentLevel == userparams.StudentLevel);
         }
+
+        public List<User> GetAllUsers()
+        {
+            return (List<User>)_context.Users.Where(u => u.StudentLevel != null);
+        }
     }
 }
