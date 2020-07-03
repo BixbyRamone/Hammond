@@ -121,11 +121,6 @@ namespace Hammond.API.Controllers
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            Console.WriteLine("Graduate Triggered");
-            Console.WriteLine(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
-
-                var userParams = new UserParams();
-
             var allUsers = _repo.GetAllUsers();
 
             foreach (var user in allUsers)
