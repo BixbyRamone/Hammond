@@ -145,6 +145,10 @@ massDeleteUsers(userId: number, idArray: number[]) {
   return this.http.put(this.baseUrl + 'users/massdelete/authId/' + userId, idArray);
 }
 
+graduateUsers(userId: number) {
+  return this.http.put(this.baseUrl + 'graduate/' + userId, null);
+}
+
 createAssignment(id: number, assignment: Assignment) {
   return this.http.post(this.baseUrl + 'assignments/' + id, assignment);
 }
