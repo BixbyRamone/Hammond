@@ -331,7 +331,8 @@ namespace Hammond.API.Data
 
         public List<User> GetAllUsers()
         {
-            return (List<User>)_context.Users.Where(u => u.StudentLevel != null);
+            var users = _context.Users.Where(u => u.StudentLevel != null).ToList();
+            return users;
         }
     }
 }
