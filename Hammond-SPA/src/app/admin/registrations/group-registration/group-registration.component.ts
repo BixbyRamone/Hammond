@@ -103,7 +103,7 @@ export class GroupRegistrationComponent implements OnInit {
       for (let index = 0; index < this.students.length; index++) {
         const element = this.students[index];
         for (let i = 0; i < this.groupToRegister.studentIds.length; i++) {
-          if (this.groupToRegister.studentIds[i] == element.id) {
+          if (this.groupToRegister.studentIds[i] === element.id) {
             element.grouped = true;
           }
         }

@@ -1,10 +1,11 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-student-list',
@@ -12,6 +13,8 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./student-list.component.css']
 })
 export class StudentListComponent implements OnInit {
+  checkAll: boolean;
+  unCheckAll: boolean;
   users: User[];
   pagination: Pagination;
   userParams: any = {};
@@ -38,7 +41,7 @@ export class StudentListComponent implements OnInit {
       this.pagination = data['users'].pagination;
       this.userType = data['userType'];
     });
-    // this.userType = this.setUserType();
+    this.checkAll = false;
     this.userParams.roleName = this.userType.toLowerCase();
     this.userParams.studentLevel = 'all';
     this.userParams.volunteerType = this.userType.toLowerCase();
@@ -59,13 +62,16 @@ export class StudentListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+    if (!this.checkAll) {
+      this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
     .subscribe((res: PaginatedResult<User[]>) => {
       this.users = res.result;
       this.pagination = res.pagination;
     }, error => {
       this.alertify.error(error);
     });
+    }
+    this.checkAll = false;
   }
 
   setUserType() {
@@ -104,4 +110,41 @@ export class StudentListComponent implements OnInit {
       });
     });
   }
+
+  graduateUsers() {
+    this.alertify.confirm('This will move all students and volunteers up to the next grade level. Proceed?',
+    () => {
+      this.userService.graduateUsers(this.authService.decodedToken.nameid)
+        .subscribe(() => {
+          this.alertify.success('Students Graduated');
+          this.loadUsers();
+        }, error => {
+          this.alertify.error('Graduation Operation Failed');
+        });
+    });
+  }
+
+  checkAllMethod() {
+    for (let index = 0; index < this.users.length; index++) {
+      const user = this.users[index];
+      user.isChecked = true;
+      if (this.usersForDeletionArray.indexOf(user.id) === -1) {
+        this.usersForDeletionArray.push(user.id);
+      }
+    }
+    this.checkAll = true;
+  }
+
+  unCheckAllMethod() {
+    if (this.usersForDeletionArray.length > 0) {
+      for (let index = 0; index < this.users.length; index++) {
+        const user = this.users[index];
+        user.isChecked = false;
+        this.usersForDeletionArray = [];
+      }
+    } else {
+      this.checkAllMethod();
+    }
+  }
+
 }

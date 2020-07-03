@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-item',
@@ -13,12 +14,14 @@ import { Router } from '@angular/router';
 export class UserItemComponent implements OnInit {
   @Input() user: User;
   @Output() checkedUser = new EventEmitter();
+  @Input() checkedFromAll: boolean;
+  checked: boolean;
   alertifyMessage: string;
 
   constructor(private alertify: AlertifyService,
               private userService: UserService,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {}
 
   ngOnInit() {
     this.alertifyMessage = 'Are you sure you want to remove ' + this.user.firstName + ' ' +
@@ -39,6 +42,8 @@ export class UserItemComponent implements OnInit {
 
   checkUncheckUsers(id: number, isChecked: boolean) {
     // ouput user id to hosting component
+    this.user.isChecked = !this.user.isChecked;
+    console.log(this.user);
     const userClickedOb = {
       userId: id,
       userIsChecked: isChecked

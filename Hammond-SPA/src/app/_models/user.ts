@@ -19,4 +19,5 @@ export interface User {
     userRoles: Role[];
     userAssignments: any;
     grouped: boolean;
+    isChecked: boolean;
 }

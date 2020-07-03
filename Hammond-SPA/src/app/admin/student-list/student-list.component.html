@@ -40,11 +40,26 @@
           style="margin-left:10px">
           Delete Selected
         </button>
+
+        <button
+        type="button"
+        class="btn btn-warning"
+        style="margin-left: 10px"
+        (click)="graduateUsers()">
+          Graduate
+        </button>
+        <br>
+        <button
+        class="btn btn-primary"
+        (click)="unCheckAllMethod()">
+          Select All
+        </button>
         
       </form>
       <br>
       <div *ngFor="let user of users" class="">
         <app-user-item [user]="user"
+        
         (checkedUser)="usersForDeletion($event)"></app-user-item>
       </div>
     </div>

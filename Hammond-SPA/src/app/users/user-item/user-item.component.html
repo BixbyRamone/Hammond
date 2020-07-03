@@ -5,8 +5,8 @@
             <input
             type="checkbox"
             class="col-md-1 col-lg-1"
-            (click)="checkUncheckUsers(user.id, $event.srcElement.checked)">
-            <!-- <div [routerLink]="['/users/', user.id]" class="col-md-1 col-lg-1">{{user.id}}: </div> -->
+            (click)="checkUncheckUsers(user.id, $event.srcElement.checked)"
+            [ngModel]="user.isChecked">
             <div  
             [routerLink]="['/users/', user.id]"
             class="link last-name-column col-md-2 col-lg-2">

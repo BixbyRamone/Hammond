@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../_services/auth.service';
@@ -51,20 +51,12 @@ export class FileUploaderComponent implements OnInit {
     };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
-        debugger
+        this.alertify.success('File Successfully Uploaded');
         const res: UpFile = JSON.parse(response);
       }
       this.alertify.success('File Successfully Uploaded');
     };
   }
-
-  // massUpload() {
-  //   this.authService.massUpload(this.authService.decodedToken.nameid, this.uploader).subscribe(() => {
-  //     console.log('Success');
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
 
   backup() {
     this.cancelUploader.emit(false);
