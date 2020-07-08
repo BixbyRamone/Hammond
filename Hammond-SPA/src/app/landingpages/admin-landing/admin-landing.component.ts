@@ -11,6 +11,7 @@ import { Assignment } from 'src/app/_models/assignment';
 import { AssignmentService } from 'src/app/_services/assignment.service';
 import { EventService } from 'src/app/_services/event.service';
 import { Evnt } from 'src/app/_models/event';
+import { TabsService } from 'src/app/_services/tabs.service';
 // import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -35,19 +36,20 @@ export class AdminLandingComponent implements OnInit {
     private eventService: EventService,
     private groupService: GroupService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private _tabsService: TabsService) { }
 
   ngOnInit() {
-    // this.route.data.subscribe( data => {
-    //   debugger
-    //   this.user = data['user'];
-    //   this.pagination = data['users'].pagination;
-    // });
-
     this.route.queryParams.subscribe(params => {
       const selectTab = params['tab'];
       this.adminTabs.tabs[selectTab > 0 ? selectTab : 0].active = true;
     });
+    this._tabsService.tabSelection$.subscribe(
+      message => {
+        console.log('Shared Service from admin-landing!');
+        console.log(message);
+      }
+    )
   }
 
   groupLoads() {

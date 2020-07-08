@@ -78,6 +78,7 @@ import { SessionNextResolver } from './_resolvers/session-next.resolver';
 import { UngroupedStudentResolver } from './_resolvers/ungrouped-student.resolver';
 import { UngroupedMentorResolver } from './_resolvers/ungroupded-mentor.resolver';
 import { UserAssignmentDetailResolver } from './_resolvers/user-assignment-detail.resolver';
+import { TestTabsComponent } from './test-tabs/test-tabs.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -120,6 +121,7 @@ export function tokenGetter() {
       StudentListComponent,
       StudentRegistrationComponent,
       StudentTabComponent,
+      TestTabsComponent,
       TimeAgoPipe,
       NavComponent,
       UserItemComponent,
