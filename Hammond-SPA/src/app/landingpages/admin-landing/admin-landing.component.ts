@@ -26,6 +26,7 @@ export class AdminLandingComponent implements OnInit {
   users: User[];
   groups: Group[];
   evnts: Evnt[];
+  setTab: string;
   // assignments: Assignment[];
   userParams: any = {};
   pagination:  Pagination;
@@ -44,12 +45,17 @@ export class AdminLandingComponent implements OnInit {
       const selectTab = params['tab'];
       this.adminTabs.tabs[selectTab > 0 ? selectTab : 0].active = true;
     });
+    console.log(localStorage.getItem('lastTab'));
+    this.setTab = localStorage.getItem('lastTab') ? localStorage.getItem('lastTab') : 'tab1';
     this._tabsService.tabSelection$.subscribe(
       message => {
-        console.log('Shared Service from admin-landing!');
-        console.log(message);
+        if (message === 'tab6') {
+          this.groupLoads();
+        }
+        this.setTab = message;
+
       }
-    )
+    );
   }
 
   groupLoads() {

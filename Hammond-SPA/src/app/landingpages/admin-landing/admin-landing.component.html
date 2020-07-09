@@ -1,36 +1,29 @@
  <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <br>
   <app-test-tabs></app-test-tabs>
-  <div class="tab-header-list">
-    <tabset class="admin-tabset" #adminTabs>
-      <tab heading="Sessions">
-        <app-sessions-tab></app-sessions-tab>
-      </tab>
-      <tab heading="Events">
-        <app-events-tab></app-events-tab>
-      </tab>
-  
-      <tab heading="Assignments">
-        <app-assignment-tab></app-assignment-tab>
-      </tab>
-  
-      <tab heading="Students">
-       <app-student-tab></app-student-tab>
-        
-      </tab>
-  
-      <tab heading="Volunteers">
-        <app-volunteers-tab></app-volunteers-tab>
-      </tab>
-  
-      <tab (click)="groupLoads()" heading="Groups">
-        <app-groups-tab [loadedUserGroups]="users" [loadedGroups]="groups"></app-groups-tab>
-      </tab>
-
-      <tab heading="Messages">
-        <app-messages></app-messages>
-      </tab>
-    </tabset>
+  <div>
+    <div *ngIf="setTab==='tab1'">
+      <app-sessions-tab></app-sessions-tab>
+    </div>
+    <div *ngIf="setTab==='tab2'">
+      <app-events-tab></app-events-tab>
+    </div>
+    <div *ngIf="setTab==='tab3'">
+      <app-assignment-tab></app-assignment-tab>
+    </div>
+    <div *ngIf="setTab==='tab4'">
+      <app-student-tab></app-student-tab>
+    </div>
+    <div *ngIf="setTab==='tab5'">
+      <app-volunteers-tab></app-volunteers-tab>
+    </div>
+    <div *ngIf="setTab==='tab6'">
+      <app-groups-tab [loadedUserGroups]="users" [loadedGroups]="groups"></app-groups-tab>
+    </div>
+    <div *ngIf="setTab==='tab7'">
+      <app-messages></app-messages>
+    </div>
   </div>
+  
   
  </body>

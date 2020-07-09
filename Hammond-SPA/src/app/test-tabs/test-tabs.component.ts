@@ -7,7 +7,6 @@ import { TabsService } from '../_services/tabs.service';
   styleUrls: ['./test-tabs.component.css']
 })
 export class TestTabsComponent implements OnInit {
-  exampleTabClass: string;
   testTabObjSel = {
     tab1: 'active',
     tab2: 'inactive',
@@ -22,7 +21,9 @@ export class TestTabsComponent implements OnInit {
   constructor(private _tabsService: TabsService) { }
 
   ngOnInit() {
-    this.exampleTabClass = 'true';
+    if (localStorage.getItem('lastTab')) {
+      this.storedTab();
+    }
   }
 
   clickATab(event: any) {
@@ -30,6 +31,18 @@ export class TestTabsComponent implements OnInit {
       if (prop === event.srcElement.id) {
         this.testTabObjSel[prop] = 'active';
         this._tabsService.sendTab(event.srcElement.id);
+      } else {
+        this.testTabObjSel[prop] = 'inactive';
+      }
+    }
+    localStorage.setItem('lastTab', event.srcElement.id);
+  }
+
+  storedTab() {
+    for (const prop in this.testTabObjSel) {
+      if (prop === localStorage.getItem('lastTab')) {
+        this.testTabObjSel[prop] = 'active';
+        this._tabsService.sendTab(prop);
       } else {
         this.testTabObjSel[prop] = 'inactive';
       }
