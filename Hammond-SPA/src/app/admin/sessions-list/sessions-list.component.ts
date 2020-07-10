@@ -4,6 +4,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { SessionService } from 'src/app/_services/session.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { Session } from 'src/app/_models/session';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sessions-list',
@@ -21,7 +22,8 @@ export class SessionsListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private alertify: AlertifyService,
-              private sessionService: SessionService) { }
+              private sessionService: SessionService,
+              private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -39,7 +41,7 @@ export class SessionsListComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
         console.log(error);
-      })
+      });
   }
 
   resetFilter() {
@@ -47,6 +49,10 @@ export class SessionsListComponent implements OnInit {
     this.userParams.studentLevel = 'all';
     // this.userParams.volunteerType = this.userType.toLowerCase();
     this.pagination.itemsPerPage = 10;
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

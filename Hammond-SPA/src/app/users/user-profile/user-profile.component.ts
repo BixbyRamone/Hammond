@@ -6,7 +6,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/_services/group.service';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
@@ -45,6 +45,7 @@ export class UserProfileComponent implements OnInit {
     private groupService: GroupService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
+    private location: Location
     ) { }
 
   ngOnInit() {
@@ -246,6 +247,10 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
          item.checked = true;
       }
     });
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="container">
-    <i id="back-arrow" class="fa fa-arrow-circle-left" [routerLink]="['/mentor']"></i>
+    <i id="back-arrow" class="fa fa-arrow-circle-left" (click)="backup()"></i>
     <ng-container class="container">
         <div *ngFor="let user of usergroup">
             <app-user-item *ngIf="currentUserId != user.user.id" [user]="user.user"></app-user-item>

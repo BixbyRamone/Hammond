@@ -5,6 +5,7 @@ import { EventService } from 'src/app/_services/event.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-events-list',
@@ -23,7 +24,8 @@ export class EventsListComponent implements OnInit {
     private alertify: AlertifyService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -61,8 +63,8 @@ export class EventsListComponent implements OnInit {
     this.loadEvents();
   }
 
-  // backup() {
-  //   this.cancel.emit(false);
-  // }
+  backup() {
+    this.location.back();
+  }
 
 }

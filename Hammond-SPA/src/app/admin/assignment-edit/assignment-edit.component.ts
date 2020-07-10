@@ -5,6 +5,7 @@ import { AssignmentService } from 'src/app/_services/assignment.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Assignment } from 'src/app/_models/assignment';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-assignment-edit',
@@ -21,7 +22,8 @@ export class AssignmentEditComponent implements OnInit {
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private authService: AuthService,
-            private router: Router) { }
+            private router: Router,
+            private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -57,6 +59,10 @@ export class AssignmentEditComponent implements OnInit {
         this.aleritfy.error(error);
       });
     }
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

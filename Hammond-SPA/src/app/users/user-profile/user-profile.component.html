@@ -1,6 +1,5 @@
 <div class="container mt-4">
-  <!-- <i *ngIf="testForStudentRole()" class="fa fa-arrow-circle-left" [routerLink]="['/admin/students']"></i> -->
-  <i *ngIf="testForStudentRole() === false" class="fa fa-arrow-circle-left" [routerLink]="['/admin/volunteers']"></i>
+  <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
   <div *ngIf="!nameEditOn" class="row prof mt-4">
     {{user.firstName}} {{user.lastName}}  
     <p  class="edit-link" *ngIf="operatingUserRole == 'Admin'" (click)="nameEditClick()" id="name-edit-link">edit</p>

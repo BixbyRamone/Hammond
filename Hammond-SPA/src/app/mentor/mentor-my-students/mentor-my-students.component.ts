@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/_models/group';
 import { UserGroup } from 'src/app/_models/usergroup';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-mentor-my-students',
@@ -16,7 +17,8 @@ export class MentorMyStudentsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -25,6 +27,10 @@ export class MentorMyStudentsComponent implements OnInit {
       console.dir(this.usergroup);
     });
     this.currentUserId = this.authService.decodedToken.nameid;
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

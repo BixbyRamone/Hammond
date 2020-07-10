@@ -6,6 +6,7 @@ import { GroupService } from 'src/app/_services/group.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
 import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-groups-list',
@@ -25,7 +26,8 @@ export class GroupsListComponent implements OnInit {
       private route: ActivatedRoute,
       private alertify: AlertifyService,
       private groupService: GroupService,
-      private authService: AuthService
+      private authService: AuthService,
+      private location: Location
     ) { }
 
   ngOnInit() {
@@ -90,6 +92,10 @@ export class GroupsListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadGroups();
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

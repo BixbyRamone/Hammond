@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <i class="fa fa-arrow-circle-left" [routerLink]="['/admin']"></i>
+  <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
   
   <form class="form-inline" #form="ngForm" (ngSubmit)="loadEvents()" novalidate>
     <div class="form-group">

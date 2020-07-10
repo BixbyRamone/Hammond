@@ -6,6 +6,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Subject } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-student-list',
@@ -33,7 +34,8 @@ export class StudentListComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -145,6 +147,10 @@ export class StudentListComponent implements OnInit {
     } else {
       this.checkAllMethod();
     }
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

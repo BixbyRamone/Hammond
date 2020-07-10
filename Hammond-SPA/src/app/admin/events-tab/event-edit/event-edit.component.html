@@ -1,5 +1,5 @@
 <div class="container">
-  <i class="fa fa-arrow-circle-left"></i>
+  <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
   <p>Event Register</p>
 
   <form [formGroup]="editForm" (ngSubmit)="updateEvent()">

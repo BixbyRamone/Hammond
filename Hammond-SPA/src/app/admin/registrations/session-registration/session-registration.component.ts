@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Session } from 'src/app/_models/session';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-session-registration',
@@ -33,7 +34,8 @@ export class SessionRegistrationComponent implements OnInit {
               private alertify: AlertifyService,
               private sessionService: SessionService,
               private authService: AuthService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -120,6 +122,10 @@ export class SessionRegistrationComponent implements OnInit {
       newArray.push(asgn);
     });
     return newArray;
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

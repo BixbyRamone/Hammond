@@ -5,6 +5,7 @@ import { Evnt } from 'src/app/_models/event';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-event-edit',
@@ -20,7 +21,8 @@ export class EventEditComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder,
               private alertify: AlertifyService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -63,6 +65,10 @@ export class EventEditComponent implements OnInit {
         this.alertify.error('Failed to delete this event');
       });
     });
+  }
+
+  backup() {
+    this.location.back();
   }
 
 }

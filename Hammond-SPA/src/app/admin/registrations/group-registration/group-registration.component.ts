@@ -14,6 +14,7 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-group-registration',
@@ -56,7 +57,8 @@ export class GroupRegistrationComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private alertify: AlertifyService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -179,8 +181,7 @@ export class GroupRegistrationComponent implements OnInit {
 
 
   backup() {
-    console.log('backup');
-    this.cancel.emit(false);
+    this.location.back();
   }
 
   get stateName() {

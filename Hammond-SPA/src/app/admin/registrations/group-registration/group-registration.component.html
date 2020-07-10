@@ -1,5 +1,5 @@
 <div class="container">
-    <i class="fa fa-arrow-circle-left" [routerLink]="['/admin']"></i>
+    <i class="fa fa-arrow-circle-left" (click)="backup()"></i>
     <form (change)="loadUsers()" class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
       <div class="form-group px-2">
         <label for="gradeLevel">Grade: </label>
