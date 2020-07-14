@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { Assignment } from 'src/app/_models/assignment';
 import { Session } from 'src/app/_models/session';
+import { TabsService } from 'src/app/_services/tabs.service';
 
 @Component({
   selector: 'app-mentor-landing',
@@ -17,13 +18,15 @@ export class MentorLandingComponent implements OnInit {
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   user: User;
+  setTab: string;
   assignments: Assignment[];
   events: Event[];
   session: any;
 
   constructor(private userService: UserService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private _tabsService: TabsService) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
@@ -32,6 +35,14 @@ export class MentorLandingComponent implements OnInit {
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;
       console.log(this.session);
+      this.setTab = localStorage.getItem('lastTab') ? localStorage.getItem('lastTab') : 'tab1';
+    this._tabsService.tabSelection$.subscribe(
+      message => {
+
+        this.setTab = message;
+
+      }
+    );
     });
 
     this.route.queryParams.subscribe(params => {

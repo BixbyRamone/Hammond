@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { TabsService } from '../_services/tabs.service';
+import { TabsService } from 'src/app/_services/tabs.service';
 
 @Component({
-  selector: 'app-test-tabs',
-  templateUrl: './test-tabs.component.html',
-  styleUrls: ['./test-tabs.component.css']
+  selector: 'app-volunteer-tabs',
+  templateUrl: './volunteer-tabs.component.html',
+  styleUrls: ['./volunteer-tabs.component.css']
 })
-export class TestTabsComponent implements OnInit {
-  testTabObjSel = {
+export class VolunteerTabsComponent implements OnInit {
+  volunteerTabsObj = {
     tab1: 'active',
     tab2: 'inactive',
     tab3: 'inactive',
     tab4: 'inactive',
-    tab5: 'inactive',
-    tab6: 'inactive',
-    tab7: 'inactive'
-
+    tab5: 'inactive'
   };
 
   constructor(private _tabsService: TabsService) { }
@@ -27,28 +24,26 @@ export class TestTabsComponent implements OnInit {
   }
 
   clickATab(event: any) {
-    for (const prop in this.testTabObjSel) {
+    for (const prop in this.volunteerTabsObj) {
       if (prop === event.srcElement.id) {
-        this.testTabObjSel[prop] = 'active';
+        this.volunteerTabsObj[prop] = 'active';
         this._tabsService.sendTab(event.srcElement.id);
       } else {
-        this.testTabObjSel[prop] = 'inactive';
+        this.volunteerTabsObj[prop] = 'inactive';
       }
     }
     localStorage.setItem('lastTab', event.srcElement.id);
   }
 
   storedTab() {
-    for (const prop in this.testTabObjSel) {
+    for (const prop in this.volunteerTabsObj) {
       if (prop === localStorage.getItem('lastTab')) {
-        this.testTabObjSel[prop] = 'active';
+        this.volunteerTabsObj[prop] = 'active';
         this._tabsService.sendTab(prop);
       } else {
-        this.testTabObjSel[prop] = 'inactive';
+        this.volunteerTabsObj[prop] = 'inactive';
       }
     }
   }
-
-
 
 }

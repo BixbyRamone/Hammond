@@ -2,29 +2,28 @@
 <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
     <br>
   <div class="container">
-    <tabset class="mentor-tabset" #mentorTabs>
-      <tab heading="Next Session">
-        <br>
-
+    <app-volunteer-tabs></app-volunteer-tabs>
+    <div>
+      <div *ngIf="setTab==='tab1'">
         <div *ngIf="!session">
-         <h5>No Session Has Been Created Yet</h5>
-        </div>
+          <h5>No Session Has Been Created Yet</h5>
+         </div>
+ 
+         <div *ngIf="session">
+           <h5>Next Session is on {{session.dayOfSession | date: 'mediumDate'}}</h5>
+           <div *ngFor="let item of session.sessionAssignments">
+             <div class="card row" [routerLink]="['/mentor/assignments', item.assignmentId]">
+               <div class="container">
+                 <div class="card-body">
+                   <h6>{{item.assigment.title}}</h6>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+      </div>
 
-        <div *ngIf="session">
-          <h5>Next Session is on {{session.dayOfSession | date: 'mediumDate'}}</h5>
-          <div *ngFor="let item of session.sessionAssignments">
-            <div class="card row" [routerLink]="['/mentor/assignments', item.assignmentId]">
-              <div class="container">
-                <div class="card-body">
-                  <h6>{{item.assigment.title}}</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </tab>
-
-      <tab heading="Events">
+      <div *ngIf="setTab==='tab2'">
         <br>
         <div *ngFor="let event of events" class="">
           <div class="card row">
@@ -37,9 +36,8 @@
           </div>
           <br>
         </div>
-      </tab>
-  
-      <tab heading="Assignments">
+      </div>
+      <div *ngIf="setTab==='tab3'">
         <br>
           <div *ngFor="let assignment of assignments">
             <div class="card row" [routerLink]="['/mentor', user.id, 'assignments', assignment.id]">
@@ -56,18 +54,17 @@
             <br>
               
               </div>
-      </tab>
-  
-      <tab heading="Students">
+      </div>
+      <div *ngIf="setTab==='tab4'">
         <br>
-        <app-mentor-stud-tab></app-mentor-stud-tab>
-      </tab>
-
-      <tab heading="Messages">
+          <app-mentor-stud-tab></app-mentor-stud-tab>
+      </div>
+      <div *ngIf="setTab==='tab5'">
         <br>
         <app-messages></app-messages>
-      </tab>
-      
-    </tabset>
+      </div>
+    </div>
+    
+
   </div>
 </body>

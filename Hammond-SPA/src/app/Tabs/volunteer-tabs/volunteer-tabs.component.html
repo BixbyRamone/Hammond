@@ -1,0 +1,32 @@
+<div class="row vol-tabs">
+  <div id="tab1" 
+    class="vol-tab"
+    [ngClass]="volunteerTabsObj.tab1=='active' ? 'vol-tab-active' : ''"
+    (click)="clickATab($event)">
+    Next Session
+  </div>
+  <div id="tab2"
+    class="vol-tab"
+    [ngClass]="volunteerTabsObj.tab2=='active' ? 'vol-tab-active' : ''"
+    (click)="clickATab($event)">
+    Events
+  </div>
+  <div id="tab3"
+    class="vol-tab"  
+    [ngClass]="volunteerTabsObj.tab3=='active' ? 'vol-tab-active' : ''"
+    (click)="clickATab($event)">
+    Assignments
+  </div>
+  <div id="tab4"
+    class="vol-tab"  
+    [ngClass]="volunteerTabsObj.tab4=='active' ? 'vol-tab-active' : ''"
+    (click)="clickATab($event)">
+    Students
+  </div>
+  <div id="tab5"
+    class="vol-tab"  
+    [ngClass]="volunteerTabsObj.tab5=='active' ? 'vol-tab-active' : ''"
+    (click)="clickATab($event)">
+    Messages
+  </div>
+</div>
