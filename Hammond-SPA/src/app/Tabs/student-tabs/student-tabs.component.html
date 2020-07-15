@@ -1,3 +1,32 @@
-<p>
-  student-tabs works!
-</p>
+<div class="row stud-tabs">
+  <div id="tab1" 
+    class="stud-tab"
+    [ngClass]="studentTabsObj.tab1=='active' ? 'stud-tab-active' : ''"
+    (click)="clickATab($event)">
+    Next Session
+  </div>
+  <div id="tab2"
+    class="stud-tab"
+    [ngClass]="studentTabsObj.tab2=='active' ? 'stud-tab-active' : ''"
+    (click)="clickATab($event)">
+    My Profile
+  </div>
+  <div id="tab3"
+    class="stud-tab"  
+    [ngClass]="studentTabsObj.tab3=='active' ? 'stud-tab-active' : ''"
+    (click)="clickATab($event)">
+    Assignments
+  </div>
+  <div id="tab4"
+    class="stud-tab"  
+    [ngClass]="studentTabsObj.tab4=='active' ? 'stud-tab-active' : ''"
+    (click)="clickATab($event)">
+    My Group
+  </div>
+  <div id="tab5"
+    class="stud-tab"  
+    [ngClass]="studentTabsObj.tab5=='active' ? 'stud-tab-active' : ''"
+    (click)="clickATab($event)">
+    Messages
+  </div>
+</div>

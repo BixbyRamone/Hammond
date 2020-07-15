@@ -33,6 +33,7 @@ export class NavComponent implements OnInit {
     this.roles = null;
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('lastTab');
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
     this.alertify.message('Logged out');

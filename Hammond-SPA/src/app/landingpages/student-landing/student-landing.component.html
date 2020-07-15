@@ -1,9 +1,9 @@
 <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <br>
   <div class="container">
-    <tabset class="admin-tabset" #studentTabs>
-      <tab heading="Next Session">
-        <br>
+    <app-student-tabs></app-student-tabs>
+    <div *ngIf="setTab==='tab1'">
+      <br>
 
         <div *ngIf="!session">
          <h5>No Session Has Been Created Yet</h5>
@@ -21,24 +21,23 @@
             </div>
           </div>
         </div>
-      </tab>
-      
-      <tab heading="My Profile">
-        <app-stud-profile-tab [student]="user"></app-stud-profile-tab>
-      </tab>
-  
-      <tab heading="Assignments">
-        <app-stud-assignment-tab [student]="user"></app-stud-assignment-tab>
-      </tab>
-  
-      <tab heading="My Group">
-        <app-stud-group-tab [group]="group"></app-stud-group-tab>
-      </tab>
-  
-      <tab heading="Messages">
-        <app-messages></app-messages>
-      </tab>
-  
-    </tabset>
+    </div>
+
+    <div *ngIf="setTab==='tab2'">
+      <app-stud-profile-tab [student]="user"></app-stud-profile-tab>
+    </div>
+
+    <div *ngIf="setTab==='tab3'">
+      <app-stud-assignment-tab [student]="user"></app-stud-assignment-tab>
+    </div>
+
+    <div *ngIf="setTab==='tab4'">
+      <app-stud-group-tab [group]="group"></app-stud-group-tab>
+    </div>
+
+    <div *ngIf="setTab==='tab5'">
+      <app-messages></app-messages>
+    </div>
+    
   </div>
 </body>

@@ -9,6 +9,7 @@ import { Group } from 'src/app/_models/group';
 import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 import { Message } from 'src/app/_models/message';
 import { Session } from 'src/app/_models/session';
+import { TabsService } from 'src/app/_services/tabs.service';
 
 @Component({
   selector: 'app-student-landing',
@@ -20,6 +21,7 @@ export class StudentLandingComponent implements OnInit {
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   user: User;
+  setTab: string;
   group: Group;
   messages: Message[];
   session: any;
@@ -29,7 +31,8 @@ export class StudentLandingComponent implements OnInit {
     private userService: UserService,
     private alertify: AlertifyService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _tabsService: TabsService
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,15 @@ export class StudentLandingComponent implements OnInit {
       this.messages = data['messages'];
       this.session = data['session'];
     });
+
+    this.setTab = localStorage.getItem('lastTab') ? localStorage.getItem('lastTab') : 'tab1';
+    this._tabsService.tabSelection$.subscribe(
+      message => {
+
+        this.setTab = message;
+
+      }
+    );
 
     console.dir(this.user);
 

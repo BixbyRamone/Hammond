@@ -35,7 +35,9 @@ export class MentorLandingComponent implements OnInit {
       this.assignments = data['assignments'].result;
       this.events = data['events'].result;
       console.log(this.session);
-      this.setTab = localStorage.getItem('lastTab') ? localStorage.getItem('lastTab') : 'tab1';
+    });
+
+    this.setTab = localStorage.getItem('lastTab') ? localStorage.getItem('lastTab') : 'tab1';
     this._tabsService.tabSelection$.subscribe(
       message => {
 
@@ -43,7 +45,6 @@ export class MentorLandingComponent implements OnInit {
 
       }
     );
-    });
 
     this.route.queryParams.subscribe(params => {
       const selectTab = params['tab'];

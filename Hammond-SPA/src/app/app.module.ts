@@ -80,6 +80,7 @@ import { UngroupedMentorResolver } from './_resolvers/ungroupded-mentor.resolver
 import { UserAssignmentDetailResolver } from './_resolvers/user-assignment-detail.resolver';
 import { TestTabsComponent } from './test-tabs/test-tabs.component';
 import { VolunteerTabsComponent } from './Tabs/volunteer-tabs/volunteer-tabs.component';
+import { StudentTabsComponent } from './Tabs/student-tabs/student-tabs.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -122,6 +123,7 @@ export function tokenGetter() {
       StudentListComponent,
       StudentRegistrationComponent,
       StudentTabComponent,
+      StudentTabsComponent,
       TestTabsComponent,
       TimeAgoPipe,
       NavComponent,
