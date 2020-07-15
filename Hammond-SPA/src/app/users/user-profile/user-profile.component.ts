@@ -154,7 +154,12 @@ export class UserProfileComponent implements OnInit {
   createActForm() {
     this.actForm = this.fb.group({
       score: ['', Validators.required],
-      dayOfScore: ['']
+      dayOfScore: [''],
+      englishScore: [''],
+      mathmaticsScore: [''],
+      readingScore: [''],
+      scienceScore: [''],
+      writingScore: ['']
     });
   }
 

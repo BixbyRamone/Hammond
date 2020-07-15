@@ -121,7 +121,29 @@
       formControlName="score">
       <p *ngIf="addActOn" class="act-add-link" (click)="this.actAddOnClick()">cancel</p>
     </div>
-    
+    <div></div>
+    English Score: <input style="width: 80px;" type="number" size="2"
+    [ngClass]="{'is-invalid': actForm.get('score').errors
+      && actForm.get('score').touched}"
+      formControlName="englishScore">
+    Mathematics Score: <input style="width: 80px;" type="number" size="2"
+    [ngClass]="{'is-invalid': actForm.get('score').errors
+      && actForm.get('score').touched}"
+      formControlName="mathmaticsScore">
+    Reading Score: <input style="width: 80px;" type="number" size="2"
+    [ngClass]="{'is-invalid': actForm.get('score').errors
+      && actForm.get('score').touched}"
+      formControlName="readingScore">
+    Science Score: <input style="width: 80px;" type="number" size="2"
+    [ngClass]="{'is-invalid': actForm.get('score').errors
+      && actForm.get('score').touched}"
+      formControlName="scienceScore">
+    Writing Score: <input style="width: 80px;" type="number" size="2"
+    [ngClass]="{'is-invalid': actForm.get('score').errors
+      && actForm.get('score').touched}"
+      formControlName="writingScore">
+    <br>
+    <br>
     <div class="row form-group act-date-picker">
       <input style="width: 90px"  class="form-control"
     placeholder="Date of Score" type="text"
