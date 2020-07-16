@@ -5,7 +5,7 @@ namespace Hammond.API.Models
     public class ActScore
     {
         public int Id { get; set; }
-        public int Score { get; set; }
+        public float Score { get; set; }
         public int? EnglishScore { get; set; }
         public int? MathmaticsScore { get; set; }
         public int? ReadingScore { get; set; }
