@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'src/app/_services/group.service';
 import { DOCUMENT, Location } from '@angular/common';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +16,7 @@ import { DOCUMENT, Location } from '@angular/common';
 })
 export class UserProfileComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
+  modalRef: BsModalRef;
   user: User;
   groupMembers: any;
   operatingUserRole: any;
@@ -45,7 +47,8 @@ export class UserProfileComponent implements OnInit {
     private groupService: GroupService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
-    private location: Location
+    private location: Location,
+    private modalService: BsModalService
     ) { }
 
   ngOnInit() {
@@ -214,6 +217,10 @@ for (let i = 0; i < this.user.userRoles.length; i++) {
         break;
     }
     return false;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   // ifUserRolesStudent() {

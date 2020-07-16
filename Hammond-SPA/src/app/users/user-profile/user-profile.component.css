@@ -33,6 +33,10 @@
     cursor: pointer;
 }
 
+.act-modal-link {
+    cursor: pointer;
+}
+
 /* #stud-level-edit-link {
   margin-left: 15px;
   font-size: 15px;

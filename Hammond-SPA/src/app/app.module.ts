@@ -8,6 +8,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
@@ -144,6 +145,7 @@ export function tokenGetter() {
       FormsModule,
       FileUploadModule,
       HttpClientModule,
+      ModalModule.forRoot(),
       PaginationModule.forRoot(),
       ReactiveFormsModule,
       RouterModule.forRoot(appRoutes),
@@ -155,6 +157,7 @@ export function tokenGetter() {
          }
       }),
       TabsModule.forRoot(),
+      ModalModule.forRoot(),
    ],
    providers: [
       AlertifyService,

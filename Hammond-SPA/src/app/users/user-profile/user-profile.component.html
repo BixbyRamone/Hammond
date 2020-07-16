@@ -103,11 +103,33 @@
   
     <ng-container *ngIf="actExpandView">
       <ul>
-      <li id="act-score" *ngFor="let actScore of this.user.actScores">
-        {{actScore.score}} taken on {{actScore.dayOfScore | date: 'mediumDate'}}
-        <i (click)="deleteActScore(actScore.id)" class="fa fa-minus-circle"></i></li>
+      <li class="row act-modal-link" id="act-score" *ngFor="let actScore of this.user.actScores">
+        <div (click)="openModal(template)">
+          {{actScore.score}}: taken on {{actScore.dayOfScore | date: 'mediumDate'}}</div>
+        <i (click)="deleteActScore(actScore.id)" class="fa fa-minus-circle"></i>
+        <ng-template #template>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">
+              {{actScore.score}}: taken on {{actScore.dayOfScore | date: 'mediumDate'}}
+            </h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>English: {{actScore.englishScore}}</li>
+              <li>Mathematics: {{actScore.mathmaticsScore}}</li>
+              <li>Reading: {{actScore.readingScore}}</li>
+              <li>Science: {{actScore.scienceScore}}</li>
+              <li>Writing: {{actScore.writingScore}}</li>
+            </ul>
+          </div>
+        </ng-template>
+      </li>
       </ul>
     </ng-container>
+    
  
   
 
