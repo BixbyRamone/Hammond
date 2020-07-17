@@ -13,8 +13,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./events-list.component.css']
 })
 export class EventsListComponent implements OnInit {
-  // @Output() cancel = new EventEmitter();
-  // @Input() evnts;
   pagination: Pagination;
   evnts: Evnt[];
   alertifyMessage: string;
@@ -65,6 +63,12 @@ export class EventsListComponent implements OnInit {
 
   backup() {
     this.location.back();
+  }
+
+  eventCatcher(event: boolean) {
+    if (event) {
+      this.loadEvents();
+    }
   }
 
 }

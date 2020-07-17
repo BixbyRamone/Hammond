@@ -40,6 +40,7 @@ export class EventRegistrationComponent implements OnInit {
 
       this.eventService.register(this.authService.decodedToken.nameid, this.evnt).subscribe(() => {
         this.alertify.success(this.evnt.title + ' was successfully registered!');
+        this.registerForm.reset();
       }, error => {
         console.log(error);
         this.alertify.error(error);

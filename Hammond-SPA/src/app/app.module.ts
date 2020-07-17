@@ -82,6 +82,8 @@ import { UserAssignmentDetailResolver } from './_resolvers/user-assignment-detai
 import { TestTabsComponent } from './test-tabs/test-tabs.component';
 import { VolunteerTabsComponent } from './Tabs/volunteer-tabs/volunteer-tabs.component';
 import { StudentTabsComponent } from './Tabs/student-tabs/student-tabs.component';
+import { AdminTabsComponent } from './Tabs/admin-tabs/admin-tabs.component';
+import { EventItemComponent } from './admin/events-tab/event-item/event-item.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -95,9 +97,11 @@ export function tokenGetter() {
       AssignmentItemComponent,
       AssigmentRegistrationComponent,
       AdminLandingComponent,
+      AdminTabsComponent,
       AssignmentListComponent,
       AssignmentTabComponent,
       EventEditComponent,
+      EventItemComponent,
       EventsListComponent,
       EventRegistrationComponent,
       EventsTabComponent,
