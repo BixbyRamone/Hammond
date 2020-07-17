@@ -1,12 +1,17 @@
 <div class="card row">
   <div class="container">
     <div class="card-body">
-      <div [routerLink]="['/admin/events/', event.id]">
+      <div *ngIf="event.id" [routerLink]="['/admin/events/', event.id]">
         <strong>{{event.title}}:&nbsp;&nbsp;</strong>
         <p *ngIf="event.eventDate">{{event.title}} will be occuring on {{event.eventDate | date: 'mediumDate'}}</p>
         <p *ngIf="!event.eventDate">Date is to be determined</p>
       </div>
-      <i (click)="deleteEvent(event)" class="fa fa-trash"></i>
+      <div *ngIf="!event.id" [routerLink]="['/admin/events/']">
+        <strong>{{event.title}}:&nbsp;&nbsp;</strong>
+        <p *ngIf="event.eventDate">{{event.title}} will be occuring on {{event.eventDate | date: 'mediumDate'}}</p>
+        <p *ngIf="!event.eventDate">Date is to be determined</p>
+      </div>
+      <i *ngIf="event.id" (click)="deleteEvent(event)" class="fa fa-trash"></i>
     </div>
   </div>
 </div>

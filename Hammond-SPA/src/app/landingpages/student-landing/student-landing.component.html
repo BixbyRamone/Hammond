@@ -1,6 +1,6 @@
 <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
   <br>
-  <div class="container">
+  <ng-container class="container">
     <app-student-tabs></app-student-tabs>
     <div *ngIf="setTab==='tab1'">
       <br>
@@ -28,6 +28,7 @@
     </div>
 
     <div *ngIf="setTab==='tab3'">
+      <h5 *ngIf="user.userAssignments < 1">No Assignments</h5>
       <app-stud-assignment-tab [student]="user"></app-stud-assignment-tab>
     </div>
 
@@ -39,5 +40,5 @@
       <app-messages></app-messages>
     </div>
     
-  </div>
+  </ng-container>
 </body>

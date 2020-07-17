@@ -1,7 +1,7 @@
 
 <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
     <br>
-  <div class="container">
+  <ng-container class="container">
     <app-volunteer-tabs></app-volunteer-tabs>
     <div>
       <div *ngIf="setTab==='tab1'">
@@ -24,6 +24,7 @@
       </div>
 
       <div *ngIf="setTab==='tab2'">
+        <h5 *ngIf="events.length < 1"> No Events</h5>
         <br>
         <div *ngFor="let event of events" class="">
           <div class="card row">
@@ -38,6 +39,7 @@
         </div>
       </div>
       <div *ngIf="setTab==='tab3'">
+        <h5 *ngIf="assignments.length < 1"> No Assignments</h5>
         <br>
           <div *ngFor="let assignment of assignments">
             <div class="card row" [routerLink]="['/mentor', user.id, 'assignments', assignment.id]">
@@ -66,5 +68,5 @@
     </div>
     
 
-  </div>
+  </ng-container>
 </body>

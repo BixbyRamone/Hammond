@@ -38,4 +38,8 @@
         </div>
 
   </form>
+  <div *ngIf="evnt">
+    <div>Just Created:</div>
+    <app-event-item [event]="evnt"></app-event-item>
+  </div>
 </div>

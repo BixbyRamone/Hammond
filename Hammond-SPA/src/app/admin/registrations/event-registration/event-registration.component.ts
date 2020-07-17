@@ -52,4 +52,10 @@ export class EventRegistrationComponent implements OnInit {
     this.cancel.emit(false);
   }
 
+  eventCatcher(event: boolean) {
+    if (event) {
+      this.evnt = <Evnt>{};
+    }
+  }
+
 }
