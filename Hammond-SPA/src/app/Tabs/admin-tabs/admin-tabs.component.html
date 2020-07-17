@@ -1,0 +1,44 @@
+<div class="row admin-tabs">
+  <div id="tab1" 
+    class="admin-tab"
+    [ngClass]="adminTabObjSel.tab1=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Sessions
+  </div>
+  <div id="tab2"
+    class="admin-tab"
+    [ngClass]="adminTabObjSel.tab2=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Events
+  </div>
+  <div id="tab3"
+    class="admin-tab"  
+    [ngClass]="adminTabObjSel.tab3=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Assignments
+  </div>
+  <div id="tab4"
+    class="admin-tab"  
+    [ngClass]="adminTabObjSel.tab4=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Students
+  </div>
+  <div id="tab5"
+    class="admin-tab"  
+    [ngClass]="adminTabObjSel.tab5=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Volunteers
+  </div>
+  <div id="tab6"
+    class="admin-tab"  
+    [ngClass]="adminTabObjSel.tab6=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Groups
+  </div>
+  <div id="tab7"
+    class="admin-tab"  
+    [ngClass]="adminTabObjSel.tab7=='active' ? 'admin-tab-active' : ''"
+    (click)="clickATab($event)">
+    Messages
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.admin-tabs {
+    border-color: #fff;
+    background-color: #2f4658 !important;
+    color: #fff !important;
+    border-radius: 5px;
+    justify-content: center;
+  }
+  
+  .admin-tab {
+    cursor: pointer;
+    border-color: #fff;
+    border-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .admin-tab:hover {
+    background-color: #4a6e8a;
+    border: 3px !important;
+    border-color:  #ff9900 !important;
+  }
+
+  .admin-tab-active {
+  font-style: bold;
+  font-size: larger;
+  background-color: #ff9900 !important;
+  color: #fff !important;
+  }
