@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AssignmentService } from 'src/app/_services/assignment.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
