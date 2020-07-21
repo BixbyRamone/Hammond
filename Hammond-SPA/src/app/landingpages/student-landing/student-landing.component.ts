@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,7 @@ import { TabsService } from 'src/app/_services/tabs.service';
 })
 export class StudentLandingComponent implements OnInit {
   @ViewChild('studentTabs') studentTabs: TabsetComponent;
+  swiped: string;
   private swipeCoord?: [number, number];
   private swipeTime?: number;
   user: User;
@@ -26,6 +27,7 @@ export class StudentLandingComponent implements OnInit {
   messages: Message[];
   session: any;
   pagination: Pagination;
+  studentTabsArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
 
   constructor(
     private userService: UserService,
@@ -42,7 +44,7 @@ export class StudentLandingComponent implements OnInit {
       this.messages = data['messages'];
       this.session = data['session'];
     });
-
+this.swiped = '';
     this.setTab = localStorage.getItem('lastTab') ? localStorage.getItem('lastTab') : 'tab1';
     this._tabsService.tabSelection$.subscribe(
       message => {
@@ -92,17 +94,20 @@ export class StudentLandingComponent implements OnInit {
       if (duration < 1000 //
         && Math.abs(direction[0]) > 30 // Long enough
         && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
-          const swipe = direction[0] < 0 ? 'next' : 'previous';
+          const pageTurn = direction[0] < 0 ? 'next' : 'previous';
+          let arrayIndx = this.studentTabsArray.indexOf(localStorage.getItem('lastTab'));
           // Do whatever you want with swipe
-          const selectedTab = this.getTabMethod();
+          // const selectedTab = this.getTabMethod();
 
-          if (swipe === 'next') {
-            if (selectedTab !== this.studentTabs.tabs.length - 1) {
-              this.studentTabs.tabs[selectedTab + 1].active = true;
+          if (pageTurn === 'next') {
+            if (arrayIndx !== this.studentTabsArray.length - 1) {
+              arrayIndx++;
+              arrayIndx++;
+              this.swiped = 'tab' + arrayIndx;
             }
-          } else if (swipe === 'previous') {
-              if (selectedTab !== 0) {
-                this.studentTabs.tabs[selectedTab - 1].active = true;
+          } else if (pageTurn === 'previous') {
+              if (arrayIndx !== 0) {
+                this.swiped = 'tab' + arrayIndx;
               }
           }
       }
@@ -114,6 +119,16 @@ export class StudentLandingComponent implements OnInit {
       if (this.studentTabs.tabs[index].active === true) {
         return index;
       }
+    }
+  }
+  onChange(value: string): void {
+    console.log(value);
+    debugger
+  }
+
+  swipeReset(event: boolean) {
+    if (event) {
+      this.swiped = '';
     }
   }
 
