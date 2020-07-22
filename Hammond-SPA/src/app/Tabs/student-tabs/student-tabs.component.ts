@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, SimpleChanges, Output } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { TabsService } from 'src/app/_services/tabs.service';
 
 @Component({
@@ -8,9 +8,6 @@ import { TabsService } from 'src/app/_services/tabs.service';
 })
 export class StudentTabsComponent implements OnInit {
   @Input() swiped: string;
-  @Output() swipeReset = new EventEmitter;
-  private _state: boolean;
-  stateChanged: EventEmitter<boolean> = new EventEmitter();
   studentTabsObj = {
     tab1: 'active',
     tab2: 'inactive',
@@ -18,7 +15,6 @@ export class StudentTabsComponent implements OnInit {
     tab4: 'inactive',
     tab5: 'inactive'
   };
-  studentTabsArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
   initiate = true;
 
   constructor(private _tabsService: TabsService) { }
@@ -56,7 +52,6 @@ export class StudentTabsComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     !this.initiate ? this.swipe(changes.swiped.currentValue) : this.initiate = false;
-    // this.swipe(changes.swiped.currentValue);
 }
 
 swipe(newTab: string) {
