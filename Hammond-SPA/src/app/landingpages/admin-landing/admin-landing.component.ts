@@ -23,6 +23,7 @@ export class AdminLandingComponent implements OnInit {
   @ViewChild('adminTabs') adminTabs: TabsetComponent;
   private swipeCoord?: [number, number];
   private swipeTime?: number;
+  swiped: string;
   users: User[];
   groups: Group[];
   evnts: Evnt[];
@@ -30,6 +31,7 @@ export class AdminLandingComponent implements OnInit {
   // assignments: Assignment[];
   userParams: any = {};
   pagination:  Pagination;
+  adminTabsArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5', 'tab6', 'tab7'];
 
   constructor(
     private userService: UserService,
@@ -108,17 +110,20 @@ export class AdminLandingComponent implements OnInit {
       if (duration < 1000 //
         && Math.abs(direction[0]) > 30 // Long enough
         && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
-          const swipe = direction[0] < 0 ? 'next' : 'previous';
+          const pageTurn = direction[0] < 0 ? 'next' : 'previous';
+          let arrayIndx = this.adminTabsArray.indexOf(localStorage.getItem('lastTab'));
           // Do whatever you want with swipe
-          const selectedTab = this.getTabMethod();
+          // const selectedTab = this.getTabMethod();
 
-          if (swipe === 'next') {
-            if (selectedTab !== this.adminTabs.tabs.length - 1) {
-              this.adminTabs.tabs[selectedTab + 1].active = true;
+          if (pageTurn === 'next') {
+            if (arrayIndx !== this.adminTabsArray.length - 1) {
+              arrayIndx++;
+              arrayIndx++;
+              this.swiped = 'tab' + arrayIndx;
             }
-          } else if (swipe === 'previous') {
-              if (selectedTab !== 0) {
-                this.adminTabs.tabs[selectedTab - 1].active = true;
+          } else if (pageTurn === 'previous') {
+              if (arrayIndx !== 0) {
+                this.swiped = 'tab' + arrayIndx;
               }
           }
       }
