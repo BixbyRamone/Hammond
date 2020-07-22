@@ -2,7 +2,7 @@
 <body class="container" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
     <br>
   <ng-container class="container">
-    <app-volunteer-tabs></app-volunteer-tabs>
+    <app-volunteer-tabs [swiped]="swiped"></app-volunteer-tabs>
     <div>
       <div *ngIf="setTab==='tab1'">
         <div *ngIf="!session">

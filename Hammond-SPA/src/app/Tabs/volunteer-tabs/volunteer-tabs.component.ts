@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
 import { TabsService } from 'src/app/_services/tabs.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { TabsService } from 'src/app/_services/tabs.service';
   styleUrls: ['./volunteer-tabs.component.css']
 })
 export class VolunteerTabsComponent implements OnInit {
+  @Input() swiped: string;
   volunteerTabsObj = {
     tab1: 'active',
     tab2: 'inactive',
@@ -14,6 +15,7 @@ export class VolunteerTabsComponent implements OnInit {
     tab4: 'inactive',
     tab5: 'inactive'
   };
+  initiate = true;
 
   constructor(private _tabsService: TabsService) { }
 
@@ -45,5 +47,23 @@ export class VolunteerTabsComponent implements OnInit {
       }
     }
   }
+
+    // tslint:disable-next-line: use-life-cycle-interface
+    ngOnChanges(changes: SimpleChanges) {
+      console.log(changes);
+      !this.initiate ? this.swipe(changes.swiped.currentValue) : this.initiate = false;
+  }
+
+  swipe(newTab: string) {
+    for (const prop in this.volunteerTabsObj) {
+      if (prop === newTab) {
+        this.volunteerTabsObj[prop] = 'active';
+        this._tabsService.sendTab(newTab);
+      } else {
+        this.volunteerTabsObj[prop] = 'inactive';
+      }
+    }
+    localStorage.setItem('lastTab', newTab);
+   }
 
 }

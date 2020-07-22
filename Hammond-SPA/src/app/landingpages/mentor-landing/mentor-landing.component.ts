@@ -22,6 +22,8 @@ export class MentorLandingComponent implements OnInit {
   assignments: Assignment[];
   events: Event[];
   session: any;
+  mentorTabsArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
+  swiped: string;
 
   constructor(private userService: UserService,
     private alertify: AlertifyService,
@@ -66,17 +68,20 @@ export class MentorLandingComponent implements OnInit {
       if (duration < 1000 //
         && Math.abs(direction[0]) > 30 // Long enough
         && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) { // Horizontal enough
-          const swipe = direction[0] < 0 ? 'next' : 'previous';
+          const pageTurn = direction[0] < 0 ? 'next' : 'previous';
+          let arrayIndx = this.mentorTabsArray.indexOf(localStorage.getItem('lastTab'));
           // Do whatever you want with swipe
-          const selectedTab = this.getTabMethod();
+          // const selectedTab = this.getTabMethod();
 
-          if (swipe === 'next') {
-            if (selectedTab !== this.mentorTabs.tabs.length - 1) {
-              this.mentorTabs.tabs[selectedTab + 1].active = true;
+          if (pageTurn === 'next') {
+            if (arrayIndx !== this.mentorTabsArray.length - 1) {
+              arrayIndx++;
+              arrayIndx++;
+              this.swiped = 'tab' + arrayIndx;
             }
-          } else if (swipe === 'previous') {
-              if (selectedTab !== 0) {
-                this.mentorTabs.tabs[selectedTab - 1].active = true;
+          } else if (pageTurn === 'previous') {
+              if (arrayIndx !== 0) {
+                this.swiped = 'tab' + arrayIndx;
               }
           }
       }
