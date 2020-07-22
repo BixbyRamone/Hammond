@@ -121,9 +121,6 @@ this.swiped = '';
       }
     }
   }
-  onChange(value: string): void {
-    console.log(value);
-  }
 
   swipeReset(event: boolean) {
     if (event) {

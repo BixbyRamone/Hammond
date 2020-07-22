@@ -19,6 +19,7 @@ export class StudentTabsComponent implements OnInit {
     tab5: 'inactive'
   };
   studentTabsArray = ['tab1', 'tab2', 'tab3', 'tab4', 'tab5'];
+  initiate = true;
 
   constructor(private _tabsService: TabsService) { }
 
@@ -26,7 +27,6 @@ export class StudentTabsComponent implements OnInit {
     if (localStorage.getItem('lastTab')) {
       this.storedTab();
     }
-    console.log(this.swiped);
   }
 
   clickATab(event: any) {
@@ -52,9 +52,11 @@ export class StudentTabsComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line: use-life-cycle-interface
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
-    this.swipe(changes.swiped.currentValue);
+    !this.initiate ? this.swipe(changes.swiped.currentValue) : this.initiate = false;
+    // this.swipe(changes.swiped.currentValue);
 }
 
 swipe(newTab: string) {
