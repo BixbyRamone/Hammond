@@ -55,8 +55,6 @@ export class StudentTabsComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     this.swipe(changes.swiped.currentValue);
-    // You can also use categoryId.previousValue and 
-    // categoryId.firstChange for comparing old and new values  
 }
 
 swipe(newTab: string) {

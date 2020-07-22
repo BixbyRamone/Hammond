@@ -123,7 +123,6 @@ this.swiped = '';
   }
   onChange(value: string): void {
     console.log(value);
-    debugger
   }
 
   swipeReset(event: boolean) {
