@@ -72,7 +72,8 @@ export const appRoutes: Routes = [
                 resolve: {users: VolunteerListResolver}, data: {roles: ['Admin'], userType: 'Volunteer', operatingRole: 'Admin'} },
 
             { path: 'admin/groups', component: GroupsListComponent,
-                resolve: {groups: UserGroupListResolver}, data: {roles: ['Admin'], operatingRole: 'Admin'} },
+                resolve: {groups: UserGroupListResolver, students: UngroupedStudentResolver, mentors: UngroupedMentorResolver},
+                 data: {roles: ['Admin'], operatingRole: 'Admin'} },
 
             { path: 'admin/groups/register', component: GroupRegistrationComponent,
                 resolve: {students: UngroupedStudentResolver, mentors: UngroupedMentorResolver },

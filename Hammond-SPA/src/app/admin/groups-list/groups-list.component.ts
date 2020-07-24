@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Group } from 'src/app/_models/group';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
 import { PaginatedResult, Pagination } from 'src/app/_models/pagination';
 import { Location } from '@angular/common';
+import { UserService } from 'src/app/_services/user.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-groups-list',
@@ -14,9 +16,14 @@ import { Location } from '@angular/common';
   styleUrls: ['./groups-list.component.css']
 })
 export class GroupsListComponent implements OnInit {
+  modalRef: BsModalRef;
   groups: Group[];
   pagination: Pagination;
   userParams: any = {};
+  students: User[];
+  mentors: User[];
+  studentPagination: Pagination;
+  mentorPagination: Pagination;
   studentLevel = [{value: 'all', display: 'All'},
                   {value: 'sophomore', display: 'Sophomores'},
                   {value: 'junior', display: 'Juniors'},
@@ -27,13 +34,19 @@ export class GroupsListComponent implements OnInit {
       private alertify: AlertifyService,
       private groupService: GroupService,
       private authService: AuthService,
-      private location: Location
+      private location: Location,
+      private userService: UserService,
+      private modalService: BsModalService
     ) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.groups = data['groups'].result;
       this.pagination = data['groups'].pagination;
+      this.students = data['students'].result;
+      this.studentPagination = data['students'].pagination;
+      this.mentors = data['mentors'].result;
+      this.mentorPagination = data['mentors'].pagination;
     });
     console.dir(this.groups);
     this.userParams.studentLevel = 'all';
@@ -81,6 +94,29 @@ export class GroupsListComponent implements OnInit {
     }
   }
 
+  loadStudents(studentLevel: string) {
+    this.userParams.studentLevel = studentLevel;
+    this.userParams.getUngrouped = true;
+    this.userParams.roleName = 'student';
+    this.studentPagination.itemsPerPage = 7;
+    this.userService.getUngroupedUsers(this.userParams, this.studentPagination.currentPage, this.studentPagination.itemsPerPage)
+      .subscribe((res:  PaginatedResult<User[]>) => {
+      this.students = res.result;
+      this.studentPagination = res.pagination;
+      // for (let index = 0; index < this.users.length; index++) {
+      //   const element = this.users[index];
+      //   for (let i = 0; i < this.groupToRegister.studentIds.length; i++) {
+      //     if (this.groupToRegister.studentIds[i] === element.id) {
+      //       element.grouped = true;
+      //     }
+      //   }
+      // }
+    }, error => {
+      this.alertify.error(error);
+    });
+    this.userParams.roleName = null;
+  }
+
   resetFilter() {
     // this.userParams.roleName = this.userType.toLowerCase();
     this.userParams.studentLevel = 'all';
@@ -92,6 +128,16 @@ export class GroupsListComponent implements OnInit {
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
     this.loadGroups();
+  }
+
+  openModal(template: TemplateRef<any>, studentLevel: string) {
+    this.loadStudents(studentLevel);
+    this.modalRef = this.modalService.show(template);
+  }
+
+  studentPageChanged(event: any, studentLevel: string): void {
+    this.studentPagination.currentPage = event.page;
+    this.loadStudents(studentLevel);
   }
 
   backup() {
