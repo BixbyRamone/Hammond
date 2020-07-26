@@ -39,7 +39,7 @@ getUsers(page?, itemsPerPage?, userParams?): Observable<PaginatedResult<User[]>>
   if (userParams.groupId !=  null) {
     params = params.append('groupId', userParams.groupId);
   }
-
+debugger
   return this.http.get<User[]>(this.baseUrl + 'users', { observe: 'response', params})
     .pipe(
       map(response => {

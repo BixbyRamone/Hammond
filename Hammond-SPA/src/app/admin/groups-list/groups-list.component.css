@@ -3,3 +3,7 @@
     color: red;
     float: right;
 }
+
+.user-link {
+    cursor: pointer;
+}

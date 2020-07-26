@@ -148,5 +148,27 @@ namespace Hammond.API.Controllers
 
             return BadRequest("Failed To Remove User From Group");
         }
+
+        [HttpPut("{groupId}/id/{id}/authId/{userId}")]
+        public async Task<IActionResult> AddUserToGroup(int groupId, int id, int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            UserGroup newUserGroup = new UserGroup
+                {
+                    UserId = id,
+                    GroupId = groupId
+                };
+
+            _repo.Add(newUserGroup);
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed To Add User To Group");
+        }
     }
 }

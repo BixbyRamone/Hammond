@@ -32,7 +32,7 @@
                     <i (click)="removeMember(ug)" class="fa fa-minus-circle"></i>
                   </li>
             </ul>
-            <ng-template #template>
+            <ng-template #student>
               <div class="modal-header">
                 <h4 class="modal-title pull-left">
                   Add A Student:
@@ -43,11 +43,11 @@
               </div>
               <div class="modal-body">
                 <ul *ngFor="let user of students">
-                  <li>{{user.lastName}}, {{user.firstName}}</li>
+                  <li (click)="addUserToGroup(group, user)" class="user-link">{{user.lastName}}, {{user.firstName}}</li>
                 </ul>
               </div>
               <div class="d-flex justify-content-center">
-                <pagination [boundaryLinks]="true"
+                <pagination [boundaryLinks]="false"
                             [totalItems]="studentPagination.totalItems"
                             [itemsPerPage]="studentPagination.itemsPerPage"
                             [(ngModel)]="studentPagination.currentPage"
@@ -56,9 +56,33 @@
                 </pagination>
               </div>
             </ng-template>
+            <ng-template #mentor>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">
+                  Add A Mentor:
+                </h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul *ngFor="let user of mentors">
+                  <li (click)="addUserToGroup(group, user)" class="user-link">{{user.lastName}}, {{user.firstName}}</li>
+                </ul>
+              </div>
+              <div class="d-flex justify-content-center">
+                <pagination [boundaryLinks]="false"
+                            [totalItems]="mentorPagination.totalItems"
+                            [itemsPerPage]="mentorPagination.itemsPerPage"
+                            [(ngModel)]="mentorPagination.currentPage"
+                            (pageChanged)="mentorPageChanged($event, group.userGroups[0].user.studentLevel)"
+                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
+                </pagination>
+              </div>
+            </ng-template>
             <div class="form-group text-center">
-              <button (click)="openModal(template, group.userGroups[0].user.studentLevel)" class="btn btn-success">Add Student</button>
-              <button class="btn btn-primary">Add Mentor</button>
+              <button (click)="openStudentModal(student, group.userGroups[0].user.studentLevel)" class="btn btn-success">Add Student</button>
+              <button (click)="openMentorModal(mentor, group.userGroups[0].user.studentLevel)" class="btn btn-primary">Add Mentor</button>
             </div>
             
             <button class="btn btn-danger" (click)="disbandGroup(group.id)">Disband Group</button>

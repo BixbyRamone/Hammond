@@ -43,8 +43,10 @@ export class GroupsListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.groups = data['groups'].result;
       this.pagination = data['groups'].pagination;
+
       this.students = data['students'].result;
       this.studentPagination = data['students'].pagination;
+
       this.mentors = data['mentors'].result;
       this.mentorPagination = data['mentors'].pagination;
     });
@@ -94,7 +96,7 @@ export class GroupsListComponent implements OnInit {
     }
   }
 
-  loadStudents(studentLevel: string) {
+  loadModalStudents(studentLevel: string) {
     this.userParams.studentLevel = studentLevel;
     this.userParams.getUngrouped = true;
     this.userParams.roleName = 'student';
@@ -103,14 +105,20 @@ export class GroupsListComponent implements OnInit {
       .subscribe((res:  PaginatedResult<User[]>) => {
       this.students = res.result;
       this.studentPagination = res.pagination;
-      // for (let index = 0; index < this.users.length; index++) {
-      //   const element = this.users[index];
-      //   for (let i = 0; i < this.groupToRegister.studentIds.length; i++) {
-      //     if (this.groupToRegister.studentIds[i] === element.id) {
-      //       element.grouped = true;
-      //     }
-      //   }
-      // }
+    }, error => {
+      this.alertify.error(error);
+    });
+    this.userParams.roleName = null;
+  }
+  loadModalMentors(studentLevel: string) {
+    this.userParams.studentLevel = studentLevel;
+    this.userParams.getUngrouped = true;
+    this.userParams.roleName = 'volunteer';
+    this.mentorPagination.itemsPerPage = 7;
+    this.userService.getUngroupedUsers(this.userParams, this.mentorPagination.currentPage, this.mentorPagination.itemsPerPage)
+      .subscribe((res:  PaginatedResult<User[]>) => {
+      this.mentors = res.result;
+      this.mentorPagination = res.pagination;
     }, error => {
       this.alertify.error(error);
     });
@@ -130,14 +138,36 @@ export class GroupsListComponent implements OnInit {
     this.loadGroups();
   }
 
-  openModal(template: TemplateRef<any>, studentLevel: string) {
-    this.loadStudents(studentLevel);
+  openStudentModal(template: TemplateRef<any>, studentLevel: string) {
+    this.loadModalStudents(studentLevel);
     this.modalRef = this.modalService.show(template);
   }
 
   studentPageChanged(event: any, studentLevel: string): void {
     this.studentPagination.currentPage = event.page;
-    this.loadStudents(studentLevel);
+    this.loadModalStudents(studentLevel);
+  }
+  openMentorModal(template: TemplateRef<any>, studentLevel: string) {
+    this.loadModalMentors(studentLevel);
+    this.modalRef = this.modalService.show(template);
+  }
+
+  mentorPageChanged(event: any, studentLevel: string): void {
+    this.mentorPagination.currentPage = event.page;
+    this.loadModalMentors(studentLevel);
+  }
+
+  addUserToGroup(group: Group, newMember: User) {
+    this.groupService.addUserToGroup(group, newMember.id, this.authService.decodedToken.nameid)
+      .subscribe(() => {
+        this.loadGroups();
+        this.alertify.success('User has been removed from group');
+        this.modalRef.hide();
+      }, error => {
+        this.alertify.error('Failed to add new group member');
+      });
+    console.log(typeof(group.userGroups));
+    console.log(group);
   }
 
   backup() {

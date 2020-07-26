@@ -62,4 +62,9 @@ disbandGroup(groupId: number, userId: number) {
   return this.http.delete(this.baseUrl + groupId + '/authId/' + userId);
 }
 
+addUserToGroup(group: Group, id: number, userId: number) {
+  const groupId = group.id;
+  return this.http.put(this.baseUrl + groupId + '/id/' + id + '/authId/' + userId, {});
+}
+
 }
