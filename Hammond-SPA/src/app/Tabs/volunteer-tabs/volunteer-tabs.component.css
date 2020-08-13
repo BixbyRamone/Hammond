@@ -1,4 +1,4 @@
-.vol-tabs {
+.vol-tabs, .vol-tabs-mob {
     border-color: #fff;
     background-color: #2f4658 !important;
     color: #fff !important;
@@ -14,7 +14,14 @@
     padding-right: 20px;
   }
 
-  .vol-tab:hover {
+  .vol-tab-mob {
+    cursor: pointer;
+    border-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .vol-tab:hover, .vol-tab-mob:hover {
     background-color: #4a6e8a;
     border: 3px !important;
     border-color:  #ff9900 !important;
@@ -25,4 +32,25 @@
   font-size: larger;
   background-color: #ff9900 !important;
   color: #fff !important;
+  }
+
+  .vol-tab-mob-active {
+    background-color: #ff9900 !important;
+    color: #fff !important;
+  }
+
+  @media screen and (min-width: 991px) {
+    .vol-tabs-mob { 
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 990px) {
+    .vol-tabs-mob {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    }
+    .vol-tabs { 
+      display: none;
+    }
   }

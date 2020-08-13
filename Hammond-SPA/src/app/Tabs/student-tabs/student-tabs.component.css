@@ -1,4 +1,4 @@
-.stud-tabs {
+.stud-tabs, .stud-tabs-mob {
     border-color: #fff;
     background-color: #2f4658 !important;
     color: #fff !important;
@@ -14,7 +14,14 @@
     padding-right: 20px;
   }
 
-  .stud-tab:hover {
+  .stud-tab-mob {
+    cursor: pointer;
+    border-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .stud-tab:hover, .stud-tab-mobile:hover {
     background-color: #4a6e8a;
     border: 3px !important;
     border-color:  #ff9900 !important;
@@ -25,4 +32,25 @@
   font-size: larger;
   background-color: #ff9900 !important;
   color: #fff !important;
+  }
+
+  .stud-tab-mob-active {
+    background-color: #ff9900 !important;
+    color: #fff !important;
+  }
+
+  @media screen and (min-width: 991px) {
+    .stud-tabs-mob { 
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 990px) {
+    .stud-tabs-mob {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    }
+    .stud-tabs { 
+      display: none;
+    }
   }

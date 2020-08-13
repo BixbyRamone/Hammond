@@ -30,3 +30,36 @@
     Messages
   </div>
 </div>
+
+<div class="row stud-tabs-mob">
+  <div id="tab1" 
+    class="stud-tab-mob"
+    [ngClass]="studentTabsObj.tab1=='active' ? 'stud-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    Nxt Ses
+  </div>
+  <div id="tab2"
+    class="stud-tab-mob"
+    [ngClass]="studentTabsObj.tab2=='active' ? 'stud-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-user"></i>
+  </div>
+  <div id="tab3"
+    class="stud-tab-mob"  
+    [ngClass]="studentTabsObj.tab3=='active' ? 'stud-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-pencil"></i>
+  </div>
+  <div id="tab4"
+    class="stud-tab-mob"  
+    [ngClass]="studentTabsObj.tab4=='active' ? 'stud-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-users"></i>
+  </div>
+  <div id="tab5"
+    class="stud-tab-mob"  
+    [ngClass]="studentTabsObj.tab5=='active' ? 'stud-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-envelope"></i>
+  </div>
+</div>

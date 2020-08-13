@@ -14,9 +14,10 @@
   }
 
   .admin-tab-abrv {
+    cursor: pointer;
     border-color: #fff;
     border-radius: 5px;
-    justify-content: center;
+    text-align: center;
   }
 
   .admin-tab:hover, .admin-tabs-abrv:hover {
@@ -37,13 +38,13 @@
     color: #fff !important;
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 991px) {
     .admin-tabs-abrv { 
       display: none;
     }
   }
 
-  @media only screen and (max-width: 599px) {
+  @media only screen and (max-width: 990px) {
     .admin-tabs-abrv {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));

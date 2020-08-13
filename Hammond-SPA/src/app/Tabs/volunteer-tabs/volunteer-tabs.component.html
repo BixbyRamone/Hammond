@@ -30,3 +30,36 @@
     Messages
   </div>
 </div>
+
+<div class="row vol-tabs-mob">
+  <div id="tab1" 
+    class="vol-tab-mob"
+    [ngClass]="volunteerTabsObj.tab1=='active' ? 'vol-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    Nxt Ses
+  </div>
+  <div id="tab2"
+    class="vol-tab-mob"
+    [ngClass]="volunteerTabsObj.tab2=='active' ? 'vol-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-calendar"></i>
+  </div>
+  <div id="tab3"
+    class="vol-tab-mob"  
+    [ngClass]="volunteerTabsObj.tab3=='active' ? 'vol-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-pencil">  </i>
+  </div>
+  <div id="tab4"
+    class="vol-tab-mob"  
+    [ngClass]="volunteerTabsObj.tab4=='active' ? 'vol-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-users"></i>
+  </div>
+  <div id="tab5"
+    class="vol-tab-mob"  
+    [ngClass]="volunteerTabsObj.tab5=='active' ? 'vol-tab-mob-active' : ''"
+    (click)="clickATab($event)">
+    <i class="fa fa-envelope"></i>
+  </div>
+</div>
