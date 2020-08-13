@@ -1,8 +1,7 @@
-.admin-tabs {
+.admin-tabs, .admin-tabs-abrv {
     border-color: #fff;
     background-color: #2f4658 !important;
     color: #fff !important;
-    border-radius: 5px;
     justify-content: center;
   }
   
@@ -14,7 +13,13 @@
     padding-right: 20px;
   }
 
-  .admin-tab:hover {
+  .admin-tab-abrv {
+    border-color: #fff;
+    border-radius: 5px;
+    justify-content: center;
+  }
+
+  .admin-tab:hover, .admin-tabs-abrv:hover {
     background-color: #4a6e8a;
     border: 3px !important;
     border-color:  #ff9900 !important;
@@ -25,4 +30,25 @@
   font-size: larger;
   background-color: #ff9900 !important;
   color: #fff !important;
+  }
+
+  .admin-tab-abrv-active {
+    background-color: #ff9900 !important;
+    color: #fff !important;
+  }
+
+  @media screen and (min-width: 600px) {
+    .admin-tabs-abrv { 
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 599px) {
+    .admin-tabs-abrv {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    }
+    .admin-tabs { 
+      display: none;
+    }
   }

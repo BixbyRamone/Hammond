@@ -42,3 +42,48 @@
     Messages
   </div>
 </div>
+
+<div class="row admin-tabs-abrv">
+  <div id="tab1" 
+    class="admin-tab-abrv"
+    [ngClass]="adminTabObjSel.tab1=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Sesn
+  </div>
+  <div id="tab2"
+    class="admin-tab-abrv"
+    [ngClass]="adminTabObjSel.tab2=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Evnt
+  </div>
+  <div id="tab3"
+    class="admin-tab-abrv"  
+    [ngClass]="adminTabObjSel.tab3=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Asgn
+  </div>
+  <div id="tab4"
+    class="admin-tab-abrv"  
+    [ngClass]="adminTabObjSel.tab4=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Stud
+  </div>
+  <div id="tab5"
+    class="admin-tab-abrv"  
+    [ngClass]="adminTabObjSel.tab5=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Vltr
+  </div>
+  <div id="tab6"
+    class="admin-tab-abrv"  
+    [ngClass]="adminTabObjSel.tab6=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Grps
+  </div>
+  <div id="tab7"
+    class="admin-tab-abrv"  
+    [ngClass]="adminTabObjSel.tab7=='active' ? 'admin-tab-abrv-active' : ''"
+    (click)="clickATab($event)">
+    Mesg
+  </div>
+</div>

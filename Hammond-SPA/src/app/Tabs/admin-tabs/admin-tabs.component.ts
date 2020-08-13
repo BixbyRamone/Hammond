@@ -23,7 +23,7 @@ export class AdminTabsComponent implements OnInit {
   constructor(private _tabsService: TabsService) { }
 
   ngOnInit() {
-    if (localStorage.getItem('lastTab')) {
+    if (localStorage.getItem('lastTabVisit')) {
       this.storedTab();
     }
   }
@@ -37,12 +37,12 @@ export class AdminTabsComponent implements OnInit {
         this.adminTabObjSel[prop] = 'inactive';
       }
     }
-    localStorage.setItem('lastTab', event.srcElement.id);
+    localStorage.setItem('lastTabVisit', event.srcElement.id);
   }
 
   storedTab() {
     for (const prop in this.adminTabObjSel) {
-      if (prop === localStorage.getItem('lastTab')) {
+      if (prop === localStorage.getItem('lastTabVisit')) {
         this.adminTabObjSel[prop] = 'active';
         this._tabsService.sendTab(prop);
       } else {
