@@ -56,16 +56,43 @@ namespace Hammond.API
             builder.AddRoleManager<RoleManager<Role>>();
             builder.AddSignInManager<SignInManager<User>>();
 
+            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //     .AddJwtBearer(options => {
+            //         options.TokenValidationParameters = new TokenValidationParameters
+            //         {
+            //             ValidateIssuerSigningKey = true,
+            //             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+            //             ValidateIssuer = false,
+            //             ValidateAudience = false
+            //         };
+            //     });
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
+.AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+})
+.AddCookie()
+.AddGoogle(options => {
+    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.ClientId = "xxx";
+    options.ClientSecret = "xxx";
+    options.Scope.Add("profile");
+    options.Events.OnCreatingTicket = (context) =>
+    {
+        context.Identity.AddClaim(new Claim("image", context.User.GetValue("image").SelectToken("url").ToString()));
+
+        return Task.CompletedTask;
+    };
+});
 
             services.AddAuthorization(options => 
             {
