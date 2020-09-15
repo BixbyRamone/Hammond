@@ -75,25 +75,11 @@ namespace Hammond.API
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
         ValidateIssuer = false,
         ValidateAudience = false
     };
-})
-.AddCookie()
-.AddGoogle(options => {
-    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.ClientId = "xxx";
-    options.ClientSecret = "xxx";
-    options.Scope.Add("profile");
-    options.Events.OnCreatingTicket = (context) =>
-    {
-        context.Identity.AddClaim(new Claim("image", context.User.GetValue("image").SelectToken("url").ToString()));
-
-        return Task.CompletedTask;
-    };
 });
-
             services.AddAuthorization(options => 
             {
                 options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
